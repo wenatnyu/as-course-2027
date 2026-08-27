@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 
 const title = "AS Computer Science · Lesson 01";
-const description = "Cambridge 9618 AS Computer Science classroom slides, homework and a 32-week course map for 2027.";
+const description = "A textbook-led Cambridge 9618 AS Computer Science lesson with classroom slides, inline homework answers and a 32-week course map for 2027.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();

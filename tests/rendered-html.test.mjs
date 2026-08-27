@@ -48,7 +48,17 @@ test("keeps the generated lesson source self-contained", async () => {
   assert.match(page, /Homework 01/);
   assert.match(page, /32 teaching weeks/);
   assert.match(page, /requestFullscreen/);
-  assert.match(page, /Show answer key/);
+  assert.match(page, /Coursebook Task 1\.01/);
+  assert.match(page, /10010101 00110011/);
+  assert.match(page, /Show all answers/);
+  assert.match(page, /function InlineAnswer/);
+  assert.doesNotMatch(page, /answer-key/);
   assert.match(css, /@media print/);
+  assert.match(css, /\.inline-answer\.visible/);
+  assert.match(css, /\.question-copy b \{ font-size: 16px/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+
+  const timings = [...page.matchAll(/time: "(\d+) min"/g)].map((match) => Number(match[1]));
+  assert.equal(timings.length, 15);
+  assert.equal(timings.reduce((sum, value) => sum + value, 0), 90);
 });
