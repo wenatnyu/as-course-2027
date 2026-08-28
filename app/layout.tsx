@@ -1,28 +1,26 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import "./globals.css";
 
 const title = "AS Computer Science · Lesson 01";
 const description = "A textbook-led Cambridge 9618 AS Computer Science lesson with classroom slides, inline homework answers and a 32-week course map for 2027.";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
+const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
+const imageUrl = new URL("og.png", siteUrl).toString();
 
-export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  const imageUrl = new URL("/og.png", `${protocol}://${host}`).toString();
+export const dynamic = "force-static";
 
-  return {
-    title,
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
     description,
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      images: [{ url: imageUrl, width: 1672, height: 941, alt: "How Computers Count: 46 equals 101110 equals 2E" }],
-    },
-    twitter: { card: "summary_large_image", title, description, images: [imageUrl] },
-  };
-}
+    title,
+    type: "website",
+    url: siteUrl,
+    images: [{ url: imageUrl, width: 1672, height: 941, alt: "How Computers Count: 46 equals 101110 equals 2E" }],
+  },
+  twitter: { card: "summary_large_image", title, description, images: [imageUrl] },
+};
 
 export default function RootLayout({
   children,

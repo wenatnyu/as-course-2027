@@ -29,19 +29,23 @@ test("server-renders the complete lesson, homework and roadmap shell", async () 
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
-test("uses a request-host absolute social image", async () => {
+test("uses the configured static GitHub Pages social image", async () => {
   const html = await (await render("as-cs.example.test")).text();
-  assert.match(html, /https:\/\/as-cs\.example\.test\/og\.png/);
+  assert.match(html, /https:\/\/wenatnyu\.github\.io\/as-course-2027\/og\.png/);
 
   const image = await stat(new URL("../public/og.png", import.meta.url));
   assert.ok(image.size > 100_000, "social preview image should be a substantive generated asset");
 });
 
 test("keeps the generated lesson source self-contained", async () => {
-  const [page, css, packageJson] = await Promise.all([
+  const [page, css, layout, nextConfig, packageJson, pagesWorkflow, noJekyll] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8"),
+    readFile(new URL("../public/.nojekyll", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /const weeklyPlan/);
@@ -56,7 +60,18 @@ test("keeps the generated lesson source self-contained", async () => {
   assert.match(css, /@media print/);
   assert.match(css, /\.inline-answer\.visible/);
   assert.match(css, /\.question-copy b \{ font-size: 16px/);
+  assert.match(layout, /export const metadata/);
+  assert.match(layout, /export const dynamic = "force-static"/);
+  assert.doesNotMatch(layout, /next\/headers|headers\(\)/);
+  assert.match(nextConfig, /output: "export"/);
+  assert.match(nextConfig, /process\.env\.PAGES_BASE_PATH/);
+  assert.match(nextConfig, /process\.env\.NEXT_PUBLIC_SITE_URL/);
+  assert.match(nextConfig, /assetPrefix: pagesAssetPrefix/);
+  assert.match(packageJson, /"build:pages"/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  assert.match(pagesWorkflow, /actions\/configure-pages@v5/);
+  assert.match(pagesWorkflow, /path: \.\/dist\/client/);
+  assert.equal(noJekyll, "");
 
   const timings = [...page.matchAll(/time: "(\d+) min"/g)].map((match) => Number(match[1]));
   assert.equal(timings.length, 15);
