@@ -104,6 +104,7 @@ export function HomeworkSheet({
   marks,
   minutes,
   sourceLabel,
+  syllabusLabel = "SYLLABUS 1.1",
   instructions,
   sections,
   challenge,
@@ -113,6 +114,7 @@ export function HomeworkSheet({
   marks: number;
   minutes: number;
   sourceLabel: string;
+  syllabusLabel?: string;
   instructions: string;
   sections: HomeworkSection[];
   challenge?: { id: string; prompt: ReactNode; answer: ReactNode };
@@ -144,14 +146,14 @@ export function HomeworkSheet({
   };
 
   return (
-    <section className="homework-page">
+    <section className={allAnswersVisible ? "homework-page all-answers-visible" : "homework-page"}>
       <header className="homework-hero">
         <div><span>AS COMPUTER SCIENCE · 9618</span><h1>Homework {lessonNumber}</h1><p>{title}</p></div>
         <div className="homework-stats"><p><b>{marks}</b><span>marks</span></p><p><b>{minutes}</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>
       </header>
       <div className="student-fields"><span>Name __________________________</span><span>Class __________</span><span>Date __________</span></div>
       <div className="homework-instructions">
-        <div className="homework-source-badges"><Mark>SYLLABUS 1.1</Mark><span className="textbook-mark">{sourceLabel}</span></div>
+        <div className="homework-source-badges"><Mark>{syllabusLabel}</Mark><span className="textbook-mark">{sourceLabel}</span></div>
         <p>{instructions}</p>
         <button type="button" onClick={toggleAllAnswers}>{allAnswersVisible ? "Hide all answers" : "Show all answers"}</button>
       </div>
@@ -217,6 +219,8 @@ export function LessonShell({
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (view !== "slides") return;
+      const target = event.target instanceof HTMLElement ? event.target : null;
+      if (target?.closest("button, a, input, textarea, select, [contenteditable='true']")) return;
       if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
       if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
       if (event.key === "Home") goTo(0);

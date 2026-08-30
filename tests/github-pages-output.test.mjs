@@ -31,6 +31,16 @@ const lessonArtifacts = [
     number: "03",
     keyContent: /signed binary|two(?:'|’|&apos;|&#x27;)?s complement|binary arithmetic|overflow|binary coded decimal|\bBCD\b/i,
   },
+  {
+    slug: "lesson-04",
+    number: "04",
+    keyContent: /character data|ASCII|Unicode|bitmap|colour depth|pixel/i,
+  },
+  {
+    slug: "lesson-05",
+    number: "05",
+    keyContent: /vector graphics?|drawing (?:list|object)|sampling (?:rate|resolution)|sound|file[- ]size/i,
+  },
 ];
 
 for (const lesson of lessonArtifacts) {

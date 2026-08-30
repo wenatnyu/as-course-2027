@@ -447,6 +447,8 @@ export default function Lesson03Client() {
         { label: "01", href: "../" },
         { label: "02", href: "../lesson-02/" },
         { label: "03", href: "../lesson-03/", active: true },
+        { label: "04", href: "../lesson-04/" },
+        { label: "05", href: "../lesson-05/" },
       ]}
       courseMapHref="../?view=roadmap"
       sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.8-14 and representative Paper 1 questions from 2023-2025."

@@ -872,6 +872,7 @@ sub, sup { font-size: .6em; line-height: 0; }
   .writing-lines.lines-2 { height: 15mm; }
   .writing-lines.lines-3 { height: 22mm; }
   .writing-lines.lines-4 { height: 29mm; }
+  .homework-page.all-answers-visible .writing-lines { display: none; }
   .challenge { margin: 10mm 0 0; }
   .inline-answer-toggle { display: none !important; }
   .inline-answer-wrap { margin-top: 0; }

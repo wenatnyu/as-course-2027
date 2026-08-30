@@ -396,6 +396,8 @@ export default function Home() {
             <a className="active" href="./" aria-current="page">01</a>
             <a href="./lesson-02/">02</a>
             <a href="./lesson-03/">03</a>
+            <a href="./lesson-04/">04</a>
+            <a href="./lesson-05/">05</a>
           </div>
           {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}

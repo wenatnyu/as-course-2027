@@ -60,6 +60,7 @@ test("keeps the generated lesson source self-contained", async () => {
   assert.doesNotMatch(page, /answer-key/);
   assert.match(css, /@media print/);
   assert.match(css, /\.inline-answer\.visible/);
+  assert.match(css, /\.homework-page\.all-answers-visible \.writing-lines/);
   assert.match(css, /\.question-copy b \{ font-size: 16px/);
   assert.match(layout, /export const metadata/);
   assert.match(layout, /export const dynamic = "force-static"/);
@@ -85,12 +86,28 @@ const lessonRoutes = [
     slug: "lesson-02",
     number: "02",
     keyContent: /binary magnitudes?|binary (?:and decimal )?prefixes?|data (?:capacity|units?)|kibibytes?|\bKiB\b/i,
+    syllabusPatterns: [/SYLLABUS 1\.1/i],
   },
   {
     pathname: "/lesson-03",
     slug: "lesson-03",
     number: "03",
     keyContent: /signed binary|two(?:'|’|&apos;|&#x27;)?s complement|binary arithmetic|overflow|binary coded decimal|\bBCD\b/i,
+    syllabusPatterns: [/SYLLABUS 1\.1/i],
+  },
+  {
+    pathname: "/lesson-04",
+    slug: "lesson-04",
+    number: "04",
+    keyContent: /character data|ASCII|Unicode|bitmap|colour depth|pixel/i,
+    syllabusPatterns: [/SYLLABUS 1\.1/i, /SYLLABUS 1\.2/i],
+  },
+  {
+    pathname: "/lesson-05",
+    slug: "lesson-05",
+    number: "05",
+    keyContent: /vector graphics?|drawing (?:list|object)|sampling (?:rate|resolution)|sound|file[- ]size/i,
+    syllabusPatterns: [/SYLLABUS 1\.2/i],
   },
 ];
 
@@ -114,9 +131,12 @@ for (const lesson of lessonRoutes) {
     const html = await response.text();
     assert.match(html, new RegExp(`<title>[^<]*Lesson ${lesson.number}[^<]*<\\/title>`, "i"));
     assert.match(html, lesson.keyContent);
-    assert.match(html, /SYLLABUS 1\.1/i);
+    for (const syllabusPattern of lesson.syllabusPatterns) assert.match(html, syllabusPattern);
     assert.match(html, /class="textbook-mark"[^>]*>[^<]*(?:COURSEBOOK|TEXTBOOK)/i);
     assert.match(html, new RegExp(`LESSON ${lesson.number} SOURCES`, "i"));
+    assert.match(html, new RegExp(`<meta property="og:title" content="[^"]*Lesson ${lesson.number}[^"]*"`, "i"));
+    assert.match(html, new RegExp(`<meta property="og:url" content="[^"]*/${lesson.slug}/"`, "i"));
+    assert.match(html, new RegExp(`<meta name="twitter:title" content="[^"]*Lesson ${lesson.number}[^"]*"`, "i"));
     assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
   });
 
@@ -131,6 +151,8 @@ for (const lesson of lessonRoutes) {
     assert.match(routeSource, /Show all answers|HomeworkSheet/);
     assert.match(sharedShell, /function InlineAnswer/);
     assert.match(sharedShell, /className="inline-answer-toggle"/);
+    assert.match(sharedShell, /all-answers-visible/);
+    assert.match(sharedShell, /target\?\.closest\("button, a, input, textarea, select/);
     assert.match(sharedShell, /className=\{visible \? "inline-answer visible" : "inline-answer"\}/);
     assert.doesNotMatch(routeSource, /answer-key/i);
     assert.doesNotMatch(sharedShell, /answer-key/i);

@@ -2,7 +2,7 @@ import { copyFile, mkdir, rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 const outputRoot = new URL("../dist/client/", import.meta.url);
-const lessonRoutes = ["lesson-02", "lesson-03"];
+const lessonRoutes = ["lesson-02", "lesson-03", "lesson-04", "lesson-05"];
 
 for (const route of lessonRoutes) {
   const routeDirectory = new URL(`${route}/`, outputRoot);
