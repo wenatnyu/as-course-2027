@@ -362,6 +362,13 @@ export default function Home() {
   }, [slides.length]);
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("view") === "roadmap") {
+      const roadmapTimer = window.setTimeout(() => setView("roadmap"), 0);
+      return () => window.clearTimeout(roadmapTimer);
+    }
+  }, []);
+
+  useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (view !== "slides") return;
       if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
@@ -385,9 +392,13 @@ export default function Home() {
           <button className={view === "roadmap" ? "active" : ""} onClick={() => setView("roadmap")}>Course map</button>
         </nav>
         <div className="bar-actions">
+          <div className="lesson-switcher" aria-label="Lesson navigation">
+            <a className="active" href="./" aria-current="page">01</a>
+            <a href="./lesson-02/">02</a>
+            <a href="./lesson-03/">03</a>
+          </div>
           {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
-          <span>LESSON 01</span>
         </div>
       </header>
 
