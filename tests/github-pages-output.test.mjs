@@ -41,6 +41,16 @@ const lessonArtifacts = [
     number: "05",
     keyContent: /vector graphics?|drawing (?:list|object)|sampling (?:rate|resolution)|sound|file[- ]size/i,
   },
+  {
+    slug: "lesson-06",
+    number: "06",
+    keyContent: /compression|lossy|lossless|run-length encoding|\bRLE\b/i,
+  },
+  {
+    slug: "lesson-07",
+    number: "07",
+    keyContent: /LAN|WAN|client-server|peer-to-peer|topolog|router|switch/i,
+  },
 ];
 
 for (const lesson of lessonArtifacts) {

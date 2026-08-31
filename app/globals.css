@@ -650,6 +650,7 @@ sub, sup { font-size: .6em; line-height: 0; }
 .writing-lines.lines-2 { height: 56px; }
 .writing-lines.lines-3 { height: 84px; }
 .writing-lines.lines-4 { height: 112px; }
+.writing-lines.lines-5 { height: 140px; }
 .challenge { margin: 44px 58px 0; padding: 24px 28px; display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 18px; color: white; background: var(--blue); border-left: 8px solid var(--acid); }
 .challenge span { color: var(--acid); font: 850 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
 .challenge p { margin: 0; font-size: 15px; line-height: 1.5; }
@@ -851,29 +852,64 @@ sub, sup { font-size: .6em; line-height: 0; }
 
 @media print {
   @page { size: A4 portrait; margin: 13mm 14mm 15mm; }
-  * { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
+  * { print-color-adjust: economy !important; -webkit-print-color-adjust: economy !important; }
   body { background: white; }
   .course-bar, .source-footer, .homework-instructions button, .deck-controls, .teacher-notes { display: none !important; }
   .homework-page, .roadmap-page { width: auto; margin: 0; background: white; box-shadow: none; }
-  .homework-hero { min-height: 58mm; padding: 12mm 13mm; }
-  .homework-hero h1 { font-size: 54pt; }
-  .homework-stats p { width: 23mm; padding: 3mm 2mm; }
-  .homework-stats b { font-size: 25pt; }
+  .homework-page,
+  .homework-page * { color: #000 !important; }
+  .homework-hero {
+    min-height: 0;
+    padding: 0 0 4mm;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 6mm;
+    color: #000;
+    background: #fff !important;
+    border: 0;
+    border-bottom: .5mm solid #000;
+  }
+  .homework-hero > div:first-child > span { color: #000 !important; font-size: 7.5pt; }
+  .homework-hero h1 { margin: 2mm 0 0; font-size: 21pt; line-height: 1; letter-spacing: -.02em; }
+  .homework-hero > div:first-child p { margin: 1.5mm 0 0; color: #000 !important; font-size: 9.5pt; }
+  .homework-stats { gap: 1.5mm; }
+  .homework-stats p {
+    width: 19mm;
+    padding: 1.5mm 1mm;
+    color: #000;
+    background: #fff !important;
+    border: .3mm solid #000;
+  }
+  .homework-stats b { font-size: 13pt; }
+  .homework-stats span { margin-top: .7mm; font-size: 7.2pt; }
   .student-fields, .homework-instructions, .homework-section { padding-right: 0; padding-left: 0; }
-  .student-fields { padding-top: 5mm; padding-bottom: 5mm; }
-  .homework-instructions { padding-top: 5mm; padding-bottom: 5mm; grid-template-columns: auto 1fr; }
-  .homework-section { padding-top: 9mm; }
+  .student-fields { padding-top: 3mm; padding-bottom: 3mm; gap: 5mm; background: #fff !important; border-color: #000; font-size: 9pt; }
+  .homework-instructions { padding-top: 3mm; padding-bottom: 3mm; grid-template-columns: auto 1fr; gap: 4mm; border-color: #000; }
+  .homework-instructions p { font-size: 8.7pt; line-height: 1.35; }
+  .homework-source-badges { gap: 1mm; }
+  .homework-source-badges .syllabus-mark,
+  .homework-source-badges .textbook-mark { padding: 1mm 1.4mm; color: #000 !important; background: #fff !important; border: .25mm solid #000; font-size: 7pt; }
+  .homework-page .syllabus-mark { color: #000 !important; background: #fff !important; border: .25mm solid #000; }
+  .homework-section { padding-top: 6mm; }
   .question-list > li, .challenge, .answer-grid p, .exam-blueprint article, .pace-notes { break-inside: avoid; }
-  .homework-section__title { break-after: avoid; }
-  .question-list > li { padding-top: 5mm; padding-bottom: 5mm; font-size: 11pt; line-height: 1.45; }
-  .question-copy b { font-size: 11pt; }
-  .question-list > li > span { top: 5.8mm; font-size: 9pt; }
-  .writing-lines { background: repeating-linear-gradient(to bottom, transparent 0 7mm, rgba(23,34,59,.25) 7mm 7.2mm); }
+  .homework-section__title { padding-bottom: 2.5mm; grid-template-columns: 9mm 1fr auto; gap: 3mm; border-color: #000; break-after: avoid; }
+  .homework-section__title > span { width: 8mm; color: #000 !important; background: #fff !important; border: .3mm solid #000; font-size: 8pt; }
+  .homework-section__title h2 { margin: 0 0 .7mm; font-size: 16pt; }
+  .homework-section__title p { font-size: 8pt; }
+  .homework-section__title > b { font-size: 7.5pt; }
+  .question-list > li { padding-top: 4mm; padding-bottom: 4mm; border-color: #000; font-size: 10.5pt; line-height: 1.42; }
+  .question-list > li::marker { color: #000 !important; }
+  .question-copy b { font-size: 10.5pt; }
+  .question-copy p { margin-top: 2mm; }
+  .question-list > li > span { top: 4.8mm; font-size: 8.5pt; }
+  .writing-lines { background: repeating-linear-gradient(to bottom, transparent 0 7mm, rgba(0,0,0,.28) 7mm 7.2mm); }
   .writing-lines.lines-2 { height: 15mm; }
   .writing-lines.lines-3 { height: 22mm; }
   .writing-lines.lines-4 { height: 29mm; }
+  .writing-lines.lines-5 { height: 36mm; }
   .homework-page.all-answers-visible .writing-lines { display: none; }
-  .challenge { margin: 10mm 0 0; }
+  .challenge { margin: 7mm 0 0; padding: 4mm; color: #000; background: #fff !important; border: .4mm solid #000; border-left-width: 1.2mm; }
+  .challenge span { color: #000 !important; }
   .inline-answer-toggle { display: none !important; }
   .inline-answer-wrap { margin-top: 0; }
   .inline-answer { display: none !important; }
@@ -881,14 +917,15 @@ sub, sup { font-size: .6em; line-height: 0; }
     display: block !important;
     margin-top: 3mm;
     padding: 3.5mm 4mm 3.5mm 12mm;
-    color: #17223b;
-    background: #f1f3e7;
-    border-left: 1.2mm solid #718b20;
+    color: #000;
+    background: #fff !important;
+    border: .3mm solid #000;
+    border-left-width: 1.2mm;
     font-size: 10.5pt;
     line-height: 1.45;
     break-inside: avoid;
   }
-  .inline-answer.visible::before { top: 3.4mm; left: 3.5mm; width: 6mm; height: 6mm; font-size: 8pt; }
+  .inline-answer.visible::before { top: 3.4mm; left: 3.5mm; width: 6mm; height: 6mm; color: #fff !important; background: #000 !important; font-size: 8pt; }
   .answer-key.visible { margin: 12mm 0 0; padding: 12mm; break-before: page; }
   .roadmap-hero { min-height: 72mm; padding: 12mm; }
   .roadmap-hero h1 { font-size: 44pt; }

@@ -371,6 +371,8 @@ export default function Home() {
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if (view !== "slides") return;
+      const target = event.target instanceof HTMLElement ? event.target : null;
+      if (target?.closest("button, a, input, textarea, select, [contenteditable='true']")) return;
       if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
       if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
       if (event.key === "Home") goTo(0);
@@ -398,6 +400,8 @@ export default function Home() {
             <a href="./lesson-03/">03</a>
             <a href="./lesson-04/">04</a>
             <a href="./lesson-05/">05</a>
+            <a href="./lesson-06/">06</a>
+            <a href="./lesson-07/">07</a>
           </div>
           {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
@@ -422,7 +426,7 @@ export default function Home() {
       )}
 
       {view === "homework" && (
-        <section className="homework-page">
+        <section className={allAnswersVisible ? "homework-page all-answers-visible" : "homework-page"}>
           <header className="homework-hero">
             <div><span>AS COMPUTER SCIENCE · 9618</span><h1>Homework 01</h1><p>Binary, denary and hexadecimal</p></div>
             <div className="homework-stats"><p><b>30</b><span>marks</span></p><p><b>35</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>

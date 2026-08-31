@@ -20,7 +20,7 @@ export type HomeworkQuestion = {
   id: string;
   prompt: ReactNode;
   marks: number;
-  lines?: 2 | 3 | 4;
+  lines?: 2 | 3 | 4 | 5;
   answer: ReactNode;
 };
 

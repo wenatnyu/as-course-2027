@@ -371,6 +371,8 @@ export default function Lesson05Client() {
         { label: "03", href: "../lesson-03/" },
         { label: "04", href: "../lesson-04/" },
         { label: "05", href: "../lesson-05/", active: true },
+        { label: "06", href: "../lesson-06/" },
+        { label: "07", href: "../lesson-07/" },
       ]}
       courseMapHref="../?view=roadmap"
       sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.17-21 plus exam-style Q2 on p.24, and representative AS Paper 1 patterns from 2023-2025."

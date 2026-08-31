@@ -61,6 +61,9 @@ test("keeps the generated lesson source self-contained", async () => {
   assert.match(css, /@media print/);
   assert.match(css, /\.inline-answer\.visible/);
   assert.match(css, /\.homework-page\.all-answers-visible \.writing-lines/);
+  assert.match(css, /print-color-adjust: economy/);
+  assert.match(css, /\.homework-hero \{[\s\S]{0,500}min-height: 0;/);
+  assert.match(css, /\.homework-page,\s*\.homework-page \* \{ color: #000 !important; \}/);
   assert.match(css, /\.question-copy b \{ font-size: 16px/);
   assert.match(layout, /export const metadata/);
   assert.match(layout, /export const dynamic = "force-static"/);
@@ -109,6 +112,22 @@ const lessonRoutes = [
     keyContent: /vector graphics?|drawing (?:list|object)|sampling (?:rate|resolution)|sound|file[- ]size/i,
     syllabusPatterns: [/SYLLABUS 1\.2/i],
   },
+  {
+    pathname: "/lesson-06",
+    slug: "lesson-06",
+    number: "06",
+    keyContent: /compression|lossy|lossless|run-length encoding|\bRLE\b/i,
+    syllabusPatterns: [/SYLLABUS 1\.3/i],
+    pastPaperPattern: /9618\/13[^<]{0,80}M\/J 2024[^<]{0,80}Q2\(b\)|MAY\/JUNE 2024[^<]{0,80}Q2\(b\)/i,
+  },
+  {
+    pathname: "/lesson-07",
+    slug: "lesson-07",
+    number: "07",
+    keyContent: /LAN|WAN|client-server|peer-to-peer|topolog|router|switch/i,
+    syllabusPatterns: [/SYLLABUS 2\.1/i],
+    pastPaperPattern: /9618\/13[^<]{0,80}M\/J 2023[^<]{0,80}Q2|9618\/11[^<]{0,80}O\/N 2023[^<]{0,80}Q2/i,
+  },
 ];
 
 async function readTsxTree(directoryUrl) {
@@ -132,6 +151,7 @@ for (const lesson of lessonRoutes) {
     assert.match(html, new RegExp(`<title>[^<]*Lesson ${lesson.number}[^<]*<\\/title>`, "i"));
     assert.match(html, lesson.keyContent);
     for (const syllabusPattern of lesson.syllabusPatterns) assert.match(html, syllabusPattern);
+    if (lesson.pastPaperPattern) assert.match(html, lesson.pastPaperPattern);
     assert.match(html, /class="textbook-mark"[^>]*>[^<]*(?:COURSEBOOK|TEXTBOOK)/i);
     assert.match(html, new RegExp(`LESSON ${lesson.number} SOURCES`, "i"));
     assert.match(html, new RegExp(`<meta property="og:title" content="[^"]*Lesson ${lesson.number}[^"]*"`, "i"));

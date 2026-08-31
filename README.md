@@ -9,8 +9,12 @@ An English classroom course built from the Cambridge 9618 syllabus, the endorsed
 - Lesson 03 — Signed binary, arithmetic, overflow and BCD
 - Lesson 04 — Character data and bitmap graphics
 - Lesson 05 — Vector graphics, bitmap file sizes and digital sound
+- Lesson 06 — Lossy/lossless compression and run-length encoding
+- Lesson 07 — Network purpose, models, topologies and LAN hardware
 
 GitHub Pages: <https://wenatnyu.github.io/as-course-2027/>
+
+Each new lesson should include a clearly labelled **Past Paper Practice** slide and at least one homework item with the exact session, paper, question and mark allocation. Prompts should be concise adaptations rather than full-paper reproductions.
 
 ## Local development
 
