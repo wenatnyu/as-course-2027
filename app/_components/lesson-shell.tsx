@@ -16,6 +16,64 @@ export type LessonLink = {
   active?: boolean;
 };
 
+export const COURSE_LESSONS = [
+  ["01", "Number systems"],
+  ["02", "Data capacity and prefixes"],
+  ["03", "Signed binary, BCD and arithmetic"],
+  ["04", "Characters and bitmap graphics"],
+  ["05", "Vector graphics and sound"],
+  ["06", "Compression"],
+  ["07", "Network models and LAN hardware"],
+  ["08", "Cloud, wired/wireless and media"],
+  ["09", "Ethernet, streaming and internet infrastructure"],
+  ["10", "IP addressing, subnetting, URL and DNS"],
+  ["11", "Hardware roles, embedded systems and buffers"],
+  ["12", "Primary memory and ROM families"],
+  ["13", "Storage and peripheral operations"],
+  ["14", "Monitoring and control"],
+  ["15", "Logic gates and truth tables"],
+  ["16", "Logic circuits and expressions"],
+] as const;
+
+export function LessonSwitcher({
+  lessonNumber,
+  root = false,
+  links,
+}: {
+  lessonNumber: string;
+  root?: boolean;
+  links?: LessonLink[];
+}) {
+  const prefix = root ? "./" : "../";
+  const generatedLinks = COURSE_LESSONS.map(([number]) => ({
+    label: number,
+    href: number === "01" ? prefix : `${prefix}lesson-${number}/`,
+    active: number === lessonNumber,
+  }));
+  const navigationLinks = links?.length === COURSE_LESSONS.length ? links : generatedLinks;
+
+  return (
+    <>
+      <div className="lesson-switcher" aria-label="Lesson navigation">
+        {navigationLinks.map((link) => <a className={link.active ? "active" : ""} href={link.href} aria-current={link.active ? "page" : undefined} title={COURSE_LESSONS.find(([number]) => number === link.label)?.[1]} key={link.label}>{link.label}</a>)}
+      </div>
+      <label className="lesson-picker">
+        <span>Lesson</span>
+        <select
+          aria-label="Choose lesson"
+          value={navigationLinks.find((link) => link.active)?.href ?? navigationLinks[0].href}
+          onChange={(event) => window.location.assign(event.currentTarget.value)}
+        >
+          {navigationLinks.map((link) => {
+            const title = COURSE_LESSONS.find(([number]) => number === link.label)?.[1] ?? "Lesson";
+            return <option value={link.href} key={link.label}>{link.label} · {title}</option>;
+          })}
+        </select>
+      </label>
+    </>
+  );
+}
+
 export type HomeworkQuestion = {
   id: string;
   prompt: ReactNode;
@@ -202,7 +260,7 @@ export function LessonShell({
   lessonNumber: string;
   slides: SlideData[];
   homework: ReactNode;
-  lessonLinks: LessonLink[];
+  lessonLinks?: LessonLink[];
   courseMapHref: string;
   sourceSummary: string;
   sourceDetail: string;
@@ -242,9 +300,7 @@ export function LessonShell({
           <a href={courseMapHref}>Course map</a>
         </nav>
         <div className="bar-actions">
-          <div className="lesson-switcher" aria-label="Lesson navigation">
-            {lessonLinks.map((link) => <a className={link.active ? "active" : ""} href={link.href} aria-current={link.active ? "page" : undefined} key={link.label}>{link.label}</a>)}
-          </div>
+          <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} />
           {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
         </div>

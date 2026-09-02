@@ -1,8 +1,11 @@
-import { copyFile, mkdir, rm } from "node:fs/promises";
+import { copyFile, mkdir, readdir, rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 const outputRoot = new URL("../dist/client/", import.meta.url);
-const lessonRoutes = ["lesson-02", "lesson-03", "lesson-04", "lesson-05", "lesson-06", "lesson-07"];
+const lessonRoutes = (await readdir(fileURLToPath(outputRoot)))
+  .filter((name) => /^lesson-\d{2}\.html$/.test(name))
+  .map((name) => name.replace(/\.html$/, ""))
+  .sort();
 
 for (const route of lessonRoutes) {
   const routeDirectory = new URL(`${route}/`, outputRoot);

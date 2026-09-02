@@ -193,7 +193,7 @@ export default function Lesson07Client() {
       content: (
         <Slide number="02" eyebrow="TEXTBOOK × SYLLABUS" sourceLabel="TEXTBOOK 2.01-2.04" syllabusLabel="SYLLABUS 2.1 · p.16" title="Today: network purpose, models, topologies and LAN hardware." className="slide--l7-map">
           <section className="l7-route-grid"><article><b>1</b><span>PURPOSE</span><p>benefits · LAN · WAN</p></article><article><b>2</b><span>MODELS</span><p>client-server · peer-to-peer · thin · thick</p></article><article><b>3</b><span>STRUCTURE</span><p>bus · star · mesh · hybrid</p></article><article><b>4</b><span>HARDWARE</span><p>LAN devices · router</p></article></section>
-          <p className="l7-defer"><Mark>DEFER TO LESSON 08</Mark><span>cloud · wired vs wireless and media · Ethernet · streaming · WWW/internet hardware · IP · URL/DNS</span></p>
+          <p className="l7-defer"><Mark>DEFER TO LESSONS 08–10</Mark><span>L08 cloud + media · L09 Ethernet + streaming + internet · L10 IP + URL/DNS</span></p>
         </Slide>
       ),
     },
@@ -338,7 +338,7 @@ export default function Lesson07Client() {
       content: (
         <Slide number="14" eyebrow="LAN HARDWARE · EXTEND & CONNECT" sourceLabel="TEXTBOOK pp.35-38" syllabusLabel="SYLLABUS 2.1 — HARDWARE / ROUTER" title="Join devices, extend segments, then cross a network boundary." className="slide--l7-hardware-more">
           <section className="l7-device-ladder"><article><span>CABLE</span><p>physical transmission link</p></article><article><span>WAP</span><p>connects wireless devices to a wired LAN</p></article><article><span>REPEATER</span><p>regenerates a weakened signal</p></article><article><span>BRIDGE</span><p>joins LAN segments using the same protocol</p></article><article><span>ROUTER</span><p>reads destination information and forwards packets between networks</p></article></section>
-          <p className="l7-defer"><Mark>LESSON 08</Mark><span>How IP addressing and internet routing support that router decision.</span></p>
+          <p className="l7-defer"><Mark>LESSON 10</Mark><span>How IP addressing supports that router decision.</span></p>
         </Slide>
       ),
     },
@@ -391,7 +391,7 @@ export default function Lesson07Client() {
       ]}
       courseMapHref="../?view=roadmap"
       sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.26-38, and published 2023-2024 AS Paper 1 questions and mark schemes."
-      sourceDetail="Core boundary: network purpose and benefits; LAN/WAN; client-server, peer-to-peer, thin and thick clients; bus, star, mesh and hybrid packet paths; LAN hardware and router role. Authentic anchors: 9618/13 M/J 2023 Q2(b)-(c), 9618/12 M/J 2023 Q1(a)-(c),(e), 9618/11 O/N 2023 Q2(a),(b),(d), and 9618/13 M/J 2024 Q5(b). Questions are concise adaptations with original references, not reproductions of complete papers. Cloud, wired/wireless implications and media, Ethernet/CSMA-CD, streaming, WWW/internet hardware, IP addressing, URL and DNS are deferred to Lesson 08."
+      sourceDetail="Core boundary: network purpose and benefits; LAN/WAN; client-server, peer-to-peer, thin and thick clients; bus, star, mesh and hybrid packet paths; LAN hardware and router role. Authentic anchors: 9618/13 M/J 2023 Q2(b)-(c), 9618/12 M/J 2023 Q1(a)-(c),(e), 9618/11 O/N 2023 Q2(a),(b),(d), and 9618/13 M/J 2024 Q5(b). Questions are concise adaptations with original references, not reproductions of complete papers. Cloud and media continue in Lesson 08; Ethernet, streaming and internet infrastructure in Lesson 09; IP addressing, URL and DNS in Lesson 10."
     />
   );
 }

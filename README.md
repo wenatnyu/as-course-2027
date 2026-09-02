@@ -11,6 +11,17 @@ An English classroom course built from the Cambridge 9618 syllabus, the endorsed
 - Lesson 05 — Vector graphics, bitmap file sizes and digital sound
 - Lesson 06 — Lossy/lossless compression and run-length encoding
 - Lesson 07 — Network purpose, models, topologies and LAN hardware
+- Lesson 08 — Cloud computing, wired/wireless networks and transmission media
+- Lesson 09 — Ethernet, internet infrastructure and bit streaming
+- Lesson 10 — IP addressing, subnetting, URL and DNS
+- Lesson 11 — Hardware roles, embedded systems and buffers
+- Lesson 12 — RAM/ROM, SRAM/DRAM and programmable ROM families
+- Lesson 13 — Storage and peripheral device operations
+- Lesson 14 — Monitoring, control, sensors, actuators and feedback
+- Lesson 15 — Logic gates, symbols, functions and truth tables
+- Lesson 16 — Logic statements, expressions, circuits and truth tables
+
+Lessons 01–16 complete syllabus Chapters 1–3. Monitoring/control is cross-referenced to the coursebook's Chapter 7 and logic to Chapter 4 so the current syllabus order is covered without omissions.
 
 GitHub Pages: <https://wenatnyu.github.io/as-course-2027/>
 

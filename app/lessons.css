@@ -16,8 +16,8 @@
 .course-bar nav a.active { border-color: var(--acid); }
 .lesson-switcher { display: flex; align-items: center; gap: 4px; }
 .lesson-switcher a {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   display: grid;
   place-items: center;
   color: #c8d0df;
@@ -1252,19 +1252,19 @@
 .l7-exit-question p { font-size: clamp(13px, 1.2cqw, 17px); }
 
 @media (max-width: 900px) {
-  .lesson-switcher a { width: 27px; height: 27px; }
+  .lesson-picker span { display: none; }
+  .lesson-picker select { width: 138px; }
 }
 
 @media (max-width: 640px) {
   .course-bar nav a { flex: 1; }
   .bar-actions { padding-right: 8px; padding-left: 8px; gap: 6px; }
-  .lesson-switcher { gap: 2px; flex: 0 0 auto; }
-  .lesson-switcher a { width: 22px; height: 22px; flex: 0 0 22px; font-size: 9px; }
+  .lesson-picker select { width: 126px; min-height: 30px; font-size: 11px; }
   .notes-toggle, .print-control { width: 38px; height: 28px; padding: 0; font-size: 0; letter-spacing: 0; }
-  .notes-toggle::before { content: "Notes"; font-size: 9px; letter-spacing: .03em; }
-  .print-control::before { content: "Print"; font-size: 9px; letter-spacing: .03em; }
+  .notes-toggle::before { content: "Notes"; font-size: 11px; letter-spacing: .01em; }
+  .print-control::before { content: "Print"; font-size: 11px; letter-spacing: .01em; }
 }
 
 @media print {
-  .lesson-switcher { display: none !important; }
+  .lesson-switcher, .lesson-picker { display: none !important; }
 }

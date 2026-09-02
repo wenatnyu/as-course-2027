@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { LessonSwitcher } from "./_components/lesson-shell";
 
 type View = "slides" | "homework" | "roadmap";
 type SlideData = {
@@ -15,11 +16,11 @@ const weights = [128, 64, 32, 16, 8, 4, 2, 1];
 const homeworkAnswerIds = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "challenge"];
 
 const phases = [
-  { weeks: "W01-08", name: "Foundations", note: "Representation, networks, hardware + pseudocode habits" },
-  { weeks: "W09-17", name: "Systems & data", note: "CPU, software, security, ethics, databases" },
-  { weeks: "W18-24", name: "Problem solving", note: "Algorithms, structures, programming, testing" },
-  { weeks: "W25-28", name: "Consolidation", note: "Topic retrieval and complete timed papers" },
-  { weeks: "W29-32", name: "Exam readiness", note: "Two mocks, error-log repair, final recall" },
+  { weeks: "W01-06", name: "Data representation", note: "Syllabus Chapter 1 + pseudocode foundations" },
+  { weeks: "W07-10", name: "Communication", note: "Syllabus Chapter 2 + arrays and files" },
+  { weeks: "W11-16", name: "Hardware & logic", note: "Syllabus Chapter 3 + modular programming" },
+  { weeks: "W17-24", name: "Systems & data", note: "Remaining theory, algorithms, testing and databases" },
+  { weeks: "W25-32", name: "Exam readiness", note: "Spaced retrieval, timed papers, two mocks and repair" },
 ];
 
 const weeklyPlan = [
@@ -30,23 +31,23 @@ const weeklyPlan = [
   ["05", "Vector graphics, sound and file-size calculations", "Decomposition, abstraction, pattern recognition"],
   ["06", "Lossy/lossless compression and RLE", "Pseudocode conventions and structured solutions"],
   ["07", "Networks: models, topologies, hardware", "Data types and records"],
-  ["08", "Internet, transmission media and bit streaming", "One-dimensional arrays · diagnostic 1"],
-  ["09", "Computer components and input/output devices", "Two-dimensional arrays"],
-  ["10", "Logic gates and logic circuits", "Files and persistent data"],
-  ["11", "CPU architecture and fetch-execute cycle", "Computational thinking in exam contexts"],
-  ["12", "Assembly language", "Procedures and parameter passing"],
-  ["13", "Bit manipulation", "Functions and return values"],
-  ["14", "Operating systems", "Programming reliability: errors and test data"],
-  ["15", "Language translators and IDEs", "ADTs: stack, queue, linked list"],
-  ["16", "Security and data protection", "Programming practice · mid-year check"],
-  ["17", "Data integrity: validation/verification; ethics and ownership", "Testing methods and Paper 2 mixed retrieval"],
-  ["18", "Database concepts and normalisation", "Algorithm design: searching"],
-  ["19", "DBMS, DDL and DML", "Algorithm design: sorting"],
-  ["20", "Paper 1 mixed application", "Records, arrays and files in one solution"],
-  ["21", "Paper 1 command words and explanations", "Programming constructs under time"],
-  ["22", "Targeted theory retrieval", "Structured programming and modular design"],
-  ["23", "Theory misconceptions clinic", "Program development life cycle and design"],
-  ["24", "Paper 1 topic test", "Testing and maintenance · syllabus complete"],
+  ["08", "Cloud computing; wired/wireless media", "One-dimensional arrays · diagnostic 1"],
+  ["09", "Ethernet, internet infrastructure and streaming", "Two-dimensional arrays"],
+  ["10", "IP addressing, subnetting, URL and DNS", "Files and persistent data"],
+  ["11", "Hardware roles, embedded systems and buffers", "Computational thinking in exam contexts"],
+  ["12", "RAM/ROM and primary-memory families", "Procedures and parameter passing"],
+  ["13", "Storage and peripheral device operations", "Functions and return values"],
+  ["14", "Monitoring, control, sensors and feedback", "Programming reliability: errors and test data"],
+  ["15", "Logic gates, symbols and truth tables", "ADTs: stack, queue, linked list"],
+  ["16", "Logic circuits and representation conversions", "Programming practice · mid-year check"],
+  ["17", "CPU architecture and fetch-execute cycle", "Testing methods and Paper 2 mixed retrieval"],
+  ["18", "Assembly language and bit manipulation", "Algorithm design: searching"],
+  ["19", "Operating systems", "Algorithm design: sorting"],
+  ["20", "Language translators and IDEs", "Records, arrays and files in one solution"],
+  ["21", "Security and data protection", "Programming constructs under time"],
+  ["22", "Data integrity, ethics and ownership", "Structured programming and modular design"],
+  ["23", "Database concepts and normalisation", "Program development life cycle and design"],
+  ["24", "DBMS, DDL/DML and Paper 1 topic test", "Testing and maintenance · syllabus complete"],
   ["25", "Sections 1-4 spaced retrieval", "Sections 9-10 spaced retrieval"],
   ["26", "Sections 5-8 spaced retrieval", "Sections 11-12 spaced retrieval"],
   ["27", "Timed Paper 1 sections + feedback", "Timed Paper 2 sections + feedback"],
@@ -394,15 +395,7 @@ export default function Home() {
           <button className={view === "roadmap" ? "active" : ""} onClick={() => setView("roadmap")}>Course map</button>
         </nav>
         <div className="bar-actions">
-          <div className="lesson-switcher" aria-label="Lesson navigation">
-            <a className="active" href="./" aria-current="page">01</a>
-            <a href="./lesson-02/">02</a>
-            <a href="./lesson-03/">03</a>
-            <a href="./lesson-04/">04</a>
-            <a href="./lesson-05/">05</a>
-            <a href="./lesson-06/">06</a>
-            <a href="./lesson-07/">07</a>
-          </div>
+          <LessonSwitcher lessonNumber="01" root />
           {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
         </div>
@@ -528,9 +521,9 @@ export default function Home() {
       {view === "roadmap" && (
         <section className="roadmap-page">
           <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Core timetable: two 90-minute lessons per week, with Paper 1 and Paper 2 developing in parallel from Week 1. Add about 2 h 40 min of supervised practical work, retrieval and guided homework each week to approach Cambridge&apos;s 180 guided learning hours.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
-          <div className="phase-track">{phases.map((phase, index) => <div key={phase.weeks} style={{ flex: [8, 9, 7, 4, 4][index] }}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.note}</p></div>)}</div>
-          <div className="exam-blueprint"><article><span>PAPER 1</span><b>1 h 30 · 75 marks</b><p>Sections 1-8 · 60% knowledge, 40% application</p></article><article><span>PAPER 2</span><b>2 h · 75 marks</b><p>Sections 9-12 · 40% application, 60% design/programming</p></article><article><span>NON-NEGOTIABLE</span><b>Past papers begin in Week 8</b><p>Short retrieval first; complete timed papers after syllabus completion.</p></article></div>
-          <div className="weekly-table"><div className="weekly-head"><span>Week</span><span>Paper 1 · Theory</span><span>Paper 2 · Problem-solving</span></div>{weeklyPlan.map(([week, theory, programming]) => <div className={week === "01" ? "weekly-row current" : ["08","16","24","29","31"].includes(week) ? "weekly-row milestone" : "weekly-row"} key={week}><b>{week}</b><span>{theory}</span><span>{programming}</span></div>)}</div>
+          <div className="phase-track">{phases.map((phase, index) => <div key={phase.weeks} style={{ flex: [6, 4, 6, 8, 8][index] }}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.note}</p></div>)}</div>
+          <div className="exam-blueprint"><article><span>PAPER 1</span><b>1 h 30 · 75 marks</b><p>Sections 1-8 · 60% knowledge, 40% application</p></article><article><span>PAPER 2</span><b>2 h · 75 marks</b><p>Sections 9-12 · 40% application, 60% design/programming</p></article><article><span>NON-NEGOTIABLE</span><b>Past-paper practice every lesson</b><p>Short cited questions now; complete timed papers after syllabus completion.</p></article></div>
+          <div className="weekly-table"><div className="weekly-head"><span>Week</span><span>Paper 1 · Theory</span><span>Paper 2 · Problem-solving</span></div>{weeklyPlan.map(([week, theory, programming]) => <div className={["06","10","16","24","29","31"].includes(week) ? "weekly-row milestone" : "weekly-row"} key={week}><b>{week}</b><span>{theory}</span><span>{programming}</span></div>)}</div>
           <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish new syllabus content by Week 24. Reserve at least eight teaching weeks for spaced retrieval, two complete mocks and error-log repair. Do not wait until the syllabus is finished to introduce past-paper language.</p></div>
         </section>
       )}

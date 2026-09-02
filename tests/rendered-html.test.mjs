@@ -30,9 +30,11 @@ test("server-renders the complete lesson, homework and roadmap shell", async () 
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
-test("uses the configured static GitHub Pages social image", async () => {
+test("uses the configured static social image", async () => {
   const html = await (await render("/", "as-cs.example.test")).text();
-  assert.match(html, /https:\/\/wenatnyu\.github\.io\/as-course-2027\/og\.png/);
+  const configuredSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/").replace(/\/+$/, "");
+  const escapedImageUrl = `${configuredSiteUrl}/og.png`.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  assert.match(html, new RegExp(escapedImageUrl));
 
   const image = await stat(new URL("../public/og.png", import.meta.url));
   assert.ok(image.size > 100_000, "social preview image should be a substantive generated asset");
@@ -128,6 +130,72 @@ const lessonRoutes = [
     syllabusPatterns: [/SYLLABUS 2\.1/i],
     pastPaperPattern: /9618\/13[^<]{0,80}M\/J 2023[^<]{0,80}Q2|9618\/11[^<]{0,80}O\/N 2023[^<]{0,80}Q2/i,
   },
+  {
+    pathname: "/lesson-08",
+    slug: "lesson-08",
+    number: "08",
+    keyContent: /cloud|wired|wireless|fibre|satellite/i,
+    syllabusPatterns: [/SYLLABUS 2\.1/i],
+  },
+  {
+    pathname: "/lesson-09",
+    slug: "lesson-09",
+    number: "09",
+    keyContent: /Ethernet|CSMA.CD|streaming|internet infrastructure|WWW/i,
+    syllabusPatterns: [/SYLLABUS 2\.1/i],
+  },
+  {
+    pathname: "/lesson-10",
+    slug: "lesson-10",
+    number: "10",
+    keyContent: /IPv4|IPv6|subnet|URL|DNS/i,
+    syllabusPatterns: [/SYLLABUS 2\.1/i],
+  },
+  {
+    pathname: "/lesson-11",
+    slug: "lesson-11",
+    number: "11",
+    keyContent: /embedded|buffer|input|output|secondary/i,
+    syllabusPatterns: [/SYLLABUS 3\.1/i],
+  },
+  {
+    pathname: "/lesson-12",
+    slug: "lesson-12",
+    number: "12",
+    keyContent: /RAM|ROM|SRAM|DRAM|EPROM|EEPROM/i,
+    syllabusPatterns: [/SYLLABUS 3\.1/i],
+  },
+  {
+    pathname: "/lesson-13",
+    slug: "lesson-13",
+    number: "13",
+    keyContent: /laser|3D print|hard disk|solid.state|touchscreen|VR/i,
+    syllabusPatterns: [/SYLLABUS 3\.1/i],
+  },
+  {
+    pathname: "/lesson-14",
+    slug: "lesson-14",
+    number: "14",
+    keyContent: /monitoring|control|sensor|actuator|feedback/i,
+    syllabusPatterns: [/SYLLABUS 3\.1/i],
+    pastPaperPattern: /9618\/12[^<]{0,100}O\/N 2024[^<]{0,100}Q9/i,
+  },
+  {
+    pathname: "/lesson-15",
+    slug: "lesson-15",
+    number: "15",
+    keyContent: /logic gate|NAND|NOR|XOR|truth table/i,
+    syllabusPatterns: [/SYLLABUS 3\.2/i],
+    pastPaperPattern: /9618\/12[^<]{0,100}M\/J 2024[^<]{0,100}Q1/i,
+  },
+  {
+    pathname: "/lesson-16",
+    slug: "lesson-16",
+    number: "16",
+    keyContent: /problem statement|expression|logic circuit|truth table/i,
+    syllabusPatterns: [/SYLLABUS 3\.2/i],
+    pastPaperPattern: /9618\/11[^<]{0,100}O\/N 2025[^<]{0,100}Q3/i,
+  },
 ];
 
 async function readTsxTree(directoryUrl) {
@@ -168,6 +236,10 @@ for (const lesson of lessonRoutes) {
 
     assert.match(routeSource, /HomeworkSheet/);
     assert.match(routeSource, /\banswer\s*:/);
+    if (Number(lesson.number) >= 6) {
+      assert.match(routeSource, /PAST PAPER PRACTICE/i);
+      assert.match(routeSource, /9618\/\d{2}/i);
+    }
     assert.match(routeSource, /Show all answers|HomeworkSheet/);
     assert.match(sharedShell, /function InlineAnswer/);
     assert.match(sharedShell, /className="inline-answer-toggle"/);
@@ -182,3 +254,14 @@ for (const lesson of lessonRoutes) {
     assert.equal(timings.reduce((sum, value) => sum + value, 0), 90);
   });
 }
+
+test("the shared navigation exposes the complete 16-lesson sequence", async () => {
+  const [html, shell] = await Promise.all([
+    (await render("/lesson-16")).text(),
+    readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.match(shell, /const COURSE_LESSONS|export const COURSE_LESSONS/);
+  assert.match(shell, /\["16", "Logic circuits and expressions"\]/);
+  assert.match(html, /lesson-01|>01</i);
+  assert.match(html, /aria-current="page"[^>]*title="Logic circuits and expressions"|title="Logic circuits and expressions"[^>]*aria-current="page"/i);
+});

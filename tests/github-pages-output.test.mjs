@@ -51,6 +51,51 @@ const lessonArtifacts = [
     number: "07",
     keyContent: /LAN|WAN|client-server|peer-to-peer|topolog|router|switch/i,
   },
+  {
+    slug: "lesson-08",
+    number: "08",
+    keyContent: /cloud|wired|wireless|fibre|satellite/i,
+  },
+  {
+    slug: "lesson-09",
+    number: "09",
+    keyContent: /Ethernet|CSMA.CD|streaming|internet infrastructure|WWW/i,
+  },
+  {
+    slug: "lesson-10",
+    number: "10",
+    keyContent: /IPv4|IPv6|subnet|URL|DNS/i,
+  },
+  {
+    slug: "lesson-11",
+    number: "11",
+    keyContent: /embedded|buffer|input|output|secondary/i,
+  },
+  {
+    slug: "lesson-12",
+    number: "12",
+    keyContent: /RAM|ROM|SRAM|DRAM|EPROM|EEPROM/i,
+  },
+  {
+    slug: "lesson-13",
+    number: "13",
+    keyContent: /laser|3D print|hard disk|solid.state|touchscreen|VR/i,
+  },
+  {
+    slug: "lesson-14",
+    number: "14",
+    keyContent: /monitoring|control|sensor|actuator|feedback/i,
+  },
+  {
+    slug: "lesson-15",
+    number: "15",
+    keyContent: /logic gate|NAND|NOR|XOR|truth table/i,
+  },
+  {
+    slug: "lesson-16",
+    number: "16",
+    keyContent: /problem statement|expression|logic circuit|truth table/i,
+  },
 ];
 
 for (const lesson of lessonArtifacts) {

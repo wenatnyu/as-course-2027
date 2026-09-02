@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./lessons.css";
+import "./hardware-lessons.css";
+import "./control-logic-lessons.css";
 
 const title = "AS Computer Science · Lesson 01";
 const description = "A textbook-led Cambridge 9618 AS Computer Science lesson with classroom slides, inline homework answers and a 32-week course map for 2027.";
