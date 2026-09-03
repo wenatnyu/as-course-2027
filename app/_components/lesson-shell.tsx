@@ -33,6 +33,18 @@ export const COURSE_LESSONS = [
   ["14", "Monitoring and control"],
   ["15", "Logic gates and truth tables"],
   ["16", "Logic circuits and expressions"],
+  ["17", "Von Neumann architecture and registers"],
+  ["18", "System buses, performance and ports"],
+  ["19", "Fetch-execute cycle and interrupts"],
+  ["20", "Assembly language and instruction groups"],
+  ["21", "Addressing modes and effective addresses"],
+  ["22", "The two-pass assembler"],
+  ["23", "Tracing assembly programs"],
+  ["24", "Binary shifts and bit masking"],
+  ["25", "Operating systems and management"],
+  ["26", "Utilities and program libraries"],
+  ["27", "Translators, compilers and interpreters"],
+  ["28", "IDE features and Chapter 5 review"],
 ] as const;
 
 export function LessonSwitcher({

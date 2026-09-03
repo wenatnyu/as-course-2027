@@ -96,6 +96,66 @@ const lessonArtifacts = [
     number: "16",
     keyContent: /problem statement|expression|logic circuit|truth table/i,
   },
+  {
+    slug: "lesson-17",
+    number: "17",
+    keyContent: /Von Neumann|stored program|Program Counter|Memory Data Register|\bMDR\b/i,
+  },
+  {
+    slug: "lesson-18",
+    number: "18",
+    keyContent: /address bus|data bus|control bus|clock speed|cache|HDMI/i,
+  },
+  {
+    slug: "lesson-19",
+    number: "19",
+    keyContent: /fetch.execute|register transfer|interrupt|Interrupt Service Routine|\bISR\b/i,
+  },
+  {
+    slug: "lesson-20",
+    number: "20",
+    keyContent: /assembly language|machine code|opcode|operand|instruction group/i,
+  },
+  {
+    slug: "lesson-21",
+    number: "21",
+    keyContent: /addressing mode|immediate|direct|indirect|indexed|relative/i,
+  },
+  {
+    slug: "lesson-22",
+    number: "22",
+    keyContent: /two.pass assembler|symbol table|forward reference|object code/i,
+  },
+  {
+    slug: "lesson-23",
+    number: "23",
+    keyContent: /trace|accumulator|\bACC\b|\bCMP\b|\bJPE\b|\bJPN\b/i,
+  },
+  {
+    slug: "lesson-24",
+    number: "24",
+    keyContent: /logical shift|arithmetic shift|cyclic shift|bit mask|bitwise/i,
+  },
+  {
+    slug: "lesson-25",
+    number: "25",
+    keyContent: /operating system|memory management|file management|process management/i,
+  },
+  {
+    slug: "lesson-26",
+    number: "26",
+    keyContent: /utility|disk formatter|defragment|program librar|\bDLL\b/i,
+  },
+  {
+    slug: "lesson-27",
+    number: "27",
+    keyContent: /assembler|compiler|interpreter|bytecode|\bJVM\b/i,
+  },
+  {
+    slug: "lesson-28",
+    number: "28",
+    keyContent: /Integrated Development Environment|\bIDE\b|context.sensitive|syntax check|breakpoint|single stepping|prettyprint/i,
+  },
 ];
 
 for (const lesson of lessonArtifacts) {

@@ -20,8 +20,20 @@ An English classroom course built from the Cambridge 9618 syllabus, the endorsed
 - Lesson 14 — Monitoring, control, sensors, actuators and feedback
 - Lesson 15 — Logic gates, symbols, functions and truth tables
 - Lesson 16 — Logic statements, expressions, circuits and truth tables
+- Lesson 17 — Von Neumann architecture, CPU components and registers
+- Lesson 18 — System buses, performance factors and ports
+- Lesson 19 — Fetch-execute cycle, register transfer notation and interrupts
+- Lesson 20 — Assembly language foundations and instruction groups
+- Lesson 21 — Addressing modes and effective addresses
+- Lesson 22 — The two-pass assembler
+- Lesson 23 — Tracing assembly-language programs
+- Lesson 24 — Binary shifts, bitwise operations and masking
+- Lesson 25 — Operating-system purpose and management tasks
+- Lesson 26 — Utility software, program libraries and DLL files
+- Lesson 27 — Assemblers, compilers, interpreters and Java bytecode
+- Lesson 28 — IDE features and Chapter 5 consolidation
 
-Lessons 01–16 complete syllabus Chapters 1–3. Monitoring/control is cross-referenced to the coursebook's Chapter 7 and logic to Chapter 4 so the current syllabus order is covered without omissions.
+Lessons 01–28 complete syllabus Chapters 1–5. Monitoring/control, bit manipulation and other cross-chapter textbook material are deliberately reordered so the current 2027–2029 syllabus sequence is covered without omissions.
 
 GitHub Pages: <https://wenatnyu.github.io/as-course-2027/>
 

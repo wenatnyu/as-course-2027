@@ -196,6 +196,90 @@ const lessonRoutes = [
     syllabusPatterns: [/SYLLABUS 3\.2/i],
     pastPaperPattern: /9618\/11[^<]{0,100}O\/N 2025[^<]{0,100}Q3/i,
   },
+  {
+    pathname: "/lesson-17",
+    slug: "lesson-17",
+    number: "17",
+    keyContent: /Von Neumann|stored program|Program Counter|Memory Data Register|\bMDR\b/i,
+    syllabusPatterns: [/SYLLABUS 4\.1/i],
+  },
+  {
+    pathname: "/lesson-18",
+    slug: "lesson-18",
+    number: "18",
+    keyContent: /address bus|data bus|control bus|clock speed|cache|HDMI/i,
+    syllabusPatterns: [/SYLLABUS 4\.1/i],
+  },
+  {
+    pathname: "/lesson-19",
+    slug: "lesson-19",
+    number: "19",
+    keyContent: /fetch.execute|register transfer|interrupt|Interrupt Service Routine|\bISR\b/i,
+    syllabusPatterns: [/SYLLABUS 4\.1/i],
+  },
+  {
+    pathname: "/lesson-20",
+    slug: "lesson-20",
+    number: "20",
+    keyContent: /assembly language|machine code|opcode|operand|instruction group/i,
+    syllabusPatterns: [/SYLLABUS 4\.2/i],
+  },
+  {
+    pathname: "/lesson-21",
+    slug: "lesson-21",
+    number: "21",
+    keyContent: /addressing mode|immediate|direct|indirect|indexed|relative/i,
+    syllabusPatterns: [/SYLLABUS 4\.2/i],
+  },
+  {
+    pathname: "/lesson-22",
+    slug: "lesson-22",
+    number: "22",
+    keyContent: /two.pass assembler|symbol table|forward reference|object code/i,
+    syllabusPatterns: [/SYLLABUS 4\.2/i],
+  },
+  {
+    pathname: "/lesson-23",
+    slug: "lesson-23",
+    number: "23",
+    keyContent: /trace|accumulator|\bACC\b|\bCMP\b|\bJPE\b|\bJPN\b/i,
+    syllabusPatterns: [/SYLLABUS 4\.2/i],
+  },
+  {
+    pathname: "/lesson-24",
+    slug: "lesson-24",
+    number: "24",
+    keyContent: /logical shift|arithmetic shift|cyclic shift|bit mask|bitwise/i,
+    syllabusPatterns: [/SYLLABUS 4\.3/i],
+  },
+  {
+    pathname: "/lesson-25",
+    slug: "lesson-25",
+    number: "25",
+    keyContent: /operating system|memory management|file management|process management/i,
+    syllabusPatterns: [/SYLLABUS 5\.1/i],
+  },
+  {
+    pathname: "/lesson-26",
+    slug: "lesson-26",
+    number: "26",
+    keyContent: /utility|disk formatter|defragment|program librar|\bDLL\b/i,
+    syllabusPatterns: [/SYLLABUS 5\.1/i],
+  },
+  {
+    pathname: "/lesson-27",
+    slug: "lesson-27",
+    number: "27",
+    keyContent: /assembler|compiler|interpreter|bytecode|\bJVM\b/i,
+    syllabusPatterns: [/SYLLABUS 5\.2/i],
+  },
+  {
+    pathname: "/lesson-28",
+    slug: "lesson-28",
+    number: "28",
+    keyContent: /Integrated Development Environment|\bIDE\b|context.sensitive|syntax check|breakpoint|single stepping|prettyprint/i,
+    syllabusPatterns: [/SYLLABUS 5\.2/i],
+  },
 ];
 
 async function readTsxTree(directoryUrl) {
@@ -252,16 +336,20 @@ for (const lesson of lessonRoutes) {
     const timings = [...routeSource.matchAll(/\btime:\s*["'](\d+) min["']/g)].map((match) => Number(match[1]));
     assert.ok(timings.length >= 10, `Lesson ${lesson.number} should expose a maintainable timing for each teaching segment`);
     assert.equal(timings.reduce((sum, value) => sum + value, 0), 90);
+    if (Number(lesson.number) >= 17) {
+      assert.match(routeSource, /marks=\{30\}/);
+      assert.match(routeSource, /minutes=\{45\}/);
+    }
   });
 }
 
-test("the shared navigation exposes the complete 16-lesson sequence", async () => {
+test("the shared navigation exposes the complete 28-lesson sequence", async () => {
   const [html, shell] = await Promise.all([
-    (await render("/lesson-16")).text(),
+    (await render("/lesson-28")).text(),
     readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(shell, /const COURSE_LESSONS|export const COURSE_LESSONS/);
-  assert.match(shell, /\["16", "Logic circuits and expressions"\]/);
+  assert.match(shell, /\["28", "IDE features and Chapter 5 review"\]/);
   assert.match(html, /lesson-01|>01</i);
-  assert.match(html, /aria-current="page"[^>]*title="Logic circuits and expressions"|title="Logic circuits and expressions"[^>]*aria-current="page"/i);
+  assert.match(html, /aria-current="page"[^>]*title="IDE features and Chapter 5 review"|title="IDE features and Chapter 5 review"[^>]*aria-current="page"/i);
 });

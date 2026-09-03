@@ -1,0 +1,192 @@
+/* Lessons 21–24: assembly language and bit manipulation.
+   All diagrams are HTML/CSS so they remain crisp when projected or printed. */
+.asm-reveal { margin-top: .85cqw; }
+.asm-reveal > button {
+  min-height: 2.55cqw;
+  padding: .62cqw .9cqw;
+  color: white;
+  background: #3156d3;
+  border: 0;
+  border-radius: 2px;
+  font: 850 clamp(11px,.92cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .06em;
+  cursor: pointer;
+}
+.asm-reveal > button:hover,
+.asm-reveal > button[aria-expanded="true"] { color: #17223b; background: #c8f05d; }
+.asm-reveal__panel {
+  margin-top: .55cqw;
+  padding: .8cqw 1cqw;
+  color: #17223b;
+  background: white;
+  border-left: .34cqw solid #c8f05d;
+  font-size: clamp(13px,1.08cqw,17px);
+  line-height: 1.42;
+}
+.asm-reveal__panel > :first-child { margin-top: 0; }
+.asm-reveal__panel > :last-child { margin-bottom: 0; }
+
+.slide--asm-title { color: white; background: #17223b; }
+.slide--asm-title::after {
+  content: "";
+  position: absolute;
+  right: -10cqw;
+  bottom: -16cqw;
+  width: 45cqw;
+  aspect-ratio: 1;
+  border: 6cqw solid rgba(200,240,93,.08);
+  border-radius: 50%;
+}
+.slide--asm-title .slide-chrome > span { color: #c8f05d; }
+.slide--asm-title .slide-chrome > b { color: #17223b; background: #c8f05d; }
+.asm-title-grid { height: 100%; display: grid; grid-template-columns: 1.12fr .88fr; gap: 3.5cqw; align-items: center; }
+.asm-title-copy { position: relative; z-index: 1; }
+.asm-title-copy > span { color: #c8f05d; font: 850 clamp(12px,1.05cqw,16px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
+.asm-title-copy h1 { margin: 1.4cqw 0 1.5cqw; color: white; font: 500 5.6cqw/.92 Georgia, serif; letter-spacing: -.05em; }
+.asm-title-copy h1 em { color: #77d8df; font-weight: 500; }
+.asm-title-copy p { max-width: 47cqw; margin: 0; color: #dbe2ee; font-size: clamp(14px,1.42cqw,21px); line-height: 1.45; }
+.asm-chip-stack { position: relative; z-index: 1; display: grid; gap: .75cqw; }
+.asm-chip-stack p { margin: 0; padding: 1.05cqw 1.2cqw; display: grid; grid-template-columns: auto 1fr; gap: 1cqw; align-items: center; background: rgba(255,255,255,.08); border-left: .34cqw solid #77d8df; }
+.asm-chip-stack p:nth-child(2) { border-color: #ff704d; }
+.asm-chip-stack p:nth-child(3) { border-color: #c8f05d; }
+.asm-chip-stack b { color: #c8f05d; font: 850 clamp(12px,1.05cqw,16px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-chip-stack span { color: white; font-size: clamp(13px,1.15cqw,18px); }
+
+.asm-note,
+.asm-warning {
+  margin: 1cqw 0 0;
+  padding: .82cqw 1cqw;
+  color: #334057;
+  background: white;
+  border-left: .34cqw solid #3156d3;
+  font-size: clamp(13px,1.08cqw,17px);
+  line-height: 1.42;
+}
+.asm-warning { background: #fff0eb; border-color: #b64028; }
+.asm-kicker { color: #3156d3; font: 850 clamp(11px,.95cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; }
+.asm-code { padding: .18cqw .4cqw; color: #17223b; background: #e9edf6; border: .08cqw solid #cbd2df; font: 750 clamp(12px,1.02cqw,16px)/1.25 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+
+.asm-route { display: grid; grid-template-columns: repeat(4,1fr); gap: .85cqw; }
+.asm-route article,
+.asm-card { min-height: 15cqw; padding: 1.1cqw; background: white; border-top: .38cqw solid #3156d3; }
+.asm-route article:nth-child(2), .asm-card:nth-child(2n) { border-color: #ff704d; }
+.asm-route article:nth-child(3) { border-color: #c8f05d; }
+.asm-route article:nth-child(4) { color: white; background: #17223b; border-color: #77d8df; }
+.asm-route b,
+.asm-card > span { display: block; color: #3156d3; font: 850 clamp(11px,.96cqw,14px)/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; }
+.asm-route article:last-child b { color: #c8f05d; }
+.asm-route p,
+.asm-card p,
+.asm-card li { color: #435067; font-size: clamp(13px,1.1cqw,17px); line-height: 1.4; }
+.asm-route article:last-child p { color: #dce3ef; }
+.asm-card-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .85cqw; }
+.asm-card-grid.two { grid-template-columns: repeat(2,1fr); }
+.asm-card-grid.five { grid-template-columns: repeat(5,1fr); }
+.asm-card-grid.five .asm-card { min-height: 12.5cqw; padding: .9cqw; }
+.asm-card-grid.five .asm-card p { font-size: clamp(12px,.96cqw,15px); }
+.asm-card h3 { margin: 1.05cqw 0 .65cqw; color: #17223b; font: 600 1.7cqw/1.05 Georgia, serif; }
+.asm-card ul { margin: .8cqw 0 0; padding-left: 1.25cqw; }
+
+.asm-equation { margin: 1.4cqw 0; padding: 1.2cqw; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .8cqw; align-items: center; color: #17223b; background: white; border-top: .42cqw solid #3156d3; text-align: center; }
+.asm-equation b,
+.asm-equation strong { font: 800 clamp(14px,1.55cqw,22px)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-equation strong { color: #17223b; background: #c8f05d; padding: .8cqw; }
+.asm-equation i { color: #ff704d; font: 800 1.8cqw/1 Georgia, serif; font-style: normal; }
+.asm-mode-strip { display: grid; grid-template-columns: repeat(5,1fr); gap: .65cqw; }
+.asm-mode-strip article { min-height: 14cqw; padding: .85cqw; background: white; border-top: .34cqw solid #3156d3; }
+.asm-mode-strip article:nth-child(even) { border-color: #ff704d; }
+.asm-mode-strip b { color: #3156d3; font: 850 clamp(11px,.9cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-mode-strip code { display: block; margin: 1.1cqw 0 .65cqw; color: #17223b; font: 800 clamp(13px,1.18cqw,18px)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-mode-strip p { margin: 0; color: #4a566c; font-size: clamp(12px,.98cqw,15px); line-height: 1.33; }
+.asm-memory-chain { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 1cqw; align-items: center; }
+.asm-memory-chain article { min-height: 15cqw; padding: 1.2cqw; display: grid; align-content: center; justify-items: center; background: white; border-top: .4cqw solid #3156d3; text-align: center; }
+.asm-memory-chain article:nth-of-type(2) { border-color: #ff704d; }
+.asm-memory-chain article:nth-of-type(3) { border-color: #c8f05d; }
+.asm-memory-chain span { color: #667187; font: 800 clamp(11px,.92cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-memory-chain b { margin-top: 1cqw; color: #17223b; font: 800 clamp(15px,1.8cqw,25px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-memory-chain > i { color: #ff704d; font-size: 2.1cqw; font-style: normal; }
+
+.asm-table-wrap { overflow: hidden; background: white; border: .12cqw solid #cbd2df; }
+.asm-table-wrap table { width: 100%; border-collapse: collapse; }
+.asm-table-wrap th { padding: .68cqw .75cqw; color: white; background: #17223b; font: 800 clamp(11px,.92cqw,14px)/1.15 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; }
+.asm-table-wrap td { padding: .65cqw .75cqw; color: #354158; border-right: .08cqw solid #d8dde6; border-bottom: .08cqw solid #d8dde6; font-size: clamp(12px,1.02cqw,16px); line-height: 1.3; }
+.asm-table-wrap td:first-child { color: #3156d3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 800; }
+.asm-table-wrap .changed { color: #17223b; background: #e7f4ba; font-weight: 850; }
+
+.asm-paper { color: white; background: #17223b; }
+.asm-paper h2 { color: white; }
+.asm-paper .slide-chrome > span { color: #c8f05d; }
+.asm-paper .slide-chrome > b { color: #17223b; background: #c8f05d; }
+.asm-paper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9cqw; }
+.asm-paper-grid.three { grid-template-columns: repeat(3,1fr); }
+.asm-paper-grid article,
+.asm-paper-grid > p { min-height: 12cqw; margin: 0; padding: 1cqw; color: #17223b; background: white; border-top: .36cqw solid #ff704d; font-size: clamp(13px,1.08cqw,17px); line-height: 1.38; }
+.asm-paper-grid b { color: #3156d3; }
+.asm-paper small { display: block; margin-top: .7cqw; color: #bdc7d7; font-size: clamp(11px,.86cqw,13px); }
+.asm-paper .asm-reveal__panel { background: #f5f2eb; }
+
+.asm-pass-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1cqw; align-items: stretch; }
+.asm-pass { min-height: 23cqw; padding: 1.15cqw; background: white; border-top: .42cqw solid #3156d3; }
+.asm-pass:last-child { border-color: #ff704d; }
+.asm-pass > span { color: #3156d3; font: 850 clamp(11px,.95cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-pass h3 { margin: .9cqw 0; color: #17223b; font: 600 1.8cqw/1 Georgia, serif; }
+.asm-pass ol { margin: 0; padding-left: 1.35cqw; }
+.asm-pass li { padding: .25cqw 0; color: #435067; font-size: clamp(12px,1.02cqw,16px); line-height: 1.32; }
+.asm-pass-grid > i { align-self: center; color: #ff704d; font-size: 2.4cqw; font-style: normal; }
+.asm-program { margin: 0; padding: 1.05cqw 1.25cqw; color: #e8edfa; background: #17223b; border-left: .4cqw solid #c8f05d; font: 750 clamp(12px,1.08cqw,17px)/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; }
+.asm-program .label { color: #c8f05d; }
+.asm-symbol-table { display: grid; grid-template-columns: 1fr 1fr; background: white; border: .12cqw solid #cbd2df; }
+.asm-symbol-table > * { padding: .72cqw 1cqw; border-right: .08cqw solid #d8dde6; border-bottom: .08cqw solid #d8dde6; font-size: clamp(13px,1.08cqw,17px); }
+.asm-symbol-table b { color: white; background: #3156d3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-symbol-table code { color: #17223b; font-weight: 800; }
+
+.asm-state-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: .8cqw; }
+.asm-state-strip article { padding: 1cqw; background: white; border-top: .36cqw solid #3156d3; text-align: center; }
+.asm-state-strip article:nth-child(even) { border-color: #ff704d; }
+.asm-state-strip span { display: block; color: #667187; font: 800 clamp(11px,.9cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-state-strip b { display: block; margin-top: .8cqw; color: #17223b; font: 800 clamp(15px,1.8cqw,25px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-trace-rule { margin-top: 1cqw; display: grid; grid-template-columns: repeat(3,1fr); gap: .8cqw; }
+.asm-trace-rule p { margin: 0; padding: .85cqw 1cqw; color: #354158; background: white; border-left: .3cqw solid #3156d3; font-size: clamp(13px,1.05cqw,16px); line-height: 1.35; }
+.asm-trace-rule b { color: #3156d3; }
+
+.asm-bit-row { display: grid; grid-template-columns: repeat(8,1fr); gap: .32cqw; }
+.asm-bit-row > span { aspect-ratio: 1.2; display: grid; place-items: center; color: white; background: #3156d3; border: .1cqw solid #2548b8; font: 850 clamp(14px,1.65cqw,24px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-bit-row > span.changed { color: #17223b; background: #c8f05d; border-color: #91b236; }
+.asm-bit-labels { margin-bottom: .35cqw; display: grid; grid-template-columns: repeat(8,1fr); gap: .32cqw; }
+.asm-bit-labels > span { color: #667187; text-align: center; font: 800 clamp(10px,.8cqw,12px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-shift-stack { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.1cqw; align-items: center; }
+.asm-shift-stack article { padding: 1.15cqw; background: white; border-top: .38cqw solid #3156d3; }
+.asm-shift-stack article:last-child { border-color: #ff704d; }
+.asm-shift-stack article > b { display: block; margin-bottom: .8cqw; color: #3156d3; font: 850 clamp(11px,.92cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-shift-stack > i { color: #ff704d; font-size: 2.2cqw; font-style: normal; }
+.asm-mask-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .9cqw; }
+.asm-mask-grid article { min-height: 18cqw; padding: 1.1cqw; background: white; border-top: .4cqw solid #3156d3; }
+.asm-mask-grid article:nth-child(2) { border-color: #ff704d; }
+.asm-mask-grid article:nth-child(3) { border-color: #c8f05d; }
+.asm-mask-grid h3 { margin: 0 0 .9cqw; color: #17223b; font: 600 1.8cqw/1 Georgia, serif; }
+.asm-mask-grid code { display: block; padding: .65cqw; color: white; background: #17223b; font: 800 clamp(12px,1.08cqw,17px)/1.25 ui-monospace, SFMono-Regular, Menlo, monospace; text-align: center; }
+.asm-mask-grid p { color: #435067; font-size: clamp(13px,1.05cqw,16px); line-height: 1.36; }
+.asm-flag-byte { display: grid; grid-template-columns: repeat(8,1fr); gap: .36cqw; }
+.asm-flag-byte article { min-height: 9.5cqw; padding: .55cqw .25cqw; display: grid; align-content: center; justify-items: center; color: white; background: #3156d3; border-bottom: .34cqw solid #17223b; }
+.asm-flag-byte article.on { color: #17223b; background: #c8f05d; }
+.asm-flag-byte b { font: 850 clamp(15px,1.8cqw,26px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-flag-byte span { margin-top: .55cqw; font: 800 clamp(9px,.72cqw,11px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.slide--asm-exit { color: white; background: #234c65; }
+.slide--asm-exit h2 { color: white; }
+.slide--asm-exit .slide-chrome > span { color: #c8f05d; }
+.slide--asm-exit .slide-chrome > b { color: #234c65; background: white; }
+.asm-exit-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .9cqw; }
+.asm-exit-grid article { min-height: 14cqw; padding: 1cqw; color: #17223b; background: white; border-top: .38cqw solid #77d8df; }
+.asm-exit-grid article:nth-child(2) { border-color: #ff704d; }
+.asm-exit-grid article:nth-child(3) { border-color: #c8f05d; }
+.asm-exit-grid b { display: block; color: #3156d3; font: 850 clamp(11px,.95cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-exit-grid p { font-size: clamp(13px,1.08cqw,17px); line-height: 1.38; }
+.asm-homework-callout { margin-top: 1cqw; padding: .82cqw 1cqw; display: grid; grid-template-columns: auto 1fr auto; gap: 1cqw; align-items: center; background: rgba(255,255,255,.11); font-size: clamp(12px,1cqw,15px); }
+.asm-homework-callout b { color: #c8f05d; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.asm-homework-callout strong { padding: .55cqw .75cqw; color: #17223b; background: #c8f05d; font: 800 clamp(11px,.9cqw,14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+@media (max-width: 760px) {
+  .asm-title-copy p { font-size: clamp(14px,1.45cqw,21px); }
+  .asm-route p, .asm-card p, .asm-table-wrap td, .asm-pass li { font-size: clamp(13px,1.1cqw,17px); }
+}
