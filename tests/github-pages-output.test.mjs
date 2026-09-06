@@ -156,6 +156,41 @@ const lessonArtifacts = [
     number: "28",
     keyContent: /Integrated Development Environment|\bIDE\b|context.sensitive|syntax check|breakpoint|single stepping|prettyprint/i,
   },
+  {
+    slug: "lesson-29",
+    number: "29",
+    keyContent: /security|privacy|integrity|virus|spyware|phishing|pharming/i,
+  },
+  {
+    slug: "lesson-30",
+    number: "30",
+    keyContent: /authentication|authorisation|digital signature|firewall|encryption|access rights/i,
+  },
+  {
+    slug: "lesson-31",
+    number: "31",
+    keyContent: /validation|verification|range check|existence check|check digit/i,
+  },
+  {
+    slug: "lesson-32",
+    number: "32",
+    keyContent: /even parity|odd parity|block parity|checksum|retransmission/i,
+  },
+  {
+    slug: "lesson-33",
+    number: "33",
+    keyContent: /professional ethics|\bBCS\b|\bIEEE\b|stakeholder|public trust/i,
+  },
+  {
+    slug: "lesson-34",
+    number: "34",
+    keyContent: /copyright|software licence|Free Software Foundation|Open Source Initiative|shareware|commercial/i,
+  },
+  {
+    slug: "lesson-35",
+    number: "35",
+    keyContent: /artificial intelligence|computer vision|natural language processing|social impact|economic impact|environmental impact/i,
+  },
 ];
 
 for (const lesson of lessonArtifacts) {

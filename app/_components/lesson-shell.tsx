@@ -45,6 +45,13 @@ export const COURSE_LESSONS = [
   ["26", "Utilities and program libraries"],
   ["27", "Translators, compilers and interpreters"],
   ["28", "IDE features and Chapter 5 review"],
+  ["29", "Security, privacy, integrity and threats"],
+  ["30", "Layered security and access control"],
+  ["31", "Validation, verification and check digits"],
+  ["32", "Parity, checksums and Chapter 6 review"],
+  ["33", "Professional ethics, BCS and IEEE"],
+  ["34", "Copyright and software licensing"],
+  ["35", "AI applications, impacts and Chapter 7 review"],
 ] as const;
 
 export function LessonSwitcher({
@@ -268,6 +275,7 @@ export function LessonShell({
   courseMapHref,
   sourceSummary,
   sourceDetail,
+  additionalSourceLinks = [],
 }: {
   lessonNumber: string;
   slides: SlideData[];
@@ -276,6 +284,7 @@ export function LessonShell({
   courseMapHref: string;
   sourceSummary: string;
   sourceDetail: string;
+  additionalSourceLinks?: { href: string; label: string }[];
 }) {
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
@@ -339,7 +348,7 @@ export function LessonShell({
 
       <footer className="source-footer">
         <div><b>{`LESSON ${lessonNumber} SOURCES`}</b><span>{sourceSummary}</span></div>
-        <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/past-papers/" target="_blank" rel="noreferrer">Cambridge past papers</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a></div>
+        <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/past-papers/" target="_blank" rel="noreferrer">Cambridge past papers</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a>{additionalSourceLinks.map((link) => <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label}</a>)}</div>
         <p>{sourceDetail}</p>
       </footer>
     </main>

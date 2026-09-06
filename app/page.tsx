@@ -47,12 +47,12 @@ const weeklyPlan = [
   ["20", "L23-24 · Assembly tracing, binary shifts and bit masking", "Records, arrays and files in one solution"],
   ["21", "L25-26 · OS management, utilities and program libraries", "Programming constructs under time"],
   ["22", "L27-28 · Translators, Java and IDE features", "Structured programming and modular design"],
-  ["23", "Security: threats, accounts, authentication and encryption", "Program development life cycle and design"],
-  ["24", "Data integrity: validation, verification and transfer checks", "Testing and maintenance"],
-  ["25", "Ethics, ownership and copyright", "Sections 9-10 spaced retrieval"],
-  ["26", "Database concepts, keys and relationships", "Sections 11-12 spaced retrieval"],
-  ["27", "Normalisation, DBMS, DDL and DML", "Timed Paper 2 sections + feedback"],
-  ["28", "Database queries + Paper 1 topic test · syllabus complete", "Full Paper 2 · 120 min extended session"],
+  ["23", "L29-30 · Security, privacy and integrity; threats and protective measures", "Program development life cycle and design"],
+  ["24", "L31-32 · Validation, verification, check digits, parity and checksums", "Testing and maintenance"],
+  ["25", "L33-34 · Professional ethics; copyright and software licensing", "Sections 9-10 spaced retrieval"],
+  ["26", "L35-36 · AI applications and impacts; database foundations, keys, relationships and E-R diagrams", "Sections 11-12 spaced retrieval"],
+  ["27", "L37-38 · Normalisation; DBMS features, tools and DDL", "Timed Paper 2 sections + feedback"],
+  ["28", "L39-40 · SQL queries, joins and data maintenance + Paper 1 topic test · syllabus complete", "Full Paper 2 · 120 min extended session"],
   ["29", "Mock 1 · Paper 1 + item analysis", "Mock 1 · Paper 2 + item analysis (extended)"],
   ["30", "Weak-topic reteaching", "Targeted pseudocode repair"],
   ["31", "Mock 2 · Paper 1 + final repair", "Mock 2 · Paper 2 + final repair (extended)"],
@@ -521,11 +521,11 @@ export default function Home() {
 
       {view === "roadmap" && (
         <section className="roadmap-page">
-          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. In Weeks 17-22 the workshop carries the second theory lesson needed for the dense Processor and System Software chapters.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
+          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. In Weeks 17-28 the workshop carries the second theory lesson needed to complete the dense Chapters 4-8 sequence without reducing the four-week exam phase.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
           <div className="phase-track">{phases.map((phase) => <div key={phase.weeks} style={{ flex: phase.span }}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.note}</p></div>)}</div>
           <div className="exam-blueprint"><article><span>PAPER 1</span><b>1 h 30 · 75 marks</b><p>Sections 1-8 · 60% knowledge, 40% application</p></article><article><span>PAPER 2</span><b>2 h · 75 marks</b><p>Sections 9-12 · 40% application, 60% design/programming</p></article><article><span>NON-NEGOTIABLE</span><b>Past-paper practice every lesson</b><p>Short cited questions now; complete timed papers after syllabus completion.</p></article></div>
           <div className="weekly-table"><div className="weekly-head"><span>Week</span><span>Paper 1 · Theory</span><span>Paper 2 · Problem-solving</span></div>{weeklyPlan.map(([week, theory, programming]) => <div className={["06","10","16","22","28","29","31"].includes(week) ? "weekly-row milestone" : "weekly-row"} key={week}><b>{week}</b><span>{theory}</span><span>{programming}</span></div>)}</div>
-          <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish new syllabus content by Week 28 after using the rotating workshop for the second Chapter 4-5 theory lesson. Reserve four dedicated weeks for two complete mocks and error-log repair, while keeping retrieval and authentic past-paper practice in every lesson from Week 1.</p></div>
+          <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish new syllabus content by Week 28 by using the rotating workshop for the second Paper 1 lesson throughout Weeks 17-28. Reserve four dedicated weeks for two complete mocks and error-log repair, while keeping retrieval and authentic past-paper practice in every lesson from Week 1.</p></div>
         </section>
       )}
 

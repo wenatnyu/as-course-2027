@@ -280,6 +280,62 @@ const lessonRoutes = [
     keyContent: /Integrated Development Environment|\bIDE\b|context.sensitive|syntax check|breakpoint|single stepping|prettyprint/i,
     syllabusPatterns: [/SYLLABUS 5\.2/i],
   },
+  {
+    pathname: "/lesson-29",
+    slug: "lesson-29",
+    number: "29",
+    keyContent: /security|privacy|integrity|virus|spyware|phishing|pharming/i,
+    syllabusPatterns: [/SYLLABUS 6\.1/i],
+    pastPaperPattern: /9618\/11[^<]{0,100}O\/N 2021[^<]{0,100}Q2/i,
+  },
+  {
+    pathname: "/lesson-30",
+    slug: "lesson-30",
+    number: "30",
+    keyContent: /authentication|authorisation|digital signature|firewall|encryption|access rights/i,
+    syllabusPatterns: [/SYLLABUS 6\.1/i],
+    pastPaperPattern: /9618\/13[^<]{0,100}M\/J 2023[^<]{0,100}Q6/i,
+  },
+  {
+    pathname: "/lesson-31",
+    slug: "lesson-31",
+    number: "31",
+    keyContent: /validation|verification|range check|existence check|check digit/i,
+    syllabusPatterns: [/SYLLABUS 6\.2/i],
+    pastPaperPattern: /9618\/13[^<]{0,100}O\/N 2025[^<]{0,100}Q7\(e\)/i,
+  },
+  {
+    pathname: "/lesson-32",
+    slug: "lesson-32",
+    number: "32",
+    keyContent: /even parity|odd parity|block parity|checksum|retransmission/i,
+    syllabusPatterns: [/SYLLABUS 6\.2/i],
+    pastPaperPattern: /9618\/12[^<]{0,100}O\/N 2025[^<]{0,100}Q6\(c\)/i,
+  },
+  {
+    pathname: "/lesson-33",
+    slug: "lesson-33",
+    number: "33",
+    keyContent: /professional ethics|\bBCS\b|\bIEEE\b|stakeholder|public trust/i,
+    syllabusPatterns: [/SYLLABUS 7\.1/i],
+    pastPaperPattern: /9618\/12[^<]{0,100}O\/N 2024[^<]{0,100}Q5\(a\)/i,
+  },
+  {
+    pathname: "/lesson-34",
+    slug: "lesson-34",
+    number: "34",
+    keyContent: /copyright|software licence|Free Software Foundation|Open Source Initiative|shareware|commercial/i,
+    syllabusPatterns: [/SYLLABUS 7\.1/i],
+    pastPaperPattern: /9618\/12[^<]{0,100}O\/N 2025[^<]{0,100}Q2/i,
+  },
+  {
+    pathname: "/lesson-35",
+    slug: "lesson-35",
+    number: "35",
+    keyContent: /artificial intelligence|computer vision|natural language processing|social impact|economic impact|environmental impact/i,
+    syllabusPatterns: [/SYLLABUS 7\.1/i],
+    pastPaperPattern: /9618\/12[^<]{0,100}M\/J 2025[^<]{0,100}Q3/i,
+  },
 ];
 
 async function readTsxTree(directoryUrl) {
@@ -343,13 +399,15 @@ for (const lesson of lessonRoutes) {
   });
 }
 
-test("the shared navigation exposes the complete 28-lesson sequence", async () => {
+test("the shared navigation exposes the complete 35-lesson sequence", async () => {
   const [html, shell] = await Promise.all([
-    (await render("/lesson-28")).text(),
+    (await render("/lesson-35")).text(),
     readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(shell, /const COURSE_LESSONS|export const COURSE_LESSONS/);
-  assert.match(shell, /\["28", "IDE features and Chapter 5 review"\]/);
+  assert.match(shell, /\["35", "AI applications, impacts and Chapter 7 review"\]/);
   assert.match(html, /lesson-01|>01</i);
-  assert.match(html, /aria-current="page"[^>]*title="IDE features and Chapter 5 review"|title="IDE features and Chapter 5 review"[^>]*aria-current="page"/i);
+  assert.match(html, /<option value="\.\.\/lesson-35\/" selected="">35/i);
+  assert.match(html, /AI applications, impacts and Chapter 7 review/i);
+  assert.match(shell, /\["29", "Security, privacy, integrity and threats"\]/);
 });

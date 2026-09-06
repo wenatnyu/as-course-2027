@@ -32,8 +32,15 @@ An English classroom course built from the Cambridge 9618 syllabus, the endorsed
 - Lesson 26 — Utility software, program libraries and DLL files
 - Lesson 27 — Assemblers, compilers, interpreters and Java bytecode
 - Lesson 28 — IDE features and Chapter 5 consolidation
+- Lesson 29 — Security, privacy, integrity and internet threats
+- Lesson 30 — Layered security, authentication, firewalls, encryption and access rights
+- Lesson 31 — Validation, entry verification and check digits
+- Lesson 32 — Byte parity, block parity, checksums and Chapter 6 consolidation
+- Lesson 33 — Professional ethics, BCS, IEEE and stakeholder decisions
+- Lesson 34 — Copyright and software licensing
+- Lesson 35 — AI applications and social, economic and environmental impacts
 
-Lessons 01–28 complete syllabus Chapters 1–5. Monitoring/control, bit manipulation and other cross-chapter textbook material are deliberately reordered so the current 2027–2029 syllabus sequence is covered without omissions.
+Lessons 01–35 complete syllabus Chapters 1–7 of the 12-chapter AS course. Monitoring/control, bit manipulation and other cross-chapter textbook material are deliberately reordered so the current 2027–2029 syllabus sequence is covered without omissions. The endorsed coursebook numbers these topics differently: syllabus Chapters 6–7 align with Coursebook Chapters 9–10.
 
 GitHub Pages: <https://wenatnyu.github.io/as-course-2027/>
 

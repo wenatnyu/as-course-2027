@@ -22,7 +22,7 @@ body {
 }
 button, a { font: inherit; }
 button { color: inherit; }
-button:focus-visible, a:focus-visible { outline: 3px solid var(--acid); outline-offset: 3px; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid var(--acid); outline-offset: 3px; }
 sub, sup { font-size: .6em; line-height: 0; }
 
 /* Persistent course navigation */
@@ -32,7 +32,7 @@ sub, sup { font-size: .6em; line-height: 0; }
   top: 0;
   min-height: 68px;
   display: grid;
-  grid-template-columns: minmax(190px, .6fr) minmax(300px, .85fr) minmax(615px, 2fr);
+  grid-template-columns: minmax(190px, .7fr) minmax(300px, 1fr) minmax(320px, .9fr);
   align-items: stretch;
   color: white;
   background: var(--ink);
@@ -90,8 +90,8 @@ sub, sup { font-size: .6em; line-height: 0; }
 }
 .notes-toggle:hover, .print-control:hover, .notes-toggle.active { color: var(--ink); background: var(--acid); border-color: var(--acid); }
 
-.lesson-picker { display: none; align-items: center; gap: 7px; color: #c8d0df; font: 800 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
-.lesson-picker select { width: 164px; min-height: 32px; padding: 0 26px 0 9px; color: white; background: #26324c; border: 1px solid rgba(255,255,255,.24); border-radius: 2px; font: 750 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.lesson-picker { display: flex; align-items: center; gap: 8px; color: #d8dfeb; font: 800 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase; }
+.lesson-picker select { width: 260px; min-height: 38px; padding: 0 30px 0 11px; color: white; background: #26324c; border: 1px solid rgba(255,255,255,.32); border-radius: 2px; font: 750 14px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
 
 @media (max-width: 1600px) {
   .course-bar { grid-template-columns: minmax(180px, .7fr) minmax(285px, 1fr) minmax(265px, .85fr); }
@@ -788,7 +788,7 @@ sub, sup { font-size: .6em; line-height: 0; }
 .source-footer b { color: var(--acid); white-space: nowrap; font: 850 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
 .source-footer span, .source-footer p, .source-footer a { font-size: 10px; line-height: 1.5; }
 .source-footer p { grid-column: 1/-1; margin: 0; color: #8491a7; }
-.source-links { display: flex; gap: 18px; }
+.source-links { display: flex; flex-wrap: wrap; gap: 12px 18px; }
 .source-links a { color: white; text-underline-offset: 4px; }
 .source-links a:hover { color: var(--acid); }
 
