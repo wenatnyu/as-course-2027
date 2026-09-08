@@ -660,6 +660,9 @@ sub, sup { font-size: .6em; line-height: 0; }
 .writing-lines.lines-3 { height: 84px; }
 .writing-lines.lines-4 { height: 112px; }
 .writing-lines.lines-5 { height: 140px; }
+.writing-lines.lines-6 { height: 168px; }
+.writing-lines.lines-7 { height: 196px; }
+.writing-lines.lines-8 { height: 224px; }
 .challenge { margin: 44px 58px 0; padding: 24px 28px; display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 18px; color: white; background: var(--blue); border-left: 8px solid var(--acid); }
 .challenge span { color: var(--acid); font: 850 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
 .challenge p { margin: 0; font-size: 15px; line-height: 1.5; }
@@ -919,6 +922,9 @@ sub, sup { font-size: .6em; line-height: 0; }
   .writing-lines.lines-3 { height: 22mm; }
   .writing-lines.lines-4 { height: 29mm; }
   .writing-lines.lines-5 { height: 36mm; }
+  .writing-lines.lines-6 { height: 43mm; }
+  .writing-lines.lines-7 { height: 50mm; }
+  .writing-lines.lines-8 { height: 57mm; }
   .homework-page.all-answers-visible .writing-lines { display: none; }
   .challenge { margin: 7mm 0 0; padding: 4mm; color: #000; background: #fff !important; border: .4mm solid #000; border-left-width: 1.2mm; }
   .challenge span { color: #000 !important; }

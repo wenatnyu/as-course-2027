@@ -52,6 +52,15 @@ export const COURSE_LESSONS = [
   ["33", "Professional ethics, BCS and IEEE"],
   ["34", "Copyright and software licensing"],
   ["35", "AI applications, impacts and Chapter 7 review"],
+  ["36", "File-based data, relational databases and keys"],
+  ["37", "Relationships, E-R diagrams and normalisation to 2NF"],
+  ["38", "Third normal form and DBMS features"],
+  ["39", "SQL DDL and core single-table DML"],
+  ["40", "SQL aggregation, joins and data maintenance"],
+  ["41", "Abstraction and decomposition"],
+  ["42", "Algorithm design, identifiers and IPO"],
+  ["43", "Logic, control constructs and representations"],
+  ["44", "Stepwise refinement and Chapter 9 review"],
 ] as const;
 
 export function LessonSwitcher({
@@ -97,7 +106,7 @@ export type HomeworkQuestion = {
   id: string;
   prompt: ReactNode;
   marks: number;
-  lines?: 2 | 3 | 4 | 5;
+  lines?: 2 | 3 | 4 | 5 | 6 | 7 | 8;
   answer: ReactNode;
 };
 

@@ -336,6 +336,78 @@ const lessonRoutes = [
     syllabusPatterns: [/SYLLABUS 7\.1/i],
     pastPaperPattern: /9618\/12[^<]{0,100}M\/J 2025[^<]{0,100}Q3/i,
   },
+  {
+    pathname: "/lesson-36",
+    slug: "lesson-36",
+    number: "36",
+    keyContent: /file-based|relational database|candidate key|foreign key/i,
+    syllabusPatterns: [/SYLLABUS 8\.1/i],
+    pastPaperPattern: /9618\/13[^<]{0,120}M\/J 2023[^<]{0,120}Q4/i,
+  },
+  {
+    pathname: "/lesson-37",
+    slug: "lesson-37",
+    number: "37",
+    keyContent: /entity.relationship|E-R|normalisation|1NF|2NF|referential integrity/i,
+    syllabusPatterns: [/SYLLABUS 8\.1/i],
+    pastPaperPattern: /9618\/11[^<]{0,120}O\/N 2025[^<]{0,120}Q2/i,
+  },
+  {
+    pathname: "/lesson-38",
+    slug: "lesson-38",
+    number: "38",
+    keyContent: /third normal form|3NF|DBMS|data dictionary|logical schema|query processor/i,
+    syllabusPatterns: [/SYLLABUS 8\.1[–-]8\.2/i],
+    pastPaperPattern: /9618\/13[^<]{0,120}M\/J 2023[^<]{0,120}Q4\(c\)|9618\/12[^<]{0,120}M\/J 2023[^<]{0,120}Q2/i,
+  },
+  {
+    pathname: "/lesson-39",
+    slug: "lesson-39",
+    number: "39",
+    keyContent: /SQL|DDL|CREATE TABLE|ALTER TABLE|FOREIGN KEY|VARCHAR/i,
+    syllabusPatterns: [/SYLLABUS 8\.3/i],
+    pastPaperPattern: /9618\/13[^<]{0,120}O\/N 2025[^<]{0,120}Q5\(b\)/i,
+  },
+  {
+    pathname: "/lesson-40",
+    slug: "lesson-40",
+    number: "40",
+    keyContent: /SQL|DML|GROUP BY|INNER JOIN|INSERT INTO|UPDATE|DELETE FROM/i,
+    syllabusPatterns: [/SYLLABUS 8\.3/i],
+    pastPaperPattern: /9618\/13[^<]{0,120}O\/N 2025[^<]{0,120}Q5\(c\)/i,
+  },
+  {
+    pathname: "/lesson-41",
+    slug: "lesson-41",
+    number: "41",
+    keyContent: /abstraction|decomposition|abstract model|sub-problem/i,
+    syllabusPatterns: [/SYLLABUS 9\.1/i],
+    pastPaperPattern: /9618\/21[^<]{0,120}O\/N 2022[^<]{0,120}Q2/i,
+  },
+  {
+    pathname: "/lesson-42",
+    slug: "lesson-42",
+    number: "42",
+    keyContent: /algorithm|identifier table|input.*process.*output|structured English/i,
+    syllabusPatterns: [/SYLLABUS 9\.2/i],
+    pastPaperPattern: /9618\/21[^<]{0,120}M\/J 2025[^<]{0,120}Q1/i,
+  },
+  {
+    pathname: "/lesson-43",
+    slug: "lesson-43",
+    number: "43",
+    keyContent: /sequence|selection|iteration|flowchart|pseudocode|AND|OR|NOT/i,
+    syllabusPatterns: [/SYLLABUS 9\.2/i],
+    pastPaperPattern: /9618\/21[^<]{0,120}M\/J 2025[^<]{0,120}Q3/i,
+  },
+  {
+    pathname: "/lesson-44",
+    slug: "lesson-44",
+    number: "44",
+    keyContent: /stepwise refinement|programmable detail|refine/i,
+    syllabusPatterns: [/SYLLABUS 9\.2/i],
+    pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2025[^<]{0,120}Q2/i,
+  },
 ];
 
 async function readTsxTree(directoryUrl) {
@@ -392,6 +464,11 @@ for (const lesson of lessonRoutes) {
     const timings = [...routeSource.matchAll(/\btime:\s*["'](\d+) min["']/g)].map((match) => Number(match[1]));
     assert.ok(timings.length >= 10, `Lesson ${lesson.number} should expose a maintainable timing for each teaching segment`);
     assert.equal(timings.reduce((sum, value) => sum + value, 0), 90);
+    if (Number(lesson.number) >= 36) {
+      const homeworkMarks = [...routeSource.matchAll(/\bid:\s*["']l\d+-\d+["'],\s*marks:\s*(\d+)/g)].map((match) => Number(match[1]));
+      assert.equal(timings.length, 15, `Lesson ${lesson.number} should contain exactly 15 timed slides`);
+      assert.equal(homeworkMarks.reduce((sum, value) => sum + value, 0), 30, `Lesson ${lesson.number} homework should total 30 marks`);
+    }
     if (Number(lesson.number) >= 17) {
       assert.match(routeSource, /marks=\{30\}/);
       assert.match(routeSource, /minutes=\{45\}/);
@@ -399,15 +476,15 @@ for (const lesson of lessonRoutes) {
   });
 }
 
-test("the shared navigation exposes the complete 35-lesson sequence", async () => {
+test("the shared navigation exposes the complete 44-lesson sequence", async () => {
   const [html, shell] = await Promise.all([
-    (await render("/lesson-35")).text(),
+    (await render("/lesson-44")).text(),
     readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(shell, /const COURSE_LESSONS|export const COURSE_LESSONS/);
-  assert.match(shell, /\["35", "AI applications, impacts and Chapter 7 review"\]/);
+  assert.match(shell, /\["44", "Stepwise refinement and Chapter 9 review"\]/);
   assert.match(html, /lesson-01|>01</i);
-  assert.match(html, /<option value="\.\.\/lesson-35\/" selected="">35/i);
-  assert.match(html, /AI applications, impacts and Chapter 7 review/i);
+  assert.match(html, /<option value="\.\.\/lesson-44\/" selected="">44/i);
+  assert.match(html, /Stepwise refinement and Chapter 9 review/i);
   assert.match(shell, /\["29", "Security, privacy, integrity and threats"\]/);
 });

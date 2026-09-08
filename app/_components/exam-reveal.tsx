@@ -7,11 +7,11 @@ export function ExamReveal({ children }: { children: ReactNode }) {
   const id = useId();
 
   return (
-    <div className="se-reveal">
+    <div className="exam-reveal se-reveal">
       <button type="button" aria-expanded={visible} aria-controls={id} onClick={() => setVisible((current) => !current)}>
         {visible ? "Hide mark scheme" : "Reveal mark scheme"}
       </button>
-      <div id={id} className={visible ? "se-reveal__panel visible" : "se-reveal__panel"} hidden={!visible}>
+      <div id={id} className={visible ? "exam-reveal__panel se-reveal__panel visible" : "exam-reveal__panel se-reveal__panel"} hidden={!visible}>
         {children}
       </div>
     </div>

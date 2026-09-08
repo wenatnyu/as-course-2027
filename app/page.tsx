@@ -29,18 +29,18 @@ const weeklyPlan = [
   ["02", "Binary magnitudes; binary vs decimal prefixes", "Selection and Boolean expressions"],
   ["03", "Signed binary, arithmetic, overflow, BCD", "Count- and condition-controlled loops"],
   ["04", "Character data; bitmap graphics", "Trace tables and algorithm dry-runs"],
-  ["05", "Vector graphics, sound and file-size calculations", "Decomposition, abstraction, pattern recognition"],
-  ["06", "Lossy/lossless compression and RLE", "Pseudocode conventions and structured solutions"],
+  ["05", "Vector graphics, sound and file-size calculations", "L41 · Abstraction and decomposition"],
+  ["06", "Lossy/lossless compression and RLE", "L42 · Algorithm design, identifiers and IPO"],
   ["07", "Networks: models, topologies, hardware", "Data types and records"],
   ["08", "Cloud computing; wired/wireless media", "One-dimensional arrays · diagnostic 1"],
   ["09", "Ethernet, internet infrastructure and streaming", "Two-dimensional arrays"],
   ["10", "IP addressing, subnetting, URL and DNS", "Files and persistent data"],
-  ["11", "Hardware roles, embedded systems and buffers", "Computational thinking in exam contexts"],
+  ["11", "Hardware roles, embedded systems and buffers", "L43 · Structured English, flowcharts, pseudocode and logic"],
   ["12", "RAM/ROM and primary-memory families", "Procedures and parameter passing"],
   ["13", "Storage and peripheral device operations", "Functions and return values"],
   ["14", "Monitoring, control, sensors and feedback", "Programming reliability: errors and test data"],
   ["15", "Logic gates, symbols and truth tables", "ADTs: stack, queue, linked list"],
-  ["16", "Logic circuits and representation conversions", "Programming practice · mid-year check"],
+  ["16", "Logic circuits and representation conversions", "L44 · Stepwise refinement and Chapter 9 check"],
   ["17", "L17-18 · CPU architecture, registers, buses, performance and ports", "Testing methods and Paper 2 mixed retrieval"],
   ["18", "L19-20 · Fetch-execute, interrupts and assembly instruction groups", "Algorithm design: searching"],
   ["19", "L21-22 · Addressing modes and the two-pass assembler", "Algorithm design: sorting"],
@@ -50,9 +50,9 @@ const weeklyPlan = [
   ["23", "L29-30 · Security, privacy and integrity; threats and protective measures", "Program development life cycle and design"],
   ["24", "L31-32 · Validation, verification, check digits, parity and checksums", "Testing and maintenance"],
   ["25", "L33-34 · Professional ethics; copyright and software licensing", "Sections 9-10 spaced retrieval"],
-  ["26", "L35-36 · AI applications and impacts; database foundations, keys, relationships and E-R diagrams", "Sections 11-12 spaced retrieval"],
-  ["27", "L37-38 · Normalisation; DBMS features, tools and DDL", "Timed Paper 2 sections + feedback"],
-  ["28", "L39-40 · SQL queries, joins and data maintenance + Paper 1 topic test · syllabus complete", "Full Paper 2 · 120 min extended session"],
+  ["26", "L35-36 · AI applications and impacts; relational database foundations and keys", "Chapters 9-12 cumulative retrieval · diagnostic and error-log repair"],
+  ["27", "L37-38 · E-R diagrams, normalisation and DBMS features/tools", "Timed Paper 2 sections · feedback and targeted reteaching"],
+  ["28", "L39-40 · SQL DDL/DML, joins and data maintenance · Paper 1 syllabus complete", "Full Paper 2 · 120 min extended session + item analysis"],
   ["29", "Mock 1 · Paper 1 + item analysis", "Mock 1 · Paper 2 + item analysis (extended)"],
   ["30", "Weak-topic reteaching", "Targeted pseudocode repair"],
   ["31", "Mock 2 · Paper 1 + final repair", "Mock 2 · Paper 2 + final repair (extended)"],
@@ -521,16 +521,16 @@ export default function Home() {
 
       {view === "roadmap" && (
         <section className="roadmap-page">
-          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. In Weeks 17-28 the workshop carries the second theory lesson needed to complete the dense Chapters 4-8 sequence without reducing the four-week exam phase.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
+          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. Lesson numbers follow syllabus chapter order for the resource library; the teaching calendar runs Paper 1 and Paper 2 in parallel. In Weeks 17-28 the workshop carries the second theory lesson needed to finish Chapter 8 without reducing the four-week exam phase.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
           <div className="phase-track">{phases.map((phase) => <div key={phase.weeks} style={{ flex: phase.span }}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.note}</p></div>)}</div>
           <div className="exam-blueprint"><article><span>PAPER 1</span><b>1 h 30 · 75 marks</b><p>Sections 1-8 · 60% knowledge, 40% application</p></article><article><span>PAPER 2</span><b>2 h · 75 marks</b><p>Sections 9-12 · 40% application, 60% design/programming</p></article><article><span>NON-NEGOTIABLE</span><b>Past-paper practice every lesson</b><p>Short cited questions now; complete timed papers after syllabus completion.</p></article></div>
           <div className="weekly-table"><div className="weekly-head"><span>Week</span><span>Paper 1 · Theory</span><span>Paper 2 · Problem-solving</span></div>{weeklyPlan.map(([week, theory, programming]) => <div className={["06","10","16","22","28","29","31"].includes(week) ? "weekly-row milestone" : "weekly-row"} key={week}><b>{week}</b><span>{theory}</span><span>{programming}</span></div>)}</div>
-          <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish new syllabus content by Week 28 by using the rotating workshop for the second Paper 1 lesson throughout Weeks 17-28. Reserve four dedicated weeks for two complete mocks and error-log repair, while keeping retrieval and authentic past-paper practice in every lesson from Week 1.</p></div>
+          <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish Paper 2 Sections 9-12 by Week 25 and Paper 1 Sections 1-8 by Week 28. Teach L41-44 in the early Paper 2 track even though their library numbers follow L40; use the rotating workshop for the second Paper 1 lesson in Weeks 17-28. Weeks 29-32 remain protected for two complete mocks and error-log repair.</p></div>
         </section>
       )}
 
       <footer className="source-footer">
-        <div><b>LESSON 01 SOURCES</b><span>Checked against the 2027-2029 syllabus, the endorsed coursebook and all 18 Paper 1 variants from 2023-2025.</span></div>
+        <div><b>LESSON 01 SOURCES</b><span>Checked against the 2027-2029 syllabus, the endorsed coursebook and representative Paper 1 and Paper 2 questions.</span></div>
         <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/past-papers/" target="_blank" rel="noreferrer">Cambridge past papers</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a></div>
         <p>Syllabus pp.11, 13-14 · Coursebook Section 1.01 pp.3-6: Tables 1.01-1.04, Worked Examples 1.01-1.02 and Task 1.01 · Coursebook p.24: Exam-style Question 1(a-b) · Recent-paper anchors: 2023 M/J 11 Q3(d)(iii), 2023 M/J 12 Q4(c), 2025 M/J 12 Q2(a).</p>
       </footer>

@@ -191,6 +191,51 @@ const lessonArtifacts = [
     number: "35",
     keyContent: /artificial intelligence|computer vision|natural language processing|social impact|economic impact|environmental impact/i,
   },
+  {
+    slug: "lesson-36",
+    number: "36",
+    keyContent: /file-based|relational database|candidate key|foreign key/i,
+  },
+  {
+    slug: "lesson-37",
+    number: "37",
+    keyContent: /entity.relationship|E-R|normalisation|1NF|2NF|referential integrity/i,
+  },
+  {
+    slug: "lesson-38",
+    number: "38",
+    keyContent: /third normal form|3NF|DBMS|data dictionary|logical schema|query processor/i,
+  },
+  {
+    slug: "lesson-39",
+    number: "39",
+    keyContent: /SQL|DDL|CREATE TABLE|ALTER TABLE|FOREIGN KEY|VARCHAR/i,
+  },
+  {
+    slug: "lesson-40",
+    number: "40",
+    keyContent: /SQL|DML|GROUP BY|INNER JOIN|INSERT INTO|UPDATE|DELETE FROM/i,
+  },
+  {
+    slug: "lesson-41",
+    number: "41",
+    keyContent: /abstraction|decomposition|abstract model|sub-problem/i,
+  },
+  {
+    slug: "lesson-42",
+    number: "42",
+    keyContent: /algorithm|identifier table|input.*process.*output|structured English/i,
+  },
+  {
+    slug: "lesson-43",
+    number: "43",
+    keyContent: /sequence|selection|iteration|flowchart|pseudocode|AND|OR|NOT/i,
+  },
+  {
+    slug: "lesson-44",
+    number: "44",
+    keyContent: /stepwise refinement|programmable detail|refine/i,
+  },
 ];
 
 for (const lesson of lessonArtifacts) {
