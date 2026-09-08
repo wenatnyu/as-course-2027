@@ -408,6 +408,25 @@ const lessonRoutes = [
     syllabusPatterns: [/SYLLABUS 9\.2/i],
     pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2025[^<]{0,120}Q2/i,
   },
+  { pathname: "/lesson-45", slug: "lesson-45", number: "45", keyContent: /data types|BookRecord|dot notation/i, syllabusPatterns: [/SYLLABUS 10\.1/i], pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2023[^<]{0,120}Q1/i },
+  { pathname: "/lesson-46", slug: "lesson-46", number: "46", keyContent: /1D Arrays|linear search|lower bound/i, syllabusPatterns: [/SYLLABUS 10\.2/i], pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2023[^<]{0,120}Q2/i },
+  { pathname: "/lesson-47", slug: "lesson-47", number: "47", keyContent: /bubble sort|NoSwaps|adjacent/i, syllabusPatterns: [/SYLLABUS 10\.2/i], pastPaperPattern: /9618\/21[^<]{0,120}O\/N 2021[^<]{0,120}Q2/i },
+  { pathname: "/lesson-48", slug: "lesson-48", number: "48", keyContent: /2D Arrays|nested loops|arrays of records/i, syllabusPatterns: [/SYLLABUS 10\.2/i], pastPaperPattern: /9618\/22[^<]{0,120}O\/N 2024[^<]{0,120}Q2/i },
+  { pathname: "/lesson-49", slug: "lesson-49", number: "49", keyContent: /text files|OPENFILE|EOF/i, syllabusPatterns: [/SYLLABUS 10\.3/i], pastPaperPattern: /9618\/21[^<]{0,120}O\/N 2024[^<]{0,120}Q3/i },
+  { pathname: "/lesson-50", slug: "lesson-50", number: "50", keyContent: /Stacks|Queues|LIFO|FIFO/i, syllabusPatterns: [/SYLLABUS 10\.4/i], pastPaperPattern: /9618\/22[^<]{0,120}O\/N 2024[^<]{0,120}Q3/i },
+  { pathname: "/lesson-51", slug: "lesson-51", number: "51", keyContent: /Linked Lists|HeadPointer|free list/i, syllabusPatterns: [/SYLLABUS 10\.4/i], pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2024[^<]{0,120}Q3/i },
+  { pathname: "/lesson-52", slug: "lesson-52", number: "52", keyContent: /Programming Essentials|library routines|assignment/i, syllabusPatterns: [/SYLLABUS 11\.1/i], pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2025[^<]{0,120}Q1/i },
+  { pathname: "/lesson-53", slug: "lesson-53", number: "53", keyContent: /Nested IF|CASE OF|selection/i, syllabusPatterns: [/SYLLABUS 11\.2/i], pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2024[^<]{0,120}Q4/i },
+  { pathname: "/lesson-54", slug: "lesson-54", number: "54", keyContent: /Iteration|WHILE|REPEAT.*UNTIL|efficient/i, syllabusPatterns: [/SYLLABUS 11\.2[–-]11\.3/i], pastPaperPattern: /9618\/23[^<]{0,120}M\/J 2024[^<]{0,120}Q5/i },
+  { pathname: "/lesson-55", slug: "lesson-55", number: "55", keyContent: /Modules|local variable|FUNCTION|PROCEDURE/i, syllabusPatterns: [/SYLLABUS 11\.3/i], pastPaperPattern: /9618\/23[^<]{0,120}M\/J 2025[^<]{0,120}Q1/i },
+  { pathname: "/lesson-56", slug: "lesson-56", number: "56", keyContent: /BYVAL|BYREF|Parameters/i, syllabusPatterns: [/SYLLABUS 11\.3/i], pastPaperPattern: /9618\/23[^<]{0,120}M\/J 2025[^<]{0,120}Q7/i },
+  { pathname: "/lesson-57", slug: "lesson-57", number: "57", keyContent: /Program Development Life Cycle|analysis|maintenance/i, syllabusPatterns: [/SYLLABUS 12\.1/i], pastPaperPattern: /9618\/21[^<]{0,120}O\/N 2024[^<]{0,120}Q5/i },
+  { pathname: "/lesson-58", slug: "lesson-58", number: "58", keyContent: /Waterfall|Iterative|RAD Models/i, syllabusPatterns: [/SYLLABUS 12\.1/i], pastPaperPattern: /9618\/21[^<]{0,120}M\/J 2023[^<]{0,120}Q5/i },
+  { pathname: "/lesson-59", slug: "lesson-59", number: "59", keyContent: /Structure Charts|module hierarchy|interface/i, syllabusPatterns: [/SYLLABUS 12\.2/i], pastPaperPattern: /9618\/23[^<]{0,120}O\/N 2025[^<]{0,120}Q7/i },
+  { pathname: "/lesson-60", slug: "lesson-60", number: "60", keyContent: /state-transition|Structure Charts to Code|transition/i, syllabusPatterns: [/SYLLABUS 12\.2/i], pastPaperPattern: /9618\/22[^<]{0,120}O\/N 2025[^<]{0,120}Q7/i },
+  { pathname: "/lesson-61", slug: "lesson-61", number: "61", keyContent: /syntax error|logic error|white-box|stub/i, syllabusPatterns: [/SYLLABUS 12\.3/i], pastPaperPattern: /9618\/22[^<]{0,120}M\/J 2025[^<]{0,120}Q2/i },
+  { pathname: "/lesson-62", slug: "lesson-62", number: "62", keyContent: /Test Strategy|boundary|beta|acceptance/i, syllabusPatterns: [/SYLLABUS 12\.3/i], pastPaperPattern: /9618\/21[^<]{0,120}O\/N 2024[^<]{0,120}Q5/i },
+  { pathname: "/lesson-63", slug: "lesson-63", number: "63", keyContent: /corrective|adaptive|perfective|AS Finish/i, syllabusPatterns: [/SYLLABUS 12\.3/i], pastPaperPattern: /9618\/22[^<]{0,120}M\/J 2025[^<]{0,120}Q1/i },
 ];
 
 async function readTsxTree(directoryUrl) {
@@ -441,18 +460,20 @@ for (const lesson of lessonRoutes) {
   });
 
   test(`Lesson ${lesson.number} includes inline-answer homework and totals 90 minutes`, async () => {
-    const [routeSource, sharedShell] = await Promise.all([
+    const [routeSource, sharedShell, paperTwoLesson] = await Promise.all([
       readTsxTree(new URL(`../app/${lesson.slug}/`, import.meta.url)),
       readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/_components/paper-two-lesson.tsx", import.meta.url), "utf8"),
     ]);
+    const lessonSource = Number(lesson.number) >= 45 ? `${routeSource}\n${paperTwoLesson}` : routeSource;
 
-    assert.match(routeSource, /HomeworkSheet/);
+    assert.match(lessonSource, /HomeworkSheet/);
     assert.match(routeSource, /\banswer\s*:/);
     if (Number(lesson.number) >= 6) {
-      assert.match(routeSource, /PAST PAPER PRACTICE/i);
+      assert.match(lessonSource, /PAST PAPER PRACTICE/i);
       assert.match(routeSource, /9618\/\d{2}/i);
     }
-    assert.match(routeSource, /Show all answers|HomeworkSheet/);
+    assert.match(lessonSource, /Show all answers|HomeworkSheet/);
     assert.match(sharedShell, /function InlineAnswer/);
     assert.match(sharedShell, /className="inline-answer-toggle"/);
     assert.match(sharedShell, /all-answers-visible/);
@@ -461,30 +482,34 @@ for (const lesson of lessonRoutes) {
     assert.doesNotMatch(routeSource, /answer-key/i);
     assert.doesNotMatch(sharedShell, /answer-key/i);
 
-    const timings = [...routeSource.matchAll(/\btime:\s*["'](\d+) min["']/g)].map((match) => Number(match[1]));
+    const timings = Number(lesson.number) >= 45
+      ? [...paperTwoLesson.match(/const timings = \[([^\]]+)\]/)?.[1].matchAll(/\d+/g) ?? []].map((match) => Number(match[0]))
+      : [...routeSource.matchAll(/\btime:\s*["'](\d+) min["']/g)].map((match) => Number(match[1]));
     assert.ok(timings.length >= 10, `Lesson ${lesson.number} should expose a maintainable timing for each teaching segment`);
     assert.equal(timings.reduce((sum, value) => sum + value, 0), 90);
     if (Number(lesson.number) >= 36) {
-      const homeworkMarks = [...routeSource.matchAll(/\bid:\s*["']l\d+-\d+["'],\s*marks:\s*(\d+)/g)].map((match) => Number(match[1]));
+      const homeworkMarks = Number(lesson.number) >= 45
+        ? [...routeSource.matchAll(/\bmarks:\s*(\d+)\b/g)].map((match) => Number(match[1]))
+        : [...routeSource.matchAll(/\bid:\s*["']l\d+-\d+["'],\s*marks:\s*(\d+)/g)].map((match) => Number(match[1]));
       assert.equal(timings.length, 15, `Lesson ${lesson.number} should contain exactly 15 timed slides`);
       assert.equal(homeworkMarks.reduce((sum, value) => sum + value, 0), 30, `Lesson ${lesson.number} homework should total 30 marks`);
     }
     if (Number(lesson.number) >= 17) {
-      assert.match(routeSource, /marks=\{30\}/);
-      assert.match(routeSource, /minutes=\{45\}/);
+      assert.match(lessonSource, /marks=\{30\}/);
+      assert.match(lessonSource, /minutes=\{45\}/);
     }
   });
 }
 
-test("the shared navigation exposes the complete 44-lesson sequence", async () => {
+test("the shared navigation exposes the complete 63-lesson sequence", async () => {
   const [html, shell] = await Promise.all([
-    (await render("/lesson-44")).text(),
+    (await render("/lesson-63")).text(),
     readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(shell, /const COURSE_LESSONS|export const COURSE_LESSONS/);
-  assert.match(shell, /\["44", "Stepwise refinement and Chapter 9 review"\]/);
+  assert.match(shell, /\["63", "Maintenance and complete AS review"\]/);
   assert.match(html, /lesson-01|>01</i);
-  assert.match(html, /<option value="\.\.\/lesson-44\/" selected="">44/i);
-  assert.match(html, /Stepwise refinement and Chapter 9 review/i);
+  assert.match(html, /<option value="\.\.\/lesson-63\/" selected="">63/i);
+  assert.match(html, /Maintenance and complete AS review/i);
   assert.match(shell, /\["29", "Security, privacy, integrity and threats"\]/);
 });

@@ -48,8 +48,27 @@ An English classroom course built from the Cambridge 9618 syllabus, the endorsed
 - Lesson 42 — Algorithm design, identifiers and IPO
 - Lesson 43 — Logic, control constructs and algorithm representations
 - Lesson 44 — Stepwise refinement and Chapter 9 consolidation
+- Lesson 45 — Data types and records
+- Lesson 46 — One-dimensional arrays and linear search
+- Lesson 47 — Bubble sort
+- Lesson 48 — Two-dimensional arrays and arrays of records
+- Lesson 49 — Sequential text files
+- Lesson 50 — Stacks and queues
+- Lesson 51 — Linked lists and Chapter 10 consolidation
+- Lesson 52 — Programming essentials and library routines
+- Lesson 53 — IF, nested IF and CASE selection
+- Lesson 54 — Iteration and efficient loops
+- Lesson 55 — Modules, scope, procedures and functions
+- Lesson 56 — Parameters, BYVAL/BYREF and integrated programs
+- Lesson 57 — Program development life cycle
+- Lesson 58 — Waterfall, iterative and RAD models
+- Lesson 59 — Structure charts and interfaces
+- Lesson 60 — Structure-chart derivation and state-transition diagrams
+- Lesson 61 — Faults, errors and developer testing
+- Lesson 62 — Test strategy, test data and release testing
+- Lesson 63 — Maintenance, program amendment and complete AS review
 
-Lessons 01–44 complete syllabus Chapters 1–9 of the 12-chapter AS course. Monitoring/control, bit manipulation and other cross-chapter textbook material are deliberately reordered so the current 2027–2029 syllabus sequence is covered without omissions. The endorsed coursebook numbers these topics differently: syllabus Chapters 6–9 align with Coursebook Chapters 9–12. Chapter 9 uses authentic Paper 2 questions because Paper 1 assesses Sections 1–8 only.
+Lessons 01–63 complete all 12 chapters of the 2027–2029 AS syllabus. Monitoring/control, bit manipulation and other cross-chapter textbook material are deliberately reordered so the current syllabus sequence is covered without omissions. The endorsed coursebook numbers Paper 2 topics differently: syllabus Chapters 9–12 align with Coursebook Chapters 12–15. Lessons 41–63 use authentic Paper 2 questions because Paper 1 assesses Sections 1–8 only. All pseudocode is normalised to the official 2027–2029 guide even where the older textbook uses superseded syntax.
 
 GitHub Pages: <https://wenatnyu.github.io/as-course-2027/>
 

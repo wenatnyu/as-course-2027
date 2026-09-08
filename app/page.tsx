@@ -25,31 +25,31 @@ const phases = [
 ];
 
 const weeklyPlan = [
-  ["01", "Number bases: binary, denary, hexadecimal", "Variables, assignment, input/output"],
-  ["02", "Binary magnitudes; binary vs decimal prefixes", "Selection and Boolean expressions"],
-  ["03", "Signed binary, arithmetic, overflow, BCD", "Count- and condition-controlled loops"],
-  ["04", "Character data; bitmap graphics", "Trace tables and algorithm dry-runs"],
+  ["01", "Number bases: binary, denary, hexadecimal", "L52 · Variables, assignment, input/output and library routines"],
+  ["02", "Binary magnitudes; binary vs decimal prefixes", "L53 · IF, nested IF, CASE and Boolean expressions"],
+  ["03", "Signed binary, arithmetic, overflow, BCD", "L54 · Count-, pre- and post-condition loops"],
+  ["04", "Character data; bitmap graphics", "L61 · Errors, dry runs, walkthroughs and testing methods"],
   ["05", "Vector graphics, sound and file-size calculations", "L41 · Abstraction and decomposition"],
   ["06", "Lossy/lossless compression and RLE", "L42 · Algorithm design, identifiers and IPO"],
-  ["07", "Networks: models, topologies, hardware", "Data types and records"],
-  ["08", "Cloud computing; wired/wireless media", "One-dimensional arrays · diagnostic 1"],
-  ["09", "Ethernet, internet infrastructure and streaming", "Two-dimensional arrays"],
-  ["10", "IP addressing, subnetting, URL and DNS", "Files and persistent data"],
+  ["07", "Networks: models, topologies, hardware", "L45 · Data types and records"],
+  ["08", "Cloud computing; wired/wireless media", "L46 · One-dimensional arrays and linear search · diagnostic 1"],
+  ["09", "Ethernet, internet infrastructure and streaming", "L48 · Two-dimensional arrays and arrays of records"],
+  ["10", "IP addressing, subnetting, URL and DNS", "L49 · Sequential text files and persistence"],
   ["11", "Hardware roles, embedded systems and buffers", "L43 · Structured English, flowcharts, pseudocode and logic"],
-  ["12", "RAM/ROM and primary-memory families", "Procedures and parameter passing"],
-  ["13", "Storage and peripheral device operations", "Functions and return values"],
-  ["14", "Monitoring, control, sensors and feedback", "Programming reliability: errors and test data"],
-  ["15", "Logic gates, symbols and truth tables", "ADTs: stack, queue, linked list"],
+  ["12", "RAM/ROM and primary-memory families", "L55 · Modules, scope, procedures and functions"],
+  ["13", "Storage and peripheral device operations", "L56 · Parameters, BYVAL/BYREF and integrated programs"],
+  ["14", "Monitoring, control, sensors and feedback", "L62 · Test strategy, test data and release testing"],
+  ["15", "Logic gates, symbols and truth tables", "L50–51 · Stacks, queues and linked lists"],
   ["16", "Logic circuits and representation conversions", "L44 · Stepwise refinement and Chapter 9 check"],
-  ["17", "L17-18 · CPU architecture, registers, buses, performance and ports", "Testing methods and Paper 2 mixed retrieval"],
-  ["18", "L19-20 · Fetch-execute, interrupts and assembly instruction groups", "Algorithm design: searching"],
-  ["19", "L21-22 · Addressing modes and the two-pass assembler", "Algorithm design: sorting"],
-  ["20", "L23-24 · Assembly tracing, binary shifts and bit masking", "Records, arrays and files in one solution"],
-  ["21", "L25-26 · OS management, utilities and program libraries", "Programming constructs under time"],
-  ["22", "L27-28 · Translators, Java and IDE features", "Structured programming and modular design"],
-  ["23", "L29-30 · Security, privacy and integrity; threats and protective measures", "Program development life cycle and design"],
-  ["24", "L31-32 · Validation, verification, check digits, parity and checksums", "Testing and maintenance"],
-  ["25", "L33-34 · Professional ethics; copyright and software licensing", "Sections 9-10 spaced retrieval"],
+  ["17", "L17-18 · CPU architecture, registers, buses, performance and ports", "L57 · PDLC purpose and five stages"],
+  ["18", "L19-20 · Fetch-execute, interrupts and assembly instruction groups", "L46 · Linear-search timed spiral"],
+  ["19", "L21-22 · Addressing modes and the two-pass assembler", "L47 · Bubble-sort trace, code and optimisation"],
+  ["20", "L23-24 · Assembly tracing, binary shifts and bit masking", "L45–51 · Records, arrays, files and ADTs in one solution"],
+  ["21", "L25-26 · OS management, utilities and program libraries", "L52–54 · Programming constructs under time"],
+  ["22", "L27-28 · Translators, Java and IDE features", "L55–56 + L58 · Modular programming and life-cycle models"],
+  ["23", "L29-30 · Security, privacy and integrity; threats and protective measures", "L59 · Structure charts and interfaces"],
+  ["24", "L31-32 · Validation, verification, check digits, parity and checksums", "L60–62 · States, developer testing, test plans and release"],
+  ["25", "L33-34 · Professional ethics; copyright and software licensing", "L63 · Maintenance and Chapters 9–12 cumulative close"],
   ["26", "L35-36 · AI applications and impacts; relational database foundations and keys", "Chapters 9-12 cumulative retrieval · diagnostic and error-log repair"],
   ["27", "L37-38 · E-R diagrams, normalisation and DBMS features/tools", "Timed Paper 2 sections · feedback and targeted reteaching"],
   ["28", "L39-40 · SQL DDL/DML, joins and data maintenance · Paper 1 syllabus complete", "Full Paper 2 · 120 min extended session + item analysis"],
@@ -521,11 +521,11 @@ export default function Home() {
 
       {view === "roadmap" && (
         <section className="roadmap-page">
-          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. Lesson numbers follow syllabus chapter order for the resource library; the teaching calendar runs Paper 1 and Paper 2 in parallel. In Weeks 17-28 the workshop carries the second theory lesson needed to finish Chapter 8 without reducing the four-week exam phase.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
+          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. The 63-lesson resource library follows syllabus chapter order; the teaching calendar runs Paper 1 and Paper 2 in parallel. In Weeks 17-28 the workshop carries the second theory lesson needed to finish Chapter 8 without reducing the four-week exam phase.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
           <div className="phase-track">{phases.map((phase) => <div key={phase.weeks} style={{ flex: phase.span }}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.note}</p></div>)}</div>
           <div className="exam-blueprint"><article><span>PAPER 1</span><b>1 h 30 · 75 marks</b><p>Sections 1-8 · 60% knowledge, 40% application</p></article><article><span>PAPER 2</span><b>2 h · 75 marks</b><p>Sections 9-12 · 40% application, 60% design/programming</p></article><article><span>NON-NEGOTIABLE</span><b>Past-paper practice every lesson</b><p>Short cited questions now; complete timed papers after syllabus completion.</p></article></div>
           <div className="weekly-table"><div className="weekly-head"><span>Week</span><span>Paper 1 · Theory</span><span>Paper 2 · Problem-solving</span></div>{weeklyPlan.map(([week, theory, programming]) => <div className={["06","10","16","22","28","29","31"].includes(week) ? "weekly-row milestone" : "weekly-row"} key={week}><b>{week}</b><span>{theory}</span><span>{programming}</span></div>)}</div>
-          <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish Paper 2 Sections 9-12 by Week 25 and Paper 1 Sections 1-8 by Week 28. Teach L41-44 in the early Paper 2 track even though their library numbers follow L40; use the rotating workshop for the second Paper 1 lesson in Weeks 17-28. Weeks 29-32 remain protected for two complete mocks and error-log repair.</p></div>
+          <div className="pace-notes"><Mark>PACE RULE</Mark><p>Finish Paper 2 Sections 9-12 by Week 25 and Paper 1 Sections 1-8 by Week 28. Teach L41-63 through the parallel Paper 2 track even though their library numbers follow L40; use the rotating workshop for the second Paper 1 lesson in Weeks 17-28. Weeks 29-32 remain protected for two complete mocks and error-log repair.</p></div>
         </section>
       )}
 
