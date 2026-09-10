@@ -513,3 +513,19 @@ test("the shared navigation exposes the complete 63-lesson sequence", async () =
   assert.match(html, /Maintenance and complete AS review/i);
   assert.match(shell, /\["29", "Security, privacy, integrity and threats"\]/);
 });
+
+test("Lesson 08 uses unambiguous media labels and viewport-safe slide navigation", async () => {
+  const [lesson, shell, css] = await Promise.all([
+    readFile(new URL("../app/lesson-08/lesson-08-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/_components/lesson-shell.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(lesson, /COPPER CABLE/);
+  assert.match(lesson, /FIBRE-OPTIC CABLE/);
+  assert.doesNotMatch(lesson, /<b>CABLE<\/b>|<b>FIBRE<\/b>/);
+  assert.match(lesson, /9618\/13 M\/J 2023 Q2\(d\)/);
+  assert.match(shell, /scrollIntoView/);
+  assert.match(css, /100dvh - 166px/);
+  assert.match(css, /@media \(max-width: 900px\)[\s\S]*?\.deck-shell\s*\{[\s\S]*?100dvh - 166px/);
+});

@@ -186,11 +186,10 @@
 .l8-medium-layout article > span { color: var(--c2-blue); font: 850 clamp(11px, .92cqw, 14px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .l8-medium-layout ul { margin: 1.4cqw 0 0; padding-left: 1.3em; color: var(--c2-muted); }
 .l8-copper-visual { position: relative; min-height: 22cqw; overflow: hidden; background: #17354a; }
-.l8-copper-visual i { position: absolute; left: 8%; width: 84%; height: 1.15cqw; border-radius: 1cqw; background: #d87a35; transform: rotate(8deg); }
-.l8-copper-visual i:nth-child(1) { top: 22%; }
-.l8-copper-visual i:nth-child(2) { top: 39%; transform: rotate(-8deg); }
-.l8-copper-visual i:nth-child(3) { top: 56%; }
-.l8-copper-visual i:nth-child(4) { top: 73%; transform: rotate(-8deg); }
+.l8-copper-visual svg { width: 100%; height: 100%; padding: 2.2cqw 1.3cqw 3.4cqw; }
+.l8-copper-visual path { fill: none; stroke-width: 10; stroke-linecap: round; }
+.l8-wire-a { stroke: #d87a35; }
+.l8-wire-b { stroke: #69d3dc; }
 .l8-copper-visual span { position: absolute; right: 1cqw; bottom: 1cqw; color: var(--c2-green); font: 800 clamp(11px, .9cqw, 13px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .l8-fibre-flow { height: 8.5cqw; padding: 1.4cqw; display: flex; align-items: center; gap: 1.1cqw; color: white; background: #17354a; }
 .l8-fibre-flow b, .l8-fibre-flow strong { font-size: clamp(12px, 1.1cqw, 16px); }
@@ -217,10 +216,10 @@
 .l8-orbit article { padding: 1.2cqw; background: white; border-top: .38cqw solid var(--c2-blue); text-align: center; }
 .l8-orbit article b, .l8-orbit article span { display: block; }
 .l8-orbit article span { margin-top: .5cqw; color: var(--c2-muted); font-size: clamp(11px, .95cqw, 14px); }
-.l8-orbit > strong { align-self: start; margin-top: .5cqw; padding: 1.2cqw; color: #17354a; background: var(--c2-green); border-radius: 50%; text-align: center; font-size: clamp(12px, 1.1cqw, 16px); }
-.l8-orbit > i { position: absolute; top: 8cqw; width: 35%; height: .22cqw; background: var(--c2-orange); transform-origin: center; }
-.l8-uplink { left: 17%; transform: rotate(-23deg); }
-.l8-downlink { right: 17%; transform: rotate(23deg); }
+.l8-orbit > strong { position: relative; z-index: 2; align-self: start; justify-self: center; width: 7.8cqw; aspect-ratio: 1; margin-top: .5cqw; display: grid; place-items: center; color: #17354a; background: var(--c2-green); border-radius: 50%; text-align: center; font-size: clamp(12px, 1.1cqw, 16px); }
+.l8-orbit > i { position: absolute; z-index: 1; top: 7.8cqw; width: 27%; height: .22cqw; background: var(--c2-orange); transform-origin: center; }
+.l8-uplink { left: 20%; transform: rotate(-23deg); }
+.l8-downlink { right: 20%; transform: rotate(23deg); }
 .l8-sat-points { margin-top: 1cqw; display: grid; grid-template-columns: 1fr 1fr; gap: 1cqw; }
 .l8-sat-points p { margin: 0; padding: .9cqw 1.1cqw; background: white; border-left: .35cqw solid var(--c2-green); }
 .l8-sat-points p:last-child { border-color: var(--c2-orange); }

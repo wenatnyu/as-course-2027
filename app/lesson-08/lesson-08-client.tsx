@@ -40,8 +40,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l8-1",
         marks: 6,
         lines: 4,
-        prompt: <><b>Distinguish a public cloud from a private cloud.</b><p>Give two defining features and one suitable user for each model.</p></>,
-        answer: <p>A <strong>public cloud</strong> is owned/managed by a third-party provider and its infrastructure is shared between customers; it may suit an individual or small company. A <strong>private cloud</strong> is dedicated to one organisation and may be managed internally or by a provider; it may suit an organisation needing greater control. <em>[2 features + 1 valid use for each model]</em></p>,
+        prompt: <><b>Distinguish a public cloud from a private cloud.</b><p>For each model, give its definition, one suitable user and one linked reason.</p></>,
+        answer: <p><strong>Public cloud:</strong> provider-owned services offered to many customers [1]; suitable for a small company [1] because it can obtain scalable services without managing all infrastructure itself [1]. <strong>Private cloud:</strong> infrastructure dedicated to one organisation [1]; suitable for an organisation handling sensitive data [1] because it provides greater control over configuration, access and policy [1]. <em>[3 + 3]</em></p>,
       },
       {
         id: "l8-2",
@@ -62,7 +62,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l8-3",
         marks: 4,
         lines: 4,
-        prompt: <><b>Compare copper cable with fibre-optic cable.</b><p>Include bandwidth, interference and cost.</p></>,
+        prompt: <><b>Compare copper cable with fibre-optic cable.</b><p>Give four comparisons: bandwidth, interference, cost and attenuation over distance.</p></>,
         answer: <p>Fibre normally offers <strong>higher bandwidth</strong>, lower attenuation over long distances and immunity to electromagnetic interference. Copper is normally <strong>cheaper and easier to install</strong>, but has lower bandwidth and is more affected by interference and signal loss. Award four distinct comparative points. <em>[4]</em></p>,
       },
       {
@@ -76,8 +76,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l8-5",
         marks: 3,
         lines: 4,
-        prompt: <><b>A hospital links two buildings and must protect confidential, high-volume data.</b><p>Choose a medium and justify it with two linked reasons.</p></>,
-        answer: <p><strong>Fibre-optic cable</strong> is suitable because its high bandwidth supports large data transfers and it is not affected by electromagnetic interference. A wired point-to-point route is also harder to intercept casually than an unguided wireless signal. <em>[1 choice; 2 linked reasons]</em></p>,
+        prompt: <><b>A hospital must carry high-volume confidential data reliably between two buildings.</b><p>Choose a medium and justify it with two linked reasons.</p></>,
+        answer: <p><strong>Fibre-optic cable</strong> is suitable because its high bandwidth supports large data transfers and immunity to electromagnetic interference improves signal reliability. Confidentiality still requires encryption, authentication and access control; the medium alone does not secure the data. <em>[1 choice; 2 linked reasons]</em></p>,
       },
     ],
   },
@@ -91,8 +91,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l8-6",
         marks: 4,
         lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Other than copper cable, identify and describe two media that may transmit data across a WAN.</b></p><p>Adapted from 9618/13 O/N 2024 Q9(b). [4]</p></>,
-        answer: <p>Any two matched pairs from the published scheme: <strong>fibre-optic cable</strong> transmits pulses of light; <strong>radio waves</strong> or <strong>microwaves</strong> are electromagnetic waves transmitted at particular frequencies. <em>[1 medium + 1 matching description each]</em></p>,
+        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Explain four benefits to university students of being allowed to use both wired and wireless connections.</b></p><p>Adapted from 9618/13 M/J 2023 Q2(d). [4]</p></>,
+        answer: <p>Award any four distinct published points: students can connect devices that support only one connection type; wired links can offer higher performance or lower interference for fixed work; wired links may reduce casual interception of the local signal; wireless allows movement between rooms or sites; wireless supports portable or multiple personal devices. Security still depends on appropriate network controls. <em>[1 each, max 4]</em></p>,
       },
       {
         id: "l8-7",
@@ -147,12 +147,12 @@ export default function Lesson08Client() {
     {
       time: "5 min",
       focus: "Retrieve the difference between a network device and the medium that connects it.",
-      prompt: "Students classify cable, WAP, radio wave, router and fibre as device or medium.",
+      prompt: "Students classify three fully named transmission media and two active network devices, then state each role.",
       source: "Coursebook Sections 2.03-2.04 printed pp.32-36; Lesson 07 retrieval.",
       content: (
-        <Slide number="03" eyebrow="DO NOW · RETRIEVAL" sourceLabel="TEXTBOOK pp.32-36" syllabusLabel="SYLLABUS 2.1 — MEDIA" title="Device or medium? Name the job before the object." className="l8-slide l8-retrieval">
-          <section className="l8-sort"><article><b>CABLE</b><span>?</span></article><article><b>WAP</b><span>?</span></article><article><b>RADIO WAVE</b><span>?</span></article><article><b>ROUTER</b><span>?</span></article><article><b>FIBRE</b><span>?</span></article></section>
-          <Reveal id="sort" visible={revealed.has("sort")} onToggle={toggleReveal}><p><strong>Media:</strong> cable, radio wave and fibre. <strong>Devices:</strong> WAP and router. A medium carries the signal; a device connects, processes or forwards.</p></Reveal>
+        <Slide number="03" eyebrow="DO NOW · RETRIEVAL" sourceLabel="TEXTBOOK pp.32-36" syllabusLabel="SYLLABUS 2.1 — MEDIA + NETWORK DEVICES" title="Transmission medium or network device? Classify it, then state its role." className="l8-slide l8-retrieval">
+          <section className="l8-sort"><article><b>COPPER CABLE</b><span>MEDIUM OR DEVICE?</span></article><article><b>WAP</b><span>MEDIUM OR DEVICE?</span></article><article><b>RADIO WAVES</b><span>MEDIUM OR DEVICE?</span></article><article><b>ROUTER</b><span>MEDIUM OR DEVICE?</span></article><article><b>FIBRE-OPTIC CABLE</b><span>MEDIUM OR DEVICE?</span></article></section>
+          <Reveal id="sort" visible={revealed.has("sort")} onToggle={toggleReveal}><p><strong>Transmission media:</strong> copper cable, radio waves and fibre-optic cable carry signals. <strong>Network devices:</strong> a WAP connects wireless devices to a network; a router forwards packets between networks.</p></Reveal>
         </Slide>
       ),
     },
@@ -182,12 +182,12 @@ export default function Lesson08Client() {
     },
     {
       time: "7 min",
-      focus: "Build linked benefit and drawback chains rather than isolated buzzwords.",
+      focus: "Build linked benefit and drawback chains for provider-managed cloud services rather than isolated buzzwords.",
       prompt: "For each card, students add the consequence for a school or company.",
-      source: "Coursebook pp.39-40; syllabus 2.1 benefits and drawbacks of cloud computing.",
+      source: "Coursebook printed p.39; syllabus 2.1 benefits and drawbacks of cloud computing; 9618/12 O/N 2025 Q8(a).",
       content: (
-        <Slide number="06" eyebrow="CLOUD TRADE-OFFS" sourceLabel="TEXTBOOK pp.39-40" syllabusLabel="SYLLABUS 2.1 — BENEFITS / DRAWBACKS" title="Every cloud benefit moves some responsibility elsewhere." className="l8-slide l8-tradeoffs">
-          <section className="l8-trade-grid"><article><span>ACCESS</span><b>many locations/devices</b><p>but service depends on network availability</p></article><article><span>SCALE</span><b>increase capacity quickly</b><p>but recurring fees and provider lock-in may grow</p></article><article><span>MANAGEMENT</span><b>provider maintains systems</b><p>but the customer gives up some control</p></article><article><span>RESILIENCE</span><b>provider can replicate/backup</b><p>but outage or breach affects remote access</p></article></section>
+        <Slide number="06" eyebrow="CLOUD TRADE-OFFS" sourceLabel="TEXTBOOK p.39 + PAPER 1" syllabusLabel="SYLLABUS 2.1 — BENEFITS / DRAWBACKS" title="Provider-managed cloud services trade some control for convenience." className="l8-slide l8-tradeoffs">
+          <section className="l8-trade-grid"><article><span>ACCESS</span><b>many locations/devices</b><p>but service depends on network availability</p></article><article><span>SCALE</span><b>increase capacity quickly</b><p>but recurring fees and provider dependence may grow</p></article><article><span>MANAGEMENT</span><b>provider maintains infrastructure</b><p>but the customer gives up some direct control</p></article><article><span>RESILIENCE</span><b>provider may replicate/backup</b><p>an outage may block access; a breach may expose data</p></article></section>
           <div className="l8-answer-frame"><b>Exam frame</b><span>Feature → direct consequence → why it matters here.</span></div>
         </Slide>
       ),
@@ -212,7 +212,7 @@ export default function Lesson08Client() {
       source: "Syllabus 2.1 public/private clouds and justified benefits/drawbacks; Coursebook p.39.",
       content: (
         <Slide number="08" eyebrow="CLOUD DECISION LAB" sourceLabel="TEXTBOOK p.39" syllabusLabel="SYLLABUS 2.1 — APPLY" title="Choose from the requirement, not from a memorised favourite." className="l8-slide l8-scenarios">
-          <section className="l8-scenario-grid"><article><span>START-UP</span><b>traffic changes each week</b><p>small technical team · global customers</p><Reveal id="startup" visible={revealed.has("startup")} onToggle={toggleReveal}><p><strong>Public:</strong> rapid scaling and provider management reduce initial infrastructure work.</p></Reveal></article><article><span>HEALTH SERVICE</span><b>sensitive patient records</b><p>strict control · specialist IT team</p><Reveal id="health" visible={revealed.has("health")} onToggle={toggleReveal}><p><strong>Private:</strong> dedicated infrastructure gives the organisation greater policy and access control.</p></Reveal></article></section>
+          <section className="l8-scenario-grid"><article><span>START-UP</span><b>traffic changes each week</b><p>small technical team · global customers</p><Reveal id="startup" visible={revealed.has("startup")} onToggle={toggleReveal}><p><strong>Public:</strong> rapid scaling and provider management reduce initial infrastructure work.</p></Reveal></article><article><span>HEALTH SERVICE</span><b>sensitive patient records</b><p>strict control · specialist IT team</p><Reveal id="health" visible={revealed.has("health")} onToggle={toggleReveal}><p><strong>Private:</strong> dedicated infrastructure gives greater policy and access control. A compliant public cloud can also earn credit when its legal, contractual and security controls are justified.</p></Reveal></article></section>
           <p className="l8-warning">A model choice never removes the need for encryption, authentication, backup and access control.</p>
         </Slide>
       ),
@@ -236,7 +236,7 @@ export default function Lesson08Client() {
       source: "Coursebook printed pp.32-33; syllabus copper cable characteristics.",
       content: (
         <Slide number="10" eyebrow="COPPER CABLE" sourceLabel="TEXTBOOK pp.32-33" syllabusLabel="SYLLABUS 2.1 — COPPER" title="Changing electrical signals carry bits through metal conductors." className="l8-slide l8-medium">
-          <section className="l8-medium-layout"><div className="l8-copper-visual" role="img" aria-label="Two twisted copper conductors carrying an electrical signal"><i /><i /><i /><i /><span>electrical signal</span></div><article><span>STRENGTHS</span><ul><li>relatively inexpensive</li><li>easy to terminate and install</li><li>common for short LAN links</li></ul></article><article><span>LIMITS</span><ul><li>electromagnetic interference</li><li>attenuation over distance</li><li>lower bandwidth than fibre</li></ul></article></section>
+          <section className="l8-medium-layout"><div className="l8-copper-visual" role="img" aria-label="A twisted pair of copper conductors carrying electrical signals"><svg viewBox="0 0 490 150" aria-hidden="true"><path className="l8-wire-a" d="M20 75 C70 20 120 20 170 75 S270 130 320 75 S420 20 470 75" /><path className="l8-wire-b" d="M20 75 C70 130 120 130 170 75 S270 20 320 75 S420 130 470 75" /></svg><span>twisted pair · electrical signal</span></div><article><span>STRENGTHS</span><ul><li>relatively inexpensive</li><li>easy to terminate and install</li><li>common for short LAN links</li></ul></article><article><span>LIMITS</span><ul><li>electromagnetic interference</li><li>attenuation over distance</li><li>lower bandwidth than fibre</li></ul></article></section>
         </Slide>
       ),
     },
@@ -259,7 +259,7 @@ export default function Lesson08Client() {
       source: "Coursebook printed pp.33-34; syllabus radio waves including Wi-Fi and microwaves.",
       content: (
         <Slide number="12" eyebrow="WIRELESS: RADIO & MICROWAVE" sourceLabel="TEXTBOOK pp.33-34" syllabusLabel="SYLLABUS 2.1 — RADIO / MICROWAVE" title="Wireless removes the cable, not the engineering constraints." className="l8-slide l8-wireless">
-          <section className="l8-wave-compare"><article><div className="l8-radio-rings"><i /><i /><i /></div><span>RADIO / WI-FI</span><b>local mobility</b><p>travels through air; range, obstacles, interference and shared access affect performance</p></article><article><div className="l8-microwave-beam"><i /></div><span>MICROWAVE</span><b>directed link</b><p>high-frequency electromagnetic waves; terrestrial links usually require line-of-sight</p></article></section>
+          <section className="l8-wave-compare"><article><div className="l8-radio-rings"><i /><i /><i /></div><span>WI-FI · USES RADIO WAVES</span><b>local mobility</b><p>range, obstacles, interference and shared access affect performance; radio waves also support other wireless systems</p></article><article><div className="l8-microwave-beam"><i /></div><span>MICROWAVE</span><b>directed link</b><p>high-frequency electromagnetic waves; terrestrial links usually require line-of-sight</p></article></section>
           <p className="l8-warning">Wi-Fi is an IEEE 802.11 WLAN technology — not simply “Ethernet without a wire”.</p>
         </Slide>
       ),
@@ -283,7 +283,7 @@ export default function Lesson08Client() {
       source: "Coursebook pp.32-35; syllabus 2.1 wired and wireless implications.",
       content: (
         <Slide number="14" eyebrow="WIRED vs WIRELESS" sourceLabel="TEXTBOOK pp.32-35" syllabusLabel="SYLLABUS 2.1 — IMPLICATIONS" title="Compare reliability and mobility — then connect both to the user." className="l8-slide l8-matrix">
-          <section className="l8-decision-table"><div><b>NEED</b><b>WIRED</b><b>WIRELESS</b></div><div><span>movement</span><p>fixed connection</p><p>portable access</p></div><div><span>interference</span><p>usually lower</p><p>often higher/shared</p></div><div><span>security surface</span><p>physical access needed</p><p>signal extends through air</p></div><div><span>installation</span><p>cable route required</p><p>fast to add mobile devices</p></div></section>
+          <section className="l8-decision-table"><div><b>NEED</b><b>WIRED</b><b>WIRELESS</b></div><div><span>movement</span><p>fixed connection</p><p>portable access</p></div><div><span>interference</span><p>usually lower</p><p>often higher/shared</p></div><div><span>signal interception</span><p>local cable/port usually needs physical access</p><p>radio signal is receivable within range</p></div><div><span>installation</span><p>cable route required</p><p>fast to add mobile devices</p></div></section>
           <div className="l8-answer-frame"><b>Balanced conclusion</b><span>Many networks use both: wired backbone + wireless access.</span></div>
         </Slide>
       ),
@@ -310,7 +310,7 @@ export default function Lesson08Client() {
       marks={30}
       minutes={45}
       syllabusLabel="SYLLABUS 2.1 · p.16"
-      sourceLabel="TEXTBOOK CH.2 · pp.32-35, 39-40 + PAPER 1"
+      sourceLabel="TEXTBOOK CH.2 · pp.32-35, 39 + PAPER 1"
       instructions="Use a named medium or cloud model in every answer. For each explanation, link one technical feature to its consequence in the stated situation. Past-paper prompts are concise adaptations with their original references and marks."
       sections={homeworkSections}
       challenge={{
@@ -327,8 +327,8 @@ export default function Lesson08Client() {
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.32-35 and 39-40, and published 2023-2025 AS Paper 1 questions and mark schemes."
-      sourceDetail="Core boundary: public/private clouds and their trade-offs; wired/wireless implications; copper, fibre-optic, radio/Wi-Fi, microwave and satellite media. Authentic anchors: 9618/13 M/J 2024 Q5(a), 9618/12 O/N 2025 Q8(a), 9618/13 O/N 2025 Q4(a)-(b), and 9618/13 O/N 2024 Q9(b). Infrared and detailed satellite-orbit counts are enrichment, not core 2027-2029 outcomes. Ethernet, streaming and internet infrastructure follow in Lesson 09; IP, subnetting, URL and DNS follow in Lesson 10."
+      sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.32-35 and p.39, and published 2023-2025 AS Paper 1 questions and mark schemes."
+      sourceDetail="Core boundary: public/private clouds and their trade-offs; wired/wireless implications; copper, fibre-optic, radio/Wi-Fi, microwave and satellite media. Authentic anchors: 9618/13 M/J 2023 Q2(d), 9618/13 M/J 2024 Q5(a), 9618/12 O/N 2025 Q8(a), 9618/13 O/N 2025 Q4(a)-(b), and 9618/13 O/N 2024 Q9(b). Infrared and detailed satellite-orbit counts are enrichment, not core 2027-2029 outcomes. Ethernet, streaming and internet infrastructure follow in Lesson 09; IP, subnetting, URL and DNS follow in Lesson 10."
     />
   );
 }

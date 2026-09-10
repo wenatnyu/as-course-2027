@@ -321,6 +321,12 @@ export function LessonShell({
 
   const goTo = useCallback((next: number) => {
     setCurrent(Math.max(0, Math.min(slides.length - 1, next)));
+    if (!document.fullscreenElement) {
+      window.requestAnimationFrame(() => deckRef.current?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      }));
+    }
   }, [slides.length]);
 
   useEffect(() => {
