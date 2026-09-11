@@ -202,7 +202,7 @@ export default function A2Lesson02Client() {
       source: "Syllabus 13.2 notes and guidance; coursebook pp.319–320.",
       content: (
         <Slide number="09" eyebrow="ORGANISATION ≠ ACCESS" sourceLabel="SYLLABUS p.32 · TEXTBOOK p.319" syllabusLabel="13.2 · ACCESS METHODS" title="How records are stored does not fully determine how they are reached." className="a2-slide a2-dr-slide">
-          <CompareTable headers={["Organisation", "Sequential access", "Direct access"]} rows={[["Serial", "✓ core route", "—"], ["Sequential", "✓ read in key order", "✓ through an index"], ["Random", "possible scan for non-key search", "✓ record key + hash"]]} />
+          <CompareTable headers={["Organisation", "Sequential access", "Direct access"]} rows={[["Serial", "✓ core route", "—"], ["Sequential", "✓ read in key order", "✓ through an index"], ["Random", "—", "✓ record key + hash"]]} />
           <p className="a2-alert"><b>Exam language</b><span><strong>Random</strong> names the organisation; <strong>direct</strong> names the access method.</span></p>
         </Slide>
       ),
