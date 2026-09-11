@@ -2,18 +2,25 @@ import type { LessonCatalog, LessonLink } from "../_components/lesson-shell";
 
 export const A2_PREVIEW_CATALOG: LessonCatalog = [
   ["01", "User-defined data types"],
+  ["02", "File organisation and access"],
+  ["03", "Hashing for file access"],
+  ["04", "Floating-point format and decoding"],
+  ["05", "Conversion, normalisation and bit allocation"],
+  ["06", "Approximation, errors and Chapter 13 review"],
   ["P01", "Python evidence and file baseline"],
 ];
 
-export const A2_LESSON_ONE_LINKS: LessonLink[] = [
-  { label: "01", href: "../lesson-01/", active: true },
-  { label: "P01", href: "../lab-01/" },
-];
+export function buildA2LessonLinks(activeLabel: string): LessonLink[] {
+  return A2_PREVIEW_CATALOG.map(([label]) => ({
+    label,
+    href: label === "P01" ? "../lab-01/" : `../lesson-${label}/`,
+    active: label === activeLabel,
+  }));
+}
 
-export const A2_LAB_ONE_LINKS: LessonLink[] = [
-  { label: "01", href: "../lesson-01/" },
-  { label: "P01", href: "../lab-01/", active: true },
-];
+export const A2_LESSON_ONE_LINKS = buildA2LessonLinks("01");
+
+export const A2_LAB_ONE_LINKS = buildA2LessonLinks("P01");
 
 export const A2_PHASES = [
   { weeks: "W01–06", name: "Represent data", detail: "Section 13 · types, files and floating point", tone: "violet" },

@@ -276,6 +276,11 @@ for (const lesson of lessonArtifacts) {
 const nestedCourseArtifacts = [
   { flat: "a2.html", route: "a2", title: /A2 Course 2028/i, keyContent: /32-WEEK COURSE MAP|32-week dual track/i },
   { flat: "a2/lesson-01.html", route: "a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, keyContent: /SYLLABUS 13\.1/i },
+  { flat: "a2/lesson-02.html", route: "a2/lesson-02", title: /A2 Computer Science · Lesson 02/i, keyContent: /SYLLABUS 13\.2/i },
+  { flat: "a2/lesson-03.html", route: "a2/lesson-03", title: /A2 Computer Science · Lesson 03/i, keyContent: /SYLLABUS 13\.2/i },
+  { flat: "a2/lesson-04.html", route: "a2/lesson-04", title: /A2 Computer Science · Lesson 04/i, keyContent: /SYLLABUS 13\.3/i },
+  { flat: "a2/lesson-05.html", route: "a2/lesson-05", title: /A2 Computer Science · Lesson 05/i, keyContent: /SYLLABUS 13\.3/i },
+  { flat: "a2/lesson-06.html", route: "a2/lesson-06", title: /A2 Computer Science · Lesson 06/i, keyContent: /SYLLABUS 13\.3/i },
   { flat: "a2/lab-01.html", route: "a2/lab-01", title: /Python Lab P01/i, keyContent: /PAPER 4/i },
   { flat: "exam-papers.html", route: "exam-papers", title: /Question Papers and Mark Schemes/i, keyContent: /School Support Hub/i },
 ];

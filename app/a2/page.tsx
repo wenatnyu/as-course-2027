@@ -30,17 +30,27 @@ const syllabusChapters = [
 
 const milestoneWeeks = new Set(["06", "10", "16", "22", "29", "30", "31", "32"]);
 
+const publishedLessons = [
+  { href: "./lesson-01/", label: "THEORY · A2-01", title: "User-defined data types", topics: "Enum · pointer · set · record · class/object", syllabus: "13.1 · PAPER 3" },
+  { href: "./lesson-02/", label: "THEORY · A2-02", title: "File organisation and access", topics: "Serial · sequential · random · direct access", syllabus: "13.2 · PAPER 3" },
+  { href: "./lesson-03/", label: "THEORY · A2-03", title: "Hashing for file access", topics: "MOD · collision · probing · overflow · chaining", syllabus: "13.2 · PAPER 3" },
+  { href: "./lesson-04/", label: "THEORY · A2-04", title: "Floating-point format", topics: "Mantissa · exponent · decode · normalise", syllabus: "13.3 · PAPER 3" },
+  { href: "./lesson-05/", label: "THEORY · A2-05", title: "Encode and normalise", topics: "Conversion · bit allocation · approximation", syllabus: "13.3 · PAPER 3" },
+  { href: "./lesson-06/", label: "THEORY · A2-06", title: "Precision, errors and review", topics: "Rounding · underflow · overflow · checkpoint", syllabus: "13.3 · PAPER 3" },
+  { href: "./lab-01/", label: "PYTHON · A2-P01", title: "Paper 4 baseline + evidence", topics: "Text files · exceptions · executable evidence", syllabus: "20.2 · PAPER 4", lab: true },
+] as const;
+
 export default function A2CoursePage() {
   return (
     <main className="a2-hub">
       <header className="a2-hub-bar">
         <a className="a2-hub-brand" href="./"><b>CS</b><span>Cambridge 9618<br />A2 · 2028</span></a>
         <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../exam-papers/">Exam papers</a></nav>
-        <a className="a2-hub-cta" href="./lesson-01/">Open lesson 01 →</a>
+        <a className="a2-hub-cta" href="./lesson-01/">Start Chapter 13 →</a>
       </header>
 
       <section className="a2-hub-hero">
-        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-01/">Preview theory lesson</a><a href="./lab-01/">Preview Python lab</a></div></div>
+        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-01/">Open Chapter 13</a><a href="./lab-01/">Open Python lab</a></div></div>
         <div className="a2-hub-scope" aria-label="A2 course scope"><div><strong>8</strong><span>syllabus sections</span></div><div><strong>32</strong><span>teaching weeks</span></div><div><strong>2</strong><span>parallel exam tracks</span></div></div>
       </section>
 
@@ -58,16 +68,15 @@ export default function A2CoursePage() {
       </section>
 
       <section className="a2-hub-section">
-        <header className="a2-section-heading"><span>AVAILABLE NOW</span><h2>The first paired teaching block.</h2><p>Both resources contain 15 classroom slides, teacher notes, syllabus and textbook markers, cited paper practice, and a 30-mark printable homework with inline answers.</p></header>
+        <header className="a2-section-heading"><span>SECTION 13 · COMPLETE</span><h2>Data Representation is ready to teach.</h2><p>Six 90-minute Paper 3 lessons cover every Section 13 objective. Each has teacher notes, visible syllabus and textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers. The first Paper 4 lab remains alongside the theory sequence.</p></header>
         <div className="a2-live-cards">
-          <a href="./lesson-01/"><span>THEORY · A2-01</span><h3>User-defined data types</h3><p>Enum · pointer · set · record · class/object</p><div><b>13.1 · PAPER 3</b><strong>90 min →</strong></div></a>
-          <a href="./lab-01/"><span>PYTHON · A2-P01</span><h3>Paper 4 baseline + evidence</h3><p>Text files · exceptions · executable evidence</p><div><b>20.2 · PAPER 4</b><strong>90 min →</strong></div></a>
+          {publishedLessons.map((lesson) => <a className={"lab" in lesson ? "lab" : "theory"} href={lesson.href} key={lesson.href}><span>{lesson.label}</span><h3>{lesson.title}</h3><p>{lesson.topics}</p><div><b>{lesson.syllabus}</b><strong>90 min →</strong></div></a>)}
         </div>
       </section>
 
       <section className="a2-hub-section">
         <header className="a2-section-heading"><span>COMPLETE A2 SCOPE</span><h2>Eight syllabus chapters, one connected sequence.</h2></header>
-        <div className="a2-chapter-grid">{syllabusChapters.map(([number, name, topics]) => <article key={number}><span>{number}</span><div><b>{name}</b><p>{topics}</p></div><em>{number === "13" ? "IN PRODUCTION" : "PLANNED"}</em></article>)}</div>
+        <div className="a2-chapter-grid">{syllabusChapters.map(([number, name, topics]) => <article key={number}><span>{number}</span><div><b>{name}</b><p>{topics}</p></div><em>{number === "13" ? "COMPLETE" : "PLANNED"}</em></article>)}</div>
       </section>
 
       <section className="a2-hub-section">
@@ -84,4 +93,3 @@ export default function A2CoursePage() {
     </main>
   );
 }
-
