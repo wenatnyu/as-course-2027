@@ -7,6 +7,16 @@ export const A2_PREVIEW_CATALOG: LessonCatalog = [
   ["04", "Floating-point format and decoding"],
   ["05", "Conversion, normalisation and bit allocation"],
   ["06", "Approximation, errors and Chapter 13 review"],
+  ["07", "Protocols and the TCP/IP stack"],
+  ["08", "Application-layer protocols"],
+  ["09", "Circuit and packet switching"],
+  ["10", "Routers and Chapter 14 review"],
+  ["11", "RISC, CISC, pipelining and interrupts"],
+  ["12", "Parallel processing architectures"],
+  ["13", "Virtual machines"],
+  ["14", "Boolean algebra and De Morgan's laws"],
+  ["15", "Adders and flip-flops"],
+  ["16", "Karnaugh maps and Chapter 15 review"],
   ["P01", "Python evidence and file baseline"],
 ];
 

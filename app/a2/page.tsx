@@ -29,6 +29,7 @@ const syllabusChapters = [
 ] as const;
 
 const milestoneWeeks = new Set(["06", "10", "16", "22", "29", "30", "31", "32"]);
+const completedChapters = new Set(["13", "14", "15"]);
 
 const publishedLessons = [
   { href: "./lesson-01/", label: "THEORY · A2-01", title: "User-defined data types", topics: "Enum · pointer · set · record · class/object", syllabus: "13.1 · PAPER 3" },
@@ -37,6 +38,16 @@ const publishedLessons = [
   { href: "./lesson-04/", label: "THEORY · A2-04", title: "Floating-point format", topics: "Mantissa · exponent · decode · normalise", syllabus: "13.3 · PAPER 3" },
   { href: "./lesson-05/", label: "THEORY · A2-05", title: "Encode and normalise", topics: "Conversion · bit allocation · approximation", syllabus: "13.3 · PAPER 3" },
   { href: "./lesson-06/", label: "THEORY · A2-06", title: "Precision, errors and review", topics: "Rounding · underflow · overflow · checkpoint", syllabus: "13.3 · PAPER 3" },
+  { href: "./lesson-07/", label: "THEORY · A2-07", title: "Protocols and TCP/IP", topics: "Protocol rules · four layers · host-to-host journey", syllabus: "14.1 · PAPER 3" },
+  { href: "./lesson-08/", label: "THEORY · A2-08", title: "Application protocols", topics: "HTTP · FTP · SMTP · POP3 · IMAP · BitTorrent", syllabus: "14.1 · PAPER 3" },
+  { href: "./lesson-09/", label: "THEORY · A2-09", title: "Switching methods", topics: "Circuit switching · packets · routes · comparison", syllabus: "14.2 · PAPER 3" },
+  { href: "./lesson-10/", label: "THEORY · A2-10", title: "Routers and review", topics: "Headers · routing tables · reassembly · exam clinic", syllabus: "14.2 · PAPER 3" },
+  { href: "./lesson-11/", label: "THEORY · A2-11", title: "RISC, CISC and pipelines", topics: "Instruction sets · registers · interrupts · throughput", syllabus: "15.1 · PAPER 3" },
+  { href: "./lesson-12/", label: "THEORY · A2-12", title: "Parallel architectures", topics: "SISD · SIMD · MISD · MIMD · massive parallelism", syllabus: "15.1 · PAPER 3" },
+  { href: "./lesson-13/", label: "THEORY · A2-13", title: "Virtual machines", topics: "Host · guest · isolation · roles · limitations", syllabus: "15.1 · PAPER 3" },
+  { href: "./lesson-14/", label: "THEORY · A2-14", title: "Boolean algebra", topics: "Laws · De Morgan · SOP · simplification", syllabus: "15.2 · PAPER 3" },
+  { href: "./lesson-15/", label: "THEORY · A2-15", title: "Adders and flip-flops", topics: "Truth tables · half/full adders · SR · JK", syllabus: "15.2 · PAPER 3" },
+  { href: "./lesson-16/", label: "THEORY · A2-16", title: "Karnaugh maps and review", topics: "Gray code · grouping · optimal SOP · checkpoint", syllabus: "15.2 · PAPER 3" },
   { href: "./lab-01/", label: "PYTHON · A2-P01", title: "Paper 4 baseline + evidence", topics: "Text files · exceptions · executable evidence", syllabus: "20.2 · PAPER 4", lab: true },
 ] as const;
 
@@ -46,11 +57,11 @@ export default function A2CoursePage() {
       <header className="a2-hub-bar">
         <a className="a2-hub-brand" href="./"><b>CS</b><span>Cambridge 9618<br />A2 · 2028</span></a>
         <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../exam-papers/">Exam papers</a></nav>
-        <a className="a2-hub-cta" href="./lesson-01/">Start Chapter 13 →</a>
+        <a className="a2-hub-cta" href="./lesson-11/">Open Chapter 15 →</a>
       </header>
 
       <section className="a2-hub-hero">
-        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-01/">Open Chapter 13</a><a href="./lab-01/">Open Python lab</a></div></div>
+        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-11/">Open Chapter 15</a><a href="./lab-01/">Open Python lab</a></div></div>
         <div className="a2-hub-scope" aria-label="A2 course scope"><div><strong>8</strong><span>syllabus sections</span></div><div><strong>32</strong><span>teaching weeks</span></div><div><strong>2</strong><span>parallel exam tracks</span></div></div>
       </section>
 
@@ -68,7 +79,7 @@ export default function A2CoursePage() {
       </section>
 
       <section className="a2-hub-section">
-        <header className="a2-section-heading"><span>SECTION 13 · COMPLETE</span><h2>Data Representation is ready to teach.</h2><p>Six 90-minute Paper 3 lessons cover every Section 13 objective. Each has teacher notes, visible syllabus and textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers. The first Paper 4 lab remains alongside the theory sequence.</p></header>
+        <header className="a2-section-heading"><span>SECTIONS 13–15 · COMPLETE</span><h2>Three A2 chapters are ready to teach.</h2><p>Sixteen 90-minute Paper 3 lessons now cover Data Representation, Communication and Internet Technologies, and Hardware and Virtual Machines. Each includes teacher notes, visible syllabus and textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers.</p></header>
         <div className="a2-live-cards">
           {publishedLessons.map((lesson) => <a className={"lab" in lesson ? "lab" : "theory"} href={lesson.href} key={lesson.href}><span>{lesson.label}</span><h3>{lesson.title}</h3><p>{lesson.topics}</p><div><b>{lesson.syllabus}</b><strong>90 min →</strong></div></a>)}
         </div>
@@ -76,7 +87,7 @@ export default function A2CoursePage() {
 
       <section className="a2-hub-section">
         <header className="a2-section-heading"><span>COMPLETE A2 SCOPE</span><h2>Eight syllabus chapters, one connected sequence.</h2></header>
-        <div className="a2-chapter-grid">{syllabusChapters.map(([number, name, topics]) => <article key={number}><span>{number}</span><div><b>{name}</b><p>{topics}</p></div><em>{number === "13" ? "COMPLETE" : "PLANNED"}</em></article>)}</div>
+        <div className="a2-chapter-grid">{syllabusChapters.map(([number, name, topics]) => <article className={completedChapters.has(number) ? "complete" : ""} key={number}><span>{number}</span><div><b>{name}</b><p>{topics}</p></div><em>{completedChapters.has(number) ? "COMPLETE" : "PLANNED"}</em></article>)}</div>
       </section>
 
       <section className="a2-hub-section">

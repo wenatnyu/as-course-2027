@@ -50,12 +50,12 @@
 .a2-live-cards a > div strong { color: #6650d9; }
 .a2-chapter-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
 .a2-chapter-grid article { min-height: 112px; padding: 20px 22px; display: grid; grid-template-columns: 54px 1fr auto; align-items: center; gap: 17px; background: white; border-left: 5px solid #d9d5e9; }
-.a2-chapter-grid article:first-child { border-color: var(--hub-violet); }
+.a2-chapter-grid article.complete { border-color: var(--hub-violet); }
 .a2-chapter-grid article > span { color: #6650d9; font: 600 34px/1 Georgia, serif; }
 .a2-chapter-grid b { display: block; font-size: 16px; }
 .a2-chapter-grid p { margin: 6px 0 0; color: #647087; font-size: 13px; }
 .a2-chapter-grid em { color: #6d7688; font: 850 11px/1 ui-monospace, monospace; letter-spacing: .08em; }
-.a2-chapter-grid article:first-child em { color: #6650d9; }
+.a2-chapter-grid article.complete em { color: #6650d9; }
 .a2-phase-track { display: grid; grid-template-columns: 1.2fr .8fr 2fr .8fr 1.6fr; }
 .a2-phase-track article { min-height: 145px; padding: 22px 19px; color: white; background: var(--hub-night); border-top: 7px solid var(--hub-violet); }
 .a2-phase-track article.teal { border-color: var(--hub-teal); }
