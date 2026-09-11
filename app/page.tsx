@@ -391,13 +391,15 @@ export default function Home() {
       <header className="course-bar">
         <button className="course-brand" onClick={() => { setView("slides"); setCurrent(0); }}><b>CS</b><span>Cambridge 9618<br />AS · 2027</span></button>
         <nav aria-label="Course materials">
-          <button className={view === "slides" ? "active" : ""} onClick={() => setView("slides")}>Slides</button>
-          <button className={view === "homework" ? "active" : ""} onClick={() => setView("homework")}>Homework</button>
-          <button className={view === "roadmap" ? "active" : ""} onClick={() => setView("roadmap")}>Course map</button>
+          <button className={view === "slides" ? "active" : ""} aria-pressed={view === "slides"} onClick={() => setView("slides")}>Slides</button>
+          <button className={view === "homework" ? "active" : ""} aria-pressed={view === "homework"} onClick={() => setView("homework")}>Homework</button>
+          <button className={view === "roadmap" ? "active" : ""} aria-pressed={view === "roadmap"} onClick={() => setView("roadmap")}>Course map</button>
+          <a href="./a2/">A2</a>
+          <a href="./exam-papers/">Papers</a>
         </nav>
         <div className="bar-actions">
           <LessonSwitcher lessonNumber="01" root />
-          {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
+          {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} aria-pressed={teacherMode} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
         </div>
       </header>
@@ -531,7 +533,7 @@ export default function Home() {
 
       <footer className="source-footer">
         <div><b>LESSON 01 SOURCES</b><span>Checked against the 2027-2029 syllabus, the endorsed coursebook and representative Paper 1 and Paper 2 questions.</span></div>
-        <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/past-papers/" target="_blank" rel="noreferrer">Cambridge past papers</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a></div>
+        <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="./exam-papers/">Exam paper library</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a></div>
         <p>Syllabus pp.11, 13-14 · Coursebook Section 1.01 pp.3-6: Tables 1.01-1.04, Worked Examples 1.01-1.02 and Task 1.01 · Coursebook p.24: Exam-style Question 1(a-b) · Recent-paper anchors: 2023 M/J 11 Q3(d)(iii), 2023 M/J 12 Q4(c), 2025 M/J 12 Q2(a).</p>
       </footer>
     </main>

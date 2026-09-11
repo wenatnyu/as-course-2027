@@ -529,3 +529,72 @@ test("Lesson 08 uses unambiguous media labels and viewport-safe slide navigation
   assert.match(css, /100dvh - 166px/);
   assert.match(css, /@media \(max-width: 900px\)[\s\S]*?\.deck-shell\s*\{[\s\S]*?100dvh - 166px/);
 });
+
+const a2RouteCases = [
+  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lab-01\//] },
+  { pathname: "/a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, content: [/SYLLABUS 13\.1/i, /A2 LESSON 01 SOURCES/i, /User-defined data types/i] },
+  { pathname: "/a2/lab-01", title: /Python Lab P01/i, content: [/PAPER 4/i, /A2 LAB P01 SOURCES/i, /evidence/i] },
+  { pathname: "/exam-papers", title: /Question Papers and Mark Schemes/i, content: [/Question paper/i, /Mark scheme/i, /2024/, /2025/, /2026/, /AS LEVEL/i, /A2 STAGE/i] },
+];
+
+for (const routeCase of a2RouteCases) {
+  test(`server-renders ${routeCase.pathname} as a complete course route`, async () => {
+    const response = await render(routeCase.pathname);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+    const html = await response.text();
+    assert.match(html, routeCase.title);
+    for (const pattern of routeCase.content) assert.match(html, pattern);
+    assert.match(html, new RegExp(`<meta property="og:url" content="[^"]*${routeCase.pathname}/"`, "i"));
+    assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
+  });
+}
+
+test("A2 preview lessons remain isolated from the 63-lesson AS catalogue", async () => {
+  const [lessonHtml, labHtml] = await Promise.all([
+    (await render("/a2/lesson-01")).text(),
+    (await render("/a2/lab-01")).text(),
+  ]);
+
+  assert.match(lessonHtml, /<option value="\.\.\/lesson-01\/" selected="">01/i);
+  assert.match(lessonHtml, /<option value="\.\.\/lab-01\/">P01/i);
+  assert.match(labHtml, /<option value="\.\.\/lab-01\/" selected="">P01/i);
+  assert.doesNotMatch(`${lessonHtml}\n${labHtml}`, /lesson-P01|Maintenance and complete AS review/i);
+});
+
+test("A2 lesson and lab each provide 15 slides, 90 minutes and 30 homework marks", async () => {
+  const lessonSource = await readFile(new URL("../app/a2/lesson-01/a2-lesson-01-client.tsx", import.meta.url), "utf8");
+  const labSource = await readFile(new URL("../app/a2/lab-01/a2-lab-01-client.tsx", import.meta.url), "utf8");
+
+  for (const [label, source, questionPattern] of [
+    ["A2 lesson 01", lessonSource, /\bid:\s*["']a2-01-\d+["'],\s*marks:\s*(\d+)/g],
+    ["A2 lab P01", labSource, /\bid:\s*["']a2-p01-\d+["'],\s*marks:\s*(\d+)/g],
+  ]) {
+    const timings = [...source.matchAll(/\btime:\s*["'](\d+) min["']/g)].map((match) => Number(match[1]));
+    const marks = [...source.matchAll(questionPattern)].map((match) => Number(match[1]));
+    assert.equal(timings.length, 15, `${label} should contain exactly 15 timed slides`);
+    assert.equal(timings.reduce((sum, value) => sum + value, 0), 90, `${label} should total 90 minutes`);
+    assert.equal(marks.length, 9, `${label} should contain nine homework questions`);
+    assert.equal(marks.reduce((sum, value) => sum + value, 0), 30, `${label} homework should total 30 marks`);
+    assert.match(source, /PAST PAPER PRACTICE|PAST PAPER|PUBLISHED-PAPER|AUTHENTIC BENCHMARK/i);
+    assert.match(source, /9618\/(?:31|41)/i);
+    assert.match(source, /HomeworkSheet/);
+    assert.doesNotMatch(source, /answer-key/i);
+  }
+});
+
+test("the recent-paper index uses authorised access and labels unreleased material", async () => {
+  const [dataSource, rootSource] = await Promise.all([
+    readFile(new URL("../app/_data/exam-papers.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+  ]);
+  const years = [...dataSource.matchAll(/\byear:\s*(20\d{2})/g)].map((match) => Number(match[1]));
+  assert.deepEqual(years, [2024, 2025, 2026]);
+  assert.match(dataSource, /cambridgeinternational\.org/);
+  assert.match(dataSource, /schoolsupporthub\.cambridgeinternational\.org/);
+  assert.match(dataSource, /status: "pending"/);
+  assert.match(dataSource, /Not yet available/);
+  assert.doesNotMatch(dataSource, /href:\s*["']#["']/);
+  assert.match(rootSource, /href="\.\/a2\/"/);
+  assert.match(rootSource, /href="\.\/exam-papers\/"/);
+});

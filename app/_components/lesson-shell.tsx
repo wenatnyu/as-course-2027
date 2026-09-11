@@ -16,6 +16,8 @@ export type LessonLink = {
   active?: boolean;
 };
 
+export type LessonCatalog = ReadonlyArray<readonly [string, string]>;
+
 export const COURSE_LESSONS = [
   ["01", "Number systems"],
   ["02", "Data capacity and prefixes"],
@@ -86,23 +88,25 @@ export function LessonSwitcher({
   lessonNumber,
   root = false,
   links,
+  lessonCatalog = COURSE_LESSONS,
 }: {
   lessonNumber: string;
   root?: boolean;
   links?: LessonLink[];
+  lessonCatalog?: LessonCatalog;
 }) {
   const prefix = root ? "./" : "../";
-  const generatedLinks = COURSE_LESSONS.map(([number]) => ({
+  const generatedLinks = lessonCatalog.map(([number]) => ({
     label: number,
     href: number === "01" ? prefix : `${prefix}lesson-${number}/`,
     active: number === lessonNumber,
   }));
-  const navigationLinks = links?.length === COURSE_LESSONS.length ? links : generatedLinks;
+  const navigationLinks = links?.length === lessonCatalog.length ? links : generatedLinks;
 
   return (
     <>
       <div className="lesson-switcher" aria-label="Lesson navigation">
-        {navigationLinks.map((link) => <a className={link.active ? "active" : ""} href={link.href} aria-current={link.active ? "page" : undefined} title={COURSE_LESSONS.find(([number]) => number === link.label)?.[1]} key={link.label}>{link.label}</a>)}
+        {navigationLinks.map((link) => <a className={link.active ? "active" : ""} href={link.href} aria-current={link.active ? "page" : undefined} title={lessonCatalog.find(([number]) => number === link.label)?.[1]} key={link.label}>{link.label}</a>)}
       </div>
       <label className="lesson-picker">
         <span>Lesson</span>
@@ -112,7 +116,7 @@ export function LessonSwitcher({
           onChange={(event) => window.location.assign(event.currentTarget.value)}
         >
           {navigationLinks.map((link) => {
-            const title = COURSE_LESSONS.find(([number]) => number === link.label)?.[1] ?? "Lesson";
+            const title = lessonCatalog.find(([number]) => number === link.label)?.[1] ?? "Lesson";
             return <option value={link.href} key={link.label}>{link.label} · {title}</option>;
           })}
         </select>
@@ -213,6 +217,7 @@ export function HomeworkSheet({
   instructions,
   sections,
   challenge,
+  qualificationLabel = "AS COMPUTER SCIENCE · 9618",
 }: {
   lessonNumber: string;
   title: string;
@@ -223,6 +228,7 @@ export function HomeworkSheet({
   instructions: string;
   sections: HomeworkSection[];
   challenge?: { id: string; prompt: ReactNode; answer: ReactNode };
+  qualificationLabel?: string;
 }) {
   const answerIds = useMemo(
     () => [...sections.flatMap((section) => section.questions.map((question) => question.id)), ...(challenge ? [challenge.id] : [])],
@@ -253,7 +259,7 @@ export function HomeworkSheet({
   return (
     <section className={allAnswersVisible ? "homework-page all-answers-visible" : "homework-page"}>
       <header className="homework-hero">
-        <div><span>AS COMPUTER SCIENCE · 9618</span><h1>Homework {lessonNumber}</h1><p>{title}</p></div>
+        <div><span>{qualificationLabel}</span><h1>Homework {lessonNumber}</h1><p>{title}</p></div>
         <div className="homework-stats"><p><b>{marks}</b><span>marks</span></p><p><b>{minutes}</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>
       </header>
       <div className="student-fields"><span>Name __________________________</span><span>Class __________</span><span>Date __________</span></div>
@@ -304,6 +310,12 @@ export function LessonShell({
   sourceSummary,
   sourceDetail,
   additionalSourceLinks = [],
+  lessonCatalog = COURSE_LESSONS,
+  courseStageLabel = "AS · 2027",
+  qualificationLabel = "LESSON",
+  siblingCourseHref = "../a2/",
+  siblingCourseLabel = "A2",
+  examPapersHref = "../exam-papers/",
 }: {
   lessonNumber: string;
   slides: SlideData[];
@@ -313,6 +325,12 @@ export function LessonShell({
   sourceSummary: string;
   sourceDetail: string;
   additionalSourceLinks?: { href: string; label: string }[];
+  lessonCatalog?: LessonCatalog;
+  courseStageLabel?: string;
+  qualificationLabel?: string;
+  siblingCourseHref?: string;
+  siblingCourseLabel?: string;
+  examPapersHref?: string;
 }) {
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
@@ -348,15 +366,17 @@ export function LessonShell({
   return (
     <main className={teacherMode ? "teacher-mode" : "student-mode"}>
       <header className="course-bar">
-        <button className="course-brand" onClick={() => { setView("slides"); setCurrent(0); }}><b>CS</b><span>Cambridge 9618<br />AS · 2027</span></button>
+        <button className="course-brand" onClick={() => { setView("slides"); setCurrent(0); }}><b>CS</b><span>Cambridge 9618<br />{courseStageLabel}</span></button>
         <nav aria-label="Course materials">
-          <button className={view === "slides" ? "active" : ""} onClick={() => setView("slides")}>Slides</button>
-          <button className={view === "homework" ? "active" : ""} onClick={() => setView("homework")}>Homework</button>
+          <button className={view === "slides" ? "active" : ""} aria-pressed={view === "slides"} onClick={() => setView("slides")}>Slides</button>
+          <button className={view === "homework" ? "active" : ""} aria-pressed={view === "homework"} onClick={() => setView("homework")}>Homework</button>
           <a href={courseMapHref}>Course map</a>
+          <a href={siblingCourseHref}>{siblingCourseLabel}</a>
+          <a href={examPapersHref}>Papers</a>
         </nav>
         <div className="bar-actions">
-          <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} />
-          {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
+          <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} lessonCatalog={lessonCatalog} />
+          {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} aria-pressed={teacherMode} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
         </div>
       </header>
@@ -381,7 +401,7 @@ export function LessonShell({
       {view === "homework" && homework}
 
       <footer className="source-footer">
-        <div><b>{`LESSON ${lessonNumber} SOURCES`}</b><span>{sourceSummary}</span></div>
+        <div><b>{`${qualificationLabel} ${lessonNumber} SOURCES`}</b><span>{sourceSummary}</span></div>
         <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/past-papers/" target="_blank" rel="noreferrer">Cambridge past papers</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a>{additionalSourceLinks.map((link) => <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label}</a>)}</div>
         <p>{sourceDetail}</p>
       </footer>

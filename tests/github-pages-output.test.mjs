@@ -272,3 +272,21 @@ for (const lesson of lessonArtifacts) {
     assert.doesNotMatch(html, /<meta name="twitter:image" content="[^"]*\/og\.png"/i);
   });
 }
+
+const nestedCourseArtifacts = [
+  { flat: "a2.html", route: "a2", title: /A2 Course 2028/i, keyContent: /32-WEEK COURSE MAP|32-week dual track/i },
+  { flat: "a2/lesson-01.html", route: "a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, keyContent: /SYLLABUS 13\.1/i },
+  { flat: "a2/lab-01.html", route: "a2/lab-01", title: /Python Lab P01/i, keyContent: /PAPER 4/i },
+  { flat: "exam-papers.html", route: "exam-papers", title: /Question Papers and Mark Schemes/i, keyContent: /School Support Hub/i },
+];
+
+for (const artifact of nestedCourseArtifacts) {
+  test(`emits the nested ${artifact.route} GitHub Pages artifact`, async () => {
+    const html = await readFile(new URL(`${artifact.route}/index.html`, outputRoot), "utf8");
+    await assert.rejects(access(new URL(artifact.flat, outputRoot)));
+    assert.match(html, assetUrlPattern);
+    assert.match(html, artifact.title);
+    assert.match(html, artifact.keyContent);
+    assert.match(html, new RegExp(`<meta property="og:url" content="${escapedSiteUrl}/${artifact.route}/"`, "i"));
+  });
+}
