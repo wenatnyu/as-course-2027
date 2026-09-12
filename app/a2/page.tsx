@@ -29,7 +29,7 @@ const syllabusChapters = [
 ] as const;
 
 const milestoneWeeks = new Set(["06", "10", "16", "22", "29", "30", "31", "32"]);
-const completedChapters = new Set(["13", "14", "15"]);
+const completedChapters = new Set(["13", "14", "15", "16", "17"]);
 
 const publishedLessons = [
   { href: "./lesson-01/", label: "THEORY · A2-01", title: "User-defined data types", topics: "Enum · pointer · set · record · class/object", syllabus: "13.1 · PAPER 3" },
@@ -48,6 +48,12 @@ const publishedLessons = [
   { href: "./lesson-14/", label: "THEORY · A2-14", title: "Boolean algebra", topics: "Laws · De Morgan · SOP · simplification", syllabus: "15.2 · PAPER 3" },
   { href: "./lesson-15/", label: "THEORY · A2-15", title: "Adders and flip-flops", topics: "Truth tables · half/full adders · SR · JK", syllabus: "15.2 · PAPER 3" },
   { href: "./lesson-16/", label: "THEORY · A2-16", title: "Karnaugh maps and review", topics: "Gray code · grouping · optimal SOP · checkpoint", syllabus: "15.2 · PAPER 3" },
+  { href: "./lesson-17/", label: "THEORY · A2-17", title: "OS resources and processes", topics: "Resources · UI abstraction · multi-tasking · states", syllabus: "16.1 · PAPER 3" },
+  { href: "./lesson-18/", label: "THEORY · A2-18", title: "CPU scheduling and interrupts", topics: "FCFS · SJF · round robin · SRT · kernel", syllabus: "16.1 · PAPER 3" },
+  { href: "./lesson-19/", label: "THEORY · A2-19", title: "Memory management", topics: "Paging · virtual memory · segmentation · thrashing", syllabus: "16.1 · PAPER 3" },
+  { href: "./lesson-20/", label: "THEORY · A2-20", title: "Translation, grammar and RPN", topics: "Interpreter · compiler stages · BNF · stack", syllabus: "16.2 · PAPER 3" },
+  { href: "./lesson-21/", label: "THEORY · A2-21", title: "Cryptographic key use", topics: "Symmetric · asymmetric · private · verified", syllabus: "17.1 · PAPER 3" },
+  { href: "./lesson-22/", label: "THEORY · A2-22", title: "TLS and digital trust", topics: "Quantum · SSL/TLS · certificates · signatures", syllabus: "17.1 · PAPER 3" },
   { href: "./lab-01/", label: "PYTHON · A2-P01", title: "Paper 4 baseline + evidence", topics: "Text files · exceptions · executable evidence", syllabus: "20.2 · PAPER 4", lab: true },
 ] as const;
 
@@ -57,11 +63,11 @@ export default function A2CoursePage() {
       <header className="a2-hub-bar">
         <a className="a2-hub-brand" href="./"><b>CS</b><span>Cambridge 9618<br />A2 · 2028</span></a>
         <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../exam-papers/">Exam papers</a></nav>
-        <a className="a2-hub-cta" href="./lesson-11/">Open Chapter 15 →</a>
+        <a className="a2-hub-cta" href="./lesson-21/">Open Chapter 17 →</a>
       </header>
 
       <section className="a2-hub-hero">
-        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-11/">Open Chapter 15</a><a href="./lab-01/">Open Python lab</a></div></div>
+        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-21/">Open Chapter 17</a><a href="./lab-01/">Open Python lab</a></div></div>
         <div className="a2-hub-scope" aria-label="A2 course scope"><div><strong>8</strong><span>syllabus sections</span></div><div><strong>32</strong><span>teaching weeks</span></div><div><strong>2</strong><span>parallel exam tracks</span></div></div>
       </section>
 
@@ -79,7 +85,7 @@ export default function A2CoursePage() {
       </section>
 
       <section className="a2-hub-section">
-        <header className="a2-section-heading"><span>SECTIONS 13–15 · COMPLETE</span><h2>Three A2 chapters are ready to teach.</h2><p>Sixteen 90-minute Paper 3 lessons now cover Data Representation, Communication and Internet Technologies, and Hardware and Virtual Machines. Each includes teacher notes, visible syllabus and textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers.</p></header>
+        <header className="a2-section-heading"><span>SECTIONS 13–17 · COMPLETE</span><h2>Five A2 chapters are ready to teach.</h2><p>Twenty-two 90-minute Paper 3 lessons now cover Data Representation, Communication and Internet Technologies, Hardware and Virtual Machines, System Software, and Security. Each includes teacher notes, visible syllabus and textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers.</p></header>
         <div className="a2-live-cards">
           {publishedLessons.map((lesson) => <a className={"lab" in lesson ? "lab" : "theory"} href={lesson.href} key={lesson.href}><span>{lesson.label}</span><h3>{lesson.title}</h3><p>{lesson.topics}</p><div><b>{lesson.syllabus}</b><strong>90 min →</strong></div></a>)}
         </div>

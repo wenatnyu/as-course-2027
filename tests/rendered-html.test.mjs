@@ -531,7 +531,7 @@ test("Lesson 08 uses unambiguous media labels and viewport-safe slide navigation
 });
 
 const a2RouteCases = [
-  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–15 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-16\//, /\.\/lab-01\//] },
+  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–17 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-22\//, /\.\/lab-01\//] },
   { pathname: "/a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, content: [/SYLLABUS 13\.1/i, /A2 LESSON 01 SOURCES/i, /User-defined data types/i] },
   { pathname: "/a2/lesson-02", title: /A2 Computer Science · Lesson 02/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 02 SOURCES/i, /File organisation and access/i] },
   { pathname: "/a2/lesson-03", title: /A2 Computer Science · Lesson 03/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 03 SOURCES/i, /Hashing for file access/i] },
@@ -548,6 +548,12 @@ const a2RouteCases = [
   { pathname: "/a2/lesson-14", title: /A2 Computer Science · Lesson 14/i, content: [/SYLLABUS 15\.2/i, /A2 LESSON 14 SOURCES/i, /De Morgan|Boolean algebra/i] },
   { pathname: "/a2/lesson-15", title: /A2 Computer Science · Lesson 15/i, content: [/SYLLABUS 15\.2/i, /A2 LESSON 15 SOURCES/i, /half adder|flip-flop/i] },
   { pathname: "/a2/lesson-16", title: /A2 Computer Science · Lesson 16/i, content: [/SYLLABUS 15\.2/i, /A2 LESSON 16 SOURCES/i, /Karnaugh|Gray code/i] },
+  { pathname: "/a2/lesson-17", title: /A2 Computer Science · Lesson 17/i, content: [/SYLLABUS 16\.1/i, /A2 LESSON 17 SOURCES/i, /operating system|process states/i] },
+  { pathname: "/a2/lesson-18", title: /A2 Computer Science · Lesson 18/i, content: [/SYLLABUS 16\.1/i, /A2 LESSON 18 SOURCES/i, /round robin|shortest remaining/i] },
+  { pathname: "/a2/lesson-19", title: /A2 Computer Science · Lesson 19/i, content: [/SYLLABUS 16\.1/i, /A2 LESSON 19 SOURCES/i, /virtual memory|segmentation|thrashing/i] },
+  { pathname: "/a2/lesson-20", title: /A2 Computer Science · Lesson 20/i, content: [/SYLLABUS 16\.2/i, /A2 LESSON 20 SOURCES/i, /lexical analysis|Backus|RPN/i] },
+  { pathname: "/a2/lesson-21", title: /A2 Computer Science · Lesson 21/i, content: [/SYLLABUS 17\.1/i, /A2 LESSON 21 SOURCES/i, /symmetric|asymmetric|public key/i] },
+  { pathname: "/a2/lesson-22", title: /A2 Computer Science · Lesson 22/i, content: [/SYLLABUS 17\.1/i, /A2 LESSON 22 SOURCES/i, /quantum|SSL \/ TLS|digital certificate/i] },
   { pathname: "/a2/lab-01", title: /Python Lab P01/i, content: [/PAPER 4/i, /A2 LAB P01 SOURCES/i, /evidence/i] },
   { pathname: "/exam-papers", title: /Question Papers and Mark Schemes/i, content: [/Question paper/i, /Mark scheme/i, /2024/, /2025/, /2026/, /AS LEVEL/i, /A2 STAGE/i] },
 ];
@@ -583,6 +589,12 @@ test("A2 resources remain isolated from the 63-lesson AS catalogue", async () =>
     ["/a2/lesson-14", "../lesson-14/", "14"],
     ["/a2/lesson-15", "../lesson-15/", "15"],
     ["/a2/lesson-16", "../lesson-16/", "16"],
+    ["/a2/lesson-17", "../lesson-17/", "17"],
+    ["/a2/lesson-18", "../lesson-18/", "18"],
+    ["/a2/lesson-19", "../lesson-19/", "19"],
+    ["/a2/lesson-20", "../lesson-20/", "20"],
+    ["/a2/lesson-21", "../lesson-21/", "21"],
+    ["/a2/lesson-22", "../lesson-22/", "22"],
     ["/a2/lab-01", "../lab-01/", "P01"],
   ];
   const htmlPages = await Promise.all(resources.map(async ([pathname]) => (await render(pathname)).text()));
@@ -616,6 +628,12 @@ test("every published A2 lesson and lab provides 15 slides, 90 minutes and 30 ho
     ["A2 lesson 14", "../app/a2/lesson-14/a2-lesson-14-client.tsx", /\bid:\s*["']a2-14-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lesson 15", "../app/a2/lesson-15/a2-lesson-15-client.tsx", /\bid:\s*["']a2-15-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lesson 16", "../app/a2/lesson-16/a2-lesson-16-client.tsx", /\bid:\s*["']a2-16-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 17", "../app/a2/lesson-17/a2-lesson-17-client.tsx", /\bid:\s*["']a2-17-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 18", "../app/a2/lesson-18/a2-lesson-18-client.tsx", /\bid:\s*["']a2-18-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 19", "../app/a2/lesson-19/a2-lesson-19-client.tsx", /\bid:\s*["']a2-19-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 20", "../app/a2/lesson-20/a2-lesson-20-client.tsx", /\bid:\s*["']a2-20-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 21", "../app/a2/lesson-21/a2-lesson-21-client.tsx", /\bid:\s*["']a2-21-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 22", "../app/a2/lesson-22/a2-lesson-22-client.tsx", /\bid:\s*["']a2-22-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lab P01", "../app/a2/lab-01/a2-lab-01-client.tsx", /\bid:\s*["']a2-p01-\d+["'],\s*marks:\s*(\d+)/g, /9618\/4[123]/i],
   ];
   const sharedTheorySource = await readFile(new URL("../app/_components/a2-theory-lesson.tsx", import.meta.url), "utf8");
@@ -651,6 +669,35 @@ test("A2 Chapters 14 and 15 preserve current-syllabus model boundaries", async (
   assert.match(logicLesson, /MORE THAN TWO INPUTS/);
   assert.match(logicLesson, /SrLatchDiagram/);
   assert.match(diagrams, /Cross-coupled NOR SR latch/);
+});
+
+test("A2 Chapters 16 and 17 cover every named current-syllabus boundary", async () => {
+  const [processes, scheduling, memory, translation, encryption, trust, diagrams] = await Promise.all([
+    readFile(new URL("../app/a2/lesson-17/a2-lesson-17-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-18/a2-lesson-18-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-19/a2-lesson-19-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-20/a2-lesson-20-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-21/a2-lesson-21-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-22/a2-lesson-22-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/_components/a2-advanced-diagrams.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(processes, /CPU time[\s\S]*main memory[\s\S]*secondary storage[\s\S]*input\/output/i);
+  assert.match(processes, /RUNNING[\s\S]*READY[\s\S]*BLOCKED/i);
+  assert.match(processes, /user interface hides hardware complexity|UI AS ABSTRACTION/i);
+  assert.match(scheduling, /FIRST COME FIRST SERVED[\s\S]*SHORTEST JOB FIRST[\s\S]*ROUND ROBIN[\s\S]*SHORTEST REMAINING TIME/i);
+  assert.match(scheduling, /kernel[\s\S]*interrupt handler|KERNEL AS INTERRUPT HANDLER/i);
+  assert.match(memory, /PAGING VS SEGMENTATION/i);
+  assert.match(memory, /page replacement|REPLACE PAGES/i);
+  assert.match(memory, /disk thrashing/i);
+  assert.match(translation, /lexical analysis[\s\S]*syntax analysis[\s\S]*code generation[\s\S]*optimisation/i);
+  assert.match(translation, /syntax diagrams[\s\S]*BACKUS[–-]NAUR FORM[\s\S]*RPN/i);
+  assert.match(encryption, /recipient's public key[\s\S]*recipient's private key/i);
+  assert.match(encryption, /sender's private key[\s\S]*sender's public key/i);
+  assert.match(trust, /quantum cryptography[\s\S]*SSL \/ TLS[\s\S]*digital certificate/i);
+  assert.match(trust, /Generates key pair \+ CSR[\s\S]*Verifies identity\/control[\s\S]*Signs certificate/i);
+  assert.match(diagrams, /Required process states and valid transitions/);
+  assert.match(diagrams, /Logical pages mapped through a page table to physical frames/);
 });
 
 test("the recent-paper index uses authorised access and labels unreleased material", async () => {

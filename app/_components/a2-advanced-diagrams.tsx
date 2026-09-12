@@ -174,3 +174,112 @@ export function KMap({
     </section>
   );
 }
+
+export function ProcessStateDiagram() {
+  return (
+    <section className="a2-at-process" aria-label="Required process states and valid transitions">
+      <svg viewBox="0 0 920 430" role="img" aria-labelledby="process-state-title process-state-desc">
+        <title id="process-state-title">Running, ready and blocked process states</title>
+        <desc id="process-state-desc">Ready moves to running when dispatched. Running returns to ready after pre-emption. Running moves to blocked when waiting for an event, and blocked returns to ready when the event completes.</desc>
+        <defs><marker id="process-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" /></marker></defs>
+        <rect className="state ready" x="70" y="115" width="220" height="110" rx="18" />
+        <rect className="state running" x="630" y="115" width="220" height="110" rx="18" />
+        <rect className="state blocked" x="350" y="300" width="220" height="110" rx="18" />
+        <text className="state-title" x="180" y="173">READY</text><text className="state-detail" x="180" y="201">waiting for CPU</text>
+        <text className="state-title" x="740" y="173">RUNNING</text><text className="state-detail" x="740" y="201">using the CPU</text>
+        <text className="state-title" x="460" y="358">BLOCKED</text><text className="state-detail" x="460" y="386">waiting for event</text>
+        <path className="transition" d="M290 145 C400 72 520 72 630 145" markerEnd="url(#process-arrow)" />
+        <text className="transition-label" x="460" y="73">dispatch</text>
+        <path className="transition" d="M630 206 C520 270 400 270 290 206" markerEnd="url(#process-arrow)" />
+        <text className="transition-label" x="460" y="279">pre-emption / time slice</text>
+        <path className="transition accent" d="M680 225 C640 278 592 307 566 328" markerEnd="url(#process-arrow)" />
+        <text className="transition-label" x="692" y="292">wait for I/O</text>
+        <path className="transition accent" d="M354 328 C318 300 252 267 220 225" markerEnd="url(#process-arrow)" />
+        <text className="transition-label" x="218" y="314">event completes</text>
+      </svg>
+      <p><b>Exam rule:</b> a blocked process returns to <strong>ready</strong>; it cannot jump straight to running.</p>
+    </section>
+  );
+}
+
+export function ScheduleBar({
+  title,
+  segments,
+}: {
+  title: string;
+  segments: Array<{ process: string; start: number; end: number; idle?: boolean }>;
+}) {
+  const endTime = Math.max(...segments.map((segment) => segment.end));
+  return (
+    <section className="a2-at-schedule" aria-label={`${title} scheduling timeline`}>
+      <header><b>{title}</b><span>CPU timeline</span></header>
+      <div className="a2-at-schedule-track">
+        {segments.map((segment, index) => (
+          <article
+            className={segment.idle ? "idle" : ""}
+            style={{ "--schedule-width": `${((segment.end - segment.start) / endTime) * 100}%` } as CSSProperties}
+            key={`${segment.process}-${index}`}
+          >
+            <b>{segment.process}</b><span>{segment.start}–{segment.end}</span>
+          </article>
+        ))}
+      </div>
+      <div className="a2-at-schedule-axis"><span>0</span><span>{endTime} time units</span></div>
+    </section>
+  );
+}
+
+export function PageFrameMap() {
+  const pages = ["P0", "P1", "P2", "P3"];
+  const frames = ["P2", "FREE", "P0", "P3", "OS", "FREE"];
+  return (
+    <section className="a2-at-memory" aria-label="Logical pages mapped through a page table to physical frames">
+      <div><b>LOGICAL PAGES</b>{pages.map((page) => <span key={page}>{page}</span>)}</div>
+      <div className="page-table"><b>PAGE TABLE</b><span>P0 → F2</span><span>P1 → disk</span><span>P2 → F0</span><span>P3 → F3</span></div>
+      <i aria-hidden="true">→</i>
+      <div><b>PHYSICAL FRAMES</b>{frames.map((frame, index) => <span className={frame === "FREE" ? "free" : frame === "OS" ? "os" : ""} key={index}>F{index} · {frame}</span>)}</div>
+    </section>
+  );
+}
+
+export function StackMachine({
+  stack,
+  operation,
+  result,
+}: {
+  stack: Array<string | number>;
+  operation: string;
+  result: string | number;
+}) {
+  return (
+    <section className="a2-at-stack-machine" aria-label={`Stack operation ${operation} gives ${result}`}>
+      <div><b>TOP</b>{[...stack].reverse().map((item, index) => <span key={`${item}-${index}`}>{item}</span>)}<em>STACK</em></div>
+      <i aria-hidden="true">→</i>
+      <article><span>POP RIGHT, THEN LEFT</span><code>{operation}</code><b>PUSH {result}</b></article>
+    </section>
+  );
+}
+
+export function KeyJourney({
+  purpose,
+  steps,
+}: {
+  purpose: string;
+  steps: Array<{ actor: string; action: ReactNode; keyLabel?: string }>;
+}) {
+  return (
+    <section className="a2-at-key-journey" aria-label={purpose}>
+      <header><span>KEY DIRECTION</span><b>{purpose}</b></header>
+      <div>{steps.map((step, index) => <section key={`${step.actor}-${index}`}><article><span>{step.actor}</span><p>{step.action}</p>{step.keyLabel && <code>{step.keyLabel}</code>}</article>{index < steps.length - 1 && <i aria-hidden="true">→</i>}</section>)}</div>
+    </section>
+  );
+}
+
+export function CertificateCard() {
+  return (
+    <section className="a2-at-certificate" aria-label="Contents and trust chain of a digital certificate">
+      <article><span>CA-SIGNED</span><h3>DIGITAL CERTIFICATE</h3><dl><div><dt>Subject</dt><dd>example.edu</dd></div><div><dt>Public key</dt><dd>owner&apos;s key</dd></div><div><dt>Issuer</dt><dd>trusted CA</dd></div><div><dt>Validity</dt><dd>start → expiry</dd></div><div><dt>Serial</dt><dd>unique ID</dd></div></dl><strong>CA DIGITAL SIGNATURE</strong></article>
+      <div><b>Browser trusts CA</b><span>→</span><b>CA vouches for identity ↔ public key</b></div>
+    </section>
+  );
+}

@@ -291,6 +291,12 @@ const nestedCourseArtifacts = [
   { flat: "a2/lesson-14.html", route: "a2/lesson-14", title: /A2 Computer Science · Lesson 14/i, keyContent: /De Morgan|Boolean algebra/i },
   { flat: "a2/lesson-15.html", route: "a2/lesson-15", title: /A2 Computer Science · Lesson 15/i, keyContent: /half adder|flip-flop/i },
   { flat: "a2/lesson-16.html", route: "a2/lesson-16", title: /A2 Computer Science · Lesson 16/i, keyContent: /Karnaugh|Gray code/i },
+  { flat: "a2/lesson-17.html", route: "a2/lesson-17", title: /A2 Computer Science · Lesson 17/i, keyContent: /operating system|process states/i },
+  { flat: "a2/lesson-18.html", route: "a2/lesson-18", title: /A2 Computer Science · Lesson 18/i, keyContent: /round robin|shortest remaining/i },
+  { flat: "a2/lesson-19.html", route: "a2/lesson-19", title: /A2 Computer Science · Lesson 19/i, keyContent: /virtual memory|disk thrashing/i },
+  { flat: "a2/lesson-20.html", route: "a2/lesson-20", title: /A2 Computer Science · Lesson 20/i, keyContent: /lexical analysis|Backus|RPN/i },
+  { flat: "a2/lesson-21.html", route: "a2/lesson-21", title: /A2 Computer Science · Lesson 21/i, keyContent: /symmetric|asymmetric|public key/i },
+  { flat: "a2/lesson-22.html", route: "a2/lesson-22", title: /A2 Computer Science · Lesson 22/i, keyContent: /quantum|SSL \/ TLS|digital certificate/i },
   { flat: "a2/lab-01.html", route: "a2/lab-01", title: /Python Lab P01/i, keyContent: /PAPER 4/i },
   { flat: "exam-papers.html", route: "exam-papers", title: /Question Papers and Mark Schemes/i, keyContent: /School Support Hub/i },
 ];

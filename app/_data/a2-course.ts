@@ -17,6 +17,12 @@ export const A2_PREVIEW_CATALOG: LessonCatalog = [
   ["14", "Boolean algebra and De Morgan's laws"],
   ["15", "Adders and flip-flops"],
   ["16", "Karnaugh maps and Chapter 15 review"],
+  ["17", "OS resources, processes and states"],
+  ["18", "CPU scheduling and interrupt handling"],
+  ["19", "Paging, virtual memory and segmentation"],
+  ["20", "Translation software, grammar and RPN"],
+  ["21", "Symmetric and asymmetric cryptography"],
+  ["22", "Quantum cryptography, SSL/TLS and certificates"],
   ["P01", "Python evidence and file baseline"],
 ];
 
