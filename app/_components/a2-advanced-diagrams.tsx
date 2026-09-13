@@ -283,3 +283,86 @@ export function CertificateCard() {
     </section>
   );
 }
+
+export function WeightedGraph({ showHeuristic = false }: { showHeuristic?: boolean }) {
+  return (
+    <section className="a2-at-graph" aria-label={showHeuristic ? "Weighted graph with A star heuristic values" : "Weighted graph with shortest path highlighted"}>
+      <svg viewBox="0 0 920 430" role="img" aria-labelledby="weighted-graph-title weighted-graph-desc">
+        <title id="weighted-graph-title">Weighted graph from S to G</title>
+        <desc id="weighted-graph-desc">The highlighted shortest path is S to A to C to D to G with total cost seven.</desc>
+        <g className="edges">
+          <path className="best" d="M110 215 L280 105 L470 215 L650 105 L820 215" />
+          <path d="M110 215 L280 325 L470 215" />
+          <path d="M280 325 L650 325 L820 215" />
+          <path d="M470 215 L820 215" />
+        </g>
+        <g className="weights">
+          <text x="184" y="137">2</text><text x="184" y="304">5</text><text x="371" y="145">2</text>
+          <text x="371" y="303">1</text><text x="565" y="138">2</text><text x="465" y="316">4</text>
+          <text x="742" y="140">1</text><text x="742" y="306">3</text><text x="643" y="203">7</text>
+        </g>
+        <g className="nodes">
+          <g transform="translate(110 215)"><circle r="42" /><text y="7">S</text>{showHeuristic && <text className="heuristic" y="67">h=7</text>}</g>
+          <g transform="translate(280 105)"><circle r="42" /><text y="7">A</text>{showHeuristic && <text className="heuristic" y="67">h=5</text>}</g>
+          <g transform="translate(280 325)"><circle r="42" /><text y="7">B</text>{showHeuristic && <text className="heuristic" y="67">h=4</text>}</g>
+          <g transform="translate(470 215)"><circle r="42" /><text y="7">C</text>{showHeuristic && <text className="heuristic" y="67">h=3</text>}</g>
+          <g transform="translate(650 105)"><circle r="42" /><text y="7">D</text>{showHeuristic && <text className="heuristic" y="67">h=1</text>}</g>
+          <g transform="translate(650 325)"><circle r="42" /><text y="7">E</text>{showHeuristic && <text className="heuristic" y="67">h=3</text>}</g>
+          <g className="goal" transform="translate(820 215)"><circle r="42" /><text y="7">G</text>{showHeuristic && <text className="heuristic" y="67">h=0</text>}</g>
+        </g>
+      </svg>
+      <div><span>{showHeuristic ? "A* SCORE" : "SHORTEST PATH"}</span><b>{showHeuristic ? "f(n) = g(n) + h(n)" : "S → A → C → D → G"}</b><p>{showHeuristic ? "Chosen frontier: S(0+7) → A(2+5) → C(4+3) → D(6+1) → G(7+0)." : "2 + 2 + 2 + 1 = 7"}</p></div>
+    </section>
+  );
+}
+
+export function NeuralNetworkDiagram() {
+  const inputY = [95, 210, 325];
+  const hiddenY = [60, 160, 260, 360];
+  return (
+    <section className="a2-at-neural" aria-label="Artificial neural network with back propagation">
+      <svg viewBox="0 0 920 420" role="img" aria-labelledby="neural-title neural-desc">
+        <title id="neural-title">Artificial neural network</title>
+        <desc id="neural-desc">Three input nodes connect to four hidden nodes and one output. Error travels backwards to adjust weights.</desc>
+        <g className="connections">{inputY.flatMap((start) => hiddenY.map((end) => <line key={`${start}-${end}`} x1="180" y1={start} x2="470" y2={end} />))}{hiddenY.map((start) => <line key={start} x1="470" y1={start} x2="760" y2="210" />)}</g>
+        <g className="layer input">{inputY.map((y,index) => <g transform={`translate(180 ${y})`} key={y}><circle r="31" /><text y="6">x{index + 1}</text></g>)}</g>
+        <g className="layer hidden">{hiddenY.map((y,index) => <g transform={`translate(470 ${y})`} key={y}><circle r="31" /><text y="6">h{index + 1}</text></g>)}</g>
+        <g className="layer output" transform="translate(760 210)"><circle r="36" /><text y="6">ŷ</text></g>
+        <path className="error" d="M804 285 C690 405 390 405 210 365" />
+        <text className="error-label" x="505" y="401">error back-propagates → adjust weights</text>
+        <text className="layer-label" x="180" y="405">INPUT</text><text className="layer-label" x="470" y="405">HIDDEN</text><text className="layer-label" x="760" y="405">OUTPUT</text>
+      </svg>
+    </section>
+  );
+}
+
+export function SearchWindow({ target = 58 }: { target?: number }) {
+  const values = [4, 9, 15, 21, 32, 47, 58, 63, 78];
+  return (
+    <section className="a2-at-search-window" aria-label={`Binary search window for target ${target}`}>
+      <header><b>TARGET {target}</b><span>sorted ascending</span></header>
+      <div>{values.map((value, index) => <article className={index === 4 ? "mid" : value === target ? "target" : ""} key={value}><span>[{index}]</span><b>{value}</b>{index === 0 && <em>LOW</em>}{index === 4 && <em>MID</em>}{index === 8 && <em>HIGH</em>}</article>)}</div>
+      <footer><span>32 &lt; 58</span><b>discard indices 0–4 · set LOW = 5</b></footer>
+    </section>
+  );
+}
+
+export function AdtBoard() {
+  return (
+    <section className="a2-at-adt-board" aria-label="Abstract data type structures">
+      <article><span>STACK · LIFO</span><div className="stack"><b>C</b><b>B</b><b>A</b></div><p>PUSH / POP at one end</p></article>
+      <article><span>QUEUE · FIFO</span><div className="queue"><b>OUT</b><i>A</i><i>B</i><i>C</i><b>IN</b></div><p>DEQUEUE front · ENQUEUE rear</p></article>
+      <article><span>LINKED LIST</span><div className="list"><b>A | •</b><i>→</i><b>C | •</b><i>→</i><b>F | ∅</b></div><p>nodes connected by pointers</p></article>
+      <article><span>BINARY SEARCH TREE</span><div className="tree"><b>F</b><i>↙</i><b>C</b><i>↘</i><b>S</b></div><p>left smaller · right larger</p></article>
+    </section>
+  );
+}
+
+export function RecursionStack() {
+  return (
+    <section className="a2-at-recursion-stack" aria-label="Recursive factorial calls winding and unwinding on a stack">
+      <div className="frames"><span>TOP</span><article><b>Factorial(1)</b><small>base → return 1</small></article><article><b>Factorial(2)</b><small>return 2 × 1</small></article><article><b>Factorial(3)</b><small>return 3 × 2</small></article><article><b>Factorial(4)</b><small>return 4 × 6</small></article></div>
+      <div className="journey"><article><span>WIND</span><b>4 → 3 → 2 → 1</b><p>Each call pushes parameters, locals and return address.</p></article><i>⇄</i><article><span>UNWIND</span><b>1 → 2 → 6 → 24</b><p>Base case stops calls; frames pop in reverse order.</p></article></div>
+    </section>
+  );
+}

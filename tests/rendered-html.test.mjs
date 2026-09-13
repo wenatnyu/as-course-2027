@@ -531,7 +531,7 @@ test("Lesson 08 uses unambiguous media labels and viewport-safe slide navigation
 });
 
 const a2RouteCases = [
-  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–17 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-22\//, /\.\/lab-01\//] },
+  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–19 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-27\//, /\.\/lab-01\//] },
   { pathname: "/a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, content: [/SYLLABUS 13\.1/i, /A2 LESSON 01 SOURCES/i, /User-defined data types/i] },
   { pathname: "/a2/lesson-02", title: /A2 Computer Science · Lesson 02/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 02 SOURCES/i, /File organisation and access/i] },
   { pathname: "/a2/lesson-03", title: /A2 Computer Science · Lesson 03/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 03 SOURCES/i, /Hashing for file access/i] },
@@ -554,6 +554,11 @@ const a2RouteCases = [
   { pathname: "/a2/lesson-20", title: /A2 Computer Science · Lesson 20/i, content: [/SYLLABUS 16\.2/i, /A2 LESSON 20 SOURCES/i, /lexical analysis|Backus|RPN/i] },
   { pathname: "/a2/lesson-21", title: /A2 Computer Science · Lesson 21/i, content: [/SYLLABUS 17\.1/i, /A2 LESSON 21 SOURCES/i, /symmetric|asymmetric|public key/i] },
   { pathname: "/a2/lesson-22", title: /A2 Computer Science · Lesson 22/i, content: [/SYLLABUS 17\.1/i, /A2 LESSON 22 SOURCES/i, /quantum|SSL \/ TLS|digital certificate/i] },
+  { pathname: "/a2/lesson-23", title: /A2 Computer Science · Lesson 23/i, content: [/SYLLABUS 18\.1/i, /A2 LESSON 23 SOURCES/i, /Dijkstra|A\*|heuristic/i] },
+  { pathname: "/a2/lesson-24", title: /A2 Computer Science · Lesson 24/i, content: [/SYLLABUS 18\.1/i, /A2 LESSON 24 SOURCES/i, /neural network|back propagation|regression/i] },
+  { pathname: "/a2/lesson-25", title: /A2 Computer Science · Lesson 25/i, content: [/SYLLABUS 19\.1/i, /A2 LESSON 25 SOURCES/i, /binary search|insertion sort|Big O/i] },
+  { pathname: "/a2/lesson-26", title: /A2 Computer Science · Lesson 26/i, content: [/SYLLABUS 19\.1/i, /A2 LESSON 26 SOURCES/i, /Abstract Data Types|linked list|binary tree/i] },
+  { pathname: "/a2/lesson-27", title: /A2 Computer Science · Lesson 27/i, content: [/SYLLABUS 19\.2/i, /A2 LESSON 27 SOURCES/i, /recursion|winding|unwinding/i] },
   { pathname: "/a2/lab-01", title: /Python Lab P01/i, content: [/PAPER 4/i, /A2 LAB P01 SOURCES/i, /evidence/i] },
   { pathname: "/exam-papers", title: /Question Papers and Mark Schemes/i, content: [/Question paper/i, /Mark scheme/i, /2024/, /2025/, /2026/, /AS LEVEL/i, /A2 STAGE/i] },
 ];
@@ -595,6 +600,11 @@ test("A2 resources remain isolated from the 63-lesson AS catalogue", async () =>
     ["/a2/lesson-20", "../lesson-20/", "20"],
     ["/a2/lesson-21", "../lesson-21/", "21"],
     ["/a2/lesson-22", "../lesson-22/", "22"],
+    ["/a2/lesson-23", "../lesson-23/", "23"],
+    ["/a2/lesson-24", "../lesson-24/", "24"],
+    ["/a2/lesson-25", "../lesson-25/", "25"],
+    ["/a2/lesson-26", "../lesson-26/", "26"],
+    ["/a2/lesson-27", "../lesson-27/", "27"],
     ["/a2/lab-01", "../lab-01/", "P01"],
   ];
   const htmlPages = await Promise.all(resources.map(async ([pathname]) => (await render(pathname)).text()));
@@ -634,6 +644,11 @@ test("every published A2 lesson and lab provides 15 slides, 90 minutes and 30 ho
     ["A2 lesson 20", "../app/a2/lesson-20/a2-lesson-20-client.tsx", /\bid:\s*["']a2-20-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lesson 21", "../app/a2/lesson-21/a2-lesson-21-client.tsx", /\bid:\s*["']a2-21-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lesson 22", "../app/a2/lesson-22/a2-lesson-22-client.tsx", /\bid:\s*["']a2-22-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 23", "../app/a2/lesson-23/a2-lesson-23-client.tsx", /\bid:\s*["']a2-23-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 24", "../app/a2/lesson-24/a2-lesson-24-client.tsx", /\bid:\s*["']a2-24-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 25", "../app/a2/lesson-25/a2-lesson-25-client.tsx", /\bid:\s*["']a2-25-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 26", "../app/a2/lesson-26/a2-lesson-26-client.tsx", /\bid:\s*["']a2-26-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 27", "../app/a2/lesson-27/a2-lesson-27-client.tsx", /\bid:\s*["']a2-27-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lab P01", "../app/a2/lab-01/a2-lab-01-client.tsx", /\bid:\s*["']a2-p01-\d+["'],\s*marks:\s*(\d+)/g, /9618\/4[123]/i],
   ];
   const sharedTheorySource = await readFile(new URL("../app/_components/a2-theory-lesson.tsx", import.meta.url), "utf8");
@@ -698,6 +713,35 @@ test("A2 Chapters 16 and 17 cover every named current-syllabus boundary", async 
   assert.match(trust, /Generates key pair \+ CSR[\s\S]*Verifies identity\/control[\s\S]*Signs certificate/i);
   assert.match(diagrams, /Required process states and valid transitions/);
   assert.match(diagrams, /Logical pages mapped through a page table to physical frames/);
+});
+
+test("A2 Chapters 18 and 19 cover every named current-syllabus boundary", async () => {
+  const [graphs, learning, algorithms, adts, recursion, diagrams] = await Promise.all([
+    readFile(new URL("../app/a2/lesson-23/a2-lesson-23-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-24/a2-lesson-24-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-25/a2-lesson-25-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-26/a2-lesson-26-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-27/a2-lesson-27-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/_components/a2-advanced-diagrams.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(graphs, /Dijkstra[\s\S]*A\*[\s\S]*heuristic/i);
+  assert.match(graphs, /not required to (?:program|write)[\s\S]*graph|NO GRAPH CODE/i);
+  assert.match(learning, /supervised[\s\S]*unsupervised[\s\S]*reinforcement/i);
+  assert.match(learning, /Deep Learning/i);
+  assert.match(learning, /back propagation[\s\S]*regression|regression[\s\S]*back propagation/i);
+  assert.match(algorithms, /linear search[\s\S]*binary search[\s\S]*bubble[\s\S]*insertion/i);
+  assert.match(algorithms, /O\(log n\)/i);
+  assert.match(algorithms, /O\(n²\)|O\(n\^2\)/i);
+  assert.match(algorithms, /Auxiliary space|space complexity/i);
+  assert.match(adts, /stack[\s\S]*queue[\s\S]*linked list[\s\S]*dictionary[\s\S]*binary tree[\s\S]*graph/i);
+  assert.match(adts, /FIND \/ INSERT \/ DELETE|find[\s\S]*insert[\s\S]*delete/i);
+  assert.match(adts, /Two LIFO stacks can expose FIFO queue behaviour|ADT FROM ANOTHER ADT/i);
+  assert.match(recursion, /base case[\s\S]*winding[\s\S]*unwinding/i);
+  assert.match(recursion, /ACTIVATION RECORD|return address/i);
+  assert.match(diagrams, /Weighted graph with shortest path highlighted/);
+  assert.match(diagrams, /Artificial neural network with back propagation/);
+  assert.match(diagrams, /Recursive factorial calls winding and unwinding on a stack/);
 });
 
 test("the recent-paper index uses authorised access and labels unreleased material", async () => {

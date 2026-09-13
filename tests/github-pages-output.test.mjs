@@ -297,6 +297,11 @@ const nestedCourseArtifacts = [
   { flat: "a2/lesson-20.html", route: "a2/lesson-20", title: /A2 Computer Science · Lesson 20/i, keyContent: /lexical analysis|Backus|RPN/i },
   { flat: "a2/lesson-21.html", route: "a2/lesson-21", title: /A2 Computer Science · Lesson 21/i, keyContent: /symmetric|asymmetric|public key/i },
   { flat: "a2/lesson-22.html", route: "a2/lesson-22", title: /A2 Computer Science · Lesson 22/i, keyContent: /quantum|SSL \/ TLS|digital certificate/i },
+  { flat: "a2/lesson-23.html", route: "a2/lesson-23", title: /A2 Computer Science · Lesson 23/i, keyContent: /Dijkstra|A\*|heuristic/i },
+  { flat: "a2/lesson-24.html", route: "a2/lesson-24", title: /A2 Computer Science · Lesson 24/i, keyContent: /neural network|back propagation|regression/i },
+  { flat: "a2/lesson-25.html", route: "a2/lesson-25", title: /A2 Computer Science · Lesson 25/i, keyContent: /binary search|insertion sort|Big O/i },
+  { flat: "a2/lesson-26.html", route: "a2/lesson-26", title: /A2 Computer Science · Lesson 26/i, keyContent: /Abstract Data Types|linked list|binary tree/i },
+  { flat: "a2/lesson-27.html", route: "a2/lesson-27", title: /A2 Computer Science · Lesson 27/i, keyContent: /recursion|winding|unwinding/i },
   { flat: "a2/lab-01.html", route: "a2/lab-01", title: /Python Lab P01/i, keyContent: /PAPER 4/i },
   { flat: "exam-papers.html", route: "exam-papers", title: /Question Papers and Mark Schemes/i, keyContent: /School Support Hub/i },
 ];

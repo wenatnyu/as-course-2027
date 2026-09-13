@@ -23,6 +23,11 @@ export const A2_PREVIEW_CATALOG: LessonCatalog = [
   ["20", "Translation software, grammar and RPN"],
   ["21", "Symmetric and asymmetric cryptography"],
   ["22", "Quantum cryptography, SSL/TLS and certificates"],
+  ["23", "Graphs, Dijkstra and A* search"],
+  ["24", "Machine learning, neural networks and back propagation"],
+  ["25", "Search, sort and Big O comparison"],
+  ["26", "Abstract Data Types and their algorithms"],
+  ["27", "Recursion, stacks and unwinding"],
   ["P01", "Python evidence and file baseline"],
 ];
 
