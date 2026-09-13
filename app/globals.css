@@ -814,9 +814,11 @@ sub, sup { font-size: .6em; line-height: 0; }
   .course-bar nav { gap: 18px; }
   .bar-actions { padding: 0 15px; }
   .deck-shell {
-    width: min(calc(100% - 24px), max(620px, calc((100dvh - 166px) * 16 / 9)));
+    width: 100%;
     margin-top: 14px;
+    overflow-x: auto;
   }
+  .slide-frame { min-width: 1060px; box-shadow: none; }
   .deck-controls { grid-template-columns: 1fr auto; }
   .shortcut-line { display: none; }
   .teacher-notes { grid-template-columns: 90px 1fr; }

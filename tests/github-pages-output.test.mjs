@@ -302,6 +302,8 @@ const nestedCourseArtifacts = [
   { flat: "a2/lesson-25.html", route: "a2/lesson-25", title: /A2 Computer Science · Lesson 25/i, keyContent: /binary search|insertion sort|Big O/i },
   { flat: "a2/lesson-26.html", route: "a2/lesson-26", title: /A2 Computer Science · Lesson 26/i, keyContent: /Abstract Data Types|linked list|binary tree/i },
   { flat: "a2/lesson-27.html", route: "a2/lesson-27", title: /A2 Computer Science · Lesson 27/i, keyContent: /recursion|winding|unwinding/i },
+  { flat: "a2/lesson-28.html", route: "a2/lesson-28", title: /A2 Computer Science · Lesson 28/i, keyContent: /low-level|imperative|declarative/i },
+  { flat: "a2/lesson-29.html", route: "a2/lesson-29", title: /A2 Computer Science · Lesson 29/i, keyContent: /random|GETRECORD|exception/i },
   { flat: "a2/lab-01.html", route: "a2/lab-01", title: /Python Lab P01/i, keyContent: /PAPER 4/i },
   { flat: "exam-papers.html", route: "exam-papers", title: /Question Papers and Mark Schemes/i, keyContent: /School Support Hub/i },
 ];

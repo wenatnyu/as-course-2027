@@ -28,6 +28,8 @@ export const A2_PREVIEW_CATALOG: LessonCatalog = [
   ["25", "Search, sort and Big O comparison"],
   ["26", "Abstract Data Types and their algorithms"],
   ["27", "Recursion, stacks and unwinding"],
+  ["28", "Low-level, procedural, OOP and declarative paradigms"],
+  ["29", "File processing and exception handling"],
   ["P01", "Python evidence and file baseline"],
 ];
 

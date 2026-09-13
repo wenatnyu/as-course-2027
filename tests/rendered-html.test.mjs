@@ -527,11 +527,13 @@ test("Lesson 08 uses unambiguous media labels and viewport-safe slide navigation
   assert.match(lesson, /9618\/13 M\/J 2023 Q2\(d\)/);
   assert.match(shell, /scrollIntoView/);
   assert.match(css, /100dvh - 166px/);
-  assert.match(css, /@media \(max-width: 900px\)[\s\S]*?\.deck-shell\s*\{[\s\S]*?100dvh - 166px/);
+  const tabletMedia = css.slice(css.indexOf("@media (max-width: 900px)"), css.indexOf("@media (max-width: 640px)"));
+  assert.match(tabletMedia, /\.deck-shell\s*\{[\s\S]*?overflow-x:\s*auto/);
+  assert.match(tabletMedia, /\.slide-frame\s*\{\s*min-width:\s*1060px/);
 });
 
 const a2RouteCases = [
-  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–19 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-27\//, /\.\/lab-01\//] },
+  { pathname: "/a2", title: /A2 Course 2028/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–20 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-29\//, /\.\/lab-01\//] },
   { pathname: "/a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, content: [/SYLLABUS 13\.1/i, /A2 LESSON 01 SOURCES/i, /User-defined data types/i] },
   { pathname: "/a2/lesson-02", title: /A2 Computer Science · Lesson 02/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 02 SOURCES/i, /File organisation and access/i] },
   { pathname: "/a2/lesson-03", title: /A2 Computer Science · Lesson 03/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 03 SOURCES/i, /Hashing for file access/i] },
@@ -559,6 +561,8 @@ const a2RouteCases = [
   { pathname: "/a2/lesson-25", title: /A2 Computer Science · Lesson 25/i, content: [/SYLLABUS 19\.1/i, /A2 LESSON 25 SOURCES/i, /binary search|insertion sort|Big O/i] },
   { pathname: "/a2/lesson-26", title: /A2 Computer Science · Lesson 26/i, content: [/SYLLABUS 19\.1/i, /A2 LESSON 26 SOURCES/i, /Abstract Data Types|linked list|binary tree/i] },
   { pathname: "/a2/lesson-27", title: /A2 Computer Science · Lesson 27/i, content: [/SYLLABUS 19\.2/i, /A2 LESSON 27 SOURCES/i, /recursion|winding|unwinding/i] },
+  { pathname: "/a2/lesson-28", title: /A2 Computer Science · Lesson 28/i, content: [/SYLLABUS 20\.1/i, /A2 LESSON 28 SOURCES/i, /low-level|imperative|declarative/i] },
+  { pathname: "/a2/lesson-29", title: /A2 Computer Science · Lesson 29/i, content: [/SYLLABUS 20\.2/i, /A2 LESSON 29 SOURCES/i, /random|GETRECORD|exception/i] },
   { pathname: "/a2/lab-01", title: /Python Lab P01/i, content: [/PAPER 4/i, /A2 LAB P01 SOURCES/i, /evidence/i] },
   { pathname: "/exam-papers", title: /Question Papers and Mark Schemes/i, content: [/Question paper/i, /Mark scheme/i, /2024/, /2025/, /2026/, /AS LEVEL/i, /A2 STAGE/i] },
 ];
@@ -605,6 +609,8 @@ test("A2 resources remain isolated from the 63-lesson AS catalogue", async () =>
     ["/a2/lesson-25", "../lesson-25/", "25"],
     ["/a2/lesson-26", "../lesson-26/", "26"],
     ["/a2/lesson-27", "../lesson-27/", "27"],
+    ["/a2/lesson-28", "../lesson-28/", "28"],
+    ["/a2/lesson-29", "../lesson-29/", "29"],
     ["/a2/lab-01", "../lab-01/", "P01"],
   ];
   const htmlPages = await Promise.all(resources.map(async ([pathname]) => (await render(pathname)).text()));
@@ -649,6 +655,8 @@ test("every published A2 lesson and lab provides 15 slides, 90 minutes and 30 ho
     ["A2 lesson 25", "../app/a2/lesson-25/a2-lesson-25-client.tsx", /\bid:\s*["']a2-25-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lesson 26", "../app/a2/lesson-26/a2-lesson-26-client.tsx", /\bid:\s*["']a2-26-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lesson 27", "../app/a2/lesson-27/a2-lesson-27-client.tsx", /\bid:\s*["']a2-27-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 28", "../app/a2/lesson-28/a2-lesson-28-client.tsx", /\bid:\s*["']a2-28-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
+    ["A2 lesson 29", "../app/a2/lesson-29/a2-lesson-29-client.tsx", /\bid:\s*["']a2-29-\d+["'],\s*marks:\s*(\d+)/g, /9618\/3[123]/i],
     ["A2 lab P01", "../app/a2/lab-01/a2-lab-01-client.tsx", /\bid:\s*["']a2-p01-\d+["'],\s*marks:\s*(\d+)/g, /9618\/4[123]/i],
   ];
   const sharedTheorySource = await readFile(new URL("../app/_components/a2-theory-lesson.tsx", import.meta.url), "utf8");
@@ -742,6 +750,27 @@ test("A2 Chapters 18 and 19 cover every named current-syllabus boundary", async 
   assert.match(diagrams, /Weighted graph with shortest path highlighted/);
   assert.match(diagrams, /Artificial neural network with back propagation/);
   assert.match(diagrams, /Recursive factorial calls winding and unwinding on a stack/);
+});
+
+test("A2 Chapter 20 covers every named current-syllabus boundary", async () => {
+  const [paradigms, files, diagrams] = await Promise.all([
+    readFile(new URL("../app/a2/lesson-28/a2-lesson-28-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/a2/lesson-29/a2-lesson-29-client.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/_components/a2-advanced-diagrams.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(paradigms, /low-level[\s\S]*imperative[\s\S]*object-oriented[\s\S]*declarative/i);
+  assert.match(`${paradigms}\n${diagrams}`, /immediate[\s\S]*direct[\s\S]*indirect[\s\S]*indexed[\s\S]*relative/i);
+  assert.match(paradigms, /variables[\s\S]*constructs[\s\S]*procedures[\s\S]*functions/i);
+  for (const term of [/objects?/i, /propert(?:y|ies)|attributes?/i, /methods?/i, /classes?/i, /inheritance/i, /polymorphism/i, /containment \(aggregation\)|aggregation/i, /encapsulation/i, /getters?/i, /setters?/i, /instances?/i]) assert.match(paradigms, term);
+  assert.match(paradigms, /facts[\s\S]*rules[\s\S]*goal/i);
+  assert.match(files, /READ[\s\S]*WRITE[\s\S]*APPEND/i);
+  assert.match(files, /serial[\s\S]*sequential[\s\S]*random/i);
+  assert.match(files, /SEEK[\s\S]*GETRECORD[\s\S]*PUTRECORD/i);
+  assert.match(files, /exception[\s\S]*TRY[\s\S]*EXCEPT/i);
+  assert.match(diagrams, /Four programming paradigms compared/);
+  assert.match(diagrams, /Serial, sequential and random file organisation/);
+  assert.match(diagrams, /Normal and exceptional control flow/);
 });
 
 test("the recent-paper index uses authorised access and labels unreleased material", async () => {

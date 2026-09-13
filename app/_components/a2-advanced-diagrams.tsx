@@ -366,3 +366,71 @@ export function RecursionStack() {
     </section>
   );
 }
+
+export function ParadigmMap() {
+  return (
+    <section className="a2-at-paradigms" aria-label="Four programming paradigms compared by the way a solution is expressed">
+      <header><span>ONE PROBLEM</span><b>Four ways to express a solution</b></header>
+      <div>
+        <article><span>LOW-LEVEL</span><b>Control the processor</b><code>LOAD · ADD · STORE</code><p>Instructions, registers, addresses.</p></article>
+        <article><span>IMPERATIVE</span><b>State the steps</b><code>sequence · selection · iteration</code><p>Variables, procedures, functions.</p></article>
+        <article><span>OBJECT-ORIENTED</span><b>Model collaborating objects</b><code>class · state · behaviour</code><p>Encapsulate data with methods.</p></article>
+        <article><span>DECLARATIVE</span><b>State facts and rules</b><code>goal ? → inference</code><p>Describe what must be true.</p></article>
+      </div>
+    </section>
+  );
+}
+
+export function AddressingModePaths() {
+  const modes = [
+    ["IMMEDIATE", "LDM #12", "data = 12", "12"],
+    ["DIRECT / ABSOLUTE", "LDD 30", "EA = 30", "M[30]"],
+    ["INDIRECT", "LDI 30", "EA = M[30]", "M[M[30]]"],
+    ["INDEXED", "LDX 30", "EA = 30 + IX", "M[30 + IX]"],
+    ["RELATIVE", "STO [BR] + 10", "EA = BR + 10", "M[BR + 10]"],
+  ];
+  return (
+    <section className="a2-at-addressing" aria-label="Five low-level addressing modes and their routes to data">
+      <header><b>MODE</b><b>OPERAND</b><b>RESOLUTION</b><b>RESULT</b></header>
+      {modes.map(([mode, instruction, rule, result]) => <div key={mode}><strong>{mode}</strong><code>{instruction}</code><span>{rule}</span><b>{result}</b></div>)}
+    </section>
+  );
+}
+
+export function FileAccessDiagram() {
+  return (
+    <section className="a2-at-files" aria-label="Serial, sequential and random file organisation and access">
+      <article>
+        <header><span>SERIAL</span><b>arrival order</b></header>
+        <div className="records"><i>A17</i><i>C04</i><i>B29</i><i>D08</i></div>
+        <p>Read from the start; new records append at the end.</p>
+      </article>
+      <article>
+        <header><span>SEQUENTIAL</span><b>key order</b></header>
+        <div className="records"><i>A17</i><i>B29</i><i>C04</i><i>D08</i></div>
+        <p>Read in order; stop when found, key passed or EOF reached.</p>
+      </article>
+      <article>
+        <header><span>RANDOM</span><b>calculated address</b></header>
+        <div className="random-route"><code>Hash(key)</code><i>→</i><strong>SEEK 27</strong></div>
+        <p>Jump to a fixed-length record, then GETRECORD or PUTRECORD.</p>
+      </article>
+    </section>
+  );
+}
+
+export function ExceptionFlow() {
+  return (
+    <section className="a2-at-exception" aria-label="Normal and exceptional control flow through try, except and finally blocks">
+      <article className="try"><span>TRY</span><b>open + read + convert</b></article>
+      <i aria-hidden="true">→</i>
+      <div className="decision"><b>EXCEPTION?</b><span>runtime event</span></div>
+      <div className="branches">
+        <article className="success"><span>NO</span><b>continue normally</b><small>valid result</small></article>
+        <article className="failure"><span>YES</span><b>EXCEPT specific type</b><small>message · recover · retry</small></article>
+      </div>
+      <i aria-hidden="true">→</i>
+      <article className="finally"><span>FINALLY</span><b>close / clean up</b></article>
+    </section>
+  );
+}
