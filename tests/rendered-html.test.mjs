@@ -533,7 +533,7 @@ test("Lesson 08 uses unambiguous media labels and viewport-safe slide navigation
 });
 
 const a2RouteCases = [
-  { pathname: "/a2", title: /A2 Course 2027/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /SECTIONS 13–20 · COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-29\//, /\.\/lab-01\//] },
+  { pathname: "/a2", title: /A2 Course 2027/i, content: [/32-WEEK COURSE MAP|32-week dual track/i, /PAPER 3 · SECTIONS 13–20 COMPLETE/i, /Paper 3/i, /Paper 4/i, /\.\/lesson-01\//, /\.\/lesson-29\//, /\.\/lab-01\//] },
   { pathname: "/a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, content: [/SYLLABUS 13\.1/i, /A2 LESSON 01 SOURCES/i, /User-defined data types/i] },
   { pathname: "/a2/lesson-02", title: /A2 Computer Science · Lesson 02/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 02 SOURCES/i, /File organisation and access/i] },
   { pathname: "/a2/lesson-03", title: /A2 Computer Science · Lesson 03/i, content: [/SYLLABUS 13\.2/i, /A2 LESSON 03 SOURCES/i, /Hashing for file access/i] },
@@ -579,6 +579,15 @@ for (const routeCase of a2RouteCases) {
     assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
   });
 }
+
+test("A2 hub explains the official syllabus and Paper 4 exam environment", async () => {
+  const response = await render("/a2");
+  const html = await response.text();
+  assert.match(html, /OFFICIAL 2027–2029 SYLLABUS/);
+  assert.match(html, /centre-owned computers/);
+  assert.match(html, /Python, Java, or Visual Basic \.NET/);
+  assert.match(html, /Paper 4 practical sequence is still being expanded/);
+});
 
 test("A2 resources remain isolated from the 63-lesson AS catalogue", async () => {
   const resources = [

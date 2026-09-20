@@ -84,15 +84,39 @@ export default function A2CoursePage() {
       </section>
 
       <section className="a2-hub-section">
-        <header className="a2-section-heading"><span>ASSESSMENT BLUEPRINT</span><h2>Teach the written and practical habits together.</h2></header>
-        <div className="a2-paper-cards">
-          <article><span>PAPER 3 · ADVANCED THEORY</span><b>1 h 30 · 75 marks</b><p>Sections 13–20. AO1 60% · AO2 40%. Short responses, extended explanation, calculation, trace and design.</p><strong>Weekly routine · recall → model → exam response</strong></article>
-          <article><span>PAPER 4 · PRACTICAL</span><b>2 h 30 · 75 marks</b><p>Practical Sections 19–20, excluding low-level and declarative programming. AO3 100%. Python console, complete code and testing evidence.</p><strong>Weekly routine · interpret → code → run → evidence</strong></article>
+        <header className="a2-section-heading"><span>OFFICIAL 2027–2029 SYLLABUS</span><h2>The syllabus appears before every A2 lesson.</h2><p>Each lesson opens with its exact Cambridge section, learning outcome and the relevant part of the official syllabus page. The excerpt changes lesson by lesson across Sections 13–20.</p></header>
+        <div className="a2-syllabus-panel">
+          <div className="a2-syllabus-copy">
+            <span>THE A2 CONTENT BOUNDARY</span>
+            <h3>Sections 13–20</h3>
+            <p>Data Representation · Communication and Internet Technologies · Hardware and Virtual Machines · System Software · Security · Artificial Intelligence · Computational Thinking and Problem-solving · Further Programming</p>
+            <div><b>Paper 3</b><small>assesses all Sections 13–20</small><b>Paper 4</b><small>practical Sections 19–20, excluding low-level and declarative programming</small></div>
+          </div>
+          <figure><img src="../syllabus/syllabus-page-32.png" alt="Cambridge 9618 2027-2029 syllabus page 32 showing the beginning of A Level Section 13" /></figure>
         </div>
       </section>
 
       <section className="a2-hub-section">
-        <header className="a2-section-heading"><span>SECTIONS 13–20 · COMPLETE</span><h2>All eight A2 chapters are ready to teach.</h2><p>Twenty-nine 90-minute Paper 3 lessons now cover the complete A2 syllabus sequence, from Data Representation through Further Programming. Each includes teacher notes, visible syllabus and textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers.</p></header>
+        <header className="a2-section-heading"><span>ASSESSMENT BLUEPRINT</span><h2>Teach the written and practical habits together.</h2></header>
+        <div className="a2-paper-cards">
+          <article><span>PAPER 3 · ADVANCED THEORY</span><b>1 h 30 · 75 marks</b><p>Sections 13–20. AO1 60% · AO2 40%. Short responses, extended explanation, calculation, trace and design.</p><ul><li>Average pace: about 1.2 minutes per mark.</li><li>Answer the command word: define, describe and explain require different depth.</li><li>Show working for floating point, Boolean algebra, K-maps and graph algorithms.</li><li>Use precise Cambridge terminology and give distinct points for multi-mark questions.</li></ul><strong>Weekly routine · recall → model → exam response</strong></article>
+          <article><span>PAPER 4 · PRACTICAL</span><b>2 h 30 · 75 marks</b><p>Practical Sections 19–20, excluding low-level and declarative programming. AO3 100%. Complete code and testing evidence.</p><ul><li>Average pace: about 2 minutes per mark.</li><li>Save after every task; test each procedure or class before moving on.</li><li>Copy every requested code listing and screenshot into the evidence document.</li><li>Match the required file names, data files, prompts and output exactly.</li></ul><strong>Weekly routine · interpret → code → run → evidence</strong></article>
+        </div>
+      </section>
+
+      <section className="a2-hub-section">
+        <header className="a2-section-heading"><span>PAPER 4 · EXAM COMPUTER</span><h2>Practise in the environment students will actually face.</h2><p>The official syllabus requires centre-owned computers with no internet or email access. A student may use a personal computer for lessons and homework, but not as the examination machine.</p></header>
+        <div className="a2-environment-grid">
+          <article className="answer"><span>OWN COMPUTER IN THE EXAM?</span><b>No</b><p>The examination centre must provide computers belonging to the centre.</p></article>
+          <article><span>APPROVED LANGUAGES</span><b>Console mode only</b><p>Python, Java, or Visual Basic .NET. Visual Basic 6.0 or earlier is not permitted.</p></article>
+          <article><span>SOFTWARE</span><b>Centre-installed tools</b><p>An offline editor or IDE for the approved language, plus software that can open and edit the supplied evidence.docx. Cambridge specifies the language and console mode, not one compulsory IDE.</p></article>
+          <article><span>EXAM ACCESS</span><b>Offline work area</b><p>No internet or email. Candidate source files and evidence.docx are supplied; code and screenshots must be saved into the evidence document as instructed.</p></article>
+        </div>
+        <div className="a2-admin-note"><b>TEACHER CHECK</b><p>Before the exam series, confirm the exact Python/Java/Visual Basic version, editor or IDE, screenshot method, document software, autosave setup and file locations with the school’s exams officer. Students should rehearse on that same setup.</p></div>
+      </section>
+
+      <section className="a2-hub-section">
+        <header className="a2-section-heading"><span>PAPER 3 · SECTIONS 13–20 COMPLETE</span><h2>All eight A2 theory chapters are ready to teach.</h2><p>Twenty-nine 90-minute Paper 3 lessons cover the complete A2 theory sequence, from Data Representation through Further Programming. Each includes teacher notes, an official syllabus opener, textbook markers, cited past-paper practice, and a 30-mark printable homework with inline answers. The dedicated Paper 4 practical sequence is still being expanded; Lab 01 is currently available.</p></header>
         <div className="a2-live-cards">
           {publishedLessons.map((lesson) => <a className={"lab" in lesson ? "lab" : "theory"} href={lesson.href} key={lesson.href}><span>{lesson.label}</span><h3>{lesson.title}</h3><p>{lesson.topics}</p><div><b>{lesson.syllabus}</b><strong>90 min →</strong></div></a>)}
         </div>
