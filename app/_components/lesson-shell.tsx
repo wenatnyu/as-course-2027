@@ -401,7 +401,7 @@ export function LessonShell({
                 <p>{syllabusBrief.outcome}</p>
                 <div><b>{stage === "AS" ? "40-minute core" : "Core route"}</b><small>{coreSlides.length} essential slides</small><b>Optional extension</b><small>{Math.max(0, slides.length - coreSlides.length)} slides</small></div>
               </div>
-              <figure><img src={`${stage === "A2" ? "../../" : lessonNumber === "01" ? "" : "../"}syllabus/syllabus-page-${syllabusBrief.page}.png`} alt={`Official Cambridge 9618 syllabus section ${syllabusBrief.section}`} /><figcaption>Cambridge 9618 · 2027-2029 syllabus · page {syllabusBrief.page}</figcaption></figure>
+              <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}` }} src={`${stage === "A2" ? "../../" : lessonNumber === "01" ? "" : "../"}syllabus/syllabus-page-${syllabusBrief.page}.png`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
             </section>
           )}
           <div className="route-toolbar"><div><b>{coreOnly ? "CORE ROUTE" : "FULL DECK"}</b><span>{coreOnly ? "Essential teaching sequence" : "Core teaching + optional extension"}</span></div><button type="button" className={coreOnly ? "active" : ""} onClick={() => { setCoreOnly((value) => !value); setCurrent(0); }}>{coreOnly ? "Show extension" : "Core only"}</button></div>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { LessonSwitcher } from "./_components/lesson-shell";
+import { getSyllabusBrief } from "./_data/course-schedule";
 
 type View = "slides" | "homework" | "roadmap";
 type SlideData = {
@@ -134,6 +135,7 @@ export default function Home() {
   const [examRevealed, setExamRevealed] = useState(false);
   const [revealedAnswers, setRevealedAnswers] = useState<Set<string>>(() => new Set());
   const deckRef = useRef<HTMLDivElement>(null);
+  const syllabusBrief = getSyllabusBrief("AS", "01");
 
   const bitValue = useMemo(() => bits.reduce((sum, bit, index) => sum + bit * weights[index], 0), [bits]);
   const toggleBit = (index: number) => setBits((old) => old.map((bit, i) => i === index ? 1 - bit : bit));
@@ -407,6 +409,12 @@ export default function Home() {
 
       {view === "slides" && (
         <section className="deck-shell" ref={deckRef}>
+          {syllabusBrief && (
+            <section className="syllabus-brief" aria-label="Official syllabus focus">
+              <div className="syllabus-brief-copy"><span>OFFICIAL SYLLABUS · {syllabusBrief.section}</span><h1>{syllabusBrief.title}</h1><p>{syllabusBrief.outcome}</p><div><b>40-minute core</b><small>essential teaching sequence</small><b>Optional extension</b><small>use when students are secure</small></div></div>
+              <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}` }} src={`syllabus/syllabus-page-${syllabusBrief.page}.png`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
+            </section>
+          )}
           <div className="slide-frame">{slides[current].content}</div>
           <div className="deck-controls">
             <div className="progress-label"><span>{String(current + 1).padStart(2, "0")} / {slides.length}</span><i><b style={{ width: `${(current + 1) / slides.length * 100}%` }} /></i></div>

@@ -3,51 +3,115 @@ export type SyllabusBrief = {
   title: string;
   page: number;
   outcome: string;
+  focus: string;
 };
 
-const asRanges = [
-  [1, 3, "1.1", "Data representation", 14, "Represent and convert data accurately; explain why each representation is used."],
-  [4, 5, "1.2", "Multimedia", 15, "Explain how image and sound data are encoded and calculate storage requirements."],
-  [6, 6, "1.3", "Compression", 15, "Compare lossy and lossless compression and apply run-length encoding."],
-  [7, 9, "2.1", "Networks including the internet", 16, "Explain network models, devices, media and the services that move data."],
-  [10, 10, "2.1", "Networks including the internet", 17, "Explain IP addressing, subnetting, URLs and DNS in internet communication."],
-  [11, 14, "3.1", "Computers and their components", 17, "Explain how hardware components operate in input, processing, storage and control systems."],
-  [15, 16, "3.2", "Logic gates and logic circuits", 18, "Use gate symbols, truth tables, Boolean expressions and logic circuits."],
-  [17, 19, "4.1", "CPU architecture", 19, "Explain processor architecture, registers, buses, performance and the fetch-execute cycle."],
-  [20, 23, "4.2", "Assembly language", 20, "Read, trace and explain assembly programs, addressing and two-pass assembly."],
-  [24, 24, "4.3", "Bit manipulation", 22, "Perform shifts and masks and explain their effects on binary data."],
-  [25, 28, "5", "System software", 23, "Explain operating systems, utilities, translators and development environments."],
-  [29, 32, "6", "Security, privacy and data integrity", 24, "Distinguish key risks and apply suitable protection, validation and error-detection methods."],
-  [33, 35, "7", "Ethics and ownership", 25, "Evaluate professional, legal and ethical consequences of computing."],
-  [36, 38, "8.1-8.2", "Databases", 25, "Model relational data, normalise tables and explain DBMS functions."],
-  [39, 40, "8.3", "DDL and DML", 26, "Write SQL to define, query and maintain data in up to two tables."],
-  [41, 44, "9", "Algorithm design and problem-solving", 27, "Apply computational thinking and refine algorithms into precise solutions."],
-  [45, 49, "10.1-10.3", "Data types and structures", 28, "Select and use records, arrays and files appropriately."],
-  [50, 51, "10.4", "Abstract Data Types", 29, "Explain and apply stacks, queues and linked lists."],
-  [52, 54, "11.1-11.2", "Programming", 29, "Use variables, expressions, selection and iteration correctly."],
-  [55, 56, "11.3", "Structured programming", 30, "Design modular programs using procedures, functions, scope and parameters."],
-  [57, 60, "12.1-12.2", "Software development", 30, "Apply the development life cycle and represent program designs clearly."],
-  [61, 63, "12.3", "Testing and maintenance", 31, "Design tests, identify errors and explain maintenance strategies."],
-] as const;
+type BriefRow = readonly [section: string, title: string, page: number, outcome: string, focus: string];
 
-const a2Ranges = [
-  [1, 3, "13.1-13.2", "User-defined types and file access", 32, "Use advanced data types and explain serial, sequential and random file organisation."],
-  [4, 6, "13.3", "Floating-point representation", 33, "Represent, normalise and reason about binary floating-point values and errors."],
-  [7, 10, "14.1-14.2", "Communication and internet technologies", 33, "Explain protocol layers and compare circuit and packet switching."],
-  [11, 16, "15", "Hardware and virtual machines", 34, "Compare processor architectures and simplify logic using Boolean algebra."],
-  [17, 20, "16", "System software", 35, "Explain resource management, scheduling, memory and translation software."],
-  [21, 22, "17", "Security", 36, "Explain encryption protocols, certificates and secure communication."],
-  [23, 24, "18", "Artificial intelligence", 36, "Apply graph-search ideas and explain machine-learning systems."],
-  [25, 27, "19", "Computational thinking", 37, "Implement and compare algorithms, ADTs and recursion."],
-  [28, 29, "20", "Further programming", 38, "Compare paradigms and build robust file-processing programs with exception handling."],
-] as const;
+const asLessons: BriefRow[] = [
+  ["1.1", "Number systems", 14, "Use binary, denary, hexadecimal and BCD; convert integer values between representations.", "64%"],
+  ["1.1", "Binary magnitudes and prefixes", 14, "Distinguish binary and decimal prefixes, from kibi/kilo through tebi/tera.", "48%"],
+  ["1.1", "Signed binary, BCD and arithmetic", 14, "Use one's and two's complement, perform binary arithmetic and explain overflow.", "67%"],
+  ["1.1-1.2", "Character data and bitmap graphics", 15, "Represent character data and explain how bitmap images are encoded.", "17%"],
+  ["1.2", "Vector graphics and sound", 15, "Explain vector encoding and sampled sound, including quality and file-size effects.", "56%"],
+  ["1.3", "Compression", 15, "Compare lossy and lossless compression and apply run-length encoding.", "88%"],
+  ["2.1", "Network models and LAN hardware", 16, "Compare LAN/WAN, client-server and peer-to-peer models, topologies and LAN devices.", "29%"],
+  ["2.1", "Cloud computing and transmission media", 16, "Evaluate cloud computing and compare wired and wireless transmission media.", "51%"],
+  ["2.1", "Ethernet, streaming and internet infrastructure", 16, "Explain Ethernet, bit streaming, WWW versus internet, and supporting hardware.", "79%"],
+  ["2.1", "IP addressing, URLs and DNS", 17, "Explain IPv4/IPv6, subnetting, address types, URLs and DNS.", "14%"],
+  ["3.1", "Hardware roles, embedded systems and buffers", 17, "Explain component roles, embedded systems, device operations and buffers.", "48%"],
+  ["3.1", "Primary memory and ROM families", 17, "Compare RAM/ROM, SRAM/DRAM and PROM/EPROM/EEPROM.", "72%"],
+  ["3.1", "Storage and peripheral operations", 17, "Describe the principal operation of storage, input and output devices.", "55%"],
+  ["3.1", "Monitoring and control", 17, "Distinguish monitoring from control and explain sensors, actuators and feedback.", "91%"],
+  ["3.2", "Logic gates and truth tables", 18, "Recognise gate symbols, define their functions and construct truth tables.", "35%"],
+  ["3.2", "Logic circuits and expressions", 18, "Construct circuits, expressions and truth tables from each representation.", "74%"],
+  ["4.1", "Von Neumann architecture and registers", 19, "Explain the stored-program model, registers, ALU, CU, clock and IAS.", "31%"],
+  ["4.1", "Buses, performance and ports", 19, "Explain system buses, performance factors and peripheral ports.", "62%"],
+  ["4.1", "Fetch-execute cycle and interrupts", 19, "Use register-transfer notation and explain interrupt detection and handling.", "87%"],
+  ["4.2", "Assembly language and instruction groups", 20, "Relate assembly to machine code and classify instruction groups.", "50%"],
+  ["4.2", "Addressing modes", 20, "Use immediate, direct, indirect, indexed and relative addressing.", "86%"],
+  ["4.2", "Two-pass assembler", 20, "Apply the stages of a two-pass assembler to a simple program.", "29%"],
+  ["4.2", "Tracing assembly programs", 21, "Trace programs using the syllabus instruction set and operand notation.", "50%"],
+  ["4.3", "Bit manipulation", 22, "Perform binary shifts and use masks to test and set bits.", "35%"],
+  ["5.1", "Operating systems and management", 23, "Explain why an OS is required and its key management tasks.", "25%"],
+  ["5.1", "Utilities and program libraries", 23, "Explain utility software, program libraries and DLL benefits.", "48%"],
+  ["5.2", "Language translators", 23, "Compare assembler, compiler and interpreter, including hybrid translation.", "71%"],
+  ["5.2", "Integrated development environments", 23, "Describe IDE features for coding, error detection, presentation and debugging.", "91%"],
+  ["6.1", "Security, privacy, integrity and threats", 24, "Distinguish security, privacy and integrity and explain internet threats.", "31%"],
+  ["6.1", "Security measures and access control", 24, "Select layered measures that protect systems and data.", "51%"],
+  ["6.2", "Validation, verification and check digits", 24, "Apply validation and verification methods during data entry.", "76%"],
+  ["6.2", "Parity and checksums", 24, "Explain parity and checksums used during data transfer.", "91%"],
+  ["7.1", "Professional ethics", 25, "Explain professional ethics and the role of bodies such as BCS and IEEE.", "23%"],
+  ["7.1", "Copyright and software licensing", 25, "Explain copyright, licences and consequences of software use.", "45%"],
+  ["7.1", "AI applications and impacts", 25, "Evaluate ethical and societal impacts of computing and AI applications.", "61%"],
+  ["8.1", "Relational databases and keys", 25, "Explain file-based limitations, relational tables, keys and relationships.", "82%"],
+  ["8.1", "E-R diagrams and normalisation", 25, "Model relationships and normalise data to first and second normal form.", "94%"],
+  ["8.1-8.2", "Third normal form and DBMS", 26, "Normalise to 3NF and explain DBMS features and tools.", "32%"],
+  ["8.3", "SQL DDL and core DML", 26, "Write SQL to define tables and query or modify data.", "72%"],
+  ["8.3", "SQL aggregation, joins and maintenance", 27, "Use aggregate functions, two-table joins and data-maintenance statements.", "13%"],
+  ["9.1", "Abstraction and decomposition", 27, "Apply abstraction and decomposition to formulate a problem.", "43%"],
+  ["9.1-9.2", "Algorithm design, identifiers and IPO", 27, "Identify inputs, processes and outputs and design precise algorithms.", "64%"],
+  ["9.2", "Logic, control and representations", 27, "Use structured English, flowcharts, pseudocode and logic statements.", "82%"],
+  ["9.2", "Stepwise refinement", 28, "Refine an algorithm to a level of detail from which it can be programmed.", "10%"],
+  ["10.1", "Data types and records", 28, "Select data types and define, read and write record structures.", "38%"],
+  ["10.2", "One-dimensional arrays and linear search", 28, "Declare and process arrays and implement a linear search.", "65%"],
+  ["10.2", "Bubble sort", 28, "Process array data using a bubble sort.", "76%"],
+  ["10.2", "Two-dimensional arrays and record arrays", 28, "Select, declare and process suitable 1D and 2D array structures.", "67%"],
+  ["10.3", "Text files", 28, "Explain why files are needed and write pseudocode for text files.", "91%"],
+  ["10.4", "Stacks and queues", 29, "Describe, justify and manipulate stack and queue ADTs.", "19%"],
+  ["10.4", "Linked lists", 29, "Describe, justify and manipulate linked lists and their array implementation.", "27%"],
+  ["11.1", "Programming essentials", 29, "Write declarations, assignments, expressions, input/output and library calls.", "57%"],
+  ["11.2", "Selection", 29, "Write IF, nested IF and CASE structures.", "78%"],
+  ["11.2", "Iteration", 29, "Write and justify count-, pre- and post-condition loops.", "89%"],
+  ["11.3", "Modules, procedures and functions", 30, "Define and use procedures and functions with clear interfaces and scope.", "25%"],
+  ["11.3", "Parameters, BYVAL and BYREF", 30, "Use parameters, arguments, return values and reference/value passing.", "37%"],
+  ["12.1", "Program development life cycle", 30, "Explain development stages and select a suitable life-cycle model.", "59%"],
+  ["12.1", "Waterfall, iterative and RAD", 30, "Compare principles, benefits and drawbacks of development life cycles.", "68%"],
+  ["12.2", "Structure charts and interfaces", 30, "Construct structure charts and express parameters between modules.", "83%"],
+  ["12.2", "Structure charts, code and state diagrams", 30, "Derive pseudocode from structure charts and use state-transition diagrams.", "94%"],
+  ["12.3", "Errors and developer testing", 31, "Locate syntax, logic and run-time errors and choose testing methods.", "36%"],
+  ["12.3", "Test strategy, data and release testing", 31, "Design test plans using normal, abnormal and boundary data.", "65%"],
+  ["12.3", "Maintenance", 31, "Distinguish perfective, adaptive and corrective maintenance.", "88%"],
+];
+
+const a2Lessons: BriefRow[] = [
+  ["13.1", "User-defined data types", 32, "Define and use enumerated, pointer, set, record and class/object types.", "46%"],
+  ["13.2", "File organisation and access", 32, "Compare serial, sequential and random files and their access methods.", "76%"],
+  ["13.2", "Hashing algorithms", 32, "Describe and use hashing to read and write keyed records.", "91%"],
+  ["13.3", "Floating-point format", 33, "Describe two's-complement mantissa and exponent formats and decode values.", "18%"],
+  ["13.3", "Conversion and normalisation", 33, "Convert floating-point values and normalise their binary representation.", "28%"],
+  ["13.3", "Approximation, rounding and range", 33, "Explain approximation, rounding errors, underflow and overflow.", "38%"],
+  ["14.1", "Protocols and TCP/IP", 33, "Explain protocol stacks and the four layers of TCP/IP.", "51%"],
+  ["14.1", "Application protocols", 33, "Explain HTTP, FTP, POP3, IMAP, SMTP and BitTorrent.", "65%"],
+  ["14.2", "Circuit and packet switching", 33, "Compare circuit and packet switching, their benefits and uses.", "80%"],
+  ["14.2", "Routers and packet journeys", 33, "Explain router decisions and how packets carry messages across networks.", "91%"],
+  ["15.1", "RISC, CISC and pipelining", 34, "Compare RISC/CISC and explain pipelining, registers and interrupts.", "21%"],
+  ["15.1", "Parallel architectures", 34, "Compare SISD, SIMD, MISD, MIMD and massively parallel systems.", "35%"],
+  ["15.1", "Virtual machines", 34, "Explain virtual-machine roles, benefits and limitations.", "47%"],
+  ["15.2", "Boolean algebra", 34, "Apply Boolean algebra and De Morgan's laws to simplify expressions.", "75%"],
+  ["15.2", "Adders and flip-flops", 34, "Construct truth tables for adders and explain SR/JK flip-flops.", "60%"],
+  ["15.2", "Karnaugh maps", 34, "Simplify logic expressions and solve problems using Karnaugh maps.", "91%"],
+  ["16.1", "OS resources and processes", 35, "Explain resource use, abstraction, multitasking and process states.", "25%"],
+  ["16.1", "Scheduling and interrupts", 35, "Compare scheduling routines and explain kernel interrupt handling.", "43%"],
+  ["16.1", "Memory management", 35, "Explain paging, virtual memory, segmentation, replacement and thrashing.", "57%"],
+  ["16.2", "Translation, grammar and RPN", 35, "Explain interpreters, compilation stages, grammar notation and RPN.", "79%"],
+  ["17.1", "Cryptographic key use", 36, "Explain symmetric/asymmetric encryption and private or verified messages.", "25%"],
+  ["17.1", "Quantum cryptography, TLS and certificates", 36, "Explain quantum cryptography, TLS and digital certificates/signatures.", "48%"],
+  ["18.1", "Graphs and path finding", 36, "Use graph concepts with Dijkstra's and A* search.", "71%"],
+  ["18.1", "Machine learning and neural networks", 36, "Explain neural networks, learning categories, back propagation and regression.", "87%"],
+  ["19.1", "Search, sort and complexity", 37, "Implement and compare searching/sorting algorithms using Big O.", "29%"],
+  ["19.1", "Abstract Data Types", 37, "Implement and compare stacks, queues, lists, trees, graphs and dictionaries.", "59%"],
+  ["19.2", "Recursion", 37, "Write and trace recursion and explain stacks and unwinding.", "88%"],
+  ["20.1", "Programming paradigms", 38, "Compare low-level, procedural, object-oriented and declarative paradigms.", "43%"],
+  ["20.2", "Files and exception handling", 38, "Write robust file-processing code using exception handling.", "88%"],
+];
 
 export function getSyllabusBrief(stage: "AS" | "A2", lessonNumber: string): SyllabusBrief | null {
   const value = Number.parseInt(lessonNumber, 10);
   if (!Number.isFinite(value)) return null;
-  const match = (stage === "A2" ? a2Ranges : asRanges).find(([start, end]) => value >= start && value <= end);
+  const match = (stage === "A2" ? a2Lessons : asLessons)[value - 1];
   if (!match) return null;
-  return { section: match[2], title: match[3], page: match[4], outcome: match[5] };
+  return { section: match[0], title: match[1], page: match[2], outcome: match[3], focus: match[4] };
 }
 
 export const AS_MILESTONES = [
