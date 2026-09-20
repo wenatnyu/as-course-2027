@@ -74,7 +74,7 @@ export default function A2CoursePage() {
       </header>
 
       <section className="a2-hub-hero">
-        <div className="a2-hub-copy"><span>21 SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>Two protected 2-hour sessions each week: advanced theory for Paper 3, then practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-01/">Start Lesson 01</a><a href="../course-progress/">Open live plan</a></div></div>
+        <div className="a2-hub-copy"><span>21 SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>Two protected 2-hour sessions each week: advanced theory for Paper 3, then practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-01/">Start Lesson 01</a><a href="#exam-guide">Paper 3 / 4 exam guide ↓</a><a href="../course-progress/">Open live plan</a></div></div>
         <div className="a2-hub-scope" aria-label="A2 course scope"><div><strong>8</strong><span>syllabus sections</span></div><div><strong>32</strong><span>teaching weeks</span></div><div><strong>2</strong><span>parallel exam tracks</span></div></div>
       </section>
 
@@ -96,7 +96,7 @@ export default function A2CoursePage() {
         </div>
       </section>
 
-      <section className="a2-hub-section">
+      <section className="a2-hub-section a2-anchor-section" id="exam-guide">
         <header className="a2-section-heading"><span>ASSESSMENT BLUEPRINT</span><h2>Teach the written and practical habits together.</h2></header>
         <div className="a2-paper-cards">
           <article><span>PAPER 3 · ADVANCED THEORY</span><b>1 h 30 · 75 marks</b><p>Sections 13–20. AO1 60% · AO2 40%. Short responses, extended explanation, calculation, trace and design.</p><ul><li>Average pace: about 1.2 minutes per mark.</li><li>Answer the command word: define, describe and explain require different depth.</li><li>Show working for floating point, Boolean algebra, K-maps and graph algorithms.</li><li>Use precise Cambridge terminology and give distinct points for multi-mark questions.</li></ul><strong>Weekly routine · recall → model → exam response</strong></article>
@@ -104,7 +104,7 @@ export default function A2CoursePage() {
         </div>
       </section>
 
-      <section className="a2-hub-section">
+      <section className="a2-hub-section a2-anchor-section" id="paper-4-environment">
         <header className="a2-section-heading"><span>PAPER 4 · EXAM COMPUTER</span><h2>Practise in the environment students will actually face.</h2><p>The official syllabus requires centre-owned computers with no internet or email access. A student may use a personal computer for lessons and homework, but not as the examination machine.</p></header>
         <div className="a2-environment-grid">
           <article className="answer"><span>OWN COMPUTER IN THE EXAM?</span><b>No</b><p>The examination centre must provide computers belonging to the centre.</p></article>

@@ -587,6 +587,9 @@ test("A2 hub explains the official syllabus and Paper 4 exam environment", async
   assert.match(html, /centre-owned computers/);
   assert.match(html, /Python, Java, or Visual Basic \.NET/);
   assert.match(html, /Paper 4 practical sequence is still being expanded/);
+  assert.match(html, /href="#exam-guide"/);
+  assert.match(html, /id="exam-guide"/);
+  assert.match(html, /id="paper-4-environment"/);
 });
 
 test("A2 resources remain isolated from the 63-lesson AS catalogue", async () => {
