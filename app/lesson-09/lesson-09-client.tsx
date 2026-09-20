@@ -341,6 +341,8 @@ export default function Lesson09Client() {
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"
+      chapterNoteHref="../notes/communication/"
+      chapterNoteLabel="Communication note"
       sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.36-41, and published 2021-2025 AS Paper 1 questions and mark schemes."
       sourceDetail="Core boundary: Ethernet and CSMA/CD; modern switched collision avoidance; internet versus WWW; modem, PSTN, dedicated lines and cell network; real-time/on-demand bit streaming, buffers, bit rate and broadband speed. Authentic anchors: 9618/12 O/N 2025 Q5(d), 9618/13 M/J 2024 Q5(c), 9618/11 M/J 2025 Q2(c), 9618/12 M/J 2024 Q3(c), and 9618/11 M/J 2024 Q2(e). IP addressing, subnetting, URL and DNS follow in Lesson 10."
     />

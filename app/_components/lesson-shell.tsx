@@ -318,6 +318,8 @@ export function LessonShell({
   siblingCourseHref = "../a2/",
   siblingCourseLabel = "A2",
   examPapersHref = "../exam-papers/",
+  chapterNoteHref,
+  chapterNoteLabel = "Chapter note",
 }: {
   lessonNumber: string;
   slides: SlideData[];
@@ -333,6 +335,8 @@ export function LessonShell({
   siblingCourseHref?: string;
   siblingCourseLabel?: string;
   examPapersHref?: string;
+  chapterNoteHref?: string;
+  chapterNoteLabel?: string;
 }) {
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
@@ -383,6 +387,7 @@ export function LessonShell({
           <a href={stage === "A2" ? "../../course-progress/" : lessonNumber === "01" ? "course-progress/" : "../course-progress/"}>Progress</a>
           <a href={siblingCourseHref}>{siblingCourseLabel}</a>
           <a href={examPapersHref}>Papers</a>
+          {chapterNoteHref && <a className="chapter-note-link" href={chapterNoteHref}>{chapterNoteLabel}</a>}
         </nav>
         <div className="bar-actions">
           <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} lessonCatalog={lessonCatalog} />

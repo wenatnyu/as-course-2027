@@ -390,6 +390,8 @@ export default function Lesson07Client() {
         { label: "07", href: "../lesson-07/", active: true },
       ]}
       courseMapHref="../?view=roadmap"
+      chapterNoteHref="../notes/communication/"
+      chapterNoteLabel="Communication note"
       sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.26-38, and published 2023-2024 AS Paper 1 questions and mark schemes."
       sourceDetail="Core boundary: network purpose and benefits; LAN/WAN; client-server, peer-to-peer, thin and thick clients; bus, star, mesh and hybrid packet paths; LAN hardware and router role. Authentic anchors: 9618/13 M/J 2023 Q2(b)-(c), 9618/12 M/J 2023 Q1(a)-(c),(e), 9618/11 O/N 2023 Q2(a),(b),(d), and 9618/13 M/J 2024 Q5(b). Questions are concise adaptations with original references, not reproductions of complete papers. Cloud and media continue in Lesson 08; Ethernet, streaming and internet infrastructure in Lesson 09; IP addressing, URL and DNS in Lesson 10."
     />

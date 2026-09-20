@@ -30,6 +30,22 @@ test("server-renders the complete lesson, homework and roadmap shell", async () 
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
+test("serves the printable Communication note and links it from Lessons 07–10", async () => {
+  const noteResponse = await render("/notes/communication");
+  assert.equal(noteResponse.status, 200);
+  const noteHtml = await noteResponse.text();
+  assert.match(noteHtml, /AS 9618 Chapter Note/);
+  assert.match(noteHtml, /CSMA\/CD on a shared Ethernet medium/);
+  assert.match(noteHtml, /DNS resolves a host name to an IP address/);
+  assert.match(noteHtml, /znotes\.org\/caie\/as-level\/computer-science-9618\/theory\/communication/);
+
+  for (const lessonNumber of ["07", "08", "09", "10"]) {
+    const lessonHtml = await (await render(`/lesson-${lessonNumber}`)).text();
+    assert.match(lessonHtml, /\.\.\/notes\/communication\//);
+    assert.match(lessonHtml, /Communication note/);
+  }
+});
+
 test("uses the configured static social image", async () => {
   const html = await (await render("/", "as-cs.example.test")).text();
   const configuredSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/").replace(/\/+$/, "");

@@ -327,6 +327,8 @@ export default function Lesson08Client() {
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"
+      chapterNoteHref="../notes/communication/"
+      chapterNoteLabel="Communication note"
       sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.32-35 and p.39, and published 2023-2025 AS Paper 1 questions and mark schemes."
       sourceDetail="Core boundary: public/private clouds and their trade-offs; wired/wireless implications; copper, fibre-optic, radio/Wi-Fi, microwave and satellite media. Authentic anchors: 9618/13 M/J 2023 Q2(d), 9618/13 M/J 2024 Q5(a), 9618/12 O/N 2025 Q8(a), 9618/13 O/N 2025 Q4(a)-(b), and 9618/13 O/N 2024 Q9(b). Infrared and detailed satellite-orbit counts are enrichment, not core 2027-2029 outcomes. Ethernet, streaming and internet infrastructure follow in Lesson 09; IP, subnetting, URL and DNS follow in Lesson 10."
     />

@@ -347,6 +347,8 @@ export default function Lesson10Client() {
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"
+      chapterNoteHref="../notes/communication/"
+      chapterNoteLabel="Communication note"
       sourceSummary="Checked against syllabus 2.1 p.17, Coursebook Chapter 2 printed pp.41-47, and published 2021-2025 AS Paper 1 questions and mark schemes."
       sourceDetail="Core boundary: IPv4/IPv6 formats; subnetting and network/host portions; how IP addresses are associated with network interfaces; public/private addressing and security implications; static/dynamic assignment; URL components and DNS resolution. Authentic anchors: 9618/11 M/J 2023 Q4(d), 9618/11 M/J 2024 Q8(b), 9618/12 O/N 2023 Q7(d), and 9618/11 O/N 2025 Q7(a)-(c). This lesson completes syllabus Chapter 2."
     />
