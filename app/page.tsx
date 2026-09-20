@@ -394,6 +394,7 @@ export default function Home() {
           <button className={view === "slides" ? "active" : ""} aria-pressed={view === "slides"} onClick={() => setView("slides")}>Slides</button>
           <button className={view === "homework" ? "active" : ""} aria-pressed={view === "homework"} onClick={() => setView("homework")}>Homework</button>
           <button className={view === "roadmap" ? "active" : ""} aria-pressed={view === "roadmap"} onClick={() => setView("roadmap")}>Course map</button>
+          <a href="./course-progress/">Progress</a>
           <a href="./a2/">A2</a>
           <a href="./exam-papers/">Papers</a>
         </nav>

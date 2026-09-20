@@ -111,7 +111,7 @@ export default function A2Lesson01Client() {
       content: (
         <Slide number="01" eyebrow="A2 · PAPER 3" sourceLabel="TEXTBOOK Ch16 §16.01" syllabusLabel="SYLLABUS 13.1" className="a2-slide a2-title">
           <section className="a2-title-grid">
-            <div><span>LESSON 01 · 90 MINUTES</span><h1>Design the <em>type</em>,<br />constrain the data.</h1><p>Enumerated types · pointers · sets · records · classes and objects</p></div>
+            <div><span>LESSON 01 · 2-HOUR SESSION</span><h1>Design the <em>type</em>,<br />constrain the data.</h1><p>90 min guided theory · 25 min exam practice · 5 min exit check</p></div>
             <div className="a2-type-orbit" role="img" aria-label="Five user-defined types orbiting a model of the problem"><strong>PROBLEM</strong><span>ENUM</span><span>POINTER</span><span>SET</span><span>RECORD</span><span>CLASS</span></div>
           </section>
         </Slide>
@@ -296,7 +296,7 @@ export default function A2Lesson01Client() {
       lessonLinks={A2_LESSON_ONE_LINKS}
       lessonCatalog={A2_PREVIEW_CATALOG}
       courseMapHref="../"
-      courseStageLabel="A2 · 2028"
+      courseStageLabel="A2 · 2027"
       qualificationLabel="A2 LESSON"
       siblingCourseHref="../../"
       siblingCourseLabel="AS"

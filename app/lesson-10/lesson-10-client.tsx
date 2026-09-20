@@ -130,6 +130,7 @@ export default function Lesson10Client() {
   const slides: SlideData[] = [
     {
       time: "3 min",
+      core: true,
       focus: "Frame naming and addressing as two different jobs: humans name resources; networks route to interfaces.",
       prompt: "Ask why a browser needs both a readable name and a numeric network address.",
       source: "Coursebook Sections 2.08-2.09 printed pp.41-47; syllabus 2.1 p.17.",
@@ -153,6 +154,7 @@ export default function Lesson10Client() {
     },
     {
       time: "5 min",
+      core: true,
       focus: "Diagnose IP notation before teaching definitions.",
       prompt: "Students vote valid IPv4, valid IPv6 or invalid, then justify with one format rule.",
       source: "Coursebook 2.08 printed pp.41-46; syllabus IPv4 and IPv6 formats.",
@@ -202,6 +204,7 @@ export default function Lesson10Client() {
     },
     {
       time: "8 min",
+      core: true,
       focus: "Use an authentic format question and make each blank correspond to one retrievable fact.",
       prompt: "Students complete all five facts from memory, then self-mark.",
       source: "Adapted from 9618/11 May/June 2023 Question 4(d)(i), verified against the published mark scheme.",
@@ -227,6 +230,7 @@ export default function Lesson10Client() {
     },
     {
       time: "6 min",
+      core: true,
       focus: "Make the network/host split visible using prefix notation and a subnet mask.",
       prompt: "Students underline the shared network portion in three /24 addresses.",
       source: "Coursebook pp.42-44; syllabus subnetting and device association.",
@@ -276,6 +280,7 @@ export default function Lesson10Client() {
     },
     {
       time: "7 min",
+      core: true,
       focus: "Decompose a URL and make clear which part DNS uses.",
       prompt: "Students colour-code scheme, host, path, query and fragment in the example.",
       source: "Coursebook 2.09 printed pp.46-47; syllabus URL use.",
@@ -289,6 +294,7 @@ export default function Lesson10Client() {
     },
     {
       time: "6 min",
+      core: true,
       focus: "Trace a realistic DNS resolution path with caching and hierarchy.",
       prompt: "Students number the resolver, root, TLD and authoritative stages.",
       source: "Coursebook printed p.47; syllabus role of DNS.",
@@ -303,6 +309,7 @@ export default function Lesson10Client() {
     },
     {
       time: "5 min",
+      core: true,
       focus: "Close Chapter 2 with an authentic four-way address classification.",
       prompt: "Students write one exact description for each type before revealing.",
       source: "Adapted from 9618/12 October/November 2023 Question 7(d), verified against the published mark scheme.",

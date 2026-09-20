@@ -1,12 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { getSyllabusBrief } from "../_data/course-schedule";
 
 export type SlideData = {
   time: string;
   focus: string;
   prompt: string;
   source: string;
+  core?: boolean;
   content: ReactNode;
 };
 
@@ -335,17 +337,24 @@ export function LessonShell({
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
   const [teacherMode, setTeacherMode] = useState(false);
+  const [coreOnly, setCoreOnly] = useState(false);
   const deckRef = useRef<HTMLDivElement>(null);
+  const stage = courseStageLabel.startsWith("A2") ? "A2" : "AS";
+  const syllabusBrief = getSyllabusBrief(stage, lessonNumber);
+  const explicitlyPlannedCore = slides.some((slide) => slide.core !== undefined);
+  const defaultCoreLimit = stage === "AS" ? Math.min(8, slides.length) : Math.min(10, slides.length);
+  const coreSlides = explicitlyPlannedCore ? slides.filter((slide) => slide.core) : slides.slice(0, defaultCoreLimit);
+  const visibleSlides = coreOnly ? coreSlides : slides;
 
   const goTo = useCallback((next: number) => {
-    setCurrent(Math.max(0, Math.min(slides.length - 1, next)));
+    setCurrent(Math.max(0, Math.min(visibleSlides.length - 1, next)));
     if (!document.fullscreenElement) {
       window.requestAnimationFrame(() => deckRef.current?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start",
       }));
     }
-  }, [slides.length]);
+  }, [visibleSlides.length]);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -355,13 +364,13 @@ export function LessonShell({
       if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
       if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
       if (event.key === "Home") goTo(0);
-      if (event.key === "End") goTo(slides.length - 1);
+      if (event.key === "End") goTo(visibleSlides.length - 1);
       if (event.key.toLowerCase() === "n") setTeacherMode((value) => !value);
       if (event.key.toLowerCase() === "f") deckRef.current?.requestFullscreen?.();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [current, goTo, slides.length, view]);
+  }, [current, goTo, visibleSlides.length, view]);
 
   return (
     <main className={teacherMode ? "teacher-mode" : "student-mode"}>
@@ -371,6 +380,7 @@ export function LessonShell({
           <button className={view === "slides" ? "active" : ""} aria-pressed={view === "slides"} onClick={() => setView("slides")}>Slides</button>
           <button className={view === "homework" ? "active" : ""} aria-pressed={view === "homework"} onClick={() => setView("homework")}>Homework</button>
           <a href={courseMapHref}>Course map</a>
+          <a href={stage === "A2" ? "../../course-progress/" : lessonNumber === "01" ? "course-progress/" : "../course-progress/"}>Progress</a>
           <a href={siblingCourseHref}>{siblingCourseLabel}</a>
           <a href={examPapersHref}>Papers</a>
         </nav>
@@ -383,17 +393,29 @@ export function LessonShell({
 
       {view === "slides" && (
         <section className="deck-shell" ref={deckRef}>
-          <div className="slide-frame">{slides[current].content}</div>
+          {syllabusBrief && (
+            <section className="syllabus-brief" aria-label="Official syllabus focus">
+              <div className="syllabus-brief-copy">
+                <span>OFFICIAL SYLLABUS · {syllabusBrief.section}</span>
+                <h1>{syllabusBrief.title}</h1>
+                <p>{syllabusBrief.outcome}</p>
+                <div><b>{stage === "AS" ? "40-minute core" : "Core route"}</b><small>{coreSlides.length} essential slides</small><b>Optional extension</b><small>{Math.max(0, slides.length - coreSlides.length)} slides</small></div>
+              </div>
+              <figure><img src={`${stage === "A2" ? "../../" : lessonNumber === "01" ? "" : "../"}syllabus/syllabus-page-${syllabusBrief.page}.png`} alt={`Official Cambridge 9618 syllabus section ${syllabusBrief.section}`} /><figcaption>Cambridge 9618 · 2027-2029 syllabus · page {syllabusBrief.page}</figcaption></figure>
+            </section>
+          )}
+          <div className="route-toolbar"><div><b>{coreOnly ? "CORE ROUTE" : "FULL DECK"}</b><span>{coreOnly ? "Essential teaching sequence" : "Core teaching + optional extension"}</span></div><button type="button" className={coreOnly ? "active" : ""} onClick={() => { setCoreOnly((value) => !value); setCurrent(0); }}>{coreOnly ? "Show extension" : "Core only"}</button></div>
+          <div className="slide-frame">{visibleSlides[current].content}</div>
           <div className="deck-controls">
-            <div className="progress-label"><span>{String(current + 1).padStart(2, "0")} / {slides.length}</span><i><b style={{ width: `${(current + 1) / slides.length * 100}%` }} /></i></div>
-            <div className="arrow-controls"><button onClick={() => goTo(current - 1)} disabled={current === 0} aria-label="Previous slide">←</button><button onClick={() => goTo(current + 1)} disabled={current === slides.length - 1} aria-label="Next slide">→</button></div>
+            <div className="progress-label"><span>{String(current + 1).padStart(2, "0")} / {visibleSlides.length}</span><i><b style={{ width: `${(current + 1) / visibleSlides.length * 100}%` }} /></i></div>
+            <div className="arrow-controls"><button onClick={() => goTo(current - 1)} disabled={current === 0} aria-label="Previous slide">←</button><button onClick={() => goTo(current + 1)} disabled={current === visibleSlides.length - 1} aria-label="Next slide">→</button></div>
             <div className="shortcut-line"><button onClick={() => deckRef.current?.requestFullscreen?.()}>Full screen</button><span>← → navigate · F full screen · N notes</span></div>
           </div>
           <aside className="teacher-notes">
-            <div><span>TIME</span><b>{slides[current].time}</b></div>
-            <div><span>TEACHING FOCUS</span><p>{slides[current].focus}</p></div>
-            <div><span>PROMPT</span><p>{slides[current].prompt}</p></div>
-            <div><span>SOURCE</span><p>{slides[current].source}</p></div>
+            <div><span>TIME</span><b>{visibleSlides[current].time}</b></div>
+            <div><span>TEACHING FOCUS</span><p>{visibleSlides[current].focus}</p></div>
+            <div><span>PROMPT</span><p>{visibleSlides[current].prompt}</p></div>
+            <div><span>SOURCE</span><p>{visibleSlides[current].source}</p></div>
           </aside>
         </section>
       )}

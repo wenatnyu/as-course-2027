@@ -172,7 +172,7 @@ export function A2TheoryLesson({
       lessonLinks={buildA2LessonLinks(lessonNumber)}
       lessonCatalog={A2_PREVIEW_CATALOG}
       courseMapHref="../"
-      courseStageLabel="A2 · 2028"
+      courseStageLabel="A2 · 2027"
       qualificationLabel="A2 LESSON"
       siblingCourseHref="../../"
       siblingCourseLabel="AS"

@@ -274,7 +274,7 @@ for (const lesson of lessonArtifacts) {
 }
 
 const nestedCourseArtifacts = [
-  { flat: "a2.html", route: "a2", title: /A2 Course 2028/i, keyContent: /32-WEEK COURSE MAP|32-week dual track/i },
+  { flat: "a2.html", route: "a2", title: /A2 Course 2027/i, keyContent: /32-WEEK COURSE MAP|32-week dual track/i },
   { flat: "a2/lesson-01.html", route: "a2/lesson-01", title: /A2 Computer Science · Lesson 01/i, keyContent: /SYLLABUS 13\.1/i },
   { flat: "a2/lesson-02.html", route: "a2/lesson-02", title: /A2 Computer Science · Lesson 02/i, keyContent: /SYLLABUS 13\.2/i },
   { flat: "a2/lesson-03.html", route: "a2/lesson-03", title: /A2 Computer Science · Lesson 03/i, keyContent: /SYLLABUS 13\.2/i },

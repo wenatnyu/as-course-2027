@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { A2_PHASES, A2_WEEKLY_PLAN } from "../_data/a2-course";
 import "./a2-hub.css";
 
-const title = "Cambridge 9618 · A2 Course 2028";
+const title = "Cambridge 9618 · A2 Course 2027";
 const description = "A 32-week A2-stage Cambridge International A Level Computer Science course map with Paper 3 theory, Paper 4 Python practice, lessons and homework.";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
 const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
@@ -68,13 +68,13 @@ export default function A2CoursePage() {
   return (
     <main className="a2-hub">
       <header className="a2-hub-bar">
-        <a className="a2-hub-brand" href="./"><b>CS</b><span>Cambridge 9618<br />A2 · 2028</span></a>
-        <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../exam-papers/">Exam papers</a></nav>
-        <a className="a2-hub-cta" href="./lesson-28/">Open Chapter 20 →</a>
+        <a className="a2-hub-brand" href="./"><b>CS</b><span>Cambridge 9618<br />A2 · 2027</span></a>
+        <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../course-progress/">Progress</a><a href="../exam-papers/">Exam papers</a></nav>
+        <a className="a2-hub-cta" href="./lesson-01/">Start A2 →</a>
       </header>
 
       <section className="a2-hub-hero">
-        <div className="a2-hub-copy"><span>SEPTEMBER 2027 → MAY/JUNE 2028</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>A 32-week dual track: advanced theory for Paper 3, practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-28/">Open Chapter 20</a><a href="./lab-01/">Open Python lab</a></div></div>
+        <div className="a2-hub-copy"><span>21 SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>From AS foundations<br />to <em>A Level performance.</em></h1><p>Two protected 2-hour sessions each week: advanced theory for Paper 3, then practical Python and evidence discipline for Paper 4.</p><div className="a2-hub-actions"><a href="./lesson-01/">Start Lesson 01</a><a href="../course-progress/">Open live plan</a></div></div>
         <div className="a2-hub-scope" aria-label="A2 course scope"><div><strong>8</strong><span>syllabus sections</span></div><div><strong>32</strong><span>teaching weeks</span></div><div><strong>2</strong><span>parallel exam tracks</span></div></div>
       </section>
 
@@ -104,7 +104,7 @@ export default function A2CoursePage() {
       </section>
 
       <section className="a2-hub-section">
-        <header className="a2-section-heading"><span>32-WEEK COURSE MAP</span><h2>Content closes before the final mock cycle.</h2><p>Three guided 90-minute blocks per week are assumed: Paper 3 theory, Paper 4 lab and a retrieval/past-paper clinic. The two 150-minute practical mocks need protected extended sessions.</p></header>
+        <header className="a2-section-heading"><span>32-WEEK COURSE MAP</span><h2>Content closes before the final mock cycle.</h2><p>Two 120-minute sessions per week are assumed: one Paper 3 theory lesson with exam practice, and one Paper 4 Python lab. The practical mock weeks use the full 150-minute examination time.</p></header>
         <div className="a2-phase-track">{A2_PHASES.map((phase) => <article className={phase.tone} key={phase.weeks}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.detail}</p></article>)}</div>
         <div className="a2-week-table" role="table" aria-label="A2 32-week teaching plan">
           <div className="a2-week-head" role="row"><span role="columnheader">Week</span><span role="columnheader">Paper 3 · advanced theory</span><span role="columnheader">Paper 4 · Python practical</span></div>

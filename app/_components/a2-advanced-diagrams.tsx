@@ -46,6 +46,34 @@ export function PacketRoute({
   );
 }
 
+export function PacketBranchRoute() {
+  return (
+    <section className="a2-at-branch-route" aria-label="Packet switching with two possible paths">
+      <svg viewBox="0 0 900 300" role="img" aria-labelledby="branch-route-title branch-route-desc">
+        <title id="branch-route-title">Packets taking different routes</title>
+        <desc id="branch-route-desc">Alice sends three packets to Bob. Packet 01 and packet 03 take the upper path; packet 02 takes the lower path.</desc>
+        <path className="route trunk" d="M90 150 H245" />
+        <path className="route upper" d="M245 150 C320 150 320 72 430 72 H690 C745 72 745 150 810 150" />
+        <path className="route lower" d="M245 150 C320 150 320 228 430 228 H690 C745 228 745 150 810 150" />
+        <circle className="route-node host" cx="80" cy="150" r="25" />
+        <circle className="route-node router" cx="245" cy="150" r="25" />
+        <circle className="route-node router upper-node" cx="430" cy="72" r="25" />
+        <circle className="route-node router lower-node" cx="430" cy="228" r="25" />
+        <circle className="route-node host" cx="820" cy="150" r="25" />
+        <text className="route-node-label" x="80" y="155">A</text>
+        <text className="route-node-label router-label" x="245" y="155">R1</text>
+        <text className="route-node-label router-label" x="430" y="77">R2</text>
+        <text className="route-node-label router-label" x="430" y="233">R3</text>
+        <text className="route-node-label" x="820" y="155">B</text>
+        <text className="route-path-label upper-label" x="540" y="52">P01 · P03</text>
+        <text className="route-path-label lower-label" x="540" y="265">P02</text>
+        <text className="route-end-label" x="80" y="205">Alice</text>
+        <text className="route-end-label" x="820" y="205">Bob</text>
+      </svg>
+    </section>
+  );
+}
+
 export function PipelineGrid({
   instructions = 5,
   stages = ["IF", "ID", "OF", "IE", "WB"],
