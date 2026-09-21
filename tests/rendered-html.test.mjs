@@ -61,6 +61,9 @@ test("maps lesson navigation to chapter notes and serves the chapter PDF library
   assert.match(a2Html, /notes\/chapters\/#a2-14/);
   assert.match(libraryHtml, /One chapter/);
   assert.match(libraryHtml, /Computational Thinking and Problem-solving/);
+  assert.match(libraryHtml, /\/notes\/rendered\/as-theory\/chapter-01\/page-01\.webp/);
+  assert.match(libraryHtml, /\/notes\/rendered\/as-theory\/chapter-01\/page-04\.webp/);
+  assert.doesNotMatch(libraryHtml, /<object\b/i);
   const chapterData = await readFile(new URL("../app/_data/chapter-resources.ts", import.meta.url), "utf8");
   assert.match(chapterData, /znotes\.org\/caie\/a2-level\/computer-science-9618\/practical\/further-programming/);
 
@@ -72,6 +75,25 @@ test("maps lesson navigation to chapter notes and serves the chapter PDF library
   for (const relativePath of expectedPdfs) {
     const pdf = await stat(new URL(relativePath, import.meta.url));
     assert.ok(pdf.size > 100_000, `${relativePath} should contain a substantive chapter note`);
+  }
+
+  const renderedCollections = [
+    ["as-theory", [4, 6, 5, 6, 4, 3, 4, 4]],
+    ["as-practical", [2, 4, 3, 4]],
+    ["a2-theory", [3, 3, 5, 3, 3, 3]],
+  ];
+  let chapterNumber = 1;
+  for (const [collection, pageCounts] of renderedCollections) {
+    for (const pageCount of pageCounts) {
+      const folder = new URL(`../public/notes/rendered/${collection}/chapter-${String(chapterNumber).padStart(2, "0")}/`, import.meta.url);
+      const pages = (await readdir(folder)).filter((name) => name.endsWith(".webp"));
+      assert.equal(pages.length, pageCount, `Chapter ${chapterNumber} should have every rendered page`);
+      for (const page of pages) {
+        const image = await stat(new URL(page, folder));
+        assert.ok(image.size > 5_000, `${page} should be a substantive rendered note page`);
+      }
+      chapterNumber += 1;
+    }
   }
 });
 

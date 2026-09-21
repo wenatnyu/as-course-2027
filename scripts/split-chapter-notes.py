@@ -10,6 +10,7 @@ from __future__ import annotations
 from copy import copy
 from pathlib import Path
 
+import pypdfium2 as pdfium
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import RectangleObject
 
@@ -75,6 +76,18 @@ def add_segment(writer: PdfWriter, source_page, crop):
     writer.add_page(page)
 
 
+def render_for_web(pdf_path: Path, target_dir: Path) -> None:
+    """Render a browser-independent WebP page set for the chapter reader."""
+    target_dir.mkdir(parents=True, exist_ok=True)
+    document = pdfium.PdfDocument(pdf_path)
+    for index in range(len(document)):
+        page = document[index]
+        image = page.render(scale=2).to_pil().convert("RGB")
+        image.save(target_dir / f"page-{index + 1:02d}.webp", "WEBP", quality=90, method=6)
+        page.close()
+    document.close()
+
+
 def main() -> None:
     for collection, spec in SPECS.items():
         source = spec["source"]
@@ -94,6 +107,7 @@ def main() -> None:
             output = target_dir / f"chapter-{chapter:02d}.pdf"
             with output.open("wb") as file_handle:
                 writer.write(file_handle)
+            render_for_web(output, ROOT / "public" / "notes" / "rendered" / collection / f"chapter-{chapter:02d}")
 
 
 if __name__ == "__main__":

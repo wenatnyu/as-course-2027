@@ -4,6 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { A2_CHAPTERS, AS_CHAPTERS, type ChapterResource } from "../../_data/chapter-resources";
 
 const allChapters = [...AS_CHAPTERS, ...A2_CHAPTERS];
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function siteHref(href: string) {
+  return href.startsWith("/") ? `${basePath}${href}` : href;
+}
 
 function chapterHash(chapter: ChapterResource) {
   return `${chapter.stage.toLowerCase()}-${chapter.number}`;
@@ -12,6 +17,11 @@ function chapterHash(chapter: ChapterResource) {
 function lessonHref(chapter: ChapterResource, lesson: string) {
   if (chapter.stage === "AS") return lesson === "01" ? "../../" : `../../lesson-${lesson}/`;
   return `../../a2/lesson-${lesson}/`;
+}
+
+function renderedPageHref(chapter: ChapterResource, page: number) {
+  const base = chapter.pdfHref?.replace("/notes/", "/notes/rendered/").replace(/\.pdf$/, "");
+  return siteHref(`${base}/page-${String(page).padStart(2, "0")}.webp`);
 }
 
 function ChapterButton({ chapter, selected, onSelect }: { chapter: ChapterResource; selected: boolean; onSelect: (chapter: ChapterResource) => void }) {
@@ -65,15 +75,23 @@ export default function ChapterLibrary() {
           <nav className="chapter-actions" aria-label="Chapter actions">
             <a href={lessonHref(selected, selected.lessonStart)}>Start Lesson {selected.lessonStart}</a>
             <a href={lessonHref(selected, selected.lessonEnd)}>Final lesson {selected.lessonEnd}</a>
-            {selected.pdfHref && <a className="primary" href={selected.pdfHref} target="_blank" rel="noreferrer">Open / download PDF</a>}
-            {selected.extraHref && <a href={selected.extraHref}>Open visual HTML summary</a>}
+            {selected.pdfHref && <a className="primary" href={siteHref(selected.pdfHref)} target="_blank" rel="noreferrer">Open / download PDF</a>}
+            {selected.extraHref && <a href={siteHref(selected.extraHref)}>Open visual HTML summary</a>}
           </nav>
 
           {selected.pdfHref ? (
             <section className="pdf-reader" aria-label={`Chapter ${selected.number} PDF note`}>
-              <object data={`${selected.pdfHref}#view=FitH`} type="application/pdf">
-                <p>Your browser cannot display the embedded PDF. <a href={selected.pdfHref} target="_blank" rel="noreferrer">Open the chapter note.</a></p>
-              </object>
+              <div className="reader-note"><b>WEB READER</b><span>{selected.pageCount} pages · displayed directly below</span></div>
+              {Array.from({ length: selected.pageCount ?? 0 }, (_, index) => index + 1).map((page) => (
+                <figure className="note-page" key={page}>
+                  <img
+                    src={renderedPageHref(selected, page)}
+                    alt={`Chapter ${selected.number} note, page ${page} of ${selected.pageCount}`}
+                    loading={page === 1 ? "eager" : "lazy"}
+                  />
+                  <figcaption>Chapter {selected.number} · page {page} of {selected.pageCount}</figcaption>
+                </figure>
+              ))}
             </section>
           ) : (
             <section className="practical-pending">
