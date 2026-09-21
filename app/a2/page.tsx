@@ -69,7 +69,7 @@ export default function A2CoursePage() {
     <main className="a2-hub">
       <header className="a2-hub-bar">
         <a className="a2-hub-brand" href="./"><b>CS</b><span>Cambridge 9618<br />A2 · 2027</span></a>
-        <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../course-progress/">Progress</a><a href="../exam-papers/">Exam papers</a></nav>
+        <nav aria-label="Course areas"><a href="../">AS course</a><a className="active" href="./">A2 course</a><a href="../notes/chapters/#a2-13">Chapter notes</a><a href="../course-progress/">Progress</a><a href="../exam-papers/">Exam papers</a></nav>
         <a className="a2-hub-cta" href="./lesson-01/">Start A2 →</a>
       </header>
 
@@ -124,7 +124,7 @@ export default function A2CoursePage() {
 
       <section className="a2-hub-section">
         <header className="a2-section-heading"><span>COMPLETE A2 SCOPE</span><h2>Eight syllabus chapters, one connected sequence.</h2></header>
-        <div className="a2-chapter-grid">{syllabusChapters.map(([number, name, topics]) => <article className={completedChapters.has(number) ? "complete" : ""} key={number}><span>{number}</span><div><b>{name}</b><p>{topics}</p></div><em>{completedChapters.has(number) ? "COMPLETE" : "PLANNED"}</em></article>)}</div>
+        <div className="a2-chapter-grid">{syllabusChapters.map(([number, name, topics]) => <a className={completedChapters.has(number) ? "complete" : ""} href={`../notes/chapters/#a2-${number}`} key={number}><span>{number}</span><div><b>{name}</b><p>{topics}</p></div><em>OPEN NOTE →</em></a>)}</div>
       </section>
 
       <section className="a2-hub-section">

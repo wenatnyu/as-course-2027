@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getSyllabusBrief } from "../_data/course-schedule";
+import { A2_CHAPTERS, AS_CHAPTERS, getChapterForLesson } from "../_data/chapter-resources";
 
 export type SlideData = {
   time: string;
@@ -91,11 +92,13 @@ export function LessonSwitcher({
   root = false,
   links,
   lessonCatalog = COURSE_LESSONS,
+  stage = "AS",
 }: {
   lessonNumber: string;
   root?: boolean;
   links?: LessonLink[];
   lessonCatalog?: LessonCatalog;
+  stage?: "AS" | "A2";
 }) {
   const prefix = root ? "./" : "../";
   const generatedLinks = lessonCatalog.map(([number]) => ({
@@ -104,25 +107,45 @@ export function LessonSwitcher({
     active: number === lessonNumber,
   }));
   const navigationLinks = links?.length === lessonCatalog.length ? links : generatedLinks;
+  const chapters = stage === "AS" ? AS_CHAPTERS : A2_CHAPTERS;
+  const currentChapter = getChapterForLesson(stage, lessonNumber);
+  const chapterHref = currentChapter
+    ? stage === "A2"
+      ? `../../notes/chapters/#a2-${currentChapter.number}`
+      : `${root ? "./" : "../"}notes/chapters/#as-${currentChapter.number}`
+    : null;
 
   return (
     <>
       <div className="lesson-switcher" aria-label="Lesson navigation">
         {navigationLinks.map((link) => <a className={link.active ? "active" : ""} href={link.href} aria-current={link.active ? "page" : undefined} title={lessonCatalog.find(([number]) => number === link.label)?.[1]} key={link.label}>{link.label}</a>)}
       </div>
-      <label className="lesson-picker">
-        <span>Lesson</span>
+      <div className="lesson-nav-stack">
+        {currentChapter && chapterHref && <a className="chapter-chip" href={chapterHref}><span>CH</span><b>{currentChapter.number}</b><small>{currentChapter.title}</small><em>Notes</em></a>}
+        <label className="lesson-picker">
+          <span>Lesson</span>
         <select
           aria-label="Choose lesson"
           value={navigationLinks.find((link) => link.active)?.href ?? navigationLinks[0].href}
           onChange={(event) => window.location.assign(event.currentTarget.value)}
         >
-          {navigationLinks.map((link) => {
-            const title = lessonCatalog.find(([number]) => number === link.label)?.[1] ?? "Lesson";
-            return <option value={link.href} key={link.label}>{link.label} · {title}</option>;
+          {chapters.map((chapter) => {
+            const start = Number.parseInt(chapter.lessonStart, 10);
+            const end = Number.parseInt(chapter.lessonEnd, 10);
+            const chapterLinks = navigationLinks.filter((link) => {
+              if (link.label === "P01") return stage === "A2" && chapter.number === 20;
+              const number = Number.parseInt(link.label, 10);
+              return number >= start && number <= end;
+            });
+            if (!chapterLinks.length) return null;
+            return <optgroup label={`Chapter ${chapter.number} · ${chapter.title}`} key={chapter.number}>{chapterLinks.map((link) => {
+              const title = lessonCatalog.find(([number]) => number === link.label)?.[1] ?? "Lesson";
+              return <option value={link.href} key={link.label}>{link.label} · {title}</option>;
+            })}</optgroup>;
           })}
         </select>
-      </label>
+        </label>
+      </div>
     </>
   );
 }
@@ -390,7 +413,7 @@ export function LessonShell({
           {chapterNoteHref && <a className="chapter-note-link" href={chapterNoteHref}>{chapterNoteLabel}</a>}
         </nav>
         <div className="bar-actions">
-          <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} lessonCatalog={lessonCatalog} />
+          <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} lessonCatalog={lessonCatalog} stage={stage} />
           {view === "slides" && <button className={teacherMode ? "notes-toggle active" : "notes-toggle"} aria-pressed={teacherMode} onClick={() => setTeacherMode(!teacherMode)}>Notes {teacherMode ? "ON" : "OFF"}</button>}
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
         </div>

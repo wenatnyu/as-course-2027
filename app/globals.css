@@ -101,6 +101,13 @@ sub, sup { font-size: .6em; line-height: 0; }
 
 .lesson-picker { display: flex; align-items: center; gap: 8px; color: #d8dfeb; font: 800 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase; }
 .lesson-picker select { width: 260px; min-height: 38px; padding: 0 30px 0 11px; color: white; background: #26324c; border: 1px solid rgba(255,255,255,.32); border-radius: 2px; font: 750 14px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.lesson-nav-stack { min-width: 0; display: flex; align-items: center; gap: 9px; }
+.chapter-chip { min-width: 58px; min-height: 38px; padding: 5px 8px; display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; align-content: center; column-gap: 5px; color: white; background: rgba(200,240,93,.12); border: 1px solid rgba(200,240,93,.55); text-decoration: none; }
+.chapter-chip span, .chapter-chip em { color: var(--acid); font: 850 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; }
+.chapter-chip b { font: 800 15px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.chapter-chip small { max-width: 112px; overflow: hidden; color: #d8dfeb; font: 700 10px/1.15 ui-sans-serif, system-ui, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.chapter-chip em { grid-column: 1; grid-row: 2; font-style: normal; }
+.chapter-chip:hover { background: var(--acid); color: var(--ink); }.chapter-chip:hover span, .chapter-chip:hover em, .chapter-chip:hover small { color: var(--ink); }
 
 @media (max-width: 1600px) {
   .course-bar { grid-template-columns: minmax(180px, .7fr) minmax(350px, 1fr) minmax(265px, .85fr); }

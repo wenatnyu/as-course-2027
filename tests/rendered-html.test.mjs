@@ -30,7 +30,7 @@ test("server-renders the complete lesson, homework and roadmap shell", async () 
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
-test("serves the printable Communication note and links it from Lessons 07–10", async () => {
+test("serves the printable Communication note and maps Lessons 07–10 to Chapter 2", async () => {
   const noteResponse = await render("/notes/communication");
   assert.equal(noteResponse.status, 200);
   const noteHtml = await noteResponse.text();
@@ -41,8 +41,37 @@ test("serves the printable Communication note and links it from Lessons 07–10"
 
   for (const lessonNumber of ["07", "08", "09", "10"]) {
     const lessonHtml = await (await render(`/lesson-${lessonNumber}`)).text();
-    assert.match(lessonHtml, /\.\.\/notes\/communication\//);
-    assert.match(lessonHtml, /Communication note/);
+    assert.match(lessonHtml, /\.\.\/notes\/chapters\/#as-2/);
+    assert.match(lessonHtml, /Chapter 2 · Communication/);
+  }
+});
+
+test("maps lesson navigation to chapter notes and serves the chapter PDF library", async () => {
+  const [asLesson, a2Lesson, library] = await Promise.all([
+    render("/lesson-10"),
+    render("/a2/lesson-07"),
+    render("/notes/chapters"),
+  ]);
+  const [asHtml, a2Html, libraryHtml] = await Promise.all([asLesson.text(), a2Lesson.text(), library.text()]);
+
+  assert.match(asHtml, /CH<\/span><b>2<\/b>/);
+  assert.match(asHtml, /notes\/chapters\/#as-2/);
+  assert.match(asHtml, /Chapter 2 · Communication/);
+  assert.match(a2Html, /CH<\/span><b>14<\/b>/);
+  assert.match(a2Html, /notes\/chapters\/#a2-14/);
+  assert.match(libraryHtml, /One chapter/);
+  assert.match(libraryHtml, /Computational Thinking and Problem-solving/);
+  const chapterData = await readFile(new URL("../app/_data/chapter-resources.ts", import.meta.url), "utf8");
+  assert.match(chapterData, /znotes\.org\/caie\/a2-level\/computer-science-9618\/practical\/further-programming/);
+
+  const expectedPdfs = [
+    ...Array.from({ length: 8 }, (_, index) => `../public/notes/as-theory/chapter-${String(index + 1).padStart(2, "0")}.pdf`),
+    ...Array.from({ length: 4 }, (_, index) => `../public/notes/as-practical/chapter-${String(index + 9).padStart(2, "0")}.pdf`),
+    ...Array.from({ length: 6 }, (_, index) => `../public/notes/a2-theory/chapter-${index + 13}.pdf`),
+  ];
+  for (const relativePath of expectedPdfs) {
+    const pdf = await stat(new URL(relativePath, import.meta.url));
+    assert.ok(pdf.size > 100_000, `${relativePath} should contain a substantive chapter note`);
   }
 });
 
