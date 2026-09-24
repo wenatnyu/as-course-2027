@@ -343,6 +343,8 @@ export function LessonShell({
   examPapersHref = "../exam-papers/",
   chapterNoteHref,
   chapterNoteLabel = "Chapter note",
+  textbookHref,
+  textbookLabel = "Textbook",
 }: {
   lessonNumber: string;
   slides: SlideData[];
@@ -360,6 +362,8 @@ export function LessonShell({
   examPapersHref?: string;
   chapterNoteHref?: string;
   chapterNoteLabel?: string;
+  textbookHref?: string;
+  textbookLabel?: string;
 }) {
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
@@ -418,6 +422,13 @@ export function LessonShell({
           {view !== "slides" && <button className="print-control" onClick={() => window.print()}>Print / PDF</button>}
         </div>
       </header>
+
+      {textbookHref && (
+        <aside className="textbook-callout" aria-label="Coursebook reading">
+          <div><b>COURSEBOOK READING</b><span>Original pages matched to this lesson</span></div>
+          <a href={textbookHref}>{textbookLabel} <span aria-hidden="true">→</span></a>
+        </aside>
+      )}
 
       {view === "slides" && (
         <section className="deck-shell" ref={deckRef}>

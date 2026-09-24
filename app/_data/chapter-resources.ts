@@ -9,12 +9,14 @@ export type ChapterResource = {
   pageCount?: number;
   externalHref?: string;
   extraHref?: string;
+  textbookHref?: string;
+  textbookLabel?: string;
 };
 
 export const AS_CHAPTERS: ChapterResource[] = [
   { stage: "AS", number: 1, title: "Information Representation", lessonStart: "01", lessonEnd: "06", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-01.pdf", pageCount: 4 },
-  { stage: "AS", number: 2, title: "Communication", lessonStart: "07", lessonEnd: "10", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-02.pdf", pageCount: 6, extraHref: "/notes/communication/" },
-  { stage: "AS", number: 3, title: "Hardware", lessonStart: "11", lessonEnd: "16", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-03.pdf", pageCount: 5 },
+  { stage: "AS", number: 2, title: "Communication", lessonStart: "07", lessonEnd: "10", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-02.pdf", pageCount: 6, extraHref: "/notes/communication/", textbookHref: "/textbook/lesson-10/", textbookLabel: "Lesson 10 textbook · pp.41–47" },
+  { stage: "AS", number: 3, title: "Hardware", lessonStart: "11", lessonEnd: "16", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-03.pdf", pageCount: 5, textbookHref: "/textbook/lesson-11/", textbookLabel: "Lesson 11 textbook · pp.50–58" },
   { stage: "AS", number: 4, title: "Processor Fundamentals", lessonStart: "17", lessonEnd: "24", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-04.pdf", pageCount: 6 },
   { stage: "AS", number: 5, title: "System Software", lessonStart: "25", lessonEnd: "28", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-05.pdf", pageCount: 4 },
   { stage: "AS", number: 6, title: "Security, Privacy and Data Integrity", lessonStart: "29", lessonEnd: "32", noteType: "Theory", pdfHref: "/notes/as-theory/chapter-06.pdf", pageCount: 3 },

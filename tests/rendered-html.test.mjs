@@ -97,6 +97,34 @@ test("maps lesson navigation to chapter notes and serves the chapter PDF library
   }
 });
 
+test("serves the Lesson 10 and 11 coursebook extracts from lessons and chapter notes", async () => {
+  const [lesson10, lesson11, reader10, reader11, library] = await Promise.all([
+    render("/lesson-10"), render("/lesson-11"), render("/textbook/lesson-10"),
+    render("/textbook/lesson-11"), render("/notes/chapters"),
+  ]);
+  const [lesson10Html, lesson11Html, reader10Html, reader11Html, libraryHtml] = await Promise.all([
+    lesson10.text(), lesson11.text(), reader10.text(), reader11.text(), library.text(),
+  ]);
+
+  assert.match(lesson10Html, /Textbook pp\.41–47/);
+  assert.match(lesson11Html, /Textbook pp\.50–58/);
+  assert.match(reader10Html, /IP Addressing, URLs &amp; DNS/);
+  assert.match(reader10Html, /textbook\/rendered\/lesson-10\/page-07\.webp/);
+  assert.match(reader11Html, /Hardware Roles, Embedded Systems &amp; Storage/);
+  assert.match(reader11Html, /textbook\/rendered\/lesson-11\/page-09\.webp/);
+  assert.match(libraryHtml, /One chapter/);
+  const chapterData = await readFile(new URL("../app/_data/chapter-resources.ts", import.meta.url), "utf8");
+  assert.match(chapterData, /Lesson 10 textbook · pp\.41–47/);
+
+  for (const [lesson, pageCount] of [["10", 7], ["11", 9]]) {
+    const pdf = await stat(new URL(`../public/textbook/lesson-${lesson}.pdf`, import.meta.url));
+    assert.ok(pdf.size > 100_000, `Lesson ${lesson} coursebook PDF should be substantive`);
+    const folder = new URL(`../public/textbook/rendered/lesson-${lesson}/`, import.meta.url);
+    const pages = (await readdir(folder)).filter((name) => name.endsWith(".webp"));
+    assert.equal(pages.length, pageCount);
+  }
+});
+
 test("uses the configured static social image", async () => {
   const html = await (await render("/", "as-cs.example.test")).text();
   const configuredSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/").replace(/\/+$/, "");

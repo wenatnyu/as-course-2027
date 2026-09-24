@@ -77,6 +77,7 @@ export default function ChapterLibrary() {
             <a href={lessonHref(selected, selected.lessonEnd)}>Final lesson {selected.lessonEnd}</a>
             {selected.pdfHref && <a className="primary" href={siteHref(selected.pdfHref)} target="_blank" rel="noreferrer">Open / download PDF</a>}
             {selected.extraHref && <a href={siteHref(selected.extraHref)}>Open visual HTML summary</a>}
+            {selected.textbookHref && <a className="textbook" href={siteHref(selected.textbookHref)}>{selected.textbookLabel}</a>}
           </nav>
 
           {selected.pdfHref ? (

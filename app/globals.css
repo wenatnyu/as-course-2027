@@ -98,6 +98,8 @@ sub, sup { font-size: .6em; line-height: 0; }
   cursor: pointer;
 }
 .notes-toggle:hover, .print-control:hover, .notes-toggle.active { color: var(--ink); background: var(--acid); border-color: var(--acid); }
+.textbook-callout { width:min(1180px,calc(100% - 48px)); margin:18px auto 0; padding:11px 14px 11px 18px; display:flex; align-items:center; justify-content:space-between; gap:18px; color:var(--ink); background:#f7fbe9; border:1px solid #c7d996; border-left:5px solid var(--acid); box-shadow:0 8px 26px rgba(23,34,59,.08); }
+.textbook-callout>div { display:flex; align-items:baseline; gap:12px; }.textbook-callout b { font:850 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.1em; }.textbook-callout>div span { color:var(--muted); font-size:12px; }.textbook-callout>a { padding:9px 13px; color:#fff; background:var(--blue); font-size:12px; font-weight:850; text-decoration:none; white-space:nowrap; }.textbook-callout>a:hover { background:var(--ink); }
 
 .lesson-picker { display: flex; align-items: center; gap: 8px; color: #d8dfeb; font: 800 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase; }
 .lesson-picker select { width: 260px; min-height: 38px; padding: 0 30px 0 11px; color: white; background: #26324c; border: 1px solid rgba(255,255,255,.32); border-radius: 2px; font: 750 14px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
@@ -889,13 +891,16 @@ sub, sup { font-size: .6em; line-height: 0; }
   .source-footer { padding: 28px 22px; grid-template-columns: 1fr; }
   .source-footer > div:first-child, .source-links { align-items: flex-start; flex-direction: column; }
   .source-footer p { grid-column: 1; }
+  .textbook-callout { width:100%; margin:0; padding:10px 14px; border-top:0; border-right:0; border-left-width:4px; }
+  .textbook-callout>div span { display:none; }
+  .textbook-callout>a { padding:8px 10px; font-size:11px; }
 }
 
 @media print {
   @page { size: A4 portrait; margin: 13mm 14mm 15mm; }
   * { print-color-adjust: economy !important; -webkit-print-color-adjust: economy !important; }
   body { background: white; }
-  .course-bar, .source-footer, .homework-instructions button, .deck-controls, .teacher-notes { display: none !important; }
+  .course-bar, .textbook-callout, .source-footer, .homework-instructions button, .deck-controls, .teacher-notes { display: none !important; }
   .homework-page, .roadmap-page { width: auto; margin: 0; background: white; box-shadow: none; }
   .homework-page,
   .homework-page * { color: #000 !important; }
