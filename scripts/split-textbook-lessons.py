@@ -11,6 +11,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pypdfium2 as pdfium
+from PIL import Image
 from pypdf import PdfReader, PdfWriter
 
 
@@ -34,6 +35,22 @@ def render_for_web(pdf_path: Path, target_dir: Path) -> None:
     document.close()
 
 
+def compact_pdf_from_renders(target_dir: Path, pdf_path: Path) -> None:
+    """Replace the large scan extract with a classroom-quality compact PDF."""
+    images = [Image.open(path).convert("RGB") for path in sorted(target_dir.glob("page-*.webp"))]
+    images[0].save(
+        pdf_path,
+        "PDF",
+        save_all=True,
+        append_images=images[1:],
+        resolution=144,
+        quality=84,
+        optimize=True,
+    )
+    for image in images:
+        image.close()
+
+
 def main() -> None:
     if not SOURCE.exists():
         raise FileNotFoundError(SOURCE)
@@ -54,7 +71,9 @@ def main() -> None:
         output = pdf_dir / f"lesson-{lesson}.pdf"
         with output.open("wb") as file_handle:
             writer.write(file_handle)
-        render_for_web(output, render_dir / f"lesson-{lesson}")
+        lesson_render_dir = render_dir / f"lesson-{lesson}"
+        render_for_web(output, lesson_render_dir)
+        compact_pdf_from_renders(lesson_render_dir, output)
 
 
 if __name__ == "__main__":
