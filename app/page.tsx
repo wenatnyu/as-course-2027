@@ -407,6 +407,11 @@ export default function Home() {
         </div>
       </header>
 
+      <aside className="textbook-callout" aria-label="Coursebook reading">
+        <div><b>COURSEBOOK READING</b><span>Original pages matched to this lesson</span></div>
+        <a href="./textbook/lesson-01/">Textbook pp.3–6 <span aria-hidden="true">→</span></a>
+      </aside>
+
       {view === "slides" && (
         <section className="deck-shell" ref={deckRef}>
           {syllabusBrief && (

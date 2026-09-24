@@ -302,6 +302,8 @@ export default function Lesson13Client() {
   return (
     <LessonShell
       lessonNumber="13"
+      textbookHref="../textbook/lesson-13/"
+      textbookLabel="Textbook · pp.55–63"
       slides={slides}
       homework={<HomeworkSheet lessonNumber="13" title="How Hardware Devices Work" marks={30} minutes={45} syllabusLabel="SYLLABUS 3.1" sourceLabel="TEXTBOOK CH.3 · pp.55-63 + PAPER 1" instructions="Answer operation questions as ordered processes. Name the physical mechanism and the component causing each change. Past-paper prompts are concise adaptations with the exact session, paper, question and mark allocation shown." sections={homeworkSections} challenge={{ id: "l13-challenge", prompt: <p><Mark>CHALLENGE</Mark> A museum scans an object, stores the model, edits it and prints a replica. Trace the data through one input device, primary memory, secondary storage and a 3D printer.</p>, answer: <p>A scanner or camera captures data; the processor works on the model held in RAM; the saved CAD file is retained on secondary storage; slicing software converts it into layers; the 3D printer builds each layer additively until the replica is complete.</p> }} />}
       courseMapHref="../?view=roadmap"

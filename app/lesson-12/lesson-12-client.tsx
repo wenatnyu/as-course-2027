@@ -301,6 +301,8 @@ export default function Lesson12Client() {
   return (
     <LessonShell
       lessonNumber="12"
+      textbookHref="../textbook/lesson-12/"
+      textbookLabel="Textbook · pp.53–54"
       slides={slides}
       homework={<HomeworkSheet lessonNumber="12" title="RAM, ROM and Programmable Memory" marks={30} minutes={45} syllabusLabel="SYLLABUS 3.1" sourceLabel="TEXTBOOK 3.03 · pp.53-54 + PAPER 1" instructions="For every comparison, describe the same property on both sides. Use precise terms such as volatile, refresh, flip-flop, capacitor, ultraviolet and in-circuit. Past-paper prompts are concise adaptations with their original references and marks." sections={homeworkSections} challenge={{ id: "l12-challenge", prompt: <p><Mark>CHALLENGE</Mark> A wearable device needs very fast cache, affordable working memory and user-updatable firmware. Select three memory technologies and justify each.</p>, answer: <p>Use <strong>SRAM</strong> for cache because it is fast and needs no refresh; <strong>DRAM</strong> for working memory because it has high density and lower cost; and <strong>EEPROM</strong> for firmware because it is non-volatile and can be updated electrically while installed.</p> }} />}
       courseMapHref="../?view=roadmap"

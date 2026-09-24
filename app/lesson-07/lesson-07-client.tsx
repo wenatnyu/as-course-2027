@@ -378,6 +378,8 @@ export default function Lesson07Client() {
   return (
     <LessonShell
       lessonNumber="07"
+      textbookHref="../textbook/lesson-07/"
+      textbookLabel="Textbook · pp.26–38"
       slides={slides}
       homework={homework}
       lessonLinks={[

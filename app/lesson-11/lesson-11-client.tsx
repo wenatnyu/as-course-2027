@@ -302,6 +302,8 @@ export default function Lesson11Client() {
   return (
     <LessonShell
       lessonNumber="11"
+      textbookHref="../textbook/lesson-11/"
+      textbookLabel="Textbook · pp.50–58"
       slides={slides}
       homework={<HomeworkSheet lessonNumber="11" title="Hardware Roles, Embedded Systems & Buffers" marks={30} minutes={45} syllabusLabel="SYLLABUS 3.1" sourceLabel="TEXTBOOK CH.3 · pp.50-58 + PAPER 1" instructions="Use precise hardware roles. For every explanation, state the feature, its mechanism and its effect in the given situation. Past-paper prompts are concise adaptations with the original reference and mark allocation shown." sections={homeworkSections} challenge={{ id: "l11-challenge", prompt: <p><Mark>CHALLENGE</Mark> Design the data path in a wildlife camera from sensor input to long-term storage. Include one reason for a buffer.</p>, answer: <p>Light reaches an image sensor, which inputs digital image data. The processor applies instructions held in primary memory; a buffer temporarily holds frames when capture and writing rates differ; non-volatile secondary storage retains the files. A removable memory card would also allow physical transfer.</p> }} />}
       courseMapHref="../?view=roadmap"

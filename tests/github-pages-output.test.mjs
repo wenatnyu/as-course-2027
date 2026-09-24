@@ -20,8 +20,11 @@ test("emits a complete Lesson 01 GitHub Pages artifact", async () => {
   assert.match(html, /https:\/\/wenatnyu\.github\.io\/as-course-2027\/og\.png/);
 });
 
-test("emits the Lesson 10 and 11 coursebook readers and assets", async () => {
-  for (const [lesson, lastPage] of [["10", "07"], ["11", "09"]]) {
+test("emits every Chapter 1–4 coursebook reader and asset set", async () => {
+  const textbookPageCounts = [4, 3, 7, 7, 5, 3, 13, 5, 6, 7, 9, 2, 9, 3, 6, 5, 4, 4, 4, 10, 2, 3, 9, 8];
+  for (const [index, pageCount] of textbookPageCounts.entries()) {
+    const lesson = String(index + 1).padStart(2, "0");
+    const lastPage = String(pageCount).padStart(2, "0");
     const html = await readFile(new URL(`textbook/lesson-${lesson}/index.html`, outputRoot), "utf8");
     assert.match(html, new RegExp(`/as-course-2027/textbook/rendered/lesson-${lesson}/page-${lastPage}\\.webp`));
     await access(new URL(`textbook/lesson-${lesson}.pdf`, outputRoot));

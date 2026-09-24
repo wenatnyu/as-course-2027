@@ -344,6 +344,8 @@ export default function Lesson10Client() {
   return (
     <LessonShell
       lessonNumber="10"
+      textbookHref="../textbook/lesson-10/"
+      textbookLabel="Textbook · pp.41–47"
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"

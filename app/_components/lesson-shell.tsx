@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getSyllabusBrief } from "../_data/course-schedule";
 import { A2_CHAPTERS, AS_CHAPTERS, getChapterForLesson } from "../_data/chapter-resources";
+import { formatPrintedPages, getTextbookResource } from "../_data/textbook-resources";
 
 export type SlideData = {
   time: string;
@@ -371,6 +372,11 @@ export function LessonShell({
   const [coreOnly, setCoreOnly] = useState(false);
   const deckRef = useRef<HTMLDivElement>(null);
   const stage = courseStageLabel.startsWith("A2") ? "A2" : "AS";
+  const textbookResource = stage === "AS" ? getTextbookResource(lessonNumber) : null;
+  const resolvedTextbookHref = textbookHref ?? (textbookResource ? `../textbook/lesson-${lessonNumber}/` : undefined);
+  const resolvedTextbookLabel = textbookResource
+    ? `Textbook pp.${formatPrintedPages(textbookResource.printedPages)}`
+    : textbookLabel;
   const syllabusBrief = getSyllabusBrief(stage, lessonNumber);
   const explicitlyPlannedCore = slides.some((slide) => slide.core !== undefined);
   const defaultCoreLimit = stage === "AS" ? Math.min(8, slides.length) : Math.min(10, slides.length);
@@ -423,10 +429,10 @@ export function LessonShell({
         </div>
       </header>
 
-      {textbookHref && (
+      {resolvedTextbookHref && (
         <aside className="textbook-callout" aria-label="Coursebook reading">
           <div><b>COURSEBOOK READING</b><span>Original pages matched to this lesson</span></div>
-          <a href={textbookHref}>{textbookLabel} <span aria-hidden="true">→</span></a>
+          <a href={resolvedTextbookHref}>{resolvedTextbookLabel} <span aria-hidden="true">→</span></a>
         </aside>
       )}
 

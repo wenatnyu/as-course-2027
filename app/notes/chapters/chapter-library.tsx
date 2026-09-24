@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { A2_CHAPTERS, AS_CHAPTERS, type ChapterResource } from "../../_data/chapter-resources";
+import { formatPrintedPages, TEXTBOOK_RESOURCES } from "../../_data/textbook-resources";
 
 const allChapters = [...AS_CHAPTERS, ...A2_CHAPTERS];
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -77,7 +78,11 @@ export default function ChapterLibrary() {
             <a href={lessonHref(selected, selected.lessonEnd)}>Final lesson {selected.lessonEnd}</a>
             {selected.pdfHref && <a className="primary" href={siteHref(selected.pdfHref)} target="_blank" rel="noreferrer">Open / download PDF</a>}
             {selected.extraHref && <a href={siteHref(selected.extraHref)}>Open visual HTML summary</a>}
-            {selected.textbookHref && <a className="textbook" href={siteHref(selected.textbookHref)}>{selected.textbookLabel}</a>}
+            {selected.stage === "AS" && TEXTBOOK_RESOURCES.filter((resource) => resource.chapter === selected.number).map((resource) => (
+              <a className="textbook" href={siteHref(`/textbook/lesson-${resource.lesson}/`)} key={resource.lesson}>
+                Lesson {resource.lesson} textbook · pp.{formatPrintedPages(resource.printedPages)}
+              </a>
+            ))}
           </nav>
 
           {selected.pdfHref ? (
