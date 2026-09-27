@@ -3,7 +3,7 @@ import "../assembly-lessons.css";
 import Lesson23Client from "./lesson-23-client";
 
 const title = "AS Computer Science · Lesson 23";
-const description = "A 90-minute Cambridge 9618 lesson on instruction groups and tracing assembly-language programs.";
+const description = "A 40-minute Cambridge 9618 core lesson with optional extension on instruction groups and tracing assembly-language programs.";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
 const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
 const lessonUrl = new URL("lesson-23/", siteUrl).toString();

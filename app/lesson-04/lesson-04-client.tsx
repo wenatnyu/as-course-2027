@@ -39,8 +39,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l4-1",
         marks: 2,
         lines: 3,
-        prompt: <><b>Explain why a character set is required.</b><p>Refer to both characters and binary.</p></>,
-        answer: <p>A character set assigns each character a <strong>unique numeric code</strong>; that code can be stored as a <strong>binary pattern</strong>. The same agreed mapping lets a receiver interpret the bits correctly. <em>[1 unique mapping; 1 binary/interpretation]</em></p>,
+        prompt: <><Mark>PAST PAPER · ADAPTED</Mark><p><b>Explain how text is represented using a character set.</b></p><p>Adapted from 9618/13 O/N 2025 Q1(b). [2]</p></>,
+        answer: <p>Each character has a <strong>unique code</strong>; each character in the text is replaced, in order, by its code and stored in binary. <em>[1 unique code; 1 sequential replacement]</em></p>,
       },
       {
         id: "l4-2",
@@ -149,7 +149,7 @@ export default function Lesson04Client() {
       content: (
         <Slide number="01" eyebrow="INFORMATION REPRESENTATION" sourceLabel="TEXTBOOK 1.04-1.05 · pp.14-20" syllabusLabel="SYLLABUS 1.1 · SYLLABUS 1.2" className="slide--l4-title">
           <section className="l4-title-grid">
-            <div><span>LESSON 04 · 90 MINUTES</span><h1>Character Data<br /><em>&amp; Bitmap Graphics</em></h1><p>Bits become meaningful when a shared code tells us how to read them.</p></div>
+            <div><span>LESSON 04 · 40-MINUTE CORE</span><h1>Character Data<br /><em>&amp; Bitmap Graphics</em></h1><p>Bits become meaningful when a shared code tells us how to read them.</p></div>
             <div className="l4-dual-code"><article><small>AS TEXT</small><code>0100 0001</code><b>A</b></article><article><small>AS PIXELS</small><div className="l4-mini-pixels"><i /><i /><i /><i /><i /><i /><i /><i /></div><b>an image fragment</b></article></div>
           </section>
         </Slide>
@@ -345,8 +345,11 @@ export default function Lesson04Client() {
   return (
     <LessonShell
       lessonNumber="04"
+      defaultCoreOnly
       textbookHref="../textbook/lesson-04/"
       textbookLabel="Textbook · pp.14–20"
+      chapterNoteHref="../notes/chapters/#as-1"
+      chapterNoteLabel="Chapter 1 ZNotes"
       slides={slides}
       homework={homework}
       lessonLinks={[
@@ -359,8 +362,8 @@ export default function Lesson04Client() {
         { label: "07", href: "../lesson-07/" },
       ]}
       courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.14-20 and representative AS Paper 1 questions from 2024-2025."
-      sourceDetail="Syllabus p.14 Section 1.1: character data, ASCII, extended ASCII and Unicode; p.15 Section 1.2: bitmap encoding, pixels, file headers, image/screen resolution, colour depth, file-size estimation and quality effects · Coursebook Section 1.04 printed pp.14-16 and bitmap material in Section 1.05 printed pp.18-20 · Recent anchors: 2024 M/J 13 Q1(d), 2025 M/J 11 Q3, 2025 M/J 13 Q1(a,c) and 2025 O/N 11 Q7(d). UTF-8 is labelled textbook context. Individual character codes are supplied rather than memorised."
+      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.14-20 and locally archived 2024 AS Paper 1 questions."
+      sourceDetail="Syllabus p.14 Section 1.1: character data, ASCII, extended ASCII and Unicode; p.15 Section 1.2: bitmap encoding, pixels, file headers, image/screen resolution, colour depth, file-size estimation and quality effects · Coursebook Section 1.04 printed pp.14-16 and bitmap material in Section 1.05 printed pp.18-20 · Verified anchor: 2024 M/J 13 Q1(d). UTF-8 is labelled textbook context. Individual character codes are supplied rather than memorised."
     />
   );
 }

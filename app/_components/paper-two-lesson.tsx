@@ -78,7 +78,7 @@ export function PaperTwoLesson({ spec }: { spec: PaperTwoLessonSpec }) {
   const slides: SlideData[] = [
     {
       time: `${timings[0]} min`, focus: `Frame ${spec.title} within syllabus Chapter ${spec.chapter}.`, prompt: "Read the lesson question and ask students to predict the exam action words.", source: `${spec.textbook}; syllabus ${spec.syllabus}.`,
-      content: <Slide number="01" eyebrow={`CHAPTER ${spec.chapter} · ${spec.chapterTitle.toUpperCase()}`} sourceLabel={spec.textbook} syllabusLabel={`SYLLABUS ${spec.syllabus}`} className="p2-title"><section className="p2-title-grid"><div><span>LESSON {spec.lessonNumber} · 90 MINUTES · PAPER 2</span><h1>{spec.title}</h1><p>{spec.tagline}</p></div><div className="p2-title-map">{spec.concepts.slice(0, 4).map((item, index) => <article key={item.label}><b>{String(index + 1).padStart(2, "0")}</b><span>{item.label}</span></article>)}</div></section></Slide>,
+      content: <Slide number="01" eyebrow={`CHAPTER ${spec.chapter} · ${spec.chapterTitle.toUpperCase()}`} sourceLabel={spec.textbook} syllabusLabel={`SYLLABUS ${spec.syllabus}`} className="p2-title"><section className="p2-title-grid"><div><span>LESSON {spec.lessonNumber} · 40-MINUTE CORE · PAPER 2</span><h1>{spec.title}</h1><p>{spec.tagline}</p></div><div className="p2-title-map">{spec.concepts.slice(0, 4).map((item, index) => <article key={item.label}><b>{String(index + 1).padStart(2, "0")}</b><span>{item.label}</span></article>)}</div></section></Slide>,
     },
     {
       time: `${timings[1]} min`, focus: "Make the assessed outcomes explicit before teaching details.", prompt: "Students paraphrase each outcome using an exam command word.", source: `2027–2029 syllabus ${spec.syllabus}.`,

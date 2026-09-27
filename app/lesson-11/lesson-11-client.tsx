@@ -124,7 +124,7 @@ export default function Lesson11Client() {
       source: "Coursebook Chapter 3 opening, printed p.50; syllabus 3.1.",
       content: (
         <Slide number="01" eyebrow="HARDWARE" sourceLabel="TEXTBOOK CH.3 · p.50" syllabusLabel="SYLLABUS 3.1" className="slide--l11-title">
-          <section className="l11-title-grid"><div><span>LESSON 11 · 90 MINUTES</span><h1>Hardware has<br /><em>a role in the flow.</em></h1><p>Input. Store. Process. Output. Then manage speed differences without losing data.</p></div><div className="l11-system-loop" role="img" aria-label="Input, processing, storage and output arranged as a system"><b>INPUT</b><i>→</i><b>PROCESS</b><i>↔</i><b>STORE</b><i>→</i><b>OUTPUT</b></div></section>
+          <section className="l11-title-grid"><div><span>LESSON 11 · 40-MINUTE CORE</span><h1>Hardware has<br /><em>a role in the flow.</em></h1><p>Input. Store. Process. Output. Then manage speed differences without losing data.</p></div><div className="l11-system-loop" role="img" aria-label="Input, processing, storage and output arranged as a system"><b>INPUT</b><i>→</i><b>PROCESS</b><i>↔</i><b>STORE</b><i>→</i><b>OUTPUT</b></div></section>
         </Slide>
       ),
     },

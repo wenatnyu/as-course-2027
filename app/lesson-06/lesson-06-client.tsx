@@ -53,8 +53,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l6-3",
         marks: 4,
         lines: 4,
-        prompt: <><b>Choose and justify a compression category for each task.</b><p>(a) Archiving a program&apos;s source code. [2]</p><p>(b) Sending a small preview of a photograph. [2]</p></>,
-        answer: <p><b>(a) Lossless:</b> every character must be recovered exactly or the program may change or fail. <b>(b) Lossy:</b> a small reduction in visual detail may be acceptable and can produce a smaller file for transfer. <em>[1 choice + 1 task-linked reason each]</em></p>,
+        prompt: <><Mark>PAST PAPER · ADAPTED</Mark><p><b>(a) A sound file is compressed by reducing its sampling rate. State whether this is lossy or lossless and justify. [2]</b></p><p><b>(b) Explain why lossless compression is more appropriate than lossy compression for a text file. [2]</b></p><p>9618/12 O/N 2025 Q6(a) + 9618/12 O/N 2022 Q8(c)(ii)</p></>,
+        answer: <p><b>(a) Lossy:</b> samples are permanently removed, so the original cannot be reconstructed exactly. <b>(b) Lossless:</b> all characters/data are required; losing data could corrupt the text or change its meaning. <em>[2 + 2]</em></p>,
       },
     ],
   },
@@ -104,7 +104,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l6-8",
         marks: 5,
         lines: 5,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>An image is compressed before it is transferred online.</b></p><p>(a) State three benefits of using lossy rather than lossless compression. [3]</p><p>(b) Explain how RLE can compress the bitmap data. [2]</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>An image is compressed before it is transferred online.</b></p><p>(a) State three benefits of using lossy rather than lossless compression. [3]</p><p>(b) Explain how RLE can compress the bitmap data. [2]</p></>,
         answer: <p><b>(a)</b> Any three: <strong>less storage than lossless</strong>, <strong>faster transfer/download than lossless</strong>, <strong>less bandwidth</strong>, or <strong>less data allowance used</strong>. <b>(b)</b> Identify <strong>consecutive pixels with the same colour</strong>, then store the colour/pattern and the <strong>number of repetitions</strong> rather than every pixel separately. <em>[3 + 2]</em></p>,
       },
       {
@@ -135,7 +135,7 @@ export default function Lesson06Client() {
       content: (
         <Slide number="01" eyebrow="INFORMATION REPRESENTATION" sourceLabel="TEXTBOOK 1.07 · pp.21-23" syllabusLabel="SYLLABUS 1.3 · p.15" className="slide--l6-title">
           <section className="l6-title-grid">
-            <div><span>LESSON 06 · 90 MINUTES</span><h1>Compression<br /><em>Keep the meaning. Store less.</em></h1><p>Choose what may be discarded, preserve what must remain exact, and encode repeated data efficiently.</p></div>
+            <div><span>LESSON 06 · 40-MINUTE CORE</span><h1>Compression<br /><em>Keep the meaning. Store less.</em></h1><p>Choose what may be discarded, preserve what must remain exact, and encode repeated data efficiently.</p></div>
             <div className="l6-title-code"><article><small>ORIGINAL</small><code>A A A A A A B B B C C C C</code></article><b>declared count/value rule</b><article><small>RLE</small><code>(6,A) (3,B) (4,C)</code></article></div>
           </section>
         </Slide>
@@ -293,7 +293,7 @@ export default function Lesson06Client() {
       source: "Adapted from 9618/13 M/J 2024 Q2(b)(i)-(ii).",
       content: (
         <Slide number="14" eyebrow="PAST PAPER PRACTICE · 5 MARKS" sourceLabel="Adapted from 9618/13 M/J 2024 Q2(b)" syllabusLabel="SYLLABUS 1.3" title="Benefits first. Then explain the RLE mechanism." className="slide--l6-past-paper">
-          <div className="l6-paper-banner"><Mark>PAST PAPER PRACTICE</Mark><span>9618/13 · MAY/JUNE 2024 · Q2(b) · ADAPTED</span></div>
+          <div className="l6-paper-banner"><Mark>ADAPTED FROM PAST PAPER</Mark><span>9618/13 · MAY/JUNE 2024 · Q2(b)</span></div>
           <section className="l6-paper-grid"><article><span>01 · LOSSY · [3]</span><p>State three benefits of using lossy rather than lossless compression before online transfer.</p><Reveal id="paper-lossy" visible={revealed.has("paper-lossy")} onToggle={toggleReveal}><p>Any three: <strong>less storage than lossless</strong>, <strong>faster transfer than lossless</strong>, <strong>less bandwidth</strong>, <strong>less data allowance</strong>.</p></Reveal></article><article><span>02 · RLE · [2]</span><p>Explain how RLE can compress the bitmap data.</p><Reveal id="paper-rle" visible={revealed.has("paper-rle")} onToggle={toggleReveal}><p>Find <strong>consecutive same-colour pixels</strong>; store the colour/pattern and its <strong>count</strong>.</p></Reveal></article></section>
         </Slide>
       ),
@@ -333,8 +333,11 @@ export default function Lesson06Client() {
   return (
     <LessonShell
       lessonNumber="06"
+      defaultCoreOnly
       textbookHref="../textbook/lesson-06/"
       textbookLabel="Textbook · pp.21–23"
+      chapterNoteHref="../notes/chapters/#as-1"
+      chapterNoteLabel="Chapter 1 ZNotes"
       slides={slides}
       homework={homework}
       lessonLinks={[

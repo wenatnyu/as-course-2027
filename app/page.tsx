@@ -33,8 +33,8 @@ const weeklyPlan = [
   ["05", "Vector graphics, sound and file-size calculations", "L41 · Abstraction and decomposition"],
   ["06", "Lossy/lossless compression and RLE", "L42 · Algorithm design, identifiers and IPO"],
   ["07", "Networks: models, topologies, hardware", "L45 · Data types and records"],
-  ["08", "Cloud computing; wired/wireless media", "L46 · One-dimensional arrays and linear search · diagnostic 1"],
-  ["09", "Ethernet, internet infrastructure and streaming", "L48 · Two-dimensional arrays and arrays of records"],
+  ["08", "Topologies, packet paths and cloud", "L46 · One-dimensional arrays and linear search · diagnostic 1"],
+  ["09", "Network media, LAN hardware, Ethernet and streaming", "L48 · Two-dimensional arrays and arrays of records"],
   ["10", "IP addressing, subnetting, URL and DNS", "L49 · Sequential text files and persistence"],
   ["11", "Hardware roles, embedded systems and buffers", "L43 · Structured English, flowcharts, pseudocode and logic"],
   ["12", "RAM/ROM and primary-memory families", "L55 · Modules, scope, procedures and functions"],
@@ -128,6 +128,7 @@ export default function Home() {
   const [view, setView] = useState<View>("slides");
   const [current, setCurrent] = useState(0);
   const [teacherMode, setTeacherMode] = useState(false);
+  const [coreOnly, setCoreOnly] = useState(true);
   const [bits, setBits] = useState([0, 0, 1, 0, 1, 1, 1, 0]);
   const [hookRevealed, setHookRevealed] = useState(false);
   const [practiceRevealed, setPracticeRevealed] = useState(false);
@@ -361,9 +362,14 @@ export default function Home() {
     },
   ];
 
+  const coreRoute = [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 15].map((slideNumber) => slides[slideNumber - 1]);
+  const coreTimes = ["2 min · 02", "2 min · 04", "3 min · 07", "3 min · 10", "4 min · 14", "3 min · 17", "4 min · 21", "5 min · 26", "5 min · 31", "5 min · 36", "4 min · 40"];
+  const visibleSlides = coreOnly ? coreRoute : slides;
+  const currentIsCore = coreRoute.includes(visibleSlides[current]);
+
   const goTo = useCallback((next: number) => {
-    setCurrent(Math.max(0, Math.min(slides.length - 1, next)));
-  }, [slides.length]);
+    setCurrent(Math.max(0, Math.min(visibleSlides.length - 1, next)));
+  }, [visibleSlides.length]);
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("view") === "roadmap") {
@@ -380,13 +386,13 @@ export default function Home() {
       if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); goTo(current + 1); }
       if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); goTo(current - 1); }
       if (event.key === "Home") goTo(0);
-      if (event.key === "End") goTo(slides.length - 1);
+      if (event.key === "End") goTo(visibleSlides.length - 1);
       if (event.key.toLowerCase() === "n") setTeacherMode((value) => !value);
       if (event.key.toLowerCase() === "f") deckRef.current?.requestFullscreen?.();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [current, view, slides.length, goTo]);
+  }, [current, view, visibleSlides.length, goTo]);
 
   return (
     <main className={teacherMode ? "teacher-mode" : "student-mode"}>
@@ -396,9 +402,8 @@ export default function Home() {
           <button className={view === "slides" ? "active" : ""} aria-pressed={view === "slides"} onClick={() => setView("slides")}>Slides</button>
           <button className={view === "homework" ? "active" : ""} aria-pressed={view === "homework"} onClick={() => setView("homework")}>Homework</button>
           <button className={view === "roadmap" ? "active" : ""} aria-pressed={view === "roadmap"} onClick={() => setView("roadmap")}>Course map</button>
-          <a href="./course-progress/">Progress</a>
-          <a href="./a2/">A2</a>
           <a href="./exam-papers/">Papers</a>
+          <a href="./a2/">A2</a>
         </nav>
         <div className="bar-actions">
           <LessonSwitcher lessonNumber="01" root />
@@ -407,9 +412,9 @@ export default function Home() {
         </div>
       </header>
 
-      <aside className="textbook-callout" aria-label="Coursebook reading">
-        <div><b>COURSEBOOK READING</b><span>Original pages matched to this lesson</span></div>
-        <a href="./textbook/lesson-01/">Textbook pp.3–6 <span aria-hidden="true">→</span></a>
+      <aside className="textbook-callout lesson-resource-strip" aria-label="Lesson resources">
+        <div><b>LESSON RESOURCES</b><span>Matched reading for this lesson</span></div>
+        <div className="lesson-resource-links"><a href="./textbook/lesson-01/">Textbook pp.3–6 <span aria-hidden="true">→</span></a><a className="notes-resource" href="./notes/chapters/#as-1">Chapter 1 ZNotes <span aria-hidden="true">→</span></a></div>
       </aside>
 
       {view === "slides" && (
@@ -417,20 +422,24 @@ export default function Home() {
           {syllabusBrief && (
             <section className="syllabus-brief" aria-label="Official syllabus focus">
               <div className="syllabus-brief-copy"><span>OFFICIAL SYLLABUS · {syllabusBrief.section}</span><h1>{syllabusBrief.title}</h1><p>{syllabusBrief.outcome}</p><div><b>40-minute core</b><small>essential teaching sequence</small><b>Optional extension</b><small>use when students are secure</small></div></div>
-              <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}` }} src={`syllabus/syllabus-page-${syllabusBrief.page}.png`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
+              <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}`, objectFit: syllabusBrief.asset ? "contain" : "cover" }} src={`syllabus/${syllabusBrief.asset ?? `syllabus-page-${syllabusBrief.page}.png`}`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
             </section>
           )}
-          <div className="slide-frame">{slides[current].content}</div>
+          <div className="route-toolbar"><div><b>{coreOnly ? "CORE ROUTE" : "FULL DECK"}</b><span>{coreOnly ? "40-minute essential teaching sequence" : "Core teaching + optional support"}</span></div><button type="button" className={coreOnly ? "active" : ""} onClick={() => { setCoreOnly((value) => !value); setCurrent(0); }}>{coreOnly ? "Show extension" : "Core only"}</button></div>
+          <div className="slide-frame">
+            {!coreOnly && !currentIsCore && <div className="extension-ribbon"><b>OPTIONAL SUPPORT</b><span>Use after the 40-minute core · check the source badge</span></div>}
+            {visibleSlides[current].content}
+          </div>
           <div className="deck-controls">
-            <div className="progress-label"><span>{String(current + 1).padStart(2, "0")} / {slides.length}</span><i><b style={{ width: `${(current + 1) / slides.length * 100}%` }} /></i></div>
-            <div className="arrow-controls"><button onClick={() => goTo(current - 1)} disabled={current === 0} aria-label="Previous slide">←</button><button onClick={() => goTo(current + 1)} disabled={current === slides.length - 1} aria-label="Next slide">→</button></div>
+            <div className="progress-label"><span>{String(current + 1).padStart(2, "0")} / {visibleSlides.length}</span><i><b style={{ width: `${(current + 1) / visibleSlides.length * 100}%` }} /></i></div>
+            <div className="arrow-controls"><button onClick={() => goTo(current - 1)} disabled={current === 0} aria-label="Previous slide">←</button><button onClick={() => goTo(current + 1)} disabled={current === visibleSlides.length - 1} aria-label="Next slide">→</button></div>
             <div className="shortcut-line"><button onClick={() => deckRef.current?.requestFullscreen?.()}>Full screen</button><span>← → navigate · F full screen · N notes</span></div>
           </div>
           <aside className="teacher-notes">
-            <div><span>TIME</span><b>{slides[current].time}</b></div>
-            <div><span>TEACHING FOCUS</span><p>{slides[current].focus}</p></div>
-            <div><span>PROMPT</span><p>{slides[current].prompt}</p></div>
-            <div><span>SOURCE</span><p>{slides[current].source}</p></div>
+            <div><span>TIME</span><b>{coreOnly ? coreTimes[current] : visibleSlides[current].time}</b></div>
+            <div><span>TEACHING FOCUS</span><p>{visibleSlides[current].focus}</p></div>
+            <div><span>PROMPT</span><p>{visibleSlides[current].prompt}</p></div>
+            <div><span>SOURCE</span><p>{visibleSlides[current].source}</p></div>
           </aside>
         </section>
       )}
@@ -439,13 +448,13 @@ export default function Home() {
         <section className={allAnswersVisible ? "homework-page all-answers-visible" : "homework-page"}>
           <header className="homework-hero">
             <div><span>AS COMPUTER SCIENCE · 9618</span><h1>Homework 01</h1><p>Binary, denary and hexadecimal</p></div>
-            <div className="homework-stats"><p><b>30</b><span>marks</span></p><p><b>35</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>
+            <div className="homework-stats"><p><b>22</b><span>core marks</span></p><p><b>30</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>
           </header>
           <div className="student-fields"><span>Name __________________________</span><span>Class __________</span><span>Date __________</span></div>
           <div className="homework-instructions"><div className="homework-source-badges"><Mark>SYLLABUS 1.1</Mark><span className="textbook-mark">COURSEBOOK 1.01 · pp.3-6 &amp; p.24</span></div><p>Show working for every conversion. Use subscripts or clearly label each number base. Complete without a calculator.</p><button type="button" onClick={toggleAllAnswers}>{allAnswersVisible ? "Hide all answers" : "Show all answers"}</button></div>
 
           <section className="homework-section">
-            <div className="homework-section__title"><span>A</span><div><h2>Foundations</h2><p>Vocabulary and place value</p></div><b>8 marks</b></div>
+            <div className="homework-section__title"><span>A</span><div><h2>Foundations + past paper</h2><p>Vocabulary, place value and cited Paper 1 conversion</p></div><b>8 marks</b></div>
             <ol className="question-list">
               <li>
                 <div className="question-copy"><b>Define each term.</b><p>(a) bit &nbsp;&nbsp; (b) nibble &nbsp;&nbsp; (c) byte</p></div><span>[3]</span>
@@ -455,10 +464,10 @@ export default function Home() {
                 </InlineAnswer>
               </li>
               <li>
-                <div className="question-copy"><b>Complete the place-value statement.</b><p>110101<sub>2</sub> = 1×___ + 1×___ + 0×___ + 1×___ + 0×___ + 1×___</p><p>Hence, convert 110101<sub>2</sub> to denary.</p></div><span>[3]</span>
+                <div className="question-copy"><Mark>PAST PAPER · ADAPTED</Mark><p><b>(a) Convert the unsigned binary integer 110001100111 into hexadecimal. [1]</b></p><p><b>(b) Convert A04<sub>16</sub> into denary. Show working. [2]</b></p><p>9618/11 O/N 2024 Q1(b)(i) + 9618/12 M/J 2023 Q4(c)</p></div><span>[3]</span>
                 <div className="writing-lines lines-3" />
                 <InlineAnswer id="2" visible={revealedAnswers.has("2")} onToggle={toggleAnswer}>
-                  <p>1×<b>32</b> + 1×<b>16</b> + 0×<b>8</b> + 1×<b>4</b> + 0×<b>2</b> + 1×<b>1</b>; 32 + 16 + 4 + 1 = <strong>53</strong>. <em>[1 complete place values; 1 valid addition; 1 answer]</em></p>
+                  <p><b>(a)</b> Group into nibbles: 1100 0110 0111 = <strong>C67<sub>16</sub></strong>. <b>(b)</b> 10×16² + 0×16 + 4 = 2560 + 4 = <strong>2564<sub>10</sub></strong>. <em>[1 + 2]</em></p>
                 </InlineAnswer>
               </li>
               <li>
@@ -498,7 +507,8 @@ export default function Home() {
             </ol>
           </section>
 
-          <section className="homework-section">
+          <section className="homework-section homework-section--optional">
+            <div className="homework-optional-banner"><b>OPTIONAL EXTENSION</b><span>8 additional marks · use after the core homework is secure</span></div>
             <div className="homework-section__title"><span>C</span><div><h2>Coursebook exam application</h2><p>Exam-style Question 1(a-b), then two checks</p></div><b>8 marks</b></div>
             <ol className="question-list" start={7}>
               <li>
@@ -537,7 +547,7 @@ export default function Home() {
 
       {view === "roadmap" && (
         <section className="roadmap-page">
-          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Plan three 90-minute guided blocks per week during content teaching: Paper 1 theory, Paper 2 problem-solving and a rotating workshop. The 63-lesson resource library follows syllabus chapter order; the teaching calendar runs Paper 1 and Paper 2 in parallel. In Weeks 17-28 the workshop carries the second theory lesson needed to finish Chapter 8 without reducing the four-week exam phase.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
+          <header className="roadmap-hero"><div><span>SEPTEMBER 2026 → MAY/JUNE 2027</span><h1>32 teaching weeks<br />to exam-ready.</h1><p>Use the daily 40-minute lessons for a clear core route, then assign optional support only when needed. The 63-lesson resource library follows syllabus chapter order; the teaching calendar balances Paper 1 theory, Paper 2 problem-solving and later timed-paper practice.</p></div><div className="roadmap-year"><b>2027</b><span>AS EXAM</span></div></header>
           <div className="phase-track">{phases.map((phase) => <div key={phase.weeks} style={{ flex: phase.span }}><span>{phase.weeks}</span><b>{phase.name}</b><p>{phase.note}</p></div>)}</div>
           <div className="exam-blueprint"><article><span>PAPER 1</span><b>1 h 30 · 75 marks</b><p>Sections 1-8 · 60% knowledge, 40% application</p></article><article><span>PAPER 2</span><b>2 h · 75 marks</b><p>Sections 9-12 · 40% application, 60% design/programming</p></article><article><span>NON-NEGOTIABLE</span><b>Past-paper practice every lesson</b><p>Short cited questions now; complete timed papers after syllabus completion.</p></article></div>
           <div className="weekly-table"><div className="weekly-head"><span>Week</span><span>Paper 1 · Theory</span><span>Paper 2 · Problem-solving</span></div>{weeklyPlan.map(([week, theory, programming]) => <div className={["06","10","16","22","28","29","31"].includes(week) ? "weekly-row milestone" : "weekly-row"} key={week}><b>{week}</b><span>{theory}</span><span>{programming}</span></div>)}</div>
@@ -546,9 +556,9 @@ export default function Home() {
       )}
 
       <footer className="source-footer">
-        <div><b>LESSON 01 SOURCES</b><span>Checked against the 2027-2029 syllabus, the endorsed coursebook and representative Paper 1 and Paper 2 questions.</span></div>
+        <div><b>LESSON 01 SOURCES</b><span>Checked against the 2027-2029 syllabus, the endorsed coursebook and locally archived Paper 1 questions.</span></div>
         <div className="source-links"><a href="https://www.cambridgeinternational.org/Images/721397-2027-2029-syllabus.pdf" target="_blank" rel="noreferrer">Official syllabus</a><a href="./exam-papers/">Exam paper library</a><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-international-as-and-a-level-computer-science-9618/published-resources/" target="_blank" rel="noreferrer">Endorsed resources</a></div>
-        <p>Syllabus pp.11, 13-14 · Coursebook Section 1.01 pp.3-6: Tables 1.01-1.04, Worked Examples 1.01-1.02 and Task 1.01 · Coursebook p.24: Exam-style Question 1(a-b) · Recent-paper anchors: 2023 M/J 11 Q3(d)(iii), 2023 M/J 12 Q4(c), 2025 M/J 12 Q2(a).</p>
+        <p>Syllabus pp.11, 13-14 · Coursebook Section 1.01 pp.3-6: Tables 1.01-1.04, Worked Examples 1.01-1.02 and Task 1.01 · Coursebook p.24: Exam-style Question 1(a-b) · Verified paper anchors: 2023 M/J 11 Q3(d)(iii) and 2023 M/J 12 Q4(c).</p>
       </footer>
     </main>
   );

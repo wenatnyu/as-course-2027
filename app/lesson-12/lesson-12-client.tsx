@@ -124,7 +124,7 @@ export default function Lesson12Client() {
       source: "Coursebook Section 3.03 printed pp.53-54; syllabus 3.1 memory types.",
       content: (
         <Slide number="01" eyebrow="PRIMARY MEMORY" sourceLabel="TEXTBOOK 3.03 · pp.53-54" syllabusLabel="SYLLABUS 3.1" className="slide--l12-title">
-          <section className="l12-title-grid"><div><span>LESSON 12 · 90 MINUTES</span><h1>Memory choices<br /><em>begin with a trade-off.</em></h1><p>Working or persistent? Fast or dense? Fixed once or safely updated?</p></div><div className="l12-memory-stack" role="img" aria-label="Memory family branching from primary memory to RAM and ROM types"><b>PRIMARY MEMORY</b><i /><section><span>RAM<br /><small>SRAM · DRAM</small></span><span>ROM<br /><small>PROM · EPROM · EEPROM</small></span></section></div></section>
+          <section className="l12-title-grid"><div><span>LESSON 12 · 40-MINUTE CORE</span><h1>Memory choices<br /><em>begin with a trade-off.</em></h1><p>Working or persistent? Fast or dense? Fixed once or safely updated?</p></div><div className="l12-memory-stack" role="img" aria-label="Memory family branching from primary memory to RAM and ROM types"><b>PRIMARY MEMORY</b><i /><section><span>RAM<br /><small>SRAM · DRAM</small></span><span>ROM<br /><small>PROM · EPROM · EEPROM</small></span></section></div></section>
         </Slide>
       ),
     },

@@ -42,8 +42,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l2-1",
         marks: 2,
         lines: 3,
-        prompt: <><b>Define a decimal prefix and a binary prefix.</b><p>Your answer must identify the base used by each family.</p></>,
-        answer: <p>A <strong>decimal prefix</strong> scales a unit by a power of 10; a <strong>binary prefix</strong> scales it by a power of 2. <em>[1 each]</em></p>,
+        prompt: <><Mark>PAST PAPER · ADAPTED</Mark><p><b>(a) State one difference between a tebibyte and a gigabyte. [1]</b></p><p><b>(b) State one difference between a kibibyte and a kilobyte. [1]</b></p><p>9618/11 O/N 2024 Q1(a) + 9618/11 M/J 2023 Q3(d)(i)</p></>,
+        answer: <p><b>(a)</b> A tebibyte uses the binary scale (2<sup>40</sup> bytes / 1024 GiB), whereas a gigabyte uses the decimal scale (10<sup>9</sup> bytes). <b>(b)</b> A kibibyte is 1024 bytes; a kilobyte is 1000 bytes. <em>[1 each]</em></p>,
       },
       {
         id: "l2-2",
@@ -156,7 +156,7 @@ export default function Lesson02Client() {
       content: (
         <Slide number="01" eyebrow="INFORMATION REPRESENTATION" sourceLabel="TEXTBOOK 1.02 · pp.6-8" className="slide--l2-title">
           <section className="l2-title-grid">
-            <div><span>LESSON 02 · 90 MINUTES</span><h1>Binary Magnitudes<br />&amp; <em>Data Prefixes</em></h1><p>The symbol tells you which scale to use. One letter can change the calculation.</p></div>
+            <div><span>LESSON 02 · 40-MINUTE CORE</span><h1>Binary Magnitudes<br />&amp; <em>Data Prefixes</em></h1><p>The symbol tells you which scale to use. One letter can change the calculation.</p></div>
             <div className="l2-hero-units"><article><small>DECIMAL</small><b>1 kB</b><strong>1,000 B</strong></article><i>≠</i><article><small>BINARY</small><b>1 KiB</b><strong>1,024 B</strong></article></div>
           </section>
         </Slide>
@@ -350,8 +350,11 @@ export default function Lesson02Client() {
   return (
     <LessonShell
       lessonNumber="02"
+      defaultCoreOnly
       textbookHref="../textbook/lesson-02/"
       textbookLabel="Textbook · pp.6–8"
+      chapterNoteHref="../notes/chapters/#as-1"
+      chapterNoteLabel="Chapter 1 ZNotes"
       slides={slides}
       homework={homework}
       lessonLinks={[
@@ -364,7 +367,7 @@ export default function Lesson02Client() {
         { label: "07", href: "../lesson-07/" },
       ]}
       courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.6-8 and representative Paper 1 questions from 2023-2025."
+      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.6-8 and locally archived Paper 1 questions from 2023-2024."
       sourceDetail="Syllabus p.14, Section 1.1 · Coursebook Section 1.02 printed pp.6-8: Tables 1.05-1.07 and byte-prefix calculations · Retrieval from Task 1.01 on p.6 · Recent anchors: 2023 M/J 11 Q3(d)(i), 2023 O/N 12 Q3(a), 2024 M/J 12 Q7(a), 2024 M/J 13 Q1(a) and 2024 O/N 11 Q1(a). The image-size item is explicitly labelled as a bridge to Syllabus 1.2. Coursebook p.8 typographical and arithmetic errors are corrected and identified."
     />
   );

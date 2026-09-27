@@ -3,7 +3,7 @@ import "../database-algorithm-lessons.css";
 import Lesson39Client from "./lesson-39-client";
 
 const title = "AS Computer Science · Lesson 39";
-const description = "A 90-minute Cambridge 9618 lesson on SQL DDL and core single-table DML.";
+const description = "A 40-minute Cambridge 9618 core lesson with optional extension on SQL DDL and core single-table DML.";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
 const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
 const lessonUrl = new URL("lesson-39/", siteUrl).toString();

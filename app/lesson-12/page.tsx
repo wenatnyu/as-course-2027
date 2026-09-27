@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Lesson12Client from "./lesson-12-client";
 
 const title = "AS Computer Science · Lesson 12";
-const description = "A 90-minute Cambridge 9618 lesson on RAM, ROM, SRAM, DRAM, PROM, EPROM and EEPROM.";
+const description = "A 40-minute Cambridge 9618 core lesson with optional extension on RAM, ROM, SRAM, DRAM, PROM, EPROM and EEPROM.";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
 const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
 const lessonUrl = new URL("lesson-12/", siteUrl).toString();

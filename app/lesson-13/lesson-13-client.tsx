@@ -124,7 +124,7 @@ export default function Lesson13Client() {
       source: "Coursebook Chapter 3 device sections, printed pp.55-63; syllabus 3.1 specified devices.",
       content: (
         <Slide number="01" eyebrow="DEVICE OPERATION" sourceLabel="TEXTBOOK CH.3 · pp.55-63" syllabusLabel="SYLLABUS 3.1" className="slide--l13-title">
-          <section className="l13-title-grid"><div><span>LESSON 13 · 90 MINUTES</span><h1>Trace the signal.<br /><em>Name the mechanism.</em></h1><p>From charge and magnetism to light, movement and sound: explain devices as ordered processes.</p></div><div className="l13-transform" role="img" aria-label="Data passes through a physical mechanism to become output"><b>DATA</b><i>→</i><strong>PHYSICAL<br />MECHANISM</strong><i>→</i><b>RESULT</b></div></section>
+          <section className="l13-title-grid"><div><span>LESSON 13 · 40-MINUTE CORE</span><h1>Trace the signal.<br /><em>Name the mechanism.</em></h1><p>From charge and magnetism to light, movement and sound: explain devices as ordered processes.</p></div><div className="l13-transform" role="img" aria-label="Data passes through a physical mechanism to become output"><b>DATA</b><i>→</i><strong>PHYSICAL<br />MECHANISM</strong><i>→</i><b>RESULT</b></div></section>
         </Slide>
       ),
     },

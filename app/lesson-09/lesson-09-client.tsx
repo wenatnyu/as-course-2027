@@ -47,14 +47,14 @@ const homeworkSections: HomeworkSection[] = [
         id: "l9-2",
         marks: 3,
         lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Describe how Ethernet deals with collisions using CSMA/CD.</b></p><p>Adapted from 9618/12 O/N 2025 Q5(d). [3]</p></>,
+        prompt: <><Mark>EXAM-STYLE ORIGINAL</Mark><p><b>Describe how Ethernet deals with collisions using CSMA/CD.</b></p><p>Written from syllabus 2.1; no past-paper wording claimed. [3]</p></>,
         answer: <p>Any three: listen to/sense the medium; transmit only when idle; detect a collision and abort/send a jamming signal; wait a random back-off time; retry; increase the wait after repeated collisions. <em>[3]</em></p>,
       },
       {
         id: "l9-3",
         marks: 4,
         lines: 5,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>(a) Describe how CSMA/CD manages a detected collision. [2]</b></p><p><b>(b) Identify two drawbacks of CSMA/CD. [2]</b></p><p>Adapted from 9618/13 M/J 2024 Q5(c)(i)-(ii).</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>(a) Describe how CSMA/CD manages a detected collision. [2]</b></p><p><b>(b) Identify two drawbacks of CSMA/CD. [2]</b></p><p>Adapted from 9618/13 M/J 2024 Q5(c)(i)-(ii).</p></>,
         answer: <p><b>(a)</b> Abort transmission/send a jamming signal, wait for a random back-off time, then retry; increase the wait after repeated collisions. <b>(b)</b> Valid drawbacks include unpredictable or very long waits, no node priority, poor scalability as nodes increase, or high power consumption. <em>[2 + 2]</em></p>,
       },
     ],
@@ -76,7 +76,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l9-5",
         marks: 2,
         lines: 3,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>State one role for each item:</b></p><p>(a) modem [1] &nbsp; (b) dedicated line [1]</p><p>Adapted from 9618/11 M/J 2025 Q2(c). [2]</p></>,
+        prompt: <><Mark>EXAM-STYLE ORIGINAL</Mark><p><b>State one role for each item:</b></p><p>(a) modem [1] &nbsp; (b) dedicated line [1]</p><p>Written from syllabus 2.1; no past-paper wording claimed. [2]</p></>,
         answer: <p><b>Modem:</b> converts digital data to/from analogue signals for transmission over a telephone line. <b>Dedicated line:</b> provides a direct/private connection, allowing faster transmission. <em>[1 each]</em></p>,
       },
       {
@@ -90,7 +90,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l9-6",
         marks: 4,
         lines: 5,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Describe the roles of (a) routers [2] and (b) the PSTN [2] in internet transmission.</b></p><p>Adapted from 9618/12 M/J 2024 Q3(c)(i)-(ii).</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>Describe the roles of (a) routers [2] and (b) the PSTN [2] in internet transmission.</b></p><p>Adapted from 9618/12 M/J 2024 Q3(c)(i)-(ii).</p></>,
         answer: <p><b>Router:</b> receives a packet, examines its destination IP address/routing table and forwards it towards the destination. <b>PSTN:</b> provides communication lines and switching centres; signals may be converted into a form suitable for the particular line and may travel in both directions. <em>[2 + 2]</em></p>,
       },
     ],
@@ -105,7 +105,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l9-7",
         marks: 3,
         lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>(a) State what is meant by bit streaming. [1]</b></p><p><b>(b) Give two differences between real-time and on-demand streaming. [2]</b></p><p>Adapted from 9618/11 M/J 2024 Q2(e)(i)-(ii).</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>(a) State what is meant by bit streaming. [1]</b></p><p><b>(b) Give two differences between real-time and on-demand streaming. [2]</b></p><p>Adapted from 9618/11 M/J 2024 Q2(e)(i)-(ii).</p></>,
         answer: <p><b>(a)</b> A continuous, ordered flow of bits over a communication path. <b>(b)</b> Real-time content is delivered as it is produced, whereas on-demand content is pre-recorded and requested at a chosen time. On-demand can normally be paused/replayed; a basic live stream normally follows the source continuously. <em>[1 + 2]</em></p>,
       },
       {
@@ -139,10 +139,10 @@ export default function Lesson09Client() {
       time: "3 min",
       focus: "Connect a local Ethernet frame to the much larger internet journey and final media experience.",
       prompt: "Ask what can go wrong at the shared cable, across the internet and inside the player.",
-      source: "Coursebook Sections 2.05-2.07 printed pp.36-41; syllabus 2.1 p.16.",
+      source: "Coursebook Chapter 2 printed pp.32-41; syllabus 2.1 p.16.",
       content: (
-        <Slide number="01" eyebrow="CHAPTER 2 · COMMUNICATION" sourceLabel="TEXTBOOK 2.05-2.07" syllabusLabel="SYLLABUS 2.1 · p.16" className="l9-slide l9-title">
-          <section className="l9-title-grid"><div><span>LESSON 09 · 90 MINUTES</span><h1>From frame<br /><em>to live stream</em></h1><p>Coordinate local access, cross internet infrastructure and keep media playing.</p></div><div className="l9-route-hero" role="img" aria-label="Local device passes data through a network into a playback buffer"><b>LAN</b><i>→</i><strong>INTERNET</strong><i>→</i><b>BUFFER</b><span>access · route · play</span></div></section>
+        <Slide number="01" eyebrow="CHAPTER 2 · COMMUNICATION" sourceLabel="TEXTBOOK pp.32-41" syllabusLabel="SYLLABUS 2.1 · p.16" className="l9-slide l9-title">
+          <section className="l9-title-grid"><div><span>LESSON 09 · 40-MINUTE CORE</span><h1>Connect it.<br /><em>Carry it. Stream it.</em></h1><p>Choose the medium and hardware, move data through the internet, then keep media playing.</p></div><div className="l9-route-hero" role="img" aria-label="Local device passes data through a network into a playback buffer"><b>LAN</b><i>→</i><strong>INTERNET</strong><i>→</i><b>BUFFER</b><span>connect · route · play</span></div></section>
         </Slide>
       ),
     },
@@ -152,21 +152,20 @@ export default function Lesson09Client() {
       prompt: "Students identify which part is infrastructure and which part is an application.",
       source: "2027-2029 syllabus Section 2.1 p.16.",
       content: (
-        <Slide number="02" eyebrow="TEXTBOOK × SYLLABUS" sourceLabel="TEXTBOOK pp.36-41" syllabusLabel="SYLLABUS 2.1 · p.16" title="One journey, four syllabus lenses." className="l9-slide l9-map">
-          <section className="l9-route"><article><span>01</span><b>ETHERNET</b><p>collision detection and avoidance</p></article><article><span>02</span><b>INFRASTRUCTURE</b><p>modem · PSTN · lines · cell network</p></article><article><span>03</span><b>WWW ≠ INTERNET</b><p>application over infrastructure</p></article><article><span>04</span><b>STREAMING</b><p>real-time · on-demand · bit rate</p></article></section>
+        <Slide number="02" eyebrow="EXACT SYLLABUS SLICE" sourceLabel="TEXTBOOK pp.32-41" syllabusLabel="SYLLABUS 2.1 · p.16" title="Media, hardware and services complete the network journey." className="l9-slide l9-map">
+          <section className="l9-route"><article><span>01</span><b>MEDIA</b><p>wired · wireless · copper · fibre · radio</p></article><article><span>02</span><b>LAN HARDWARE</b><p>switch · server · NIC · WNIC · WAP · bridge · repeater · router</p></article><article><span>03</span><b>ETHERNET + INTERNET</b><p>CSMA/CD · access infrastructure · WWW</p></article><article><span>04</span><b>STREAMING</b><p>real-time · on-demand · bit rate</p></article></section>
           <p className="l9-boundary"><Mark>LESSON 10</Mark><span>IPv4 · IPv6 · subnetting · public/private · static/dynamic · URL · DNS</span></p>
         </Slide>
       ),
     },
     {
       time: "5 min",
-      focus: "Retrieve media choices and reveal why access rules matter on a shared medium.",
-      prompt: "Two devices share one cable and transmit together: predict what happens to both signals.",
-      source: "Coursebook transition from 2.03 to 2.05, printed pp.32-37.",
+      focus: "Separate wired and wireless networks, then name the physical medium that carries each signal.",
+      prompt: "Students classify copper, fibre, radio, microwave and satellite before comparing them.",
+      source: "Coursebook 2.03, printed pp.32-35; syllabus 2.1 wired/wireless implications.",
       content: (
-        <Slide number="03" eyebrow="DO NOW · RETRIEVAL" sourceLabel="TEXTBOOK pp.32-37" syllabusLabel="SYLLABUS 2.1 — ETHERNET" title="A and B transmit at the same time on one shared cable. What must the protocol do?" className="l9-slide l9-collision-question">
-          <section className="l9-collision-visual" role="img" aria-label="Two devices send signals that collide on a shared cable"><b>A</b><i /><strong>COLLISION</strong><i /><b>B</b></section>
-          <Reveal id="collision-do-now" visible={revealed.has("collision-do-now")} onToggle={toggleReveal}><p>The corrupted transmissions must stop. Devices need to detect the collision, wait for different random periods and attempt retransmission.</p></Reveal>
+        <Slide number="03" eyebrow="FOUNDATION · WIRED OR WIRELESS" sourceLabel="TEXTBOOK pp.32-35" syllabusLabel="SYLLABUS 2.1 — MEDIA" title="Name the signal and medium before comparing performance." className="l7-readable">
+          <section className="l7-two-column"><article><span>WIRED</span><h3>Guided through a cable</h3><ul><li>copper: changing electrical signals</li><li>fibre-optic: pulses of light</li><li>stable fixed links; installation limits movement</li></ul></article><article><span>WIRELESS</span><h3>Electromagnetic waves through space</h3><ul><li>radio waves including Wi-Fi</li><li>microwave and satellite links</li><li>mobility and easier deployment; interference/security concerns</li></ul></article></section>
         </Slide>
       ),
     },
@@ -184,13 +183,12 @@ export default function Lesson09Client() {
     },
     {
       time: "7 min",
-      focus: "Make collision causation visible before introducing the acronym.",
-      prompt: "Students explain why carrier sensing reduces but cannot guarantee prevention of collisions.",
-      source: "Coursebook printed p.37; syllabus collision detection and avoidance.",
+      focus: "Name the LAN devices in the syllabus and assign one precise role to each.",
+      prompt: "Read a role; students point to the device. Contrast switch, bridge, repeater and router.",
+      source: "Coursebook printed pp.34-36; syllabus 2.1 LAN hardware.",
       content: (
-        <Slide number="05" eyebrow="WHY COLLISIONS HAPPEN" sourceLabel="TEXTBOOK p.37" syllabusLabel="SYLLABUS 2.1 — COLLISIONS" title="Signals overlap when two devices use the same medium together." className="l9-slide l9-cause">
-          <section className="l9-timeline" role="img" aria-label="Two devices sense an idle cable then transmit before hearing the other"><div><span>t₀</span><b>A senses idle</b><b>B senses idle</b></div><div><span>t₁</span><b>A transmits →</b><b>← B transmits</b></div><div><span>t₂</span><strong>signals overlap: collision</strong></div></section>
-          <p className="l9-takeaway">Propagation takes time. Two distant devices may both sense “idle” before either signal reaches the other.</p>
+        <Slide number="05" eyebrow="LAN HARDWARE" sourceLabel="TEXTBOOK pp.34-36" syllabusLabel="SYLLABUS 2.1 — NAMED DEVICES" title="Choose a device by the job it performs, not by appearance." className="l9-slide l9-hardware">
+          <section className="l9-hardware-grid"><article><span>CONNECT A DEVICE</span><b>NIC / WNIC · WAP</b><p>interface joins one device; WAP links wireless devices to the LAN</p></article><article><span>FORWARD INSIDE A LAN</span><b>switch · bridge</b><p>switch forwards to a device; bridge filters between LAN segments</p></article><article><span>CARRY OR EXTEND</span><b>cable · repeater</b><p>cable carries the signal; repeater regenerates it over distance</p></article><article><span>PROVIDE OR ROUTE</span><b>server · router</b><p>server responds to clients; router forwards packets between networks</p></article></section>
         </Slide>
       ),
     },
@@ -221,13 +219,12 @@ export default function Lesson09Client() {
     },
     {
       time: "6 min",
-      focus: "Explain why switching and full-duplex operation remove the shared collision domain.",
-      prompt: "Compare a hub broadcast with a switch forwarding on one destination port.",
-      source: "Coursebook p.37; syllabus Ethernet and collision avoidance.",
+      focus: "Compare the five named media using bandwidth, distance, interference, mobility and cost.",
+      prompt: "For each scenario, require a named medium and one linked reason.",
+      source: "Coursebook pp.32-35; syllabus 2.1 characteristics of named media.",
       content: (
-        <Slide number="08" eyebrow="MODERN SWITCHED ETHERNET" sourceLabel="TEXTBOOK p.37" syllabusLabel="SYLLABUS 2.1 — AVOIDANCE" title="Dedicated full-duplex switch links do not compete for one shared cable." className="l9-slide l9-switched">
-          <section className="l9-switch-visual" role="img" aria-label="Two devices use separate full-duplex links to a switch"><article><b>A</b><span>send + receive</span></article><i /><strong>SWITCH</strong><i /><article><b>B</b><span>send + receive</span></article></section>
-          <section className="l9-two-points"><p><b>Separate links:</b> A and B do not transmit on the same conductor.</p><p><b>Full duplex:</b> each link can send and receive simultaneously.</p></section>
+        <Slide number="08" eyebrow="CHOOSE A TRANSMISSION MEDIUM" sourceLabel="TEXTBOOK pp.32-35" syllabusLabel="SYLLABUS 2.1 — CHARACTERISTICS" title="A correct choice links one physical property to the situation." className="l7-readable">
+          <section className="l8-topology-grid"><article><b>COPPER</b><p>low cost; easy installation; interference and attenuation</p></article><article><b>FIBRE</b><p>high bandwidth; low attenuation; immune to electromagnetic interference</p></article><article><b>RADIO / MICROWAVE</b><p>mobility or line-of-sight links; interference and range constraints</p></article><article><b>SATELLITE</b><p>very wide coverage; high latency and weather/cost constraints</p></article></section>
         </Slide>
       ),
     },
@@ -296,7 +293,7 @@ export default function Lesson09Client() {
       prompt: "Predict the buffer when input is 8 Mbit/s and playback is 6 Mbit/s, then reverse the rates.",
       source: "Coursebook pp.40-41; syllabus importance of bit rates and broadband speed.",
       content: (
-        <Slide number="14" eyebrow="BUFFER + BIT RATE" sourceLabel="TEXTBOOK pp.40-41" syllabusLabel="SYLLABUS 2.1 — BIT RATE / BROADBAND" title="Smooth playback needs data to arrive at least as fast as it is consumed." className="l9-slide l9-buffer">
+        <Slide number="14" eyebrow="BUFFER + BIT RATE" sourceLabel="TEXTBOOK pp.40-41" syllabusLabel="CORE BIT RATE · BUFFER IS CROSS-SYLLABUS 3.1" title="Smooth playback needs data to arrive at least as fast as it is consumed." className="l9-slide l9-buffer">
           <section className="l9-rate-model"><article><span>NETWORK</span><b>8 Mbit/s</b><p>incoming</p></article><i>→</i><div><span>BUFFER</span><b>temporary store</b><em /></div><i>→</i><article><span>PLAYER</span><b>6 Mbit/s</b><p>consumed</p></article></section>
           <section className="l9-buffer-rules"><p><b>input &gt; playback:</b> buffer fills</p><p><b>input = playback:</b> level is stable</p><p><b>input &lt; playback:</b> buffer drains → stall</p></section>
         </Slide>
@@ -338,13 +335,16 @@ export default function Lesson09Client() {
   return (
     <LessonShell
       lessonNumber="09"
+      defaultCoreOnly
       textbookHref="../textbook/lesson-09/"
-      textbookLabel="Textbook · pp.36–41"
+      textbookLabel="Textbook · pp.32–41"
+      chapterNoteHref="../notes/chapters/#as-2"
+      chapterNoteLabel="Chapter 2 ZNotes"
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.36-41, and published 2021-2025 AS Paper 1 questions and mark schemes."
-      sourceDetail="Core boundary: Ethernet and CSMA/CD; modern switched collision avoidance; internet versus WWW; modem, PSTN, dedicated lines and cell network; real-time/on-demand bit streaming, buffers, bit rate and broadband speed. Authentic anchors: 9618/12 O/N 2025 Q5(d), 9618/13 M/J 2024 Q5(c), 9618/11 M/J 2025 Q2(c), 9618/12 M/J 2024 Q3(c), and 9618/11 M/J 2024 Q2(e). IP addressing, subnetting, URL and DNS follow in Lesson 10."
+      sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.32-41, and locally archived 2024 AS Paper 1 questions and mark schemes."
+      sourceDetail="Core boundary: wired/wireless transmission media and their characteristics; LAN hardware; Ethernet and CSMA/CD; internet versus WWW; internet-access infrastructure; real-time/on-demand bit streaming, bit rate and broadband speed. Verified anchors: 9618/13 M/J 2024 Q5(c), 9618/12 M/J 2024 Q3(c), and 9618/11 M/J 2024 Q2(e). Modern full-duplex switched Ethernet is optional context; buffer detail is a cross-syllabus link to section 3.1. Other practice is labelled exam-style original rather than presented as an unverified past-paper extract."
     />
   );
 }

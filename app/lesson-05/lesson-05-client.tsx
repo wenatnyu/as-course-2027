@@ -130,8 +130,8 @@ const homeworkSections: HomeworkSection[] = [
         id: "l5-9",
         marks: 4,
         lines: 4,
-        prompt: <><b>Explain the separate effects of increasing sampling rate and increasing sampling resolution.</b><p>For each change, refer to accuracy and uncompressed file size.</p></>,
-        answer: <p>A higher <strong>sampling rate</strong> takes more measurements per second, so rapid changes are tracked more closely, but more samples make the file larger. A higher <strong>sampling resolution</strong> provides more amplitude levels and reduces quantisation error, but more bits per sample make the file larger. <em>[1 linked accuracy effect + 1 size effect for each term]</em></p>,
+        prompt: <><Mark>PAST PAPER · ADAPTED</Mark><p><b>Explain why increasing sampling rate and sampling resolution improves the precision of a sound recording.</b></p><p>Adapted from 9618/13 M/J 2023 Q3(c)(ii). [4]</p></>,
+        answer: <p>A higher <strong>sampling rate</strong> records the wave more often, leaving smaller time gaps so the digital waveform follows the analogue waveform more closely. A higher <strong>sampling resolution</strong> uses more bits and therefore more amplitude levels, so each stored amplitude is closer to the original and quantisation error is reduced. <em>[max 2 for rate; max 2 for resolution]</em></p>,
       },
       {
         id: "l5-10",
@@ -161,7 +161,7 @@ export default function Lesson05Client() {
       content: (
         <Slide number="01" eyebrow="MULTIMEDIA REPRESENTATION" sourceLabel="TEXTBOOK 1.05-1.06 · pp.17-21" syllabusLabel="SYLLABUS 1.2" className="slide--l5-title">
           <section className="l5-title-grid">
-            <div className="l5-title-copy"><span>LESSON 05 · 90 MINUTES</span><h1>Vectors, File Size<br /><em>&amp; Digital Sound</em></h1><p>Describe the structure, calculate the data, then justify the representation.</p></div>
+            <div className="l5-title-copy"><span>LESSON 05 · 40-MINUTE CORE</span><h1>Vectors, File Size<br /><em>&amp; Digital Sound</em></h1><p>Describe the structure, calculate the data, then justify the representation.</p></div>
             <div className="l5-hero-media" role="img" aria-label="Vector objects, bitmap pixels and sampled sound"><article className="l5-hero-vector"><i /><i /><i /><b>objects</b></article><article className="l5-hero-bitmap"><i /><i /><i /><i /><i /><i /><i /><i /><i /><b>pixels</b></article><article className="l5-hero-wave"><div><i /><i /><i /><i /><i /><i /><i /></div><b>samples</b></article></div>
           </section>
         </Slide>
@@ -363,8 +363,11 @@ export default function Lesson05Client() {
   return (
     <LessonShell
       lessonNumber="05"
+      defaultCoreOnly
       textbookHref="../textbook/lesson-05/"
       textbookLabel="Textbook · pp.17–21"
+      chapterNoteHref="../notes/chapters/#as-1"
+      chapterNoteLabel="Chapter 1 ZNotes"
       slides={slides}
       homework={homework}
       lessonLinks={[
@@ -377,8 +380,8 @@ export default function Lesson05Client() {
         { label: "07", href: "../lesson-07/" },
       ]}
       courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.17-21 plus exam-style Q2 on p.24, and representative AS Paper 1 patterns from 2023-2025."
-      sourceDetail="Syllabus p.15 Section 1.2: vector drawing objects, properties and drawing lists; bitmap/vector choice; bitmap file-size estimation; analogue and digital sound, sampling, sampling rate, sampling resolution, and their effects on accuracy and file size · Coursebook Section 1.05 printed pp.17-20, including the 1366 × 768 calculation and Worked Example 1.04; Section 1.06 printed pp.20-21 · Recent anchors: 2023 M/J 13 Q3(c), 2023 O/N 11 Q1(a), 2024 M/J 12 Q2(d) and 2025 O/N 13 Q1(a), Q7(b). Sound-size calculations are explicitly labelled as derived exam practice. Compression is deferred to Lesson 06."
+      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.17-21 plus exam-style Q2 on p.24, and locally archived 2023-2024 AS Paper 1 patterns."
+      sourceDetail="Syllabus p.15 Section 1.2: vector drawing objects, properties and drawing lists; bitmap/vector choice; bitmap file-size estimation; analogue and digital sound, sampling, sampling rate, sampling resolution, and their effects on accuracy and file size · Coursebook Section 1.05 printed pp.17-20 and Section 1.06 printed pp.20-21 · Verified anchors: 2023 M/J 13 Q3(c), 2023 O/N 11 Q1(a) and 2024 M/J 12 Q2(d). Sound-size calculations are labelled derived exam practice. Compression is deferred to Lesson 06."
     />
   );
 }

@@ -48,7 +48,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l3-1",
         marks: 2,
         lines: 3,
-        prompt: <><b>Give the 8-bit one’s complement representation of -120.</b><p>Show the positive binary value before taking the complement.</p></>,
+        prompt: <><Mark>PAST PAPER · 9618/12 M/J 2023 Q4(b)</Mark><p><b>Give the 8-bit one’s complement representation of -120.</b></p><p>Show the positive binary value before taking the complement. [2]</p></>,
         answer: <p>+120 = <strong>0111 1000</strong>. Invert every bit to obtain <strong>1000 0111</strong>. <em>[1 working; 1 answer]</em></p>,
       },
       {
@@ -170,7 +170,7 @@ export default function Lesson03Client() {
         <Slide number="01" eyebrow="INFORMATION REPRESENTATION" sourceLabel="TEXTBOOK 1.03 · pp.8-14" className="slide--l3-title">
           <section className="l3-title-grid">
             <div className="l3-hero-copy">
-              <span>LESSON 03 · 90 MINUTES</span>
+              <span>LESSON 03 · 40-MINUTE CORE</span>
               <h1>Signed Binary,<br /><em>Arithmetic &amp; BCD</em></h1>
               <p>Representation gives a bit pattern its meaning. Width gives it a limit.</p>
             </div>
@@ -441,8 +441,11 @@ export default function Lesson03Client() {
   return (
     <LessonShell
       lessonNumber="03"
+      defaultCoreOnly
       textbookHref="../textbook/lesson-03/"
       textbookLabel="Textbook · pp.8–14"
+      chapterNoteHref="../notes/chapters/#as-1"
+      chapterNoteLabel="Chapter 1 ZNotes"
       slides={slides}
       homework={homework}
       lessonLinks={[
@@ -455,8 +458,8 @@ export default function Lesson03Client() {
         { label: "07", href: "../lesson-07/" },
       ]}
       courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.8-14 and representative Paper 1 questions from 2023-2025."
-      sourceDetail="Syllabus p.14, Section 1.1 · Coursebook Section 1.03 printed pp.8-14: signed integers, Key Terms for one’s/two’s complement, Worked Example 1.03, Table 1.08, Tasks 1.02-1.04, binary arithmetic, overflow, BCD and Figures 1.01-1.03 · Recent anchors: 2023 M/J 12 Q4(b), 2023 O/N 12 Q3(b-c), 2024 M/J 11 Q7, 2024 O/N 11 Q1, 2025 M/J 12 Q2 and 2025 O/N 11 Q1. BCD correction is labelled textbook extension only."
+      sourceSummary="Checked against the 2027-2029 syllabus, Coursebook printed pp.8-14 and locally archived Paper 1 questions from 2023-2024."
+      sourceDetail="Syllabus p.14, Section 1.1 · Coursebook Section 1.03 printed pp.8-14: signed integers, Key Terms for one’s/two’s complement, Worked Example 1.03, Table 1.08, Tasks 1.02-1.04, binary arithmetic, overflow and BCD · Verified anchors: 2023 M/J 12 Q4(b), 2023 O/N 12 Q3(b-c), 2024 M/J 11 Q7 and 2024 O/N 11 Q1. BCD correction is labelled textbook extension only."
     />
   );
 }

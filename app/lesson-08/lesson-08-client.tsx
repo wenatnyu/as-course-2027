@@ -1,336 +1,57 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import {
-  HomeworkSheet,
-  LessonShell,
-  Mark,
-  Slide,
-  type HomeworkSection,
-  type SlideData,
-} from "../_components/lesson-shell";
+import { HomeworkSheet, LessonShell, Mark, Slide, type HomeworkSection, type SlideData } from "../_components/lesson-shell";
 
-function Reveal({ id, visible, onToggle, children }: {
-  id: string;
-  visible: boolean;
-  onToggle: (id: string) => void;
-  children: ReactNode;
-}) {
+function Reveal({ id, visible, onToggle, children }: { id: string; visible: boolean; onToggle: (id: string) => void; children: ReactNode }) {
   const panelId = `l8-reveal-${id}`;
-  return (
-    <div className="l8-reveal">
-      <button type="button" onClick={() => onToggle(id)} aria-expanded={visible} aria-controls={panelId}>
-        {visible ? "Hide mark scheme" : "Reveal mark scheme"}
-      </button>
-      <div id={panelId} className={visible ? "l8-reveal-panel l8-visible" : "l8-reveal-panel"} hidden={!visible}>
-        {children}
-      </div>
-    </div>
-  );
+  return <div className="lesson-reveal l7-reveal"><button type="button" onClick={() => onToggle(id)} aria-expanded={visible} aria-controls={panelId}>{visible ? "Hide mark scheme" : "Reveal mark scheme"}</button><div id={panelId} className={visible ? "lesson-reveal__panel visible" : "lesson-reveal__panel"} hidden={!visible}>{children}</div></div>;
+}
+
+function Topology({ type, path = false }: { type: "bus" | "star" | "mesh" | "hybrid"; path?: boolean }) {
+  const node = (x: number, y: number, label: string) => <g key={label}><circle cx={x} cy={y} r="13"/><text x={x} y={y + 1}>{label}</text></g>;
+  if (type === "bus") return <div className="l8-topology" role="img" aria-label="Bus topology: every host connects to one shared backbone cable"><svg viewBox="0 0 260 150" aria-hidden="true"><g className="link"><line x1="22" y1="105" x2="238" y2="105"/><line x1="22" y1="96" x2="22" y2="114"/><line x1="238" y1="96" x2="238" y2="114"/><line x1="50" y1="48" x2="50" y2="105"/><line x1="103" y1="48" x2="103" y2="105"/><line x1="157" y1="48" x2="157" y2="105"/><line x1="210" y1="48" x2="210" y2="105"/></g>{path && <g className="packet-path"><line x1="50" y1="48" x2="50" y2="105"/><line x1="50" y1="105" x2="210" y2="105"/><line x1="210" y1="105" x2="210" y2="48"/></g>}{node(50,35,"A")}{node(103,35,"B")}{node(157,35,"C")}{node(210,35,"D")}<text className="caption" x="130" y="135">shared backbone</text></svg></div>;
+  if (type === "star") return <div className="l8-topology" role="img" aria-label="Star topology: every host has its own connection to a central switch"><svg viewBox="0 0 260 150" aria-hidden="true"><g className="link"><line x1="55" y1="35" x2="130" y2="75"/><line x1="205" y1="35" x2="130" y2="75"/><line x1="55" y1="115" x2="130" y2="75"/><line x1="205" y1="115" x2="130" y2="75"/></g>{path && <g className="packet-path"><line x1="55" y1="35" x2="130" y2="75"/><line x1="130" y1="75" x2="205" y2="35"/></g>}{node(55,35,"A")}{node(205,35,"B")}{node(55,115,"C")}{node(205,115,"D")}<g className="switch"><rect x="111" y="60" width="38" height="30" rx="6"/><text x="130" y="76">SW</text></g></svg></div>;
+  if (type === "mesh") return <div className="l8-topology" role="img" aria-label="Full mesh topology: every host has a direct connection to every other host"><svg viewBox="0 0 260 150" aria-hidden="true"><g className="link"><line x1="55" y1="35" x2="205" y2="35"/><line x1="55" y1="115" x2="205" y2="115"/><line x1="55" y1="35" x2="55" y2="115"/><line x1="205" y1="35" x2="205" y2="115"/><line x1="55" y1="35" x2="205" y2="115"/><line x1="205" y1="35" x2="55" y2="115"/></g>{path && <g className="packet-path"><line x1="55" y1="35" x2="55" y2="115"/><line x1="55" y1="115" x2="205" y2="115"/></g>}{node(55,35,"A")}{node(205,35,"B")}{node(55,115,"C")}{node(205,115,"D")}</svg></div>;
+  return <div className="l8-topology" role="img" aria-label="Hybrid topology: a bus segment connects through a switch to a star segment"><svg viewBox="0 0 260 150" aria-hidden="true"><g className="link"><line x1="20" y1="102" x2="112" y2="102"/><line x1="20" y1="94" x2="20" y2="110"/><line x1="50" y1="48" x2="50" y2="102"/><line x1="90" y1="48" x2="90" y2="102"/><line x1="112" y1="102" x2="145" y2="75"/><line x1="145" y1="75" x2="215" y2="35"/><line x1="145" y1="75" x2="215" y2="115"/></g>{path && <g className="packet-path"><line x1="50" y1="48" x2="50" y2="102"/><line x1="50" y1="102" x2="112" y2="102"/><line x1="112" y1="102" x2="145" y2="75"/><line x1="145" y1="75" x2="215" y2="35"/></g>}{node(50,35,"A")}{node(90,35,"B")}{node(215,35,"C")}{node(215,115,"D")}<g className="switch"><rect x="126" y="60" width="38" height="30" rx="6"/><text x="145" y="76">SW</text></g><text className="caption" x="66" y="130">bus section</text><text className="caption" x="205" y="145">star section</text></svg></div>;
+}
+
+function StarQuestionDiagram() {
+  return <div className="l8-homework-star" role="img" aria-label="Five computers, one server and a central switch with connection lines left for the student to draw"><span>Computer</span><span>Computer</span><span>Computer</span><span>Computer</span><span>Computer</span><span>Server</span><b>Switch</b></div>;
 }
 
 const homeworkSections: HomeworkSection[] = [
-  {
-    code: "A",
-    title: "Cloud computing",
-    subtitle: "Define the model, then link benefits and risks to the user",
-    marks: 10,
-    questions: [
-      {
-        id: "l8-1",
-        marks: 6,
-        lines: 4,
-        prompt: <><b>Distinguish a public cloud from a private cloud.</b><p>For each model, give its definition, one suitable user and one linked reason.</p></>,
-        answer: <p><strong>Public cloud:</strong> provider-owned services offered to many customers [1]; suitable for a small company [1] because it can obtain scalable services without managing all infrastructure itself [1]. <strong>Private cloud:</strong> infrastructure dedicated to one organisation [1]; suitable for an organisation handling sensitive data [1] because it provides greater control over configuration, access and policy [1]. <em>[3 + 3]</em></p>,
-      },
-      {
-        id: "l8-2",
-        marks: 4,
-        lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>State two advantages and two disadvantages of cloud storage for a student.</b></p><p>Adapted from 9618/12 O/N 2025 Q8(a)(i)-(ii). [4]</p></>,
-        answer: <p><b>Advantages:</b> access from any internet-connected computer; provider backup/recovery; easy sharing/collaboration; scalable capacity; little/no personal storage hardware. <b>Disadvantages:</b> dependence on network/provider; slow transfer; downtime; security/privacy risk; migration/compatibility issues; limited free space or long-term cost. Award any two distinct points in each category. <em>[2 + 2]</em></p>,
-      },
-    ],
-  },
-  {
-    code: "B",
-    title: "Transmission media",
-    subtitle: "Compare the signal, performance and physical constraint",
-    marks: 10,
-    questions: [
-      {
-        id: "l8-3",
-        marks: 4,
-        lines: 4,
-        prompt: <><b>Compare copper cable with fibre-optic cable.</b><p>Give four comparisons: bandwidth, interference, cost and attenuation over distance.</p></>,
-        answer: <p>Fibre normally offers <strong>higher bandwidth</strong>, lower attenuation over long distances and immunity to electromagnetic interference. Copper is normally <strong>cheaper and easier to install</strong>, but has lower bandwidth and is more affected by interference and signal loss. Award four distinct comparative points. <em>[4]</em></p>,
-      },
-      {
-        id: "l8-4",
-        marks: 3,
-        lines: 4,
-        prompt: <><b>Describe one suitable use of each medium:</b><p>(a) Wi-Fi radio waves &nbsp; (b) terrestrial microwave &nbsp; (c) satellite</p></>,
-        answer: <p><b>Wi-Fi:</b> mobile access inside a home, school or office. <b>Microwave:</b> a high-capacity line-of-sight link between towers/buildings. <b>Satellite:</b> communication with remote or very widely separated locations where cable is impractical. <em>[1 each]</em></p>,
-      },
-      {
-        id: "l8-5",
-        marks: 3,
-        lines: 4,
-        prompt: <><b>A hospital must carry high-volume confidential data reliably between two buildings.</b><p>Choose a medium and justify it with two linked reasons.</p></>,
-        answer: <p><strong>Fibre-optic cable</strong> is suitable because its high bandwidth supports large data transfers and immunity to electromagnetic interference improves signal reliability. Confidentiality still requires encryption, authentication and access control; the medium alone does not secure the data. <em>[1 choice; 2 linked reasons]</em></p>,
-      },
-    ],
-  },
-  {
-    code: "C",
-    title: "Authentic Paper 1 application",
-    subtitle: "Use named media and situation-linked implications",
-    marks: 10,
-    questions: [
-      {
-        id: "l8-6",
-        marks: 4,
-        lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Explain four benefits to university students of being allowed to use both wired and wireless connections.</b></p><p>Adapted from 9618/13 M/J 2023 Q2(d). [4]</p></>,
-        answer: <p>Award any four distinct published points: students can connect devices that support only one connection type; wired links can offer higher performance or lower interference for fixed work; wired links may reduce casual interception of the local signal; wireless allows movement between rooms or sites; wireless supports portable or multiple personal devices. Security still depends on appropriate network controls. <em>[1 each, max 4]</em></p>,
-      },
-      {
-        id: "l8-7",
-        marks: 4,
-        lines: 5,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Give three advantages of wireless over wired communication and one disadvantage.</b></p><p>Adapted from 9618/13 O/N 2025 Q4(a)-(b). [4]</p></>,
-        answer: <p><b>Advantages:</b> mobility/no physical connection, no cabling/easier setup, easy addition of devices, or support for different portable device types. <b>Disadvantage:</b> less secure, slower, subject to interference, or signal strength degrades with distance/obstacles. <em>[3 + 1]</em></p>,
-      },
-      {
-        id: "l8-8",
-        marks: 2,
-        lines: 3,
-        prompt: <><b>State two factors, other than cost, used to select a transmission medium.</b></>,
-        answer: <p>Any two: required bandwidth/data rate, distance and attenuation, susceptibility to interference, security, mobility, line-of-sight, terrain/installation constraints, reliability or latency. <em>[1 each]</em></p>,
-      },
-    ],
-  },
+  { code: "A", title: "Topologies and packet paths", subtitle: "Authentic Paper 1 questions · core slides 03–07", marks: 11, questions: [
+    { id: "l8-1", marks: 2, lines: 2, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><p>A local area network (LAN) has five computers, one switch and one server.</p><b>Complete the following diagram to show how these devices are connected in a star topology.</b><StarQuestionDiagram/><p className="question-source">9618/12 O/N 2025 · Q5(b) · diagram redrawn for print clarity</p></>, answer: <p>All five computers connect <strong>directly to the switch</strong>, with no computer-to-computer links <em>[1]</em>. The server connects <strong>directly to the switch</strong> <em>[1]</em>.</p> },
+    { id: "l8-2", marks: 3, lines: 5, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><b>Describe how packets are transmitted between two hosts using a star topology.</b><p className="question-source">9618/12 O/N 2025 · Q5(c)</p></>, answer: <p>The sending device sends packets to the switch <em>[1]</em>. The switch checks the destination address on each packet <em>[1]</em> and sends it only to the intended receiver <em>[1]</em>.</p> },
+    { id: "l8-3", marks: 2, lines: 4, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><p>In one building there are five computers connected in a mesh topology.</p><b>Describe what is meant by a mesh topology.</b><p className="question-source">9618/13 M/J 2023 · Q2(b)(i)</p></>, answer: <p>All computers connect to at least one other device <em>[1]</em>; there are multiple routes between devices / computers can relay packets towards the destination <em>[1]</em>.</p> },
+    { id: "l8-4", marks: 2, lines: 5, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><b>Give two advantages of using a mesh topology instead of a bus topology.</b><p className="question-source">9618/13 M/J 2023 · Q2(b)(ii)</p></>, answer: <p>Any two: another route remains if a line fails; fewer/no collisions; a new node can be added without interrupting others; a dedicated connection can improve security. <em>[1 each, max 2]</em></p> },
+    { id: "l8-5", marks: 2, lines: 5, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><p>A new classroom is being set up with 20 computers and a switch.</p><b>Explain one advantage of implementing a star topology instead of a bus topology in the new classroom.</b><p className="question-source">9618/11 O/N 2023 · Q2(d)</p></>, answer: <p>One advantage <em>[1]</em> plus a linked explanation <em>[1]</em>. For example: more resilient because one cable failure affects only one computer; fewer collisions because each computer has its own link; easier to add/fault-find nodes because each connection is independent.</p> },
+  ]},
+  { code: "B", title: "Cloud computing", subtitle: "Authentic Paper 1 questions · core slides 08–09", marks: 12, questions: [
+    { id: "l8-6", marks: 6, lines: 8, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><p>A company uses cloud computing.</p><p><b>(a)</b> Define cloud computing. [1]</p><p><b>(b)</b> State what is meant by a public cloud and a private cloud. [2]</p><p><b>(c)</b> Give two benefits and one drawback of using cloud computing. [3]</p><p className="question-source">9618/13 M/J 2022 · Q8(a)–(c)</p></>, answer: <p><b>(a)</b> Accessing a service/files/software on a remote server <em>[1]</em>. <b>(b)</b> Public: third-party services offered over the public internet / available to customers with suitable access <em>[1]</em>. Private: services available only to selected users or one organisation <em>[1]</em>. <b>(c)</b> Two benefits: access anywhere, provider-managed security/backup, no need for specific hardware/software, easy sharing/collaboration <em>[2]</em>. One drawback: depends on internet/server/provider security or backup <em>[1]</em>.</p> },
+    { id: "l8-7", marks: 6, lines: 9, prompt: <><Mark>PAST PAPER · VERBATIM</Mark><p>A company sells online Computer Science courses to students in different countries. The courses are stored on a public cloud.</p><p><b>(i)</b> Explain why the company uses a public cloud to store these courses. [2]</p><p><b>(ii)</b> Describe two disadvantages of storing data on a public cloud compared to storing data on a server in a Local Area Network (LAN). [4]</p><p className="question-source">9618/13 O/N 2023 · Q3(a)(i)–(ii)</p></>, answer: <p><b>(i)</b> Courses are available to anyone / over the internet; shared infrastructure can reduce cost. Any two published points <em>[2]</em>. <b>(ii)</b> Develop two: loss of control because data is remote; reliance on the provider for backup/security; reliable internet is required; recurring provider costs compared with a locally owned server. <em>[4]</em>.</p> },
+  ]},
 ];
 
 export default function Lesson08Client() {
   const [revealed, setRevealed] = useState<Set<string>>(() => new Set());
-  const toggleReveal = (id: string) => setRevealed((current) => {
-    const next = new Set(current);
-    if (next.has(id)) next.delete(id); else next.add(id);
-    return next;
-  });
-
+  const toggleReveal = (id: string) => setRevealed((current) => { const next = new Set(current); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const slides: SlideData[] = [
-    {
-      time: "3 min",
-      focus: "Frame every connection as a choice between control, mobility and performance.",
-      prompt: "Ask students what must cross the gap: electrical signal, light or electromagnetic wave?",
-      source: "Coursebook Section 2.03 printed pp.32-35 and cloud subsection p.39; syllabus 2.1 p.16.",
-      content: (
-        <Slide number="01" eyebrow="CHAPTER 2 · COMMUNICATION" sourceLabel="TEXTBOOK 2.03 + p.39" syllabusLabel="SYLLABUS 2.1 · p.16" className="l8-slide l8-title">
-          <section className="l8-title-grid"><div><span>LESSON 08 · 90 MINUTES</span><h1>Connect<br /><em>through the right medium</em></h1><p>Place services in a cloud, then choose how the data should travel.</p></div><div className="l8-signal-hero" role="img" aria-label="Electrical, light and radio signals connecting users to a cloud"><b>USER</b><i /><strong>CLOUD</strong><i /><b>USER</b><span>copper · light · radio</span></div></section>
-        </Slide>
-      ),
-    },
-    {
-      time: "4 min",
-      focus: "Make the current syllabus boundary visible before teaching details.",
-      prompt: "Students identify the two decisions made today: where a service runs and how its data travels.",
-      source: "2027-2029 syllabus Section 2.1 p.16.",
-      content: (
-        <Slide number="02" eyebrow="TEXTBOOK × SYLLABUS" sourceLabel="TEXTBOOK pp.32-35, 39" syllabusLabel="SYLLABUS 2.1 · p.16" title="Two connected questions: where is the service, and what carries its data?" className="l8-slide l8-map">
-          <section className="l8-route"><article><span>01</span><b>CLOUD MODEL</b><p>public · private · benefits · drawbacks</p></article><article><span>02</span><b>NETWORK TYPE</b><p>wired · wireless · implications</p></article><article><span>03</span><b>MEDIUM</b><p>copper · fibre · radio · microwave · satellite</p></article></section>
-          <p className="l8-boundary"><Mark>DEFER TO LESSONS 09–10</Mark><span>Ethernet · streaming · internet infrastructure · IP · URL · DNS</span></p>
-        </Slide>
-      ),
-    },
-    {
-      time: "5 min",
-      focus: "Retrieve the difference between a network device and the medium that connects it.",
-      prompt: "Students classify three fully named transmission media and two active network devices, then state each role.",
-      source: "Coursebook Sections 2.03-2.04 printed pp.32-36; Lesson 07 retrieval.",
-      content: (
-        <Slide number="03" eyebrow="DO NOW · RETRIEVAL" sourceLabel="TEXTBOOK pp.32-36" syllabusLabel="SYLLABUS 2.1 — MEDIA + NETWORK DEVICES" title="Transmission medium or network device? Classify it, then state its role." className="l8-slide l8-retrieval">
-          <section className="l8-sort"><article><b>COPPER CABLE</b><span>MEDIUM OR DEVICE?</span></article><article><b>WAP</b><span>MEDIUM OR DEVICE?</span></article><article><b>RADIO WAVES</b><span>MEDIUM OR DEVICE?</span></article><article><b>ROUTER</b><span>MEDIUM OR DEVICE?</span></article><article><b>FIBRE-OPTIC CABLE</b><span>MEDIUM OR DEVICE?</span></article></section>
-          <Reveal id="sort" visible={revealed.has("sort")} onToggle={toggleReveal}><p><strong>Transmission media:</strong> copper cable, radio waves and fibre-optic cable carry signals. <strong>Network devices:</strong> a WAP connects wireless devices to a network; a router forwards packets between networks.</p></Reveal>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Define cloud computing as remote provision of computing services, not weather or a single storage box.",
-      prompt: "Ask which resources besides storage may be provided through a cloud.",
-      source: "Coursebook cloud computing subsection printed p.39; syllabus 2.1 cloud computing.",
-      content: (
-        <Slide number="04" eyebrow="WHAT IS CLOUD COMPUTING?" sourceLabel="TEXTBOOK p.39" syllabusLabel="SYLLABUS 2.1 — CLOUD" title="Computing resources are provided remotely, usually through the internet." className="l8-slide l8-cloud-definition">
-          <section className="l8-cloud-flow"><article><span>LOCAL DEVICE</span><b>request</b><p>browser or client</p></article><i>→</i><article><span>REMOTE SYSTEM</span><b>provide</b><p>storage · software · processing</p></article><i>→</i><article><span>LOCAL DEVICE</span><b>receive</b><p>service or result</p></article></section>
-          <p className="l8-takeaway"><b>Cloud</b> describes service delivery and resource location. It does not mean the data has no physical server.</p>
-        </Slide>
-      ),
-    },
-    {
-      time: "6 min",
-      focus: "Separate ownership, exclusivity and location in public and private clouds.",
-      prompt: "Classify a shared provider service and a dedicated company-only service.",
-      source: "Coursebook printed p.39; syllabus 2.1 public and private clouds.",
-      content: (
-        <Slide number="05" eyebrow="PUBLIC OR PRIVATE?" sourceLabel="TEXTBOOK p.39" syllabusLabel="SYLLABUS 2.1 — CLOUD TYPES" title="The key distinction is who the infrastructure serves." className="l8-slide l8-cloud-types">
-          <section className="l8-compare"><article><span>PUBLIC CLOUD</span><h3>shared provider infrastructure</h3><ul><li>owned and managed by a third party</li><li>services sold to many customers</li><li>fast to scale; less direct control</li></ul></article><article><span>PRIVATE CLOUD</span><h3>dedicated to one organisation</h3><ul><li>may be on-site or provider-hosted</li><li>greater configuration and policy control</li><li>higher management cost or responsibility</li></ul></article></section>
-          <p className="l8-warning">Public does <b>not</b> mean that anyone may read the customer&apos;s data.</p>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Build linked benefit and drawback chains for provider-managed cloud services rather than isolated buzzwords.",
-      prompt: "For each card, students add the consequence for a school or company.",
-      source: "Coursebook printed p.39; syllabus 2.1 benefits and drawbacks of cloud computing; 9618/12 O/N 2025 Q8(a).",
-      content: (
-        <Slide number="06" eyebrow="CLOUD TRADE-OFFS" sourceLabel="TEXTBOOK p.39 + PAPER 1" syllabusLabel="SYLLABUS 2.1 — BENEFITS / DRAWBACKS" title="Provider-managed cloud services trade some control for convenience." className="l8-slide l8-tradeoffs">
-          <section className="l8-trade-grid"><article><span>ACCESS</span><b>many locations/devices</b><p>but service depends on network availability</p></article><article><span>SCALE</span><b>increase capacity quickly</b><p>but recurring fees and provider dependence may grow</p></article><article><span>MANAGEMENT</span><b>provider maintains infrastructure</b><p>but the customer gives up some direct control</p></article><article><span>RESILIENCE</span><b>provider may replicate/backup</b><p>an outage may block access; a breach may expose data</p></article></section>
-          <div className="l8-answer-frame"><b>Exam frame</b><span>Feature → direct consequence → why it matters here.</span></div>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Use a verified authentic question to distinguish private-cloud definition from comparative benefit.",
-      prompt: "Give four minutes closed-book, then reveal and self-mark one distinct point per mark.",
-      source: "Adapted from 9618/13 May/June 2024 Question 5(a)(i)-(ii), verified against the published mark scheme.",
-      content: (
-        <Slide number="07" eyebrow="PAST PAPER PRACTICE · 4 MARKS" sourceLabel="9618/13 M/J 2024 · Q5(a)" syllabusLabel="SYLLABUS 2.1 — CLOUD" title="Private cloud: define it, then compare it with public cloud." className="l8-slide l8-paper">
-          <section className="l8-paper-question"><p><b>(a)</b> Define <em>private cloud</em>. <strong>[1]</strong></p><p><b>(b)</b> Describe three benefits to a multimedia company of private rather than public cloud storage. <strong>[3]</strong></p></section>
-          <Reveal id="cloud-paper" visible={revealed.has("cloud-paper")} onToggle={toggleReveal}><p><b>(a)</b> Dedicated/bespoke remote services or storage available only to the company. <b>(b)</b> Any three: less reliance on a third party; greater control of security/privacy; greater control of backup; capacity/configuration tailored or scaled to company needs.</p></Reveal>
-          <p className="l8-citation">Concise adaptation of 9618/13 M/J 2024 Q5(a)(i)-(ii), with the original 1 + 3 mark allocation.</p>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Require a model choice that is driven by an organisation's constraints.",
-      prompt: "Pairs choose a model for each scenario and write one linked reason.",
-      source: "Syllabus 2.1 public/private clouds and justified benefits/drawbacks; Coursebook p.39.",
-      content: (
-        <Slide number="08" eyebrow="CLOUD DECISION LAB" sourceLabel="TEXTBOOK p.39" syllabusLabel="SYLLABUS 2.1 — APPLY" title="Choose from the requirement, not from a memorised favourite." className="l8-slide l8-scenarios">
-          <section className="l8-scenario-grid"><article><span>START-UP</span><b>traffic changes each week</b><p>small technical team · global customers</p><Reveal id="startup" visible={revealed.has("startup")} onToggle={toggleReveal}><p><strong>Public:</strong> rapid scaling and provider management reduce initial infrastructure work.</p></Reveal></article><article><span>HEALTH SERVICE</span><b>sensitive patient records</b><p>strict control · specialist IT team</p><Reveal id="health" visible={revealed.has("health")} onToggle={toggleReveal}><p><strong>Private:</strong> dedicated infrastructure gives greater policy and access control. A compliant public cloud can also earn credit when its legal, contractual and security controls are justified.</p></Reveal></article></section>
-          <p className="l8-warning">A model choice never removes the need for encryption, authentication, backup and access control.</p>
-        </Slide>
-      ),
-    },
-    {
-      time: "6 min",
-      focus: "Introduce a reusable set of criteria for every transmission-medium decision.",
-      prompt: "Students rank the five criteria for a rural clinic and a gaming room.",
-      source: "Coursebook Section 2.03 printed pp.32-35; syllabus wired/wireless implications.",
-      content: (
-        <Slide number="09" eyebrow="CHOOSE A MEDIUM" sourceLabel="TEXTBOOK 2.03 · pp.32-35" syllabusLabel="SYLLABUS 2.1 — MEDIA" title="The best medium depends on what the connection must achieve." className="l8-slide l8-criteria">
-          <section className="l8-criteria-row"><article><b>BANDWIDTH</b><span>data per second</span></article><article><b>DISTANCE</b><span>attenuation</span></article><article><b>INTERFERENCE</b><span>signal quality</span></article><article><b>MOBILITY</b><span>movement/access</span></article><article><b>CONSTRAINT</b><span>cost · terrain · security</span></article></section>
-          <p className="l8-takeaway">Do not write “faster” alone. Name the property, then its consequence for the stated network.</p>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Explain how copper carries data and connect physical behaviour to advantages and limitations.",
-      prompt: "Ask why twisting pairs and shielding can improve signal quality.",
-      source: "Coursebook printed pp.32-33; syllabus copper cable characteristics.",
-      content: (
-        <Slide number="10" eyebrow="COPPER CABLE" sourceLabel="TEXTBOOK pp.32-33" syllabusLabel="SYLLABUS 2.1 — COPPER" title="Changing electrical signals carry bits through metal conductors." className="l8-slide l8-medium">
-          <section className="l8-medium-layout"><div className="l8-copper-visual" role="img" aria-label="A twisted pair of copper conductors carrying electrical signals"><svg viewBox="0 0 490 150" aria-hidden="true"><path className="l8-wire-a" d="M20 75 C70 20 120 20 170 75 S270 130 320 75 S420 20 470 75" /><path className="l8-wire-b" d="M20 75 C70 130 120 130 170 75 S270 20 320 75 S420 130 470 75" /></svg><span>twisted pair · electrical signal</span></div><article><span>STRENGTHS</span><ul><li>relatively inexpensive</li><li>easy to terminate and install</li><li>common for short LAN links</li></ul></article><article><span>LIMITS</span><ul><li>electromagnetic interference</li><li>attenuation over distance</li><li>lower bandwidth than fibre</li></ul></article></section>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Explain fibre as light transmission and make comparison language explicit.",
-      prompt: "Students convert each physical feature into a network consequence.",
-      source: "Coursebook printed pp.32-33; syllabus fibre-optic cable characteristics.",
-      content: (
-        <Slide number="11" eyebrow="FIBRE-OPTIC CABLE" sourceLabel="TEXTBOOK pp.32-33" syllabusLabel="SYLLABUS 2.1 — FIBRE" title="Pulses of light travel through a glass or plastic core." className="l8-slide l8-medium l8-fibre">
-          <section className="l8-fibre-flow" role="img" aria-label="Pulses of light travelling along a fibre"><b>LIGHT</b><i /><i /><i /><i /><i /><strong>RECEIVER</strong></section>
-          <section className="l8-property-grid"><article><b>HIGH BANDWIDTH</b><p>more data may be carried each second</p></article><article><b>LOW INTERFERENCE</b><p>electromagnetic fields do not alter light</p></article><article><b>LOWER ATTENUATION</b><p>long links need fewer repeaters</p></article><article><b>TRADE-OFF</b><p>equipment and installation can cost more</p></article></section>
-        </Slide>
-      ),
-    },
-    {
-      time: "6 min",
-      focus: "Differentiate radio/Wi-Fi and terrestrial microwave without treating all wireless links as identical.",
-      prompt: "Ask which signal can support movement and which usually needs line-of-sight.",
-      source: "Coursebook printed pp.33-34; syllabus radio waves including Wi-Fi and microwaves.",
-      content: (
-        <Slide number="12" eyebrow="WIRELESS: RADIO & MICROWAVE" sourceLabel="TEXTBOOK pp.33-34" syllabusLabel="SYLLABUS 2.1 — RADIO / MICROWAVE" title="Wireless removes the cable, not the engineering constraints." className="l8-slide l8-wireless">
-          <section className="l8-wave-compare"><article><div className="l8-radio-rings"><i /><i /><i /></div><span>WI-FI · USES RADIO WAVES</span><b>local mobility</b><p>range, obstacles, interference and shared access affect performance; radio waves also support other wireless systems</p></article><article><div className="l8-microwave-beam"><i /></div><span>MICROWAVE</span><b>directed link</b><p>high-frequency electromagnetic waves; terrestrial links usually require line-of-sight</p></article></section>
-          <p className="l8-warning">Wi-Fi is an IEEE 802.11 WLAN technology — not simply “Ethernet without a wire”.</p>
-        </Slide>
-      ),
-    },
-    {
-      time: "7 min",
-      focus: "Model satellite as a microwave relay and link distance to coverage and latency.",
-      prompt: "Students trace uplink → satellite → downlink and identify where delay is introduced.",
-      source: "Coursebook printed p.35; syllabus satellite characteristics.",
-      content: (
-        <Slide number="13" eyebrow="SATELLITE LINKS" sourceLabel="TEXTBOOK p.35" syllabusLabel="SYLLABUS 2.1 — SATELLITES" title="A satellite relays microwave signals across a very large area." className="l8-slide l8-satellite">
-          <section className="l8-orbit" role="img" aria-label="Ground station uplink to satellite and downlink to a remote receiver"><article><b>GROUND A</b><span>uplink</span></article><i className="l8-uplink" /><strong>SATELLITE</strong><i className="l8-downlink" /><article><b>GROUND B</b><span>downlink</span></article></section>
-          <section className="l8-sat-points"><p><b>Benefit:</b> wide coverage and access where cable is impractical.</p><p><b>Drawback:</b> long signal path creates latency; weather/interference and capacity may matter.</p></section>
-        </Slide>
-      ),
-    },
-    {
-      time: "6 min",
-      focus: "Synthesize wired/wireless implications in one decision matrix.",
-      prompt: "Students complete the final column for one school scenario.",
-      source: "Coursebook pp.32-35; syllabus 2.1 wired and wireless implications.",
-      content: (
-        <Slide number="14" eyebrow="WIRED vs WIRELESS" sourceLabel="TEXTBOOK pp.32-35" syllabusLabel="SYLLABUS 2.1 — IMPLICATIONS" title="Compare reliability and mobility — then connect both to the user." className="l8-slide l8-matrix">
-          <section className="l8-decision-table"><div><b>NEED</b><b>WIRED</b><b>WIRELESS</b></div><div><span>movement</span><p>fixed connection</p><p>portable access</p></div><div><span>interference</span><p>usually lower</p><p>often higher/shared</p></div><div><span>signal interception</span><p>local cable/port usually needs physical access</p><p>radio signal is receivable within range</p></div><div><span>installation</span><p>cable route required</p><p>fast to add mobile devices</p></div></section>
-          <div className="l8-answer-frame"><b>Balanced conclusion</b><span>Many networks use both: wired backbone + wireless access.</span></div>
-        </Slide>
-      ),
-    },
-    {
-      time: "5 min",
-      focus: "Finish with an authentic medium-identification item and a concise self-mark.",
-      prompt: "Students answer in two matched name-description pairs before revealing.",
-      source: "Adapted from 9618/13 October/November 2024 Question 9(b), verified against the published mark scheme.",
-      content: (
-        <Slide number="15" eyebrow="PAST PAPER EXIT · 4 MARKS" sourceLabel="9618/13 O/N 2024 · Q9(b)" syllabusLabel="SYLLABUS 2.1 — MEDIA" title="Other than copper, name and describe two WAN transmission media." className="l8-slide l8-exit">
-          <section className="l8-exit-prompt"><p><b>MEDIUM 1</b><span>name + how its signal carries data</span></p><p><b>MEDIUM 2</b><span>name + how its signal carries data</span></p></section>
-          <Reveal id="media-exit" visible={revealed.has("media-exit")} onToggle={toggleReveal}><p>Examples: <strong>fibre optic</strong> — pulses of light; <strong>radio waves/microwaves</strong> — electromagnetic waves at selected frequencies. Award one mark for each valid medium and one for its matching description.</p></Reveal>
-          <div className="l8-homework"><b>HOMEWORK 08</b><span>30 marks · 45 minutes · inline answers</span><strong>USE HOMEWORK TAB ↑</strong></div>
-        </Slide>
-      ),
-    },
+    { time: "2 min · cumulative 02", core: true, focus: "Frame one practical question: how should data travel?", prompt: "Ask students to sketch how four classroom computers might connect.", source: "Official syllabus 2.1 p.16; Coursebook pp.29–32 and 39.", content: <Slide number="01" eyebrow="CHAPTER 2 · COMMUNICATION" sourceLabel="TEXTBOOK pp.29–32, 39" syllabusLabel="SYLLABUS 2.1 · p.16" className="l7-readable l7-clean-title"><section className="l7-clean-title__grid"><div><span>LESSON 08 · 40-MINUTE CORE</span><h1>Topologies,<br />paths and cloud</h1><p>Bus · star · mesh · hybrid · packet journeys · public and private clouds</p></div><div className="l7-clean-question"><span>TODAY&apos;S QUESTION</span><strong>What route does the data take?</strong><p>The layout controls packet paths; cloud choice controls where services are provided.</p></div></section></Slide> },
+    { time: "3 min · cumulative 05", core: true, focus: "Show the exact official syllabus slice and lesson boundary.", prompt: "Students circle the command words understand and justify.", source: "Cambridge 9618 syllabus 2027–2029, section 2.1, p.16.", content: <Slide number="02" eyebrow="EXACT SYLLABUS SLICE" sourceLabel="OFFICIAL SYLLABUS p.16" syllabusLabel="2.1 · TOPOLOGIES + CLOUD" title="What must you be able to do?" className="l7-readable"><section className="l7-outcome-list"><article><b>01</b><div><strong>Recognise four topologies</strong><p>Bus, star, mesh and hybrid.</p></div></article><article><b>02</b><div><strong>Trace packets</strong><p>Explain transmission between two hosts.</p></div></article><article><b>03</b><div><strong>Justify a topology</strong><p>Link its design to a given situation.</p></div></article><article><b>04</b><div><strong>Evaluate cloud computing</strong><p>Public/private, benefits and drawbacks.</p></div></article></section><p className="l7-boundary"><b>NEXT LESSON</b><span>Wired/wireless networks and transmission media move to Lesson 09.</span></p></Slide> },
+    { time: "4 min · cumulative 09", core: true, focus: "Make all four layouts visually distinct.", prompt: "Name each layout and identify any central device or shared backbone.", source: "Coursebook 2.02, pp.29–32; syllabus 2.1.", content: <Slide number="03" eyebrow="FOUNDATION 1 · RECOGNISE" sourceLabel="TEXTBOOK pp.29–32" syllabusLabel="2.1 · FOUR TOPOLOGIES" title="Start with the layout: what is connected to what?" className="l7-readable"><section className="l8-topology-grid"><article><b>BUS</b><Topology type="bus" /></article><article><b>STAR</b><Topology type="star" /></article><article><b>MESH</b><Topology type="mesh" /></article><article><b>HYBRID</b><Topology type="hybrid" /></article></section></Slide> },
+    { time: "4 min · cumulative 13", core: true, focus: "Trace a bus packet and connect the shared backbone to trade-offs.", prompt: "Ask what every node sees and what happens if the backbone breaks.", source: "Coursebook pp.29–30; syllabus packet transmission and justification.", content: <Slide number="04" eyebrow="PATH 1 · BUS" sourceLabel="TEXTBOOK pp.29–30" syllabusLabel="2.1 · PACKET PATH" title="A packet travels along one shared backbone." className="l7-readable"><section className="l8-path-layout"><Topology type="bus" path/><article><ol><li>Sender places the packet on the bus.</li><li>The signal travels along the shared cable.</li><li>Every node receives it; only the addressed host accepts it.</li></ol></article></section><div className="l7-pro-con"><p><b>Benefit:</b> little cable; low cost for a small network.</p><p><b>Drawback:</b> backbone failure stops the network; traffic can collide.</p></div></Slide> },
+    { time: "4 min · cumulative 17", core: true, focus: "Trace the exact star route through the switch.", prompt: "Students say the three marking points aloud.", source: "9618/12 O/N 2025 Q5(c) and published mark scheme.", content: <Slide number="05" eyebrow="PATH 2 · STAR" sourceLabel="9618/12 O/N 2025 · Q5(c)" syllabusLabel="AUTHENTIC PAST PAPER" title="Describe packet transmission between two hosts in a star. [3]" className="l7-readable"><section className="l8-path-layout"><Topology type="star" path/><article><ol><li>Sender sends the packet to the switch.</li><li>Switch checks the destination address.</li><li>Switch forwards only to the intended receiver.</li></ol></article></section><div className="l7-answer-frame"><b>Exact route</b><span>Host A → switch → Host B. Not “A sends directly to B”.</span></div></Slide> },
+    { time: "4 min · cumulative 21", core: true, focus: "Explain alternate routes in mesh and component sections in hybrid.", prompt: "Trace two possible A-to-D paths on the mesh.", source: "Coursebook pp.30–32; 9618/13 M/J 2023 Q2(b).", content: <Slide number="06" eyebrow="PATH 3 · MESH AND HYBRID" sourceLabel="TEXTBOOK pp.30–32" syllabusLabel="2.1 · PACKET PATHS" title="Mesh adds routes; hybrid combines topology sections." className="l7-readable"><section className="l8-dual-path"><article><span>MESH</span><Topology type="mesh" path/><p>Nodes may relay packets. If one link fails, another route may remain.</p></article><article><span>HYBRID</span><Topology type="hybrid" path/><p>Trace each section by its own rules, then cross the connecting link.</p></article></section></Slide> },
+    { time: "5 min · cumulative 26", core: true, focus: "Move from features to situation-linked justification.", prompt: "Pairs complete one because/therefore chain per scenario.", source: "Syllabus 2.1 topology justification; Coursebook pp.29–32.", content: <Slide number="07" eyebrow="APPLY · CHOOSE AND JUSTIFY" sourceLabel="TEXTBOOK pp.29–32" syllabusLabel="2.1 · GIVEN SITUATION" title="There is no best topology without a requirement." className="l7-readable"><section className="l7-two-column"><article><span>CLASSROOM · 20 COMPUTERS</span><h3>Star</h3><p>Independent links mean one cable failure affects only one computer and faults are easier to locate.</p></article><article><span>CRITICAL MULTI-SITE LINKS</span><h3>Mesh</h3><p>Multiple routes improve resilience because packets can take another path after a link failure.</p></article></section><div className="l7-answer-frame"><b>2-mark chain</b><span>Feature [1] → consequence in this situation [1].</span></div></Slide> },
+    { time: "5 min · cumulative 31", core: true, focus: "Define cloud, then separate public and private by access and dedication.", prompt: "Ask whether private cloud must be physically on-site. Answer: no.", source: "Coursebook p.39; 9618/13 M/J 2022 Q8(a)–(b).", content: <Slide number="08" eyebrow="FOUNDATION 2 · CLOUD" sourceLabel="TEXTBOOK p.39" syllabusLabel="2.1 · PUBLIC / PRIVATE" title="Cloud computing provides remote services, files or software." className="l7-readable"><section className="l7-two-column"><article><span>PUBLIC CLOUD</span><h3>Shared provider infrastructure</h3><ul><li>third-party service over the internet</li><li>offered to many customers</li><li>quick to scale; less direct control</li></ul></article><article><span>PRIVATE CLOUD</span><h3>Dedicated to one organisation</h3><ul><li>only selected users can access it</li><li>may be on-site or remotely hosted</li><li>greater control; more responsibility/cost</li></ul></article></section><p className="l7-keyline"><b>Common error</b><span>“Public” does not mean anyone may read customer data.</span></p></Slide> },
+    { time: "6 min · cumulative 37", core: true, focus: "Build linked cloud benefits and drawbacks.", prompt: "Write two developed disadvantages before revealing the scheme.", source: "9618/13 O/N 2023 Q3(a)(i)–(ii) and published mark scheme.", content: <Slide number="09" eyebrow="GUIDED EXAM PRACTICE · 6 MARKS" sourceLabel="9618/13 O/N 2023 · Q3(a)" syllabusLabel="AUTHENTIC PAST PAPER" title="A company stores international online courses on a public cloud." className="l7-readable"><section className="l8-cloud-question"><p><b>(i) Explain why a public cloud is suitable. [2]</b></p><p><b>(ii) Describe two disadvantages compared with a LAN server. [4]</b></p></section><Reveal id="cloud-paper" visible={revealed.has("cloud-paper")} onToggle={toggleReveal}><p><b>Why:</b> courses are available online/to anyone who enrols; shared infrastructure can reduce cost. <b>Disadvantages:</b> less control over remote data/provider backup and security; reliable internet required; recurring provider costs. Develop two disadvantages for four marks.</p></Reveal></Slide> },
+    { time: "3 min · cumulative 40", core: true, focus: "Close with a four-step answer routine.", prompt: "Explain one route and one cloud distinction without notes.", source: "Syllabus 2.1 synthesis; Coursebook pp.29–32 and 39.", content: <Slide number="10" eyebrow="EXIT · FOUR QUESTIONS" sourceLabel="TEXTBOOK pp.29–32, 39" syllabusLabel="2.1 · CHECKPOINT" title="Identify, trace, justify, evaluate." className="l7-readable"><section className="l7-exit-list"><p><b>1 · IDENTIFY</b><span>Which topology?</span></p><p><b>2 · TRACE</b><span>What exact packet path?</span></p><p><b>3 · JUSTIFY</b><span>Why does the feature suit?</span></p><p><b>4 · EVALUATE</b><span>What does the cloud choice gain and lose?</span></p></section><div className="l7-homework"><b>HOMEWORK 08</b><span>23 marks · 7 authentic Paper 1 question parts</span><strong>HOMEWORK TAB ↑</strong></div></Slide> },
+    { time: "6 min", core: false, focus: "Give a slower recognition routine.", prompt: "Answer the diagnostic question for each topology.", source: "Coursebook pp.29–32; syllabus 2.1.", content: <Slide number="E1" eyebrow="OPTIONAL SUPPORT · SYLLABUS" sourceLabel="TEXTBOOK pp.29–32" syllabusLabel="2.1 · RECOGNISE" title="Three questions reveal the topology." className="l7-readable"><section className="l7-benefit-list"><article><b>CENTRAL DEVICE?</b><p>Yes suggests star.</p></article><article><b>ONE BACKBONE?</b><p>Yes suggests bus.</p></article><article><b>MULTIPLE ROUTES?</b><p>Yes suggests mesh.</p></article><article><b>COMBINED DESIGNS?</b><p>Yes suggests hybrid.</p></article></section></Slide> },
+    { time: "7 min", core: false, focus: "Practise topology choice in new scenarios.", prompt: "Require one feature and one consequence.", source: "Original syllabus-aligned practice; no past-paper wording.", content: <Slide number="E2" eyebrow="OPTIONAL PRACTICE · ORIGINAL" sourceLabel="SYLLABUS-STYLE ORIGINAL" syllabusLabel="2.1 · JUSTIFY" title="Choose from the requirement." className="l7-readable"><section className="l7-two-column"><article><span>TEMPORARY SMALL EVENT</span><h3>Low cost matters</h3><p>Few devices; short duration; failure is not critical.</p></article><article><span>EMERGENCY CONTROL</span><h3>Availability matters</h3><p>One failed link must not stop communication.</p></article></section><div className="l7-answer-frame"><b>Your answer</b><span>Choose a topology, then write feature → consequence.</span></div></Slide> },
+    { time: "5 min", core: false, focus: "Repair three common misconceptions.", prompt: "Correct each statement in one sentence.", source: "Coursebook pp.29–32, 39; syllabus 2.1.", content: <Slide number="E3" eyebrow="OPTIONAL SUPPORT · MISCONCEPTIONS" sourceLabel="TEXTBOOK pp.29–32, 39" syllabusLabel="2.1 · PRECISION" title="Three statements that lose marks." className="l7-readable"><section className="l7-misconceptions"><article><b>“Star sends A → B.”</b><p>No: A → switch → B.</p></article><article><b>“Mesh means all-to-all.”</b><p>That is full mesh; partial mesh also provides multiple routes.</p></article><article><b>“Private cloud is on-site.”</b><p>It means dedicated access; hosting may still be remote.</p></article></section></Slide> },
   ];
-
-  const homework = (
-    <HomeworkSheet
-      lessonNumber="08"
-      title="Cloud Computing, Wired/Wireless Networks & Transmission Media"
-      marks={30}
-      minutes={45}
-      syllabusLabel="SYLLABUS 2.1 · p.16"
-      sourceLabel="TEXTBOOK CH.2 · pp.32-35, 39 + PAPER 1"
-      instructions="Use a named medium or cloud model in every answer. For each explanation, link one technical feature to its consequence in the stated situation. Past-paper prompts are concise adaptations with their original references and marks."
-      sections={homeworkSections}
-      challenge={{
-        id: "l8-challenge",
-        prompt: <p><Mark>CHALLENGE</Mark> Design a connection for a remote medical clinic. Choose a cloud model, one local medium and one long-distance medium; justify every choice.</p>,
-        answer: <p>One valid design is a <strong>private cloud</strong> for greater control of patient data, <strong>Wi-Fi</strong> locally for mobile clinical devices, and a <strong>satellite link</strong> where terrestrial cable is unavailable. Fibre could replace satellite where installed because it offers high bandwidth and low latency. Credit any technically consistent, linked design.</p>,
-      }}
-    />
-  );
-
-  return (
-    <LessonShell
-      lessonNumber="08"
-      textbookHref="../textbook/lesson-08/"
-      textbookLabel="Textbook · pp.32–35, 39"
-      slides={slides}
-      homework={homework}
-      courseMapHref="../?view=roadmap"
-      sourceSummary="Checked against syllabus 2.1 p.16, Coursebook Chapter 2 printed pp.32-35 and p.39, and published 2023-2025 AS Paper 1 questions and mark schemes."
-      sourceDetail="Core boundary: public/private clouds and their trade-offs; wired/wireless implications; copper, fibre-optic, radio/Wi-Fi, microwave and satellite media. Authentic anchors: 9618/13 M/J 2023 Q2(d), 9618/13 M/J 2024 Q5(a), 9618/12 O/N 2025 Q8(a), 9618/13 O/N 2025 Q4(a)-(b), and 9618/13 O/N 2024 Q9(b). Infrared and detailed satellite-orbit counts are enrichment, not core 2027-2029 outcomes. Ethernet, streaming and internet infrastructure follow in Lesson 09; IP, subnetting, URL and DNS follow in Lesson 10."
-    />
-  );
+  const homework = <HomeworkSheet lessonNumber="08" title="Topologies, Packet Paths and Cloud Computing" marks={23} minutes={40} syllabusLabel="SYLLABUS 2.1 · p.16" sourceLabel="7 AUTHENTIC PAPER 1 QUESTION PARTS" instructions="Answer every question. All wording is taken from Cambridge 9618 question papers; each answer toggle condenses the corresponding published mark scheme. Write one distinct developed point for each mark." sections={homeworkSections} />;
+  return <LessonShell lessonNumber="08" defaultCoreOnly textbookHref="../textbook/lesson-08/" textbookLabel="Coursebook reading · pp.29–32, 39" chapterNoteHref="../notes/chapters/#as-2" chapterNoteLabel="Chapter 2 ZNotes" slides={slides} homework={homework} courseMapHref="../?view=roadmap" additionalSourceLinks={[{ href: "https://znotes.org/caie/as-level/computer-science-9618/theory/communication/", label: "ZNotes Communication" }]} sourceSummary="Official 2027–2029 syllabus 2.1 p.16 · Coursebook printed pp.29–32 and 39 · Chapter 2 ZNotes · original 2022–2025 Paper 1 question papers and published mark schemes." sourceDetail="Lesson 08 is limited to bus, star, mesh and hybrid topologies; packet paths; topology justification; and cloud computing. Wired/wireless networks and transmission media move to Lesson 09. Homework: 9618/12 O/N 2025 Q5(b)–(c), 9618/13 M/J 2023 Q2(b)(i)–(ii), 9618/11 O/N 2023 Q2(d), 9618/13 M/J 2022 Q8(a)–(c), and 9618/13 O/N 2023 Q3(a)(i)–(ii)." />;
 }

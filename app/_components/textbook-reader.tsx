@@ -9,12 +9,13 @@ export function TextbookReader({ lesson }: TextbookReaderProps) {
   const resource = getTextbookResource(lesson);
   if (!resource) return null;
   const { chapter, title, printedPages } = resource;
+  const lessonHref = lesson === "01" ? asset("/") : asset(`/lesson-${lesson}/`);
 
   return (
     <main className="textbook-reader">
       <header className="textbook-bar">
-        <a href={asset(`/lesson-${lesson}/`)}><b>CS</b><span>Cambridge 9618<br />Lesson {lesson}</span></a>
-        <nav><a href={asset(`/lesson-${lesson}/`)}>Back to lesson</a><a href={asset(`/notes/chapters/#as-${chapter}`)}>Chapter {chapter} notes</a><a href={asset("/course-progress/")}>Progress</a></nav>
+        <a href={lessonHref}><b>CS</b><span>Cambridge 9618<br />Lesson {lesson}</span></a>
+        <nav><a href={lessonHref}>Back to lesson</a><a href={asset(`/notes/chapters/#as-${chapter}`)}>Chapter {chapter} notes</a><a href={asset("/course-progress/")}>Progress</a></nav>
       </header>
 
       <section className="textbook-hero">

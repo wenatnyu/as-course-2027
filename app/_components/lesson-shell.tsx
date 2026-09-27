@@ -29,9 +29,9 @@ export const COURSE_LESSONS = [
   ["04", "Characters and bitmap graphics"],
   ["05", "Vector graphics and sound"],
   ["06", "Compression"],
-  ["07", "Network models and LAN hardware"],
-  ["08", "Cloud, wired/wireless and media"],
-  ["09", "Ethernet, streaming and internet infrastructure"],
+  ["07", "Network foundations and models"],
+  ["08", "Topologies, packet paths and cloud"],
+  ["09", "Network media, hardware and internet services"],
   ["10", "IP addressing, subnetting, URL and DNS"],
   ["11", "Hardware roles, embedded systems and buffers"],
   ["12", "Primary memory and ROM families"],
@@ -88,6 +88,112 @@ export const COURSE_LESSONS = [
   ["63", "Maintenance and complete AS review"],
 ] as const;
 
+const AS_CORE_ROUTES: Record<string, number[]> = {
+  "02": [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 15],
+  "03": [1, 2, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15],
+  "04": [1, 2, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15],
+  "05": [1, 2, 4, 6, 7, 8, 9, 12, 13, 14, 15],
+  "06": [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15],
+  "07": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "08": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "09": [1, 2, 3, 8, 5, 4, 6, 9, 10, 12, 15],
+  "10": [1, 2, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15],
+  "11": [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13],
+  "12": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15],
+  "13": [1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14],
+  "14": [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 15],
+  "15": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "16": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "17": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "18": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15],
+  "19": [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 15],
+  "20": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15],
+  "21": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "22": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "23": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15],
+  "24": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15],
+  "25": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "26": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 15],
+  "27": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15],
+  "28": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15],
+  "29": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "30": [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 15],
+  "31": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15],
+  "32": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15],
+  "33": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "34": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "35": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15],
+  "36": [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15],
+  "37": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "38": [1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 15],
+  "39": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "40": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "41": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "42": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "43": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "44": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "45": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "46": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "47": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "48": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "49": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "50": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+  "51": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15],
+};
+
+const AS_CORE_TIMES: Record<string, string[]> = {
+  "02": ["2 min · 02", "2 min · 04", "3 min · 07", "4 min · 11", "4 min · 15", "3 min · 18", "2 min · 20", "4 min · 24", "5 min · 29", "6 min · 35", "5 min · 40"],
+  "03": ["2 min · 02", "2 min · 04", "3 min · 07", "4 min · 11", "4 min · 15", "4 min · 19", "4 min · 23", "3 min · 26", "3 min · 29", "4 min · 33", "3 min · 36", "4 min · 40"],
+  "04": ["2 min · 02", "2 min · 04", "3 min · 07", "4 min · 11", "3 min · 14", "3 min · 17", "4 min · 21", "3 min · 24", "4 min · 28", "3 min · 31", "4 min · 35", "5 min · 40"],
+  "05": ["2 min · 02", "2 min · 04", "4 min · 08", "3 min · 11", "4 min · 15", "4 min · 19", "4 min · 23", "4 min · 27", "4 min · 31", "4 min · 35", "5 min · 40"],
+  "06": ["2 min · 02", "2 min · 04", "3 min · 07", "3 min · 10", "3 min · 13", "4 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "07": ["2 min · 02", "3 min · 05", "4 min · 09", "5 min · 14", "4 min · 18", "4 min · 22", "5 min · 27", "3 min · 30", "5 min · 35", "5 min · 40"],
+  "08": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "5 min · 26", "5 min · 31", "6 min · 37", "3 min · 40"],
+  "09": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "3 min · 20", "5 min · 25", "3 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "10": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "3 min · 28", "3 min · 31", "3 min · 34", "3 min · 37", "3 min · 40"],
+  "11": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "12": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "13": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "14": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "15": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "16": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "17": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "18": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "19": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "20": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "3 min · 35", "5 min · 40"],
+  "21": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "22": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "23": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "24": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "25": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "26": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "27": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "28": ["2 min · 02", "3 min · 05", "4 min · 09", "4 min · 13", "4 min · 17", "4 min · 21", "4 min · 25", "4 min · 29", "4 min · 33", "4 min · 37", "3 min · 40"],
+  "29": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "30": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "31": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "32": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "33": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "34": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "35": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "36": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "37": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "38": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "4 min · 24", "4 min · 28", "4 min · 32", "4 min · 36", "4 min · 40"],
+  "39": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "40": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "41": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "42": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "43": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "44": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "45": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "46": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "47": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "48": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "49": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "50": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+  "51": ["2 min · 02", "3 min · 05", "3 min · 08", "3 min · 11", "3 min · 14", "3 min · 17", "3 min · 20", "3 min · 23", "3 min · 26", "3 min · 29", "3 min · 32", "4 min · 36", "4 min · 40"],
+};
+
 export function LessonSwitcher({
   lessonNumber,
   root = false,
@@ -109,20 +215,8 @@ export function LessonSwitcher({
   }));
   const navigationLinks = links?.length === lessonCatalog.length ? links : generatedLinks;
   const chapters = stage === "AS" ? AS_CHAPTERS : A2_CHAPTERS;
-  const currentChapter = getChapterForLesson(stage, lessonNumber);
-  const chapterHref = currentChapter
-    ? stage === "A2"
-      ? `../../notes/chapters/#a2-${currentChapter.number}`
-      : `${root ? "./" : "../"}notes/chapters/#as-${currentChapter.number}`
-    : null;
-
   return (
-    <>
-      <div className="lesson-switcher" aria-label="Lesson navigation">
-        {navigationLinks.map((link) => <a className={link.active ? "active" : ""} href={link.href} aria-current={link.active ? "page" : undefined} title={lessonCatalog.find(([number]) => number === link.label)?.[1]} key={link.label}>{link.label}</a>)}
-      </div>
       <div className="lesson-nav-stack">
-        {currentChapter && chapterHref && <a className="chapter-chip" href={chapterHref}><span>CH</span><b>{currentChapter.number}</b><small>{currentChapter.title}</small><em>Notes</em></a>}
         <label className="lesson-picker">
           <span>Lesson</span>
         <select
@@ -147,7 +241,6 @@ export function LessonSwitcher({
         </select>
         </label>
       </div>
-    </>
   );
 }
 
@@ -256,6 +349,12 @@ export function HomeworkSheet({
   challenge?: { id: string; prompt: ReactNode; answer: ReactNode };
   qualificationLabel?: string;
 }) {
+  const splitCoreHomework = qualificationLabel.startsWith("AS") && ["02", "03", "04", "05", "06", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51"].includes(lessonNumber);
+  const nonCoreQuestionIds = new Set(["l10-6"]);
+  const coreSectionCount = splitCoreHomework ? Math.min(2, sections.length) : sections.length;
+  const coreMarks = sections.slice(0, coreSectionCount).flatMap((section) => section.questions).filter((question) => !nonCoreQuestionIds.has(question.id)).reduce((total, question) => total + question.marks, 0);
+  const optionalMarks = sections.flatMap((section, sectionIndex) => section.questions.filter((question) => sectionIndex >= coreSectionCount || nonCoreQuestionIds.has(question.id))).reduce((total, question) => total + question.marks, 0);
+  const displayedMinutes = splitCoreHomework ? Math.min(30, minutes) : minutes;
   const answerIds = useMemo(
     () => [...sections.flatMap((section) => section.questions.map((question) => question.id)), ...(challenge ? [challenge.id] : [])],
     [challenge, sections],
@@ -286,7 +385,7 @@ export function HomeworkSheet({
     <section className={allAnswersVisible ? "homework-page all-answers-visible" : "homework-page"}>
       <header className="homework-hero">
         <div><span>{qualificationLabel}</span><h1>Homework {lessonNumber}</h1><p>{title}</p></div>
-        <div className="homework-stats"><p><b>{marks}</b><span>marks</span></p><p><b>{minutes}</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>
+        <div className="homework-stats"><p><b>{splitCoreHomework ? coreMarks : marks}</b><span>core marks</span></p><p><b>{displayedMinutes}</b><span>minutes</span></p><p><b>0</b><span>calculators</span></p></div>
       </header>
       <div className="student-fields"><span>Name __________________________</span><span>Class __________</span><span>Date __________</span></div>
       <div className="homework-instructions">
@@ -296,12 +395,15 @@ export function HomeworkSheet({
       </div>
 
       {sections.map((section, sectionIndex) => {
+        const optionalSection = sectionIndex >= coreSectionCount;
         return (
-          <section className="homework-section" key={section.code}>
+          <section className={optionalSection ? "homework-section homework-section--optional" : "homework-section"} key={section.code}>
+            {optionalSection && sectionIndex === coreSectionCount && <div className="homework-optional-banner"><b>OPTIONAL EXTENSION</b><span>{optionalMarks} additional marks · use after the core homework is secure</span></div>}
             <div className="homework-section__title"><span>{section.code}</span><div><h2>{section.title}</h2><p>{section.subtitle}</p></div><b>{section.marks} marks</b></div>
             <ol className="question-list" start={sectionStarts[sectionIndex]}>
               {section.questions.map((question) => (
-                <li key={question.id}>
+                <li className={nonCoreQuestionIds.has(question.id) ? "question-optional" : ""} key={question.id}>
+                  {nonCoreQuestionIds.has(question.id) && <div className="question-optional__label">TEXTBOOK EXTENSION · NOT NAMED IN THE 2027–2029 SYLLABUS</div>}
                   <div className="question-copy">{question.prompt}</div><span>[{question.marks}]</span>
                   <div className={`writing-lines lines-${question.lines ?? 3}`} />
                   <InlineAnswer id={question.id} visible={revealedAnswers.has(question.id)} onToggle={toggleAnswer}>
@@ -346,6 +448,7 @@ export function LessonShell({
   chapterNoteLabel = "Chapter note",
   textbookHref,
   textbookLabel = "Textbook",
+  defaultCoreOnly = false,
 }: {
   lessonNumber: string;
   slides: SlideData[];
@@ -365,13 +468,21 @@ export function LessonShell({
   chapterNoteLabel?: string;
   textbookHref?: string;
   textbookLabel?: string;
+  defaultCoreOnly?: boolean;
 }) {
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
   const [teacherMode, setTeacherMode] = useState(false);
-  const [coreOnly, setCoreOnly] = useState(false);
+  const plannedCoreRoute = courseStageLabel.startsWith("AS") ? AS_CORE_ROUTES[lessonNumber] : undefined;
+  const [coreOnly, setCoreOnly] = useState(defaultCoreOnly || Boolean(plannedCoreRoute));
   const deckRef = useRef<HTMLDivElement>(null);
+  const slideRef = useRef<HTMLDivElement>(null);
   const stage = courseStageLabel.startsWith("A2") ? "A2" : "AS";
+  const currentChapter = getChapterForLesson(stage, lessonNumber);
+  const resolvedChapterNoteHref = chapterNoteHref ?? (currentChapter
+    ? stage === "A2" ? `../../notes/chapters/#a2-${currentChapter.number}` : `../notes/chapters/#as-${currentChapter.number}`
+    : undefined);
+  const resolvedChapterNoteLabel = chapterNoteHref ? chapterNoteLabel : currentChapter ? `Chapter ${currentChapter.number} ZNotes` : chapterNoteLabel;
   const textbookResource = stage === "AS" ? getTextbookResource(lessonNumber) : null;
   const resolvedTextbookHref = textbookHref ?? (textbookResource ? `../textbook/lesson-${lessonNumber}/` : undefined);
   const resolvedTextbookLabel = textbookResource
@@ -380,13 +491,17 @@ export function LessonShell({
   const syllabusBrief = getSyllabusBrief(stage, lessonNumber);
   const explicitlyPlannedCore = slides.some((slide) => slide.core !== undefined);
   const defaultCoreLimit = stage === "AS" ? Math.min(8, slides.length) : Math.min(10, slides.length);
-  const coreSlides = explicitlyPlannedCore ? slides.filter((slide) => slide.core) : slides.slice(0, defaultCoreLimit);
+  const coreSlides = plannedCoreRoute
+    ? plannedCoreRoute.map((slideNumber) => slides[slideNumber - 1]).filter(Boolean)
+    : explicitlyPlannedCore ? slides.filter((slide) => slide.core) : slides.slice(0, defaultCoreLimit);
   const visibleSlides = coreOnly ? coreSlides : slides;
+  const currentIsCore = coreSlides.includes(visibleSlides[current]);
+  const coreTime = coreOnly && AS_CORE_TIMES[lessonNumber]?.[current] ? AS_CORE_TIMES[lessonNumber][current] : visibleSlides[current].time;
 
   const goTo = useCallback((next: number) => {
     setCurrent(Math.max(0, Math.min(visibleSlides.length - 1, next)));
     if (!document.fullscreenElement) {
-      window.requestAnimationFrame(() => deckRef.current?.scrollIntoView({
+      window.requestAnimationFrame(() => slideRef.current?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start",
       }));
@@ -417,10 +532,8 @@ export function LessonShell({
           <button className={view === "slides" ? "active" : ""} aria-pressed={view === "slides"} onClick={() => setView("slides")}>Slides</button>
           <button className={view === "homework" ? "active" : ""} aria-pressed={view === "homework"} onClick={() => setView("homework")}>Homework</button>
           <a href={courseMapHref}>Course map</a>
-          <a href={stage === "A2" ? "../../course-progress/" : lessonNumber === "01" ? "course-progress/" : "../course-progress/"}>Progress</a>
-          <a href={siblingCourseHref}>{siblingCourseLabel}</a>
           <a href={examPapersHref}>Papers</a>
-          {chapterNoteHref && <a className="chapter-note-link" href={chapterNoteHref}>{chapterNoteLabel}</a>}
+          <a href={siblingCourseHref}>{siblingCourseLabel}</a>
         </nav>
         <div className="bar-actions">
           <LessonSwitcher lessonNumber={lessonNumber} links={lessonLinks} lessonCatalog={lessonCatalog} stage={stage} />
@@ -429,10 +542,13 @@ export function LessonShell({
         </div>
       </header>
 
-      {resolvedTextbookHref && (
-        <aside className="textbook-callout" aria-label="Coursebook reading">
-          <div><b>COURSEBOOK READING</b><span>Original pages matched to this lesson</span></div>
-          <a href={resolvedTextbookHref}>{resolvedTextbookLabel} <span aria-hidden="true">→</span></a>
+      {(resolvedTextbookHref || resolvedChapterNoteHref) && (
+        <aside className="textbook-callout" aria-label="Lesson resources">
+          <div><b>LESSON RESOURCES</b><span>Matched reading and chapter notes</span></div>
+          <div className="lesson-resource-links">
+            {resolvedTextbookHref && <a href={resolvedTextbookHref}>{resolvedTextbookLabel} <span aria-hidden="true">→</span></a>}
+            {resolvedChapterNoteHref && <a className="notes-resource" href={resolvedChapterNoteHref}>{resolvedChapterNoteLabel} <span aria-hidden="true">→</span></a>}
+          </div>
         </aside>
       )}
 
@@ -446,18 +562,21 @@ export function LessonShell({
                 <p>{syllabusBrief.outcome}</p>
                 <div><b>{stage === "AS" ? "40-minute core" : "Core route"}</b><small>{coreSlides.length} essential slides</small><b>Optional extension</b><small>{Math.max(0, slides.length - coreSlides.length)} slides</small></div>
               </div>
-              <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}` }} src={`${stage === "A2" ? "../../" : lessonNumber === "01" ? "" : "../"}syllabus/syllabus-page-${syllabusBrief.page}.png`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
+              <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}`, objectFit: syllabusBrief.asset ? "contain" : "cover" }} src={`${stage === "A2" ? "../../" : lessonNumber === "01" ? "" : "../"}syllabus/${syllabusBrief.asset ?? `syllabus-page-${syllabusBrief.page}.png`}`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
             </section>
           )}
           <div className="route-toolbar"><div><b>{coreOnly ? "CORE ROUTE" : "FULL DECK"}</b><span>{coreOnly ? "Essential teaching sequence" : "Core teaching + optional extension"}</span></div><button type="button" className={coreOnly ? "active" : ""} onClick={() => { setCoreOnly((value) => !value); setCurrent(0); }}>{coreOnly ? "Show extension" : "Core only"}</button></div>
-          <div className="slide-frame">{visibleSlides[current].content}</div>
+          <div className="slide-frame" ref={slideRef}>
+            {!coreOnly && !currentIsCore && <div className="extension-ribbon"><b>OPTIONAL SUPPORT</b><span>Use after the 40-minute core · check the source badge for syllabus or textbook context</span></div>}
+            {visibleSlides[current].content}
+          </div>
           <div className="deck-controls">
             <div className="progress-label"><span>{String(current + 1).padStart(2, "0")} / {visibleSlides.length}</span><i><b style={{ width: `${(current + 1) / visibleSlides.length * 100}%` }} /></i></div>
             <div className="arrow-controls"><button onClick={() => goTo(current - 1)} disabled={current === 0} aria-label="Previous slide">←</button><button onClick={() => goTo(current + 1)} disabled={current === visibleSlides.length - 1} aria-label="Next slide">→</button></div>
             <div className="shortcut-line"><button onClick={() => deckRef.current?.requestFullscreen?.()}>Full screen</button><span>← → navigate · F full screen · N notes</span></div>
           </div>
           <aside className="teacher-notes">
-            <div><span>TIME</span><b>{visibleSlides[current].time}</b></div>
+            <div><span>TIME</span><b>{coreTime}</b></div>
             <div><span>TEACHING FOCUS</span><p>{visibleSlides[current].focus}</p></div>
             <div><span>PROMPT</span><p>{visibleSlides[current].prompt}</p></div>
             <div><span>SOURCE</span><p>{visibleSlides[current].source}</p></div>

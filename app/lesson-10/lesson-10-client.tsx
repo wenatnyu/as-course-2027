@@ -47,7 +47,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l10-2",
         marks: 3,
         lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>(a) State why a router uses a public IP address. [1]</b></p><p><b>(b) Give two IPv4/IPv6 differences other than the separator. [2]</b></p><p>Adapted from 9618/11 M/J 2024 Q8(b)(i)-(ii).</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>(a) State why a router uses a public IP address. [1]</b></p><p><b>(b) Give two IPv4/IPv6 differences other than the separator. [2]</b></p><p>Adapted from 9618/11 M/J 2024 Q8(b)(i)-(ii).</p></>,
         answer: <p><b>(a)</b> It makes the router visible/accessible to other devices on the internet. <b>(b)</b> Any two: IPv4 has 4 groups versus 8; IPv4 uses denary versus hexadecimal; group ranges are 0–255 versus 0–FFFF; total length is 32 versus 128 bits. <em>[1 + 2]</em></p>,
       },
       {
@@ -76,7 +76,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l10-5",
         marks: 4,
         lines: 5,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Describe two benefits of subnetting a network.</b></p><p>Adapted from 9618/11 M/J 2023 Q4(d)(ii). [4]</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>Describe two benefits of subnetting a network.</b></p><p>Adapted from 9618/11 M/J 2023 Q4(d)(ii). [4]</p></>,
         answer: <p>Any two developed benefits: <strong>less traffic/better performance</strong> because local traffic stays within its subnet; <strong>greater security</strong> because access between segments can be restricted; <strong>easier maintenance</strong> because one subnet can be changed or taken down while others continue. <em>[1 benefit + 1 linked explanation each]</em></p>,
       },
       {
@@ -98,7 +98,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l10-7",
         marks: 4,
         lines: 4,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Complete the four address-type descriptions: public, private, static and dynamic.</b></p><p>Adapted from 9618/12 O/N 2023 Q7(d). [4]</p></>,
+        prompt: <><Mark>ADAPTED FROM PAST PAPER</Mark><p><b>Complete the four address-type descriptions: public, private, static and dynamic.</b></p><p>Adapted from 9618/12 O/N 2023 Q7(d). [4]</p></>,
         answer: <p><strong>Public:</strong> assigned for direct visibility/access on the internet. <strong>Private:</strong> used within an internal LAN and not routed directly on the public internet. <strong>Static:</strong> fixed/does not change when the device rejoins. <strong>Dynamic:</strong> may be refreshed or changed when the device reconnects. <em>[1 each]</em></p>,
       },
       {
@@ -112,7 +112,7 @@ const homeworkSections: HomeworkSection[] = [
         id: "l10-9",
         marks: 4,
         lines: 5,
-        prompt: <><Mark>PAST PAPER PRACTICE</Mark><p><b>Explain how a browser uses a URL and DNS to access a resource on a web server.</b></p><p>Adapted from 9618/11 O/N 2025 Q7(c). [4]</p></>,
+        prompt: <><Mark>EXAM-STYLE ORIGINAL</Mark><p><b>Explain how a browser uses a URL and DNS to access a resource on a web server.</b></p><p>Written from syllabus 2.1; no past-paper wording claimed. [4]</p></>,
         answer: <p>Any four linked points: the browser checks its cache; parses the URL/extracts the domain; sends the domain to a DNS resolver; DNS returns the matching IP address; the browser connects to that IP/web server; requests the resource identified by the path; receives and renders it; caches the IP record. <em>[4]</em></p>,
       },
     ],
@@ -136,7 +136,7 @@ export default function Lesson10Client() {
       source: "Coursebook Sections 2.08-2.09 printed pp.41-47; syllabus 2.1 p.17.",
       content: (
         <Slide number="01" eyebrow="CHAPTER 2 · COMMUNICATION" sourceLabel="TEXTBOOK 2.08-2.09" syllabusLabel="SYLLABUS 2.1 · p.17" className="l10-slide l10-title">
-          <section className="l10-title-grid"><div><span>LESSON 10 · 90 MINUTES</span><h1>Name it.<br /><em>Address it. Route it.</em></h1><p>Move from a human-readable URL to the IP information a network can use.</p></div><div className="l10-address-hero"><article><span>NAME</span><b>learn.example.org</b></article><i>DNS</i><article><span>ADDRESS</span><b>203.0.113.24</b></article></div></section>
+          <section className="l10-title-grid"><div><span>LESSON 10 · 40-MINUTE CORE</span><h1>Name it.<br /><em>Address it. Route it.</em></h1><p>Move from a human-readable URL to the IP information a network can use.</p></div><div className="l10-address-hero"><article><span>NAME</span><b>learn.example.org</b></article><i>DNS</i><article><span>ADDRESS</span><b>203.0.113.24</b></article></div></section>
         </Slide>
       ),
     },
@@ -235,7 +235,7 @@ export default function Lesson10Client() {
       prompt: "Students underline the shared network portion in three /24 addresses.",
       source: "Coursebook pp.42-44; syllabus subnetting and device association.",
       content: (
-        <Slide number="09" eyebrow="NETWORK ID + HOST ID" sourceLabel="TEXTBOOK pp.42-44" syllabusLabel="SYLLABUS 2.1 — ADDRESS PARTS" title="The prefix identifies the subnet; the remaining bits identify an interface within it." className="l10-slide l10-prefix">
+        <Slide number="09" eyebrow="NETWORK ID + HOST ID" sourceLabel="TEXTBOOK pp.42-44" syllabusLabel="TEXTBOOK EXTENSION · CIDR /24 NOT NAMED" title="The prefix identifies the subnet; the remaining bits identify an interface within it." className="l10-slide l10-prefix">
           <section className="l10-prefix-address"><span>192 . 168 . 12</span><b>.</b><strong>44</strong><i>/24</i></section>
           <section className="l10-prefix-grid"><article><span>NETWORK PREFIX · FIRST 24 BITS</span><b>shared by this subnet</b></article><article><span>HOST PORTION · LAST 8 BITS</span><b>unique within this subnet</b></article></section>
           <p className="l10-warning"><code>/24</code> is a decimal prefix length, not an extra 8-bit field added to the IPv4 address.</p>
@@ -299,11 +299,11 @@ export default function Lesson10Client() {
       prompt: "Students number the resolver, root, TLD and authoritative stages.",
       source: "Coursebook printed p.47; syllabus role of DNS.",
       content: (
-        <Slide number="14" eyebrow="PAST PAPER PRACTICE · 4 MARKS" sourceLabel="9618/11 O/N 2025 · Q7(c)" syllabusLabel="SYLLABUS 2.1 — URL / DNS" title="Explain how a browser uses a URL and DNS to access a web resource." className="l10-slide l10-dns">
+        <Slide number="14" eyebrow="EXAM-STYLE ORIGINAL · 4 MARKS" sourceLabel="TEXTBOOK p.47 · DNS" syllabusLabel="CORE DNS ROLE + TEXTBOOK EXTENSION: HIERARCHY" title="Explain how a browser uses a URL and DNS to access a web resource." className="l10-slide l10-dns">
           <section className="l10-dns-flow"><article><span>1</span><b>BROWSER</b><p>asks resolver</p></article><i>→</i><article><span>2</span><b>RESOLVER</b><p>checks cache</p></article><i>→</i><article><span>3</span><b>ROOT / TLD</b><p>directs query</p></article><i>→</i><article><span>4</span><b>AUTHORITATIVE</b><p>returns record</p></article></section>
           <div className="l10-dns-result"><b>203.0.113.24</b><span>The browser can now contact the server and request the URL path.</span></div>
           <Reveal id="dns-check" visible={revealed.has("dns-check")} onToggle={toggleReveal}><p>Parse the URL/extract its domain; check browser/resolver cache; query DNS; receive the IP; connect to the server; request the named resource; receive/render it. Any four linked points score. DNS does not send the web page or choose its packet route.</p></Reveal>
-          <p className="l10-citation">Concise adaptation of 9618/11 O/N 2025 Q7(c), retaining the original 4 marks.</p>
+          <p className="l10-citation">Original practice question. DNS hierarchy and caching are useful textbook detail beyond the syllabus wording “role of DNS”.</p>
         </Slide>
       ),
     },
@@ -344,15 +344,16 @@ export default function Lesson10Client() {
   return (
     <LessonShell
       lessonNumber="10"
-      textbookHref="../textbook/lesson-10/"
-      textbookLabel="Textbook · pp.41–47"
+      defaultCoreOnly
       slides={slides}
       homework={homework}
       courseMapHref="../?view=roadmap"
       textbookHref="../textbook/lesson-10/"
       textbookLabel="Textbook pp.41–47"
-      sourceSummary="Checked against syllabus 2.1 p.17, Coursebook Chapter 2 printed pp.41-47, and published 2021-2025 AS Paper 1 questions and mark schemes."
-      sourceDetail="Core boundary: IPv4/IPv6 formats; subnetting and network/host portions; how IP addresses are associated with network interfaces; public/private addressing and security implications; static/dynamic assignment; URL components and DNS resolution. Authentic anchors: 9618/11 M/J 2023 Q4(d), 9618/11 M/J 2024 Q8(b), 9618/12 O/N 2023 Q7(d), and 9618/11 O/N 2025 Q7(a)-(c). This lesson completes syllabus Chapter 2."
+      chapterNoteHref="../notes/chapters/#as-2"
+      chapterNoteLabel="Chapter 2 ZNotes"
+      sourceSummary="Checked against syllabus 2.1 p.17, Coursebook Chapter 2 printed pp.41-47, and locally archived 2023-2024 AS Paper 1 questions and mark schemes."
+      sourceDetail="Core boundary: IPv4/IPv6 formats; subnetting and network/host portions; how IP addresses are associated with network interfaces; public/private addressing and security implications; static/dynamic assignment; URL components and the role of DNS. Verified anchors: 9618/11 M/J 2023 Q4(d), 9618/11 M/J 2024 Q8(b), and 9618/12 O/N 2023 Q7(d). CIDR /24 notation and detailed DNS hierarchy/caching are explicitly marked textbook extension. This lesson completes syllabus Chapter 2."
     />
   );
 }

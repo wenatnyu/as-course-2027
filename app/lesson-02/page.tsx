@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Lesson02Client from "./lesson-02-client";
 
 const title = "AS Computer Science · Lesson 02";
-const description = "A 90-minute Cambridge 9618 lesson on binary magnitudes and binary versus decimal prefixes.";
+const description = "A 40-minute Cambridge 9618 core lesson with optional extension on binary magnitudes and binary versus decimal prefixes.";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
 const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
 const lessonUrl = new URL("lesson-02/", siteUrl).toString();

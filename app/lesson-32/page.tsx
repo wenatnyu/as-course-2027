@@ -3,7 +3,7 @@ import "../security-ethics-lessons.css";
 import Lesson32Client from "./lesson-32-client";
 
 const title = "AS Computer Science · Lesson 32";
-const description = "A 90-minute Cambridge 9618 lesson on parity, block parity, checksums and Chapter 6 review.";
+const description = "A 40-minute Cambridge 9618 core lesson with optional extension on parity, block parity, checksums and Chapter 6 review.";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/";
 const siteUrl = configuredSiteUrl.endsWith("/") ? configuredSiteUrl : `${configuredSiteUrl}/`;
 const lessonUrl = new URL("lesson-32/", siteUrl).toString();
