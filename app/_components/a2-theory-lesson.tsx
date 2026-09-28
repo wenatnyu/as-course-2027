@@ -180,6 +180,7 @@ export function A2TheoryLesson({
       sourceSummary={sourceSummary}
       sourceDetail={sourceDetail}
       additionalSourceLinks={additionalSourceLinks}
+      twoHourSession={Number.parseInt(lessonNumber, 10) <= 29}
     />
   );
 }

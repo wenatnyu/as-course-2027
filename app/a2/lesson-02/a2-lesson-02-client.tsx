@@ -108,7 +108,7 @@ export default function A2Lesson02Client() {
       source: "2027–2029 syllabus 13.2; coursebook Chapter 16 §16.02 printed pp.317–320.",
       content: (
         <Slide number="01" eyebrow="A2 · PAPER 3" sourceLabel="TEXTBOOK Ch16 §16.02" syllabusLabel="SYLLABUS 13.2" className="a2-slide a2-title a2-dr-slide">
-          <section className="a2-title-grid"><div><span>LESSON 02 · 90 MINUTES</span><h1>Arrange the records.<br /><em>Choose the route.</em></h1><p>Serial · sequential · random organisation · sequential and direct access</p></div><div className="a2-dr-hero-graphic" role="img" aria-label="A record travelling through file organisation to an address"><strong>RECORD</strong><span>SERIAL</span><span>SEQUENTIAL</span><span>RANDOM</span><span>ACCESS</span></div></section>
+          <section className="a2-title-grid"><div><span>LESSON 02 · 2-HOUR SESSION</span><h1>Arrange the records.<br /><em>Choose the route.</em></h1><p>Serial · sequential · random organisation · sequential and direct access</p></div><div className="a2-dr-hero-graphic" role="img" aria-label="A record travelling through file organisation to an address"><strong>RECORD</strong><span>SERIAL</span><span>SEQUENTIAL</span><span>RANDOM</span><span>ACCESS</span></div></section>
         </Slide>
       ),
     },

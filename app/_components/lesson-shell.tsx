@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { getSyllabusBrief } from "../_data/course-schedule";
 import { A2_CHAPTERS, AS_CHAPTERS, getChapterForLesson } from "../_data/chapter-resources";
-import { formatPrintedPages, getTextbookResource } from "../_data/textbook-resources";
+import { formatPrintedPages, getA2TextbookResource, getTextbookResource } from "../_data/textbook-resources";
 
 export type SlideData = {
   time: string;
@@ -449,6 +449,7 @@ export function LessonShell({
   textbookHref,
   textbookLabel = "Textbook",
   defaultCoreOnly = false,
+  twoHourSession = false,
 }: {
   lessonNumber: string;
   slides: SlideData[];
@@ -469,6 +470,7 @@ export function LessonShell({
   textbookHref?: string;
   textbookLabel?: string;
   defaultCoreOnly?: boolean;
+  twoHourSession?: boolean;
 }) {
   const [view, setView] = useState<"slides" | "homework">("slides");
   const [current, setCurrent] = useState(0);
@@ -483,8 +485,10 @@ export function LessonShell({
     ? stage === "A2" ? `../../notes/chapters/#a2-${currentChapter.number}` : `../notes/chapters/#as-${currentChapter.number}`
     : undefined);
   const resolvedChapterNoteLabel = chapterNoteHref ? chapterNoteLabel : currentChapter ? `Chapter ${currentChapter.number} ZNotes` : chapterNoteLabel;
-  const textbookResource = stage === "AS" ? getTextbookResource(lessonNumber) : null;
-  const resolvedTextbookHref = textbookHref ?? (textbookResource ? `../textbook/lesson-${lessonNumber}/` : undefined);
+  const textbookResource = stage === "AS" ? getTextbookResource(lessonNumber) : getA2TextbookResource(lessonNumber);
+  const resolvedTextbookHref = textbookHref ?? (textbookResource
+    ? stage === "A2" ? `../../textbook/a2/lesson-${lessonNumber}/` : `../textbook/lesson-${lessonNumber}/`
+    : undefined);
   const resolvedTextbookLabel = textbookResource
     ? `Textbook pp.${formatPrintedPages(textbookResource.printedPages)}`
     : textbookLabel;
@@ -560,14 +564,16 @@ export function LessonShell({
                 <span>OFFICIAL SYLLABUS · {syllabusBrief.section}</span>
                 <h1>{syllabusBrief.title}</h1>
                 <p>{syllabusBrief.outcome}</p>
-                <div><b>{stage === "AS" ? "40-minute core" : "Core route"}</b><small>{coreSlides.length} essential slides</small><b>Optional extension</b><small>{Math.max(0, slides.length - coreSlides.length)} slides</small></div>
+                {twoHourSession
+                  ? <div><b>90-minute guided deck</b><small>{slides.length} teaching slides</small><b>30-minute exam clinic</b><small>attempt, mark and repair</small></div>
+                  : <div><b>{stage === "AS" ? "40-minute core" : "Core route"}</b><small>{coreSlides.length} essential slides</small><b>Optional extension</b><small>{Math.max(0, slides.length - coreSlides.length)} slides</small></div>}
               </div>
               <figure><img style={{ objectPosition: `center ${syllabusBrief.focus}`, objectFit: syllabusBrief.asset ? "contain" : "cover" }} src={`${stage === "A2" ? "../../" : lessonNumber === "01" ? "" : "../"}syllabus/${syllabusBrief.asset ?? `syllabus-page-${syllabusBrief.page}.png`}`} alt={`Cambridge 9618 2027-2029 syllabus page ${syllabusBrief.page}, section ${syllabusBrief.section}`} /></figure>
             </section>
           )}
-          <div className="route-toolbar"><div><b>{coreOnly ? "CORE ROUTE" : "FULL DECK"}</b><span>{coreOnly ? "Essential teaching sequence" : "Core teaching + optional extension"}</span></div><button type="button" className={coreOnly ? "active" : ""} onClick={() => { setCoreOnly((value) => !value); setCurrent(0); }}>{coreOnly ? "Show extension" : "Core only"}</button></div>
+          {!twoHourSession && <div className="route-toolbar"><div><b>{coreOnly ? "CORE ROUTE" : "FULL DECK"}</b><span>{coreOnly ? "Essential teaching sequence" : "Core teaching + optional extension"}</span></div><button type="button" className={coreOnly ? "active" : ""} onClick={() => { setCoreOnly((value) => !value); setCurrent(0); }}>{coreOnly ? "Show extension" : "Core only"}</button></div>}
           <div className="slide-frame" ref={slideRef}>
-            {!coreOnly && !currentIsCore && <div className="extension-ribbon"><b>OPTIONAL SUPPORT</b><span>Use after the 40-minute core · check the source badge for syllabus or textbook context</span></div>}
+            {!twoHourSession && !coreOnly && !currentIsCore && <div className="extension-ribbon"><b>OPTIONAL SUPPORT</b><span>Use after the 40-minute core · check the source badge for syllabus or textbook context</span></div>}
             {visibleSlides[current].content}
           </div>
           <div className="deck-controls">

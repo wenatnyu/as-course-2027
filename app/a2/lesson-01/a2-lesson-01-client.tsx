@@ -304,6 +304,7 @@ export default function A2Lesson01Client() {
       sourceSummary="Official 2027–2029 syllabus §13.1 · endorsed coursebook Chapter 16 §16.01 · current Pseudocode Guide §4 · verified Paper 3 mark schemes"
       sourceDetail="The current syllabus and Pseudocode Guide take precedence where older textbook notation differs. Past-paper prompts are concise classroom adaptations; full papers and mark schemes remain available only through authorised Cambridge channels."
       additionalSourceLinks={[{ href: "https://www.cambridgeinternational.org/Images/697401-2027-2029-pseudocode-guide.pdf", label: "Pseudocode guide" }]}
+      twoHourSession
     />
   );
 }

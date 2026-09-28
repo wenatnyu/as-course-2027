@@ -32,6 +32,18 @@ test("emits every Chapter 1–10 coursebook reader and asset set", async () => {
   }
 });
 
+test("emits every A2 Chapters 13–20 coursebook reader and asset set", async () => {
+  const pageCounts = [5, 4, 2, 4, 3, 4, 5, 3, 2, 11, 4, 3, 2, 4, 6, 23, 8, 3, 4, 8, 6, 7, 6, 6, 21, 15, 9, 57, 13];
+  for (const [index, pageCount] of pageCounts.entries()) {
+    const lesson = String(index + 1).padStart(2, "0");
+    const lastPage = String(pageCount).padStart(2, "0");
+    const html = await readFile(new URL(`textbook/a2/lesson-${lesson}/index.html`, outputRoot), "utf8");
+    assert.match(html, new RegExp(`/as-course-2027/textbook/rendered/a2/lesson-${lesson}/page-${lastPage}\\.webp`));
+    await access(new URL(`textbook/a2/lesson-${lesson}.pdf`, outputRoot));
+    await access(new URL(`textbook/rendered/a2/lesson-${lesson}/page-${lastPage}.webp`, outputRoot));
+  }
+});
+
 const lessonArtifacts = [
   {
     slug: "lesson-02",

@@ -195,6 +195,32 @@ test("serves the Chapter 9–10 coursebook extracts, syllabus crops and chapter 
   }
 });
 
+test("serves the complete A2 Chapters 13–20 teaching and reading sets", async () => {
+  const pageCounts = [5, 4, 2, 4, 3, 4, 5, 3, 2, 11, 4, 3, 2, 4, 6, 23, 8, 3, 4, 8, 6, 7, 6, 6, 21, 15, 9, 57, 13];
+  for (const [index, pageCount] of pageCounts.entries()) {
+    const lesson = String(index + 1).padStart(2, "0");
+    const chapter = index < 6 ? 13 : index < 10 ? 14 : index < 16 ? 15 : index < 20 ? 16 : index < 22 ? 17 : index < 24 ? 18 : index < 27 ? 19 : 20;
+    const [lessonResponse, readerResponse] = await Promise.all([
+      render(`/a2/lesson-${lesson}`),
+      render(`/textbook/a2/lesson-${lesson}`),
+    ]);
+    const [lessonHtml, readerHtml] = await Promise.all([lessonResponse.text(), readerResponse.text()]);
+    assert.equal(lessonResponse.status, 200);
+    assert.equal(readerResponse.status, 200);
+    assert.match(lessonHtml, new RegExp(`syllabus-a2-lesson-${lesson}\\.png`));
+    assert.match(lessonHtml, new RegExp(`textbook/a2/lesson-${lesson}`));
+    assert.match(lessonHtml, new RegExp(`notes/chapters/#a2-${chapter}`));
+    assert.match(lessonHtml, /90-minute guided deck/);
+    assert.match(lessonHtml, /30-minute exam clinic/);
+    assert.match(readerHtml, new RegExp(`textbook/rendered/a2/lesson-${lesson}/page-${String(pageCount).padStart(2, "0")}\\.webp`));
+
+    const pdf = await stat(new URL(`../public/textbook/a2/lesson-${lesson}.pdf`, import.meta.url));
+    assert.ok(pdf.size > 100_000, `A2 Lesson ${lesson} coursebook PDF should be substantive`);
+    const syllabusCrop = await stat(new URL(`../public/syllabus/syllabus-a2-lesson-${lesson}.png`, import.meta.url));
+    assert.ok(syllabusCrop.size > 10_000, `A2 Lesson ${lesson} syllabus crop should be substantive`);
+  }
+});
+
 test("uses the configured static social image", async () => {
   const html = await (await render("/", "as-cs.example.test")).text();
   const configuredSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://wenatnyu.github.io/as-course-2027/").replace(/\/+$/, "");
