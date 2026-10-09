@@ -56,11 +56,6 @@ export default function ChapterLibrary() {
         <nav><a href="../../">AS course</a><a href="../../a2/">A2 course</a><a href="../../course-progress/">Progress</a></nav>
       </header>
 
-      <section className="chapter-library-head">
-        <div><span>AS + A2 · CHAPTER RESOURCE LIBRARY</span><h1>One chapter.<br />One complete note.</h1></div>
-        <p>Choose the chapter, then read the supplied note here or open it as a PDF. Lesson ranges match the course navigation, so Chapter 2 ends with Lesson 10.</p>
-      </section>
-
       <div className="chapter-library-layout">
         <aside className="chapter-list" aria-label="Choose a chapter">
           <section><h2>AS · Chapters 1–12</h2><div>{AS_CHAPTERS.map((chapter) => <ChapterButton chapter={chapter} selected={selected === chapter} onSelect={setSelected} key={chapter.number} />)}</div></section>
@@ -74,6 +69,10 @@ export default function ChapterLibrary() {
           </header>
 
           <nav className="chapter-actions" aria-label="Chapter actions">
+            {selected.stage === "AS" && selected.number === 1 && <a href={siteHref('/notes/representation/words/')} className="primary">Chapter 1 vocabulary · L01–06</a>}
+            {selected.stage === "AS" && selected.number === 2 && <a href={siteHref('/notes/communication/words/')} className="primary">Chapter 2 vocabulary · L07–10</a>}
+            {selected.stage === "AS" && selected.number === 3 && <a href={siteHref('/notes/hardware/words/')} className="primary">Chapter 3 vocabulary · L11–16</a>}
+            {selected.stage === "AS" && selected.number === 3 && <a href={siteHref('/notes/hardware/')} className="primary">Flashcards & knowledge library · L12–14</a>}
             <a href={lessonHref(selected, selected.lessonStart)}>Start Lesson {selected.lessonStart}</a>
             <a href={lessonHref(selected, selected.lessonEnd)}>Final lesson {selected.lessonEnd}</a>
             {selected.pdfHref && <a className="primary" href={siteHref(selected.pdfHref)} target="_blank" rel="noreferrer">Open / download PDF</a>}
