@@ -139,7 +139,7 @@
 .c3-steps > article > p { margin: 0; color: #465269; }
 .c3-paper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1cqw; }
 .c3-paper-grid.four { grid-template-columns: repeat(4,1fr); }
-.c3-paper-grid p { min-height: 8cqw; margin: 0; padding: 1cqw; background: white; border-top: .35cqw solid var(--orange); font-size: clamp(13px,1.2cqw,18px); }
+.c3-paper-grid p { min-height: 8cqw; margin: 0; padding: 1cqw; color: var(--ink); background: white; border-top: .35cqw solid var(--orange); font-size: clamp(13px,1.2cqw,18px); }
 .c3-paper-grid p strong { float: right; color: var(--blue); }
 .slide--c3-paper { color: white; background: var(--ink); }
 .slide--c3-paper h2 { color: white; }
