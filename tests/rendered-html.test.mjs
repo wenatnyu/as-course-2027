@@ -59,7 +59,8 @@ test("maps lesson navigation to chapter notes and serves the chapter PDF library
   assert.match(a2Html, /notes\/chapters\/#a2-14/);
   assert.doesNotMatch(asHtml, /class="lesson-switcher"/);
   assert.doesNotMatch(asHtml, /class="chapter-chip"/);
-  assert.match(libraryHtml, /One chapter/);
+  assert.match(libraryHtml, /chapter-library-layout/);
+  assert.match(libraryHtml, /Chapter 1 vocabulary · L01–06/);
   assert.match(libraryHtml, /Computational Thinking and Problem-solving/);
   assert.match(libraryHtml, /\/notes\/rendered\/as-theory\/chapter-01\/page-01\.webp/);
   assert.match(libraryHtml, /\/notes\/rendered\/as-theory\/chapter-01\/page-04\.webp/);
@@ -112,7 +113,8 @@ test("serves the Lesson 10 and 11 coursebook extracts from lessons and chapter n
   assert.match(reader10Html, /textbook\/rendered\/lesson-10\/page-07\.webp/);
   assert.match(reader11Html, /Hardware Roles, Embedded Systems &amp; Storage/);
   assert.match(reader11Html, /textbook\/rendered\/lesson-11\/page-09\.webp/);
-  assert.match(libraryHtml, /One chapter/);
+  assert.match(libraryHtml, /chapter-library-layout/);
+  assert.match(libraryHtml, /Chapter 1 vocabulary · L01–06/);
   const chapterData = await readFile(new URL("../app/_data/chapter-resources.ts", import.meta.url), "utf8");
   assert.match(chapterData, /Lesson 10 textbook · pp\.41–47/);
 
